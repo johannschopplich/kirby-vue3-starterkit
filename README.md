@@ -1,11 +1,11 @@
 <p align="center">
-  <img src="./img/favicon.svg" alt="Logo of Kirby + Vue.js 3 Starterkit" width="114" height="114">
+  <img src="./public/img/favicon.svg" alt="Logo of Kirby + Vue.js 3 Starterkit" width="114" height="114">
 </p>
 
 <h3 align="center">Kirby + Vue.js 3 Starterkit</h3>
 
 <p align="center">
-  SPA with Vue.js 3 and Kirby. Uses Vite for a no-bundler dev setup.<br>
+  SPA with Vue.js 3 and Kirby. Uses Vite as web dev build tool.<br>
   <a href="https://kirby-vue3-starterkit.jhnn.dev"><strong>Explore the starterkit live »</strong></a>
 </p>
 
@@ -188,7 +188,7 @@ You can define variables for your backend and frontend code in the same file.
 
 ## Credits
 
-Big thanks to Jakub Medvecký Heretik for his work on [kirby-vue-starterkit](https://github.com/jmheretik/kirby-vue-starterkit)!
+Big thanks to Jakub Medvecký Heretik for his inspirational work on [kirby-vue-starterkit](https://github.com/jmheretik/kirby-vue-starterkit).
 
 ## License
 
