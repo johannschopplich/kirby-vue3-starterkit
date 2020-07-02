@@ -116,7 +116,8 @@ kirby-vue3-starterkit/
 ├── vendor/
 |
 |   # Shared environment variables accessible from both Kirby and Vue.js
-├── .env
+|   # To be duplicated as `.env`
+├── .env.example
 |
 |   # Handles PHP dependencies
 ├── composer.json
@@ -143,6 +144,8 @@ kirby-vue3-starterkit/
 
 ## Setup
 
+Duplicate the [`.env.example`](.env.example) as `.env` and optionally adapt its values.
+
 Install npm dependencies.
 
 ```bash
@@ -160,7 +163,7 @@ npm install
 npm run start
 ```
 
-Out of the box the backend is automatically served while developing. `npm run kirby:serve` spawns a PHP built-in web server by Node. You can also serve the backend by a web server of your choice. If done so, please specify hostname and port in the [`.env`](.env) if they differ from `127.0.0.1:8080` so that the decoupled frontend can access the JSON content representations in development.
+Out of the box the backend is automatically served while developing. `npm run kirby:serve` spawns a PHP built-in web server by Node. You can also serve the backend by a web server of your choice. If done so, please specify hostname and port in the [`.env.example`](.env.example) if they differ from `127.0.0.1:8080` so that the decoupled frontend can access the JSON content representations in development.
 
 ### Compile for production
 
@@ -174,14 +177,15 @@ Finally, deploy your project and point your web server to the `public` folder.
 
 ### Deployment
 
-1. Deploy the whole repository on the server of your choice.
-2. Install npm dependencies and build the frontend assets.
-3. Set `debug` to `false` in [`site/config/config.php`](site/config/config.php).
-4. Point your web server to the `public` directory as main entry point.
+1. Deploy whole repository on your server.
+2. Duplicate [`.env.example`](.env.example) as `.env`.
+3. Install npm dependencies and build frontend assets.
+4. Set `debug` to `false` in your `.env`.
+5. Point your web server to the `public` directory.
 
 ## Config
 
-All development-related configurations are located in the [`env`](.env) file:
+All development-related configurations are located in the [`.env.example`](.env.example) file:
 - `KIRBY_SERVER_HOSTNAME` and `KIRBY_SERVER_PORT` specifies the adress where you want it served
 
 You can define variables for your backend and frontend code in the same file.
