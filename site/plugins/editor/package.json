@@ -1,0 +1,27 @@
+{
+  "scripts": {
+    "dev": "parcel watch src/index.js --no-source-maps -d ./",
+    "build": "parcel build src/index.js --no-source-maps --experimental-scope-hoisting -d ./"
+  },
+  "posthtml": {
+    "recognizeSelfClosing": true
+  },
+  "devDependencies": {
+    "@vue/component-compiler-utils": "^3.0.0",
+    "cssnano": "^4.1.10",
+    "sass": "^1.22.3",
+    "vue-template-compiler": "^2.6.10"
+  },
+  "dependencies": {
+    "clipboard": "^2.0.4",
+    "prosemirror-commands": "^1.0.8",
+    "prosemirror-history": "^1.0.4",
+    "prosemirror-inputrules": "^1.0.4",
+    "prosemirror-keymap": "^1.0.1",
+    "prosemirror-model": "^1.7.1",
+    "prosemirror-state": "^1.2.3",
+    "prosemirror-view": "^1.9.11",
+    "vue": "^2.6.10",
+    "vue-hot-reload-api": "^2.3.3"
+  }
+}

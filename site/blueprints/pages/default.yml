@@ -1,0 +1,34 @@
+# Each page blueprint must have a title, the title may be different from the file name
+# This default blueprint is used to display a page in the Panel whenever a custom page blueprint is missing.
+title: Simple Page
+
+# Each page can have an icon that is shown in page listings when no preview image is available.
+icon: 📝
+
+# Page presets are a quick way to set up a standard page layout
+# More about page presets:
+# - https://getkirby.com/docs/guide/blueprints/presets and
+# - https://getkirby.com/docs/reference/panel/presets/page
+preset: page
+
+# Custom descriptions of page statuses depending on use case
+# More about page statuses: https://getkirby.com/docs/reference/panel/blueprints/page#statuses
+status:
+  draft: true
+  unlisted:
+    label: Hidden Page
+    text: The page is not listed in the main menu
+  listed:
+    label: Menu Page
+    text: The page is listed in the main menu
+
+# Limit subpage display to certain templates in a page preset
+pages:
+  template: default
+
+# A page preset can have a freely defined set of fields
+# List of all available field types: https://getkirby.com/docs/reference/panel/fields
+fields:
+  text:
+    type: textarea
+    size: huge

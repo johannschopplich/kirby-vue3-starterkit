@@ -1,0 +1,13 @@
+/**
+ * Each block is automatically wrapped in a div
+ * with a generated class name that follos the scheme
+ * `k-editor-$type-block` You can use this to scope
+ * all your css within a block
+ */
+.k-editor-intro-block {
+  margin-bottom: .75rem;
+}
+.k-editor-intro-block .ProseMirror {
+  line-height: 1.5em;
+  font-size: 1.25rem;
+}

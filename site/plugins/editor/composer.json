@@ -1,0 +1,29 @@
+{
+    "name": "getkirby/editor",
+    "description": "Kirby Editor",
+    "license": "proprietary",
+    "keywords": ["kirby", "cms", "wysiwyg", "plugin", "editor"],
+    "homepage": "https://getkirby.com",
+    "type": "kirby-plugin",
+    "authors": [
+        {
+            "name": "Bastian Allgeier",
+            "email": "bastian@getkirby.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.1.0",
+        "getkirby/composer-installer": "^1.1",
+        "paquettg/php-html-parser": "^2.1"
+    },
+    "require-dev": {
+        "getkirby/cms": "^3.3"
+    },
+    "config": {
+        "optimize-autoloader": true
+    },
+    "scripts": {
+        "analyze": "phpstan analyse",
+        "fix": "php-cs-fixer fix --config .php_cs"
+    }
+}

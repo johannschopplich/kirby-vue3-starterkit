@@ -1,0 +1,26 @@
+.DS_Store
+# .env
+composer.lock
+package-lock.json
+node_modules/
+
+# Frontend
+/frontend/dist/
+/public/assets/
+
+# Kirby
+.lock
+/public/media/*
+!/public/media/index.html
+/storage/accounts/*
+!/storage/accounts/index.html
+/storage/cache/*
+!/storage/cache/index.html
+/storage/sessions/*
+!/storage/sessions/index.html
+/site/config/.license
+
+# Retour plugin
+/site/config/.retour
+/site/config/redirects.yml
+/site/logs/

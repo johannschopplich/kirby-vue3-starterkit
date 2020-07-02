@@ -1,0 +1,31 @@
+# Each page blueprint must have a title, the title may be different from the file name
+title: Sandbox
+
+# Page presets are a quick way to set up a standard page layout
+# More about page presets:
+# - https://getkirby.com/docs/guide/blueprints/presets and
+# - https://getkirby.com/docs/reference/panel/presets/page
+preset: page
+
+# Sorting number scheme that is applied when page status is changed to `listed`
+# More about page sorting: https://getkirby.com/docs/reference/panel/blueprints/page#sorting
+num: zero
+
+# Limit subpage display to certain templates in a page preset
+pages:
+  template: sandbox
+
+# A page preset can have a freely defined set of fields
+# List of all available field types: https://getkirby.com/docs/reference/panel/fields
+fields:
+  headline:
+    type: text
+  test:
+    type: structure
+    translate: false
+    fields:
+      itemimage:
+        label: Image
+        type: files
+        max: 1
+        parent: kirby.page('photography').children.first

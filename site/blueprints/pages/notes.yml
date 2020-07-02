@@ -1,0 +1,33 @@
+# Each page blueprint must have a title, the title may be different from the file name
+title: Notes
+
+# Each page can have an icon that is shown in page listings when no preview image is available.
+icon: 📖
+
+# Define the form layout with two columns
+# More about columns: https://getkirby.com/docs/guide/blueprints/layout#defining-columns
+
+columns:
+  - width: 1/2
+    # In the first column, we reuse the `notes` section
+    # (defined in `/site/blueprints/sections/notes.yml` twice with different page status and headline
+    sections:
+      drafts:
+        extends: sections/notes
+        headline: Drafts
+        status: draft
+
+      unlisted:
+        extends: sections/notes
+        headline: In Review
+        status: unlisted
+
+  - width: 1/2
+    # In the second column, we reuse the same section, this time for listed pages and with a different headline
+    sections:
+      listed:
+        extends: sections/notes
+        headline: Published
+        status: listed
+
+# More about pages sections: https://getkirby.com/docs/reference/panel/sections/pages

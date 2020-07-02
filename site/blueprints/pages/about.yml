@@ -1,0 +1,55 @@
+# Each page blueprint must have a title, the title may be different from the file name
+title: About us
+
+# Each page can have an icon that is shown in page listings when no preview image is available.
+icon: ☎️
+
+# Limit the possible page statuses to `draft` and `listed`.
+# More about page statuses: https://getkirby.com/docs/reference/panel/blueprints/page#statuses
+status:
+  draft: true
+  listed: true
+
+# Page options allow you to control how users can interact with the page.
+# Here we prevent changing the page slug and page deletion
+# More about page options: https://getkirby.com/docs/reference/panel/blueprints/page#options
+options:
+  changeSlug: false
+  delete: false
+
+# Define the form layout with two columns, each column has a set of fields
+# Columns are optional but help structure the form layout
+# More about columns: https://getkirby.com/docs/guide/blueprints/layout#defining-columns
+columns:
+  - width: 1/2
+    fields:
+      text:
+        label: Text
+        type: textarea
+        size: huge
+
+  - width: 1/2
+    # Kirby has many different field types, from simple text fields to the more complex structure field that contains subfields
+    # All available field types: https://getkirby.com/docs/reference/panel/fields
+    fields:
+      address:
+        label: Address
+        type: textarea
+      email:
+        label: Email
+        type: email
+      phone:
+        label: Phone
+        type: tel
+      social:
+        label: On the web
+        type: structure
+        fields:
+          platform:
+            label: Platform
+            type: text
+            width: 1/2
+          url:
+            label: URL
+            type: url
+            width: 1/2

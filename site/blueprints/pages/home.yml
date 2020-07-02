@@ -1,0 +1,27 @@
+# Each page blueprint must have a title, the title may be different from the file name
+title: Home
+
+# Each page can have an icon that is shown in page listings when no preview image is available.
+icon: 🏠
+
+# Page options allow you to control how users can interact with the page.
+# Here we prevent changing the page status (the home page cannot be renamed or deleted by default)
+# More about page options: https://getkirby.com/docs/reference/panel/blueprints/page#options
+options:
+  changeStatus: false
+
+# Here we define an info section and a pages section (`photography`)
+sections:
+  info:
+    headline: Info
+    type: info
+    text: All content for the homepage is being pulled from the photography page.
+
+# The photography section extends a pages section defined in the `/site/blueprints/section/album.yml` blueprint
+# More about reusing and extending sections: https://getkirby.com/docs/guide/blueprints/extending-blueprints#reusing-and-extending-sectionss
+  photography:
+    headline: Photography
+    extends: sections/albums
+    status: listed
+
+

@@ -1,0 +1,34 @@
+# The site blueprint must have a title, the title may be different from the file name
+# The `site.yml` blueprint defines the look of the start page (Dashboard) of the Panel.
+title: Site
+
+# The site blueprint usually provides easy access to all main pages of the site.
+# In this example blueprint, we also show subpages of the `photography` and `notes` pages.
+# More about the site blueprint: https://getkirby.com/docs/reference/panel/blueprints/site
+
+# The layout of this form has two columns:
+columns:
+  # The first column has one section for the subpages of the `photography` page in card layout
+  # It reuses the pages section defined in `/site/blueprints/sections/albums.yml`
+  - width: 1/2
+    sections:
+      albums: sections/albums
+
+  # The second column has two sections, `notes` and `pages`
+  - width: 1/2
+    sections:
+      # The `notes` section reuses the pages section defined in `/site/blueprints/sections/notes.yml`
+      notes: sections/notes
+
+      # The `pages` pages section shows other main pages of the site
+      # Using the `templates` option, we limit which types of pages are shown
+      # Using the `create` option, we limit the type of page that can be created when a new page is created
+      # Note that the `sandbox` page and the `error` page that also exist in the content folder but use different blueprints thus do not show up in the list
+      # Since the error page's blueprint is set to `read: false`, it wouldn't show up here even if you added the error blueprint to the templates list
+      pages:
+        type: pages
+        create: default
+        templates:
+          - about
+          - home
+          - default

@@ -1,0 +1,73 @@
+# Kirby .htaccess
+
+# Core rewrite rules
+<IfModule mod_rewrite.c>
+
+    RewriteEngine on
+
+    # Make sure to set the RewriteBase correctly if you are running
+    # the site in a subfolder otherwise links or the entire site will break.
+    # RewriteBase /
+
+    # Block files and folders beginning with a dot, such as `.git`, except for
+    # the `.well-known` folder, which is used for Let's Encrypt and `security.txt`.
+    RewriteRule (^|/)\.(?!well-known\/) index.php [L]
+
+    # Make site links work.
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*) index.php [L]
+
+</IfModule>
+
+# Enable authentication header.
+SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
+
+# Compression for better web performance
+<IfModule mod_deflate.c>
+
+    # Force compression for mangled `Accept-Encoding` request headers.
+    <IfModule mod_setenvif.c>
+        <IfModule mod_headers.c>
+            SetEnvIfNoCase ^(Accept-EncodXng|X-cept-Encoding|X{15}|~{15}|-{15})$ ^((gzip|deflate)\s*,?\s*)+|[X~-]{4,13}$ HAVE_Accept-Encoding
+            RequestHeader append Accept-Encoding "gzip,deflate" env=HAVE_Accept-Encoding
+        </IfModule>
+    </IfModule>
+
+    # Compress all output labeled with one of the following media types.
+    <IfModule mod_filter.c>
+        AddOutputFilterByType DEFLATE "application/atom+xml" \
+                                      "application/javascript" \
+                                      "application/json" \
+                                      "application/ld+json" \
+                                      "application/manifest+json" \
+                                      "application/rdf+xml" \
+                                      "application/rss+xml" \
+                                      "application/schema+json" \
+                                      "application/geo+json" \
+                                      "application/wasm" \
+                                      "application/x-font-ttf" \
+                                      "application/x-javascript" \
+                                      "application/x-web-app-manifest+json" \
+                                      "application/xhtml+xml" \
+                                      "application/xml" \
+                                      "font/opentype" \
+                                      "font/otf" \
+                                      "image/bmp" \
+                                      "image/svg+xml" \
+                                      "text/cache-manifest" \
+                                      "text/calendar" \
+                                      "text/css" \
+                                      "text/html" \
+                                      "text/javascript" \
+                                      "text/plain" \
+                                      "text/markdown" \
+                                      "text/vcard" \
+                                      "text/vtt" \
+                                      "text/x-component" \
+                                      "text/x-cross-domain-policy" \
+                                      "text/xml"
+
+    </IfModule>
+
+</IfModule>

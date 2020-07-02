@@ -1,0 +1,11 @@
+# This section blueprint defines a pages section that can be reused across multiple blueprints
+# or multiple times within the same blueprint, see `/site/blueprints/pages/notes.yml` and `/site/blueprints/site.yml`
+# Sections can have different layouts and display additional information or a preview image
+# More about pages sections: https://getkirby.com/docs/reference/panel/sections/pages
+type: pages
+headline: Notes
+parent: kirby.page("notes")
+info: "{{ page.date.toDate('d.m.Y') }}"
+template: note
+empty: No notes yet
+sortBy: date desc

@@ -1,0 +1,21 @@
+/**
+ * Each block is automatically wrapped in a div
+ * with a generated class name that follos the scheme
+ * `k-editor-$type-block` You can use this to scope
+ * all your css within a block
+ */
+.k-editor-info-block {
+  margin-bottom: .75rem;
+  line-height: 1.5em;
+}
+.k-editor-info-block input {
+  font: inherit;
+  width: 100%;
+  background: #d3deeb;
+  border: 0;
+  padding: .5rem;
+  border-radius: 3px;
+}
+.k-editor-info-block input:focus {
+  outline: none;
+}

@@ -1,0 +1,15 @@
+{
+  "require": {
+    "php": ">=7.3.0",
+    "getkirby/cms": "^3.0",
+    "getkirby/editor": "^1.0",
+    "kirbyzone/sitemapper": "^1.0",
+    "beebmx/kirby-env": "^2.0"
+  },
+  "config": {
+    "optimize-autoloader": true
+  },
+  "extra": {
+    "kirby-cms-path": false
+  }
+}
