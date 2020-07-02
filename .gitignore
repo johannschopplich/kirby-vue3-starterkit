@@ -1,5 +1,5 @@
 .DS_Store
-# .env
+.env
 composer.lock
 package-lock.json
 node_modules/
@@ -19,8 +19,3 @@ node_modules/
 /storage/sessions/*
 !/storage/sessions/index.html
 /site/config/.license
-
-# Retour plugin
-/site/config/.retour
-/site/config/redirects.yml
-/site/logs/
