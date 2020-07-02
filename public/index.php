@@ -1,7 +1,5 @@
 <?php
 
-use Kirby\Cms\App as Kirby;
-
 require dirname(__DIR__) . '/vendor/autoload.php';
 
 $kirby = new Kirby([

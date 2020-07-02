@@ -20,7 +20,7 @@
 
 </IfModule>
 
-# Enable authentication header.
+# Pass the Authorization header to PHP.
 SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
 
 # Compression for better web performance

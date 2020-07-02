@@ -179,9 +179,12 @@ Finally, deploy your project and point your web server to the `public` folder.
 
 1. Deploy whole repository on your server.
 2. Duplicate [`.env.example`](.env.example) as `.env`.
-3. Install npm dependencies and build frontend assets.
+3. Install npm dependencies and build frontend assets: `npm i && npm run build`.
 4. Set `debug` to `false` in your `.env`.
 5. Point your web server to the `public` directory.
+6. Some hosting environments require to uncomment `RewriteBase /` in [`.htaccess`](public/.htaccess) to make site links work.
+
+Now your project is hopefully up 'n' running!
 
 ## Config
 
