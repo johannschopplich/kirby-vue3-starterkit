@@ -1,5 +1,5 @@
 {
-  "name": "kirby-vite-starterkit",
+  "name": "kirby-vue3-starterkit",
   "version": "1.0.0",
   "scripts": {
     "kirby:serve": "node serve-kirby.js",
