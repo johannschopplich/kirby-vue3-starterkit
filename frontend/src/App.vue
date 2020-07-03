@@ -10,10 +10,16 @@
   <div class="page">
     <Header />
 
-    <!-- TODO: Use `keep-alive` once Vue Router 4 supports it -->
-    <!-- <keep-alive> -->
-      <router-view :key="path" />
-    <!-- </keep-alive> -->
+    <!-- TODO: Use `keep-alive` once Vue Router 4 fully supports it -->
+    <!--
+    <router-view v-slot="{ Component }">
+      <keep-alive>
+        <component :is="Component" />
+      </keep-alive>
+    </router-view>
+    -->
+
+    <router-view />
   </div>
 
   <Footer />
@@ -30,7 +36,7 @@ export default {
   components: { Header, Footer },
 
   setup () {
-    const { path, hash } = useRoute()
+    const { hash } = useRoute()
 
     const scrollToHash = hash => {
       if (hash) window.location.hash = hash
@@ -41,7 +47,6 @@ export default {
     })
 
     return {
-      path,
       scrollToHash
     }
   }

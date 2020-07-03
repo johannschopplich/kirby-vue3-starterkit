@@ -1,12 +1,12 @@
 import { createApp } from 'vue'
-import App from './App.vue'
-import Router from './router'
+import { initRouter } from './router'
 import { useKirbyAPI } from './hooks/kirby-api'
+import App from './App.vue'
 
 ;(async () => {
   const { getPage } = useKirbyAPI()
   const home = await getPage('home')
-  const router = await Router.init(home.site)
+  const router = await initRouter(home.site)
 
   window.$site = home.site
 
