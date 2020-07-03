@@ -1,7 +1,7 @@
 import { kirbyApiStore } from '../store/modules/kirby-api'
 
 const apiUrl = process.env.NODE_ENV === 'development'
-  ? import.meta.env.KIRBY_URL
+  ? import.meta.env.KIRBY_API_URL
   : window.location.origin
 
 const getPage = async id => {

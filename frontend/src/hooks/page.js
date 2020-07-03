@@ -31,6 +31,8 @@ export const usePage = () => {
     }
 
     Object.assign(page, { ...pageData })
+
+    // Set document title
     document.title = page.metaTitle
   })()
 
