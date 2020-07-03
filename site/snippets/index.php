@@ -13,13 +13,13 @@ $pathToAsset = function ($pattern, $root = '/assets/') {
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <?php snippet('meta', compact('page', 'site')) ?>
 
-  <link rel="stylesheet" href="<?= $pathToAsset('style*.css') ?>">
+  <link rel="stylesheet" href="<?= $pathToAsset('style.*.css') ?>">
 
 </head>
 <body>
 
   <div id="app"></div>
-  <script type="module" src="<?= $pathToAsset('index*.js') ?>"></script>
+  <script type="module" src="<?= $pathToAsset('index.*.js') ?>"></script>
 
 </body>
 </html>

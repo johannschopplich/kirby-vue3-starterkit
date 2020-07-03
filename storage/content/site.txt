@@ -1,1 +1,5 @@
 Title: Mægazine
+
+----
+
+Description: Simple, almost identical port of the Kirby 3 starterkit frontend to Vue.js. Head over to https://github.com/johannschopplich/kirby-vue3-starterkit for more details about the project.
