@@ -4,8 +4,9 @@ use Kirby\Cms\Url;
 
 $title = $page->customTitle()->or($page->title() . ' – ' . $site->title());
 $description = $page->description()->or($site->description());
-$siteThumbnail = $site->thumbnail()->toFile() ? $site->thumbnail()->toFile()->url() : null;
-$pageThumbnail = $page->thumbnail()->toFile() ? $page->thumbnail()->toFile()->url() : $siteThumbnail;
+$thumbnail = ($image = $page->thumbnail()->toFile())
+    ? $image->resize(1280)->url()
+    : (($siteImage = $site->thumbnail()->toFile()) ? $siteImage->resize(1280)->url() : '/img/android-chrome-512x512.png');
 
 ?>
 
@@ -18,14 +19,14 @@ $pageThumbnail = $page->thumbnail()->toFile() ? $page->thumbnail()->toFile()->ur
 <meta property="og:url" content="<?= $page->url() ?>">
 <meta property="og:title" content="<?= $title ?>">
 <meta property="og:description" content="<?= $description ?>">
-<meta property="og:image" content="<?= $pageThumbnail ?>">
+<meta property="og:image" content="<?= $thumbnail ?>">
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:url" content="<?= $page->url() ?>">
 <meta name="twitter:domain" content="<?= Url::host() ?>">
 <meta name="twitter:title" content="<?= $title ?>">
 <meta name="twitter:description" content="<?= $description ?>">
-<meta name="twitter:image" content="<?= $pageThumbnail ?>">
+<meta name="twitter:image" content="<?= $thumbnail ?>">
 
 <meta name="theme-color" content="#41b883">
 <meta name="apple-mobile-web-app-capable" content="yes">
