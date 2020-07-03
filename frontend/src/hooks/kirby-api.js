@@ -26,7 +26,7 @@ const getPage = async id => {
   }
 
   // Add page data to api store
-  kirbyApiStore.addPage({ id: id, data: page })
+  kirbyApiStore.addPage({ id, data: page })
 
   return page
 }
