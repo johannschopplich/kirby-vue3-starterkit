@@ -10,15 +10,21 @@ export class PersistentStore extends Store {
   }
 
   async init () {
-    if (this.isInitialized) {
-      const stateFromIndexedDB = await get(this.storeName)
-      if (stateFromIndexedDB) {
-        Object.assign(this.state, JSON.parse(stateFromIndexedDB))
-      }
+    // Catch multiple initialization calls
+    if (this.isInitialized.value) return
 
-      watch(() => this.state, val => set(this.storeName, JSON.stringify(val)), { deep: true })
-      this.isInitialized.value = true
+    // Check if persisted state exists and if so use it
+    const stateFromIndexedDB = await get(this.storeName)
+    if (stateFromIndexedDB) {
+      Object.assign(this.state, JSON.parse(stateFromIndexedDB))
     }
+
+    // Watch for state changes and immediately save it to IndexedDB
+    watch(() => this.state, val => {
+      set(this.storeName, JSON.stringify(val))
+    }, { deep: true })
+
+    this.isInitialized.value = true
   }
 
   getIsInitialized () {

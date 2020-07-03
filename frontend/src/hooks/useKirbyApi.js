@@ -5,6 +5,9 @@ const apiUrl = process.env.NODE_ENV === 'development'
   : window.location.origin
 
 const getPage = async id => {
+  // Replace `Store` with `PersistentStore` in api store to save
+  // store between sessions, then uncomment the next line
+  // await kirbyApiStore.init()
   const storedPage = kirbyApiStore.getPage(id)
 
   // Use cached page if already fetched once
