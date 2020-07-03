@@ -1,6 +1,6 @@
 <template>
   <footer class="footer">
-    <router-link to="/" @click.native="scrollTop">&copy; {{ new Date().getFullYear() }} / {{ site.title }}</router-link>
+    <router-link to="/" @click.native="scrollToTop">&copy; {{ new Date().getFullYear() }} / {{ site.title }}</router-link>
 
     <nav class="social">
       <a v-for="social in site.social" :key="social.url" :href="social.url"> {{ social.platform }} </a>
@@ -13,12 +13,12 @@ export default {
   name: 'Footer',
 
   setup () {
-    const scrollTop = () => {
+    const scrollToTop = () => {
       window.scrollTo(0, 0)
     }
 
     return {
-      scrollTop,
+      scrollToTop,
       site: window.$site
     }
   }
