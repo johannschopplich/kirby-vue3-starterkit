@@ -1,10 +1,5 @@
 <template>
-  <router-link
-    to="#main"
-    class="skip-to-content-link"
-  >
-    Skip to content
-  </router-link>
+  <router-link to="#main" class="skip-link">Skip to content</router-link>
 
   <div class="page">
     <Header />
@@ -41,7 +36,7 @@ html {
   font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
 }
 
-.skip-to-content-link {
+.skip-link {
   position: absolute;
   top: -1px;
   left: 50%;
@@ -49,7 +44,7 @@ html {
   padding: .25rem .5rem;
   transform: translate(-50%, -100%);
 }
-.skip-to-content-link:focus {
+.skip-link:focus {
   transform: translate(-50%, 0%);
 }
 
@@ -86,8 +81,8 @@ main {
 .tags {
   text-align: center;
   text-transform: uppercase;
-  letter-spacing: 0.075em;
-  font-size: 0.75rem;
+  letter-spacing: .075em;
+  font-size: .75rem;
   font-weight: 600;
 }
 

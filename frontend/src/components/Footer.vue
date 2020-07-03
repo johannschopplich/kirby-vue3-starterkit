@@ -30,18 +30,18 @@ export default {
 }
 .footer a {
   display: inline-block;
-  font-size: 0.875rem;
+  font-size: .875rem;
 }
 .footer > a {
   margin-bottom: 1.5rem;
   border-top: 2px solid #000;
   width: 16.5rem;
-  padding-top: 0.5rem;
+  padding-top: .5rem;
 }
 
 .social a {
-  margin: 0 0.75rem;
-  padding: 0.5rem 1rem;
+  margin: 0 .75rem;
+  padding: .5rem 1rem;
   border: 2px solid #000;
   width: 7.5rem;
 }

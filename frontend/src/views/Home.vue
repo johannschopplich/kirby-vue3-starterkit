@@ -93,7 +93,7 @@ export default {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: all 0.3s;
+  transition: all .3s;
 }
 .grid figcaption {
   display: flex;
@@ -107,10 +107,10 @@ export default {
   left: 0;
   line-height: 1;
   text-align: center;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0,0,0, .5);
   text-transform: uppercase;
-  font-size: 0.875rem;
-  letter-spacing: 0.125em;
+  font-size: .875rem;
+  letter-spacing: .125em;
   font-weight: 600;
 }
 

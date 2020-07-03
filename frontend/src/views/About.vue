@@ -74,6 +74,6 @@ export default {
 }
 
 .layout aside h2 {
-  margin-bottom: 0.75rem;
+  margin-bottom: .75rem;
 }
 </style>

@@ -35,7 +35,7 @@ export default {
   text-align: center;
 }
 .note-date {
-  margin-bottom: 0.5rem;
+  margin-bottom: .5rem;
   display: block;
 }
 

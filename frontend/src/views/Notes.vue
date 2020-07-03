@@ -50,6 +50,6 @@ export default {
   font-size: 1rem;
 }
 .note time {
-  font-size: 0.75rem;
+  font-size: .75rem;
 }
 </style>

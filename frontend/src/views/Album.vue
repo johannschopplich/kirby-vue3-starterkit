@@ -60,7 +60,7 @@ export default {
   left: 0;
   right: 0;
   top: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0,0,0, .5);
   text-align: center;
   color: #fff;
   line-height: 1;
@@ -95,10 +95,10 @@ export default {
 .album-gallery[data-even] {
   grid-template-columns: repeat(4, 1fr);
 }
-.album-gallery[data-count='1'] {
+.album-gallery[data-count="1"] {
   grid-template-columns: 1fr;
 }
-.album-gallery[data-count='2'] {
+.album-gallery[data-count="2"] {
   grid-template-columns: 1fr 1fr;
 }
 </style>
