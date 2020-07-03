@@ -196,7 +196,7 @@ Now your project is hopefully up 'n' running!
 
 ## TODO
 
-- [ ] Since Vue Router is in alpha stage, `keep-alive` isn't suppoerted yet. Implement it, once it's available again.
+- [ ] Since Vue Router 4 is in alpha stage, `keep-alive` isn't supported yet. Implement it, once it's available again.
 
 ## Credits
 
