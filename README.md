@@ -16,7 +16,7 @@
 ### Key Features
 
 - 🖖 Vue.js 3 powered
-- ⚡️ [Vite](https://github.com/vitejs/vite) in favour of Vue.js CLI
+- ⚡️ [Vite](https://github.com/vitejs/vite) instead of Vue.js CLI
 - ♿ Accessible routing
 - 🔍 SEO-friendly ([server-side generated](site/snippets/meta.php) meta tags)
 - 🤝 Shared `.env` file for frontend & backend
