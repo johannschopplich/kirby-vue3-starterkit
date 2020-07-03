@@ -42,7 +42,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 .header {
   margin-bottom: 1.5rem;
 }
@@ -50,16 +50,16 @@ export default {
 .header a {
   position: relative;
   text-transform: uppercase;
-  font-size: 0.875rem;
-  letter-spacing: 0.05em;
-  padding: 0.5rem 0;
+  font-size: .875rem;
+  letter-spacing: .05em;
+  padding: .5rem 0;
   font-weight: 700;
 }
 
 .header .logo {
   display: block;
   margin-bottom: 1.5rem;
-  padding: 0.5rem 0;
+  padding: .5rem 0;
 }
 
 .header {
@@ -69,11 +69,10 @@ export default {
 }
 
 .menu a {
-  margin: 0 0.75rem;
+  margin: 0 .75rem;
 }
 
-.menu a[aria-current],
-.menu a.router-link-active {
+.menu a[aria-current="page"] {
   border-bottom: 2px solid #000;
 }
 
@@ -86,7 +85,7 @@ export default {
     justify-content: space-between;
   }
   .menu {
-    margin-right: -0.75rem;
+    margin-right: -.75rem;
   }
 }
 </style>
