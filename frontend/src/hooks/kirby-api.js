@@ -1,4 +1,4 @@
-import { apiStore } from '../store/api-store'
+import { apiStore } from '../store/modules/api'
 
 const apiUrl = process.env.NODE_ENV === 'development'
   ? import.meta.env.KIRBY_URL
@@ -26,7 +26,7 @@ const getPage = async id => {
   }
 
   // Add page data to api store
-  apiStore.addPage({ __id: id, ...page })
+  apiStore.addPage({ id: id, data: page })
 
   return page
 }

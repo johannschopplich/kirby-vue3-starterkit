@@ -1,5 +1,5 @@
-import { Store } from '.'
-import { API_STORE_NAME } from './store-names'
+import { Store } from '..'
+import { API_STORE_NAME } from '../names'
 
 class ApiStore extends Store {
   data () {
@@ -12,8 +12,8 @@ class ApiStore extends Store {
     return this.state.pages.find(i => i.__id === id)
   }
 
-  addPage (page) {
-    this.state.pages.push(page)
+  addPage ({ id, data }) {
+    this.state.pages.push({ __id: id, ...data })
   }
 }
 

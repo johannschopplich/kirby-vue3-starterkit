@@ -2,7 +2,7 @@
   <main id="main">
     <Intro :title="page.title" />
 
-    <ul class="grid">
+    <ul v-if="photography.children" class="grid">
       <li v-for="album in photography.children" :key="album.id">
         <router-link :to="`/${album.id}`">
           <figure>
@@ -31,13 +31,13 @@ export default {
   components: { Intro },
 
   setup () {
-    const { getPage } = useKirbyAPI()
     const { page } = usePage()
     const photography = reactive({
       children: null
     })
 
     ;(async () => {
+      const { getPage } = useKirbyAPI()
       Object.assign(photography, { ...(await getPage('photography')) })
     })()
 

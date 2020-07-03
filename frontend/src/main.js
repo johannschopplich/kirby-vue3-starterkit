@@ -8,7 +8,6 @@ import { useKirbyAPI } from './hooks/kirby-api'
   const home = await getPage('home')
   const router = await Router.init(home.site)
 
-  window.$home = home
   window.$site = home.site
 
   const app = createApp(App)
