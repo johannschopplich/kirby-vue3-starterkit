@@ -21,18 +21,21 @@ return [
         }
     ],
     /**
-     * Redirect all non-JSON templates to Vue index (https://router.vuejs.org/guide/essentials/history-mode.html).
-     * Taken from https://getkirby.com/docs/guide/routing#defining-your-own-routes
+     * Respond with JSON content representation for the given URL ending with `.json`.
      */
     [
         'pattern' => ['(:all).json'],
         'action'  => function ($pageId) {
+            // Required, otherwise CORS disallows fetching API calls from the decoupled frontend in development
             if (option('debug') === true) header('Access-Control-Allow-Origin: *');
 
             kirby()->response()->json();
             return (page($pageId) ?? page('error'))->render();
         }
     ],
+    /**
+     * Redirect all non-JSON templates to the index snippet.
+     */
     [
         'pattern' => ['(:all)'],
         'action'  => function ($pageId) {
@@ -44,7 +47,7 @@ return [
 
             $page = page($pageId) ?? page('error');
 
-            return Tpl::load(kirby()->roots()->snippets() . '/index.php', compact('page', 'site'), false);
+            return Tpl::load(kirby()->roots()->snippets() . '/index.php', compact('page', 'site'));
         }
     ]
 ];
