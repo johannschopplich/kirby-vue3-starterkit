@@ -1,6 +1,6 @@
 import { reactive } from 'vue'
-import { useKirbyAPI } from './kirby-api'
 import { useRoute } from 'vue-router'
+import { useKirbyAPI } from './kirby-api'
 
 export const usePage = () => {
   const { path } = useRoute()
@@ -25,18 +25,13 @@ export const usePage = () => {
       pageData = await getPage(pageId)
     } catch (error) {
       if (process.env.NODE_ENV === 'development') {
-        console.error('[KirbyAPI] Failed to fetch page id:', pageId)
+        console.error('[KirbyAPI] Failed to fetch page by id:', pageId)
       }
       pageData = await getPage('error')
     }
 
     Object.assign(page, { ...pageData })
     document.title = page.metaTitle
-
-    // TODO: Use `keep-alive` once Vue Router 4 supports it
-    // onActivated(() => {
-    //   document.title = page.metaTitle
-    // })
   })()
 
   return {

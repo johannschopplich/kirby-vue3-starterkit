@@ -194,10 +194,6 @@ All development and production related configurations are located in your `.env`
 
 Now your project is hopefully up 'n' running!
 
-## TODO
-
-- [ ] Since Vue Router 4 is in alpha stage, `keep-alive` isn't supported yet. Implement it, once it's available again.
-
 ## Credits
 
 Big thanks to Jakub Medvecký Heretik for his inspirational work on [kirby-vue-starterkit](https://github.com/jmheretik/kirby-vue-starterkit).

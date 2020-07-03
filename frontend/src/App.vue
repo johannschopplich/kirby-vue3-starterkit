@@ -8,16 +8,6 @@
 
   <div class="page">
     <Header />
-
-    <!-- TODO: Use `keep-alive` once Vue Router 4 fully supports it -->
-    <!--
-    <router-view v-slot="{ Component }">
-      <keep-alive>
-        <component :is="Component" />
-      </keep-alive>
-    </router-view>
-    -->
-
     <router-view />
   </div>
 
