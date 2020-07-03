@@ -17,7 +17,6 @@
         v-slot="{ href, isExactActive, navigate }"
         :key="page.id"
         :to="`/${page.id}`"
-        @click.native="scrollToTop"
       >
         <a
           :href="href"
@@ -36,12 +35,7 @@ export default {
   name: 'Header',
 
   setup () {
-    const scrollToTop = () => {
-      window.scrollTo(0, 0)
-    }
-
     return {
-      scrollToTop,
       site: window.$site
     }
   }

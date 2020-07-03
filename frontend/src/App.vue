@@ -28,7 +28,6 @@
 import Header from './components/Header.vue'
 import Footer from './components/Footer.vue'
 import { useRoute } from 'vue-router'
-import { scrollWaiter } from './router/scrollWaiter'
 
 export default {
   name: 'App',
