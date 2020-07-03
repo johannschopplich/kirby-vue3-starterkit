@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
 import { initRouter } from './router'
-import { useKirbyAPI } from './hooks/kirby-api'
+import { useKirbyAPI } from './hooks/useKirbyApi'
 import App from './App.vue'
 
 ;(async () => {

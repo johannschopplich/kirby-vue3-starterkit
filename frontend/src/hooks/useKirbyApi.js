@@ -1,4 +1,4 @@
-import { kirbyApiStore } from '../store/modules/kirby-api'
+import { kirbyApiStore } from '../store/kirbyApiStore'
 
 const apiUrl = process.env.NODE_ENV === 'development'
   ? import.meta.env.KIRBY_API_URL

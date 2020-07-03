@@ -1,9 +1,10 @@
 import { reactive } from 'vue'
 import { useRoute } from 'vue-router'
-import { useKirbyAPI } from './kirby-api'
+import { useKirbyAPI } from './useKirbyApi'
 
 export const usePage = () => {
   const { path } = useRoute()
+  const { getPage } = useKirbyAPI()
 
   // Transform route `path` to `pageId` for use with api
   const pageId = (path.endsWith('/') ? path.slice(0, -1) : path).slice(1) || 'home'
@@ -17,7 +18,6 @@ export const usePage = () => {
   })
 
   ;(async () => {
-    const { getPage } = useKirbyAPI()
     let pageData
 
     try {
@@ -27,6 +27,8 @@ export const usePage = () => {
       if (process.env.NODE_ENV === 'development') {
         console.error('[KirbyAPI] Failed to fetch page by id:', pageId)
       }
+
+      // Fall back to error page
       pageData = await getPage('error')
     }
 
@@ -36,7 +38,5 @@ export const usePage = () => {
     document.title = page.metaTitle
   })()
 
-  return {
-    page
-  }
+  return page
 }

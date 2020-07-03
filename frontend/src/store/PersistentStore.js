@@ -1,17 +1,6 @@
-import { reactive, readonly, ref, watch } from 'vue'
+import { Store } from './Store'
+import { ref, watch } from 'vue'
 import { set, get } from 'idb-keyval'
-
-export class Store {
-  constructor (storeName) {
-    this.storeName = storeName
-    const data = this.data()
-    this.state = reactive(data)
-  }
-
-  getState () {
-    return readonly(this.state)
-  }
-}
 
 export class PersistentStore extends Store {
   constructor (storeName) {

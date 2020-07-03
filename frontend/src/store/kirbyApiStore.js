@@ -1,5 +1,6 @@
-import { Store } from '..'
-import { KIRBY_API_STORE_NAME } from '../names'
+import { Store } from './Store'
+
+const storeName = 'KIRBY_API_STORE'
 
 class KirbyApiStore extends Store {
   data () {
@@ -18,4 +19,4 @@ class KirbyApiStore extends Store {
   }
 }
 
-export const kirbyApiStore = new KirbyApiStore(KIRBY_API_STORE_NAME)
+export const kirbyApiStore = new KirbyApiStore(storeName)

@@ -43,14 +43,14 @@
 
 <script>
 import Intro from '../components/Intro.vue'
-import { usePage } from '../hooks/page'
+import { usePage } from '../hooks/usePage'
 
 export default {
   name: 'About',
   components: { Intro },
 
   setup () {
-    const { page } = usePage()
+    const page = usePage()
     return { page }
   }
 }

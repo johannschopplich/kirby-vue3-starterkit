@@ -31,13 +31,13 @@
 </template>
 
 <script>
-import { usePage } from '../hooks/page'
+import { usePage } from '../hooks/usePage'
 
 export default {
   name: 'Album',
 
   setup () {
-    const { page } = usePage()
+    const page = usePage()
     return { page }
   }
 }

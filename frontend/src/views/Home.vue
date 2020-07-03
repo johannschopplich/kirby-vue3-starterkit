@@ -23,21 +23,21 @@
 <script>
 import Intro from '../components/Intro.vue'
 import { reactive } from 'vue'
-import { useKirbyAPI } from '../hooks/kirby-api'
-import { usePage } from '../hooks/page'
+import { useKirbyAPI } from '../hooks/useKirbyApi'
+import { usePage } from '../hooks/usePage'
 
 export default {
   name: 'Home',
   components: { Intro },
 
   setup () {
-    const { page } = usePage()
+    const page = usePage()
+    const { getPage } = useKirbyAPI()
     const photography = reactive({
       children: null
     })
 
     ;(async () => {
-      const { getPage } = useKirbyAPI()
       Object.assign(photography, { ...(await getPage('photography')) })
     })()
 
