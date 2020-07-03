@@ -2,7 +2,6 @@
   <router-link
     to="#main"
     class="skip-to-content-link"
-    @click.native="scrollToHash('#main')"
   >
     Skip to content
   </router-link>
@@ -28,28 +27,12 @@
 <script>
 import Header from './components/Header.vue'
 import Footer from './components/Footer.vue'
-import { onMounted } from 'vue'
 import { useRoute } from 'vue-router'
+import { scrollWaiter } from './router/scrollWaiter'
 
 export default {
   name: 'App',
-  components: { Header, Footer },
-
-  setup () {
-    const { hash } = useRoute()
-
-    const scrollToHash = hash => {
-      if (hash) window.location.hash = hash
-    }
-
-    onMounted(() => {
-      scrollToHash(hash)
-    })
-
-    return {
-      scrollToHash
-    }
-  }
+  components: { Header, Footer }
 }
 </script>
 
