@@ -175,6 +175,14 @@ This builds the frontend assets and saves them to the `public` directory and the
 
 Finally, deploy your project and point your web server to the `public` folder.
 
+### Configuration
+
+You can define variables for your backend and frontend code in the same file.
+
+All development and production related configurations are located in your `.env` file:
+- `KIRBY_SERVER_HOSTNAME` and `KIRBY_SERVER_PORT` specifies the address where you wish the Kirby backend to be served from. It is used by the frontend to fetch content data.
+- Keys starting with `VITE_` are available in your code with e.g. `import.meta.env.VITE_CUSTOM_VARIABLE`.
+
 ### Deployment
 
 1. Deploy whole repository on your server.
@@ -186,12 +194,9 @@ Finally, deploy your project and point your web server to the `public` folder.
 
 Now your project is hopefully up 'n' running!
 
-## Config
+## TODO
 
-All development-related configurations are located in the [`.env.example`](.env.example) file:
-- `KIRBY_SERVER_HOSTNAME` and `KIRBY_SERVER_PORT` specifies the adress where you want it served
-
-You can define variables for your backend and frontend code in the same file.
+- [ ] Since Vue Router is in alpha stage, `keep-alive` isn't suppoerted yet. Implement it, once it's available again.
 
 ## Credits
 
