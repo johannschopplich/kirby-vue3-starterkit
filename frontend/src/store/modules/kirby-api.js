@@ -1,7 +1,7 @@
 import { Store } from '..'
-import { API_STORE_NAME } from '../names'
+import { KIRBY_API_STORE_NAME } from '../names'
 
-class ApiStore extends Store {
+class KirbyApiStore extends Store {
   data () {
     return {
       pages: []
@@ -9,6 +9,7 @@ class ApiStore extends Store {
   }
 
   getPage (id) {
+    if (!id) return
     return this.state.pages.find(i => i.__id === id)
   }
 
@@ -17,4 +18,4 @@ class ApiStore extends Store {
   }
 }
 
-export const apiStore = new ApiStore(API_STORE_NAME)
+export const kirbyApiStore = new KirbyApiStore(KIRBY_API_STORE_NAME)

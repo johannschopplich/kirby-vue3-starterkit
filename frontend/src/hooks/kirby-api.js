@@ -1,11 +1,11 @@
-import { apiStore } from '../store/modules/api'
+import { kirbyApiStore } from '../store/modules/kirby-api'
 
 const apiUrl = process.env.NODE_ENV === 'development'
   ? import.meta.env.KIRBY_URL
   : window.location.origin
 
 const getPage = async id => {
-  const storedPage = apiStore.getPage(id)
+  const storedPage = kirbyApiStore.getPage(id)
 
   // Use cached page if already fetched once
   if (storedPage) {
@@ -26,7 +26,7 @@ const getPage = async id => {
   }
 
   // Add page data to api store
-  apiStore.addPage({ id: id, data: page })
+  kirbyApiStore.addPage({ id: id, data: page })
 
   return page
 }

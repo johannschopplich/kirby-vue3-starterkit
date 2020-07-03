@@ -27,7 +27,7 @@ export class PersistentStore extends Store {
         Object.assign(this.state, JSON.parse(stateFromIndexedDB))
       }
 
-      watch(() => this.state, (val) => set(this.storeName, JSON.stringify(val)), { deep: true })
+      watch(() => this.state, val => set(this.storeName, JSON.stringify(val)), { deep: true })
       this.isInitialized.value = true
     }
   }

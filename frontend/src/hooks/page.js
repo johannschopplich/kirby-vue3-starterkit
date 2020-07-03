@@ -4,7 +4,6 @@ import { useRoute } from 'vue-router'
 
 export const usePage = () => {
   const { path } = useRoute()
-  const { getPage } = useKirbyAPI()
 
   // Transform route `path` to `pageId` for use with api
   const pageId = (path.endsWith('/') ? path.slice(0, -1) : path).slice(1) || 'home'
@@ -18,11 +17,16 @@ export const usePage = () => {
   })
 
   ;(async () => {
+    const { getPage } = useKirbyAPI()
     let pageData
+
     try {
       // Get page from cache or freshly fetch it
       pageData = await getPage(pageId)
     } catch (error) {
+      if (process.env.NODE_ENV === 'development') {
+        console.error('[KirbyAPI] Failed to fetch page id:', pageId)
+      }
       pageData = await getPage('error')
     }
 

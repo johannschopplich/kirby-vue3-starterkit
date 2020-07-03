@@ -1,1 +1,1 @@
-export const API_STORE_NAME = 'API_STORE'
+export const KIRBY_API_STORE_NAME = 'KIRBY_API_STORE'
