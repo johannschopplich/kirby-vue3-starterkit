@@ -196,7 +196,8 @@ Now your project is hopefully up 'n' running!
 
 ## Credits
 
-Big thanks to Jakub Medvecký Heretik for his inspirational work on [kirby-vue-starterkit](https://github.com/jmheretik/kirby-vue-starterkit).
+- Big thanks to Jakub Medvecký Heretik for his inspirational work on [kirby-vue-starterkit](https://github.com/jmheretik/kirby-vue-starterkit).
+- Mario Brendl for his [article on a Vue 3 based store w/o Vuex](https://medium.com/@mario.brendel1990/vue-3-the-new-store-a7569d4a546f).
 
 ## License
 
