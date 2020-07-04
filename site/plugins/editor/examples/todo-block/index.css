@@ -1,0 +1,17 @@
+/**
+ * Each block is automatically wrapped in a div
+ * with a generated class name that follos the scheme
+ * `k-editor-$type-block` You can use this to scope
+ * all your css within a block
+ */
+.k-editor-todo-block {
+  margin-bottom: .75rem;
+  line-height: 1.5em;
+}
+.k-editor-todo-block p {
+  display: flex;
+  align-items: center;
+}
+.k-editor-todo-block input[type="checkbox"] {
+  margin-right: .5rem;
+}

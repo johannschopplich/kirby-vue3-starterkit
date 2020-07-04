@@ -19,6 +19,7 @@ return array(
     'Psr\\Container\\' => array($vendorDir . '/psr/container/src'),
     'PhpOption\\' => array($vendorDir . '/phpoption/phpoption/src/PhpOption'),
     'PHPMailer\\PHPMailer\\' => array($vendorDir . '/phpmailer/phpmailer/src'),
+    'PHPHtmlParser\\' => array($vendorDir . '/paquettg/php-html-parser/src/PHPHtmlParser'),
     'Laminas\\ZendFrameworkBridge\\' => array($vendorDir . '/laminas/laminas-zendframework-bridge/src'),
     'Laminas\\Escaper\\' => array($vendorDir . '/laminas/laminas-escaper/src'),
     'Kirby\\' => array($vendorDir . '/getkirby/cms/src', $vendorDir . '/getkirby/composer-installer/src'),

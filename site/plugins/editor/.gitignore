@@ -1,0 +1,11 @@
+# OS files
+.DS_Store
+
+# npm modules
+/node_modules
+
+# Composer files
+
+/.cache
+/.php_cs.cache
+.phpunit.result.cache
