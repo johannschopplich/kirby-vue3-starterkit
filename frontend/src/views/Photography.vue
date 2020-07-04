@@ -25,8 +25,9 @@ export default {
   components: { Intro },
 
   setup () {
-    const page = usePage()
-    return { page }
+    return {
+      page: usePage()
+    }
   }
 }
 </script>

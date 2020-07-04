@@ -36,8 +36,9 @@ export default {
   name: 'Album',
 
   setup () {
-    const page = usePage()
-    return { page }
+    return {
+      page: usePage()
+    }
   }
 }
 </script>

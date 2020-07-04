@@ -8,8 +8,6 @@ import App from './App.vue'
   const home = await getPage('home', { force: true })
   const router = await initRouter(home.site)
 
-  // window.$site = home.site
-
   const app = createApp(App)
   app.use(router)
   await router.isReady()

@@ -31,7 +31,6 @@ export default {
   components: { Intro },
 
   setup () {
-    const page = usePage()
     const { getPage } = useKirbyAPI()
     const photography = reactive({
       children: null
@@ -42,7 +41,7 @@ export default {
     })()
 
     return {
-      page,
+      page: usePage(),
       photography
     }
   }

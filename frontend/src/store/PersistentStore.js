@@ -10,13 +10,12 @@ export class PersistentStore extends Store {
 
     // Optionally persist state between browser sessions
     // `VITE_PERSIST_API_STORE` returns a string, but we need a boolean
-    this.persistState = JSON.parse(import.meta.env.VITE_PERSIST_API_STORE || false)
+    this.persistState = JSON.parse(import.meta.env.VITE_PERSIST_API_STORE ?? false)
   }
 
   async init () {
     // Initialization is only needed for persisting the state
     if (!this.persistState) return
-    console.log('persist')
 
     // Catch multiple initialization calls
     if (this.isInitialized.value) return
