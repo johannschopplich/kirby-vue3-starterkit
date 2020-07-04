@@ -23,21 +23,8 @@ export const usePage = () => {
   })
 
   ;(async () => {
-    let pageData
-
-    try {
-      // Get page from cache or freshly fetch it
-      pageData = await getPage(pageId)
-    } catch (error) {
-      if (process.env.NODE_ENV === 'development') {
-        console.error(`[KirbyAPI] Failed to fetch page by id: ${pageId}`)
-      }
-
-      // Fall back to error page
-      pageData = await getPage('error')
-    }
-
-    Object.assign(page, { ...pageData })
+    // Get page from cache or freshly fetch it
+    Object.assign(page, { ...(await getPage(pageId)) })
 
     // Set document title
     document.title = page.metaTitle
