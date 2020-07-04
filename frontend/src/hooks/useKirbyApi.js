@@ -4,8 +4,6 @@ const apiUrl = process.env.NODE_ENV === 'development'
   ? import.meta.env.KIRBY_API_URL
   : window.location.origin
 
-const persistStore = import.meta.env.VITE_PERSIST_API_STORE
-
 /**
  * Retrieve a page by id from either store or fetch it freshly
  *
@@ -13,10 +11,7 @@ const persistStore = import.meta.env.VITE_PERSIST_API_STORE
  * @param {object} options Set of options
  */
 const getPage = async (id, { force = false } = {}) => {
-  // Optionally persist state between browser sessions
-  if (persistStore) {
-    await kirbyApiStore.init()
-  }
+  await kirbyApiStore.init()
 
   // Try to get cached page from api store, except when `force` is `true`
   if (!force) {
@@ -42,7 +37,7 @@ const getPage = async (id, { force = false } = {}) => {
   }
 
   // Make sure page gets stored freshly if `force` is `true`
-  if (persistStore && force) {
+  if (force) {
     kirbyApiStore.removePage(id)
   }
 
@@ -50,7 +45,7 @@ const getPage = async (id, { force = false } = {}) => {
   kirbyApiStore.addPage({ id, data: page })
 
   // Since `site` object is provided via `home` page data, save it
-  if (persistStore && id === 'home') {
+  if (id === 'home') {
     kirbyApiStore.addSite(page.site)
   }
 
