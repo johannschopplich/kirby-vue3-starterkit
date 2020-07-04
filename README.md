@@ -55,11 +55,14 @@ kirby-vue3-starterkit/
 |   |   |   # Hooks for common actions
 |   |   ├── hooks/
 |   |   |   |
-|   |   |   |   # Handle retrieval of JSON content and store management
+|   |   |   |   # Handle retrieval of pages through Kirby API as JSON
 |   |   |   ├── useKirbyApi.js
 |   |   |   |
-|   |   |   |   # Roughly corresponds to the Kirby's `$page` object
+|   |   |   |   # Returns page for current path corresponding to Kirby's `$page` object
 |   |   |   └── usePage.js
+|   |   |   |
+|   |   |   |   # Returns object corresponding to Kirby's global `$site`
+|   |   |   └── useSite.js
 |   |   |
 |   |   |   # Minimal store to cache page data fetched via api (Vuex-free)
 |   |   ├── store/
