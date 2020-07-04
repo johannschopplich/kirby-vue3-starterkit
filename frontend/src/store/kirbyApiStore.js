@@ -25,7 +25,10 @@ class KirbyApiStore extends PersistentStore {
       if (indexedPage.modified !== page.modified) return
     }
 
-    // Return object, not proxy, for Safari support
+    // Deep clone to return object, not proxy, for Safari support
+    // This works fine, as long as no `Date`s, functions, `undefined`, [NaN], Maps, Sets
+    // and other complex types appear within the object – which is the case
+    // for fetched JSON from Kirby backend anyway
     return JSON.parse(JSON.stringify(page))
   }
 
