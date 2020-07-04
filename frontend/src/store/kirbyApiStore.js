@@ -25,7 +25,8 @@ class KirbyApiStore extends PersistentStore {
       if (indexedPage.modified !== page.modified) return
     }
 
-    return page
+    // Return object, not proxy, for Safari support
+    return JSON.parse(JSON.stringify(page))
   }
 
   /**
