@@ -4,7 +4,8 @@
     "getkirby/cms": "^3.0",
     "getkirby/editor": "^1.0",
     "kirbyzone/sitemapper": "^1.0",
-    "beebmx/kirby-env": "^2.0"
+    "beebmx/kirby-env": "^2.0",
+    "lukaskleinschmidt/kirby-resolve": "^1.0"
   },
   "config": {
     "optimize-autoloader": true

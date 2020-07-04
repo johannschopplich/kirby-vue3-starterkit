@@ -5,7 +5,7 @@ import App from './App.vue'
 
 ;(async () => {
   const { getPage } = useKirbyAPI()
-  const home = await getPage('home')
+  const home = await getPage('home', { force: true })
   const router = await initRouter(home.site)
 
   window.$site = home.site

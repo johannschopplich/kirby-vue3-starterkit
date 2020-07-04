@@ -4,19 +4,32 @@ const apiUrl = process.env.NODE_ENV === 'development'
   ? import.meta.env.KIRBY_API_URL
   : window.location.origin
 
-const getPage = async id => {
-  // Replace `Store` with `PersistentStore` in api store to save
-  // store between sessions, then uncomment the next line
-  // await kirbyApiStore.init()
-  const storedPage = kirbyApiStore.getPage(id)
+const persistStore = import.meta.env.VITE_PERSIST_API_STORE
 
-  // Use cached page if already fetched once
-  if (storedPage) {
-    if (process.env.NODE_ENV === 'development') {
-      console.log(`[KirbyAPI] Use cached ${apiUrl}/${id}.json`)
+/**
+ * Retrieve a page by id from either store or fetch it freshly
+ *
+ * @param {number} id Page id to retrieve
+ * @param {object} options Set of options
+ */
+const getPage = async (id, { force = false } = {}) => {
+  // Optionally persist state between browser sessions
+  if (persistStore) {
+    await kirbyApiStore.init()
+  }
+
+  // Try to get cached page from api store, except when `force` is `true`
+  if (!force) {
+    const storedPage = kirbyApiStore.getPage(id)
+
+    // Use cached page if already fetched once
+    if (storedPage) {
+      if (process.env.NODE_ENV === 'development') {
+        console.log(`[KirbyAPI] Use ${apiUrl}/${id}.json from store`)
+      }
+
+      return storedPage
     }
-
-    return storedPage
   }
 
   // Otherwise fetch page for the first time
@@ -28,8 +41,19 @@ const getPage = async id => {
     console.log(page)
   }
 
+  // Make sure page gets stored freshly if `force` is `true`
+  if (persistStore && force) {
+    kirbyApiStore.removePage(id)
+  }
+
   // Add page data to api store
   kirbyApiStore.addPage({ id, data: page })
+
+  // When `site` object is fetched via homepage,
+  // save modified timestamp pages index to store as well
+  if (persistStore && id === 'home') {
+    kirbyApiStore.addModifiedIndex(page.site.modifiedIndex)
+  }
 
   return page
 }

@@ -3,6 +3,7 @@
 $data = [
   'title' => $page->title()->value(),
   'metaTitle' => $page->customTitle()->or($page->title() . ' – ' . $site->title())->value(),
+  'modified' => $page->modified(),
   'site' => [
     'title' => $site->title()->value(),
     'children' => array_values($site->children()->published()->map(function ($child) {
@@ -18,6 +19,13 @@ $data = [
                 ];
             })->data())
         ];
+    })->data()),
+    'modifiedIndex' => array_values($site->index()->map(function ($child) {
+      if (!$child->isPublished()) return;
+      return [
+          'id' => $child->id(),
+          'modified' => $child->modified()
+      ];
     })->data()),
     'social' => array_values(page('about')->social()->toStructure()->map(function ($social) {
         return [

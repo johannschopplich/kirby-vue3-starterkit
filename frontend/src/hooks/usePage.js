@@ -25,7 +25,7 @@ export const usePage = () => {
       pageData = await getPage(pageId)
     } catch (error) {
       if (process.env.NODE_ENV === 'development') {
-        console.error('[KirbyAPI] Failed to fetch page by id:', pageId)
+        console.error(`[KirbyAPI] Failed to fetch page by id: ${pageId}`)
       }
 
       // Fall back to error page

@@ -19,8 +19,9 @@
 - ⚡️ [Vite](https://github.com/vitejs/vite) instead of Vue.js CLI
 - ♿ Accessible routing
 - 🔍 SEO-friendly ([server-side generated](site/snippets/meta.php) meta tags)
-- 🤝 Shared `.env` file for frontend & backend
+- 🦋 [Cache pages between sessions](#caching) and revalidate with modification timestamps
 - 🗃️ Centralized state management without Vuex
+- 🤝 Shared `.env` file for frontend & backend
 - 🚀 Modern Kirby folder setup
 
 ### Introduction
@@ -54,7 +55,7 @@ kirby-vue3-starterkit/
 |   |   |   # Hooks for common actions
 |   |   ├── hooks/
 |   |   |   |
-|   |   |   |   # Handle retrieval of JSON content representations
+|   |   |   |   # Handle retrieval of JSON content and store management
 |   |   |   ├── useKirbyApi.js
 |   |   |   |
 |   |   |   |   # Roughly corresponds to the Kirby's `$page` object
@@ -171,25 +172,36 @@ Out of the box the backend is automatically served while developing. `npm run ki
 npm run build
 ```
 
-This builds the frontend assets and saves them to the `public` directory and the index file as a Kirby template to `site/templates/default.php`.
-
-Finally, deploy your project and point your web server to the `public` folder.
+This builds the frontend assets (CSS & JS files) and moves them to the `public/assets`.
 
 ### Configuration
 
-You can define variables for your backend and frontend code in the same file.
-
-All development and production related configurations are located in your `.env` file:
+All development and production related configurations for both backend and frontend code are located in your `.env` file:
 - `KIRBY_SERVER_HOSTNAME` and `KIRBY_SERVER_PORT` specifies the address where you wish the Kirby backend to be served from. It is used by the frontend to fetch content data.
 - Keys starting with `VITE_` are available in your code with e.g. `import.meta.env.VITE_CUSTOM_VARIABLE`.
+
+### Caching
+
+Even without caching enabled, the frontend will cache pages between indiviual routes/views. Once you reload the tab however, every page data has to be fetched from the api once again.
+
+If you wish to create  apersistent store which caches pages between browser sessions, set:
+- `KIRBY_CACHE` to `true`
+- `VITE_PERSIST_API_STORE` to `true`
+
+By that, the pages state will be saved to `IndexedDB` each time a page has been fetched.
+
+While calling up the website for the first time, the `home` page will be always be fetched. It holds `site` data with an index of modification timestamps for each page id. This is relevant, because before returning a cached page, the timestamp will be compared with the latest modification timestamp from the site modification index. If it differs, the cached page will be removed and freshly fetched.
 
 ### Deployment
 
 1. Deploy whole repository on your server.
 2. Duplicate [`.env.example`](.env.example) as `.env`.
 3. Install npm dependencies and build frontend assets: `npm i && npm run build`.
-4. Set `debug` to `false` in your `.env`.
-5. Point your web server to the `public` directory.
+4. Change variables in your `.env`:
+   - `KIRBY_DEBUG` to `false`
+   - `KIRBY_CACHE` to `true` (recommended)
+   - `VITE_PERSIST_API_STORE` to `true` (optional)
+5. Point your web server to the `public` folder.
 6. Some hosting environments require to uncomment `RewriteBase /` in [`.htaccess`](public/.htaccess) to make site links work.
 
 Now your project is hopefully up 'n' running!
