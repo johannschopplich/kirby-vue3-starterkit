@@ -31,12 +31,15 @@
 </template>
 
 <script>
+import { useKirbyAPI } from '../hooks/useKirbyApi'
+
 export default {
   name: 'Header',
 
   setup () {
+    const { getSite } = useKirbyAPI()
     return {
-      site: window.$site
+      site: getSite()
     }
   }
 }

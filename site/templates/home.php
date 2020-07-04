@@ -4,6 +4,8 @@ $data = [
   'title' => $page->title()->value(),
   'metaTitle' => $page->customTitle()->or($page->title() . ' – ' . $site->title())->value(),
   'modified' => $page->modified(),
+
+  // Make `site` object available through homepage
   'site' => [
     'title' => $site->title()->value(),
     'children' => array_values($site->children()->published()->map(function ($child) {

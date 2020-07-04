@@ -9,12 +9,15 @@
 </template>
 
 <script>
+import { useKirbyAPI } from '../hooks/useKirbyApi'
+
 export default {
   name: 'Footer',
 
   setup () {
+    const { getSite } = useKirbyAPI()
     return {
-      site: window.$site
+      site: getSite()
     }
   }
 }

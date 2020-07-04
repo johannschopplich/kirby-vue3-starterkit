@@ -49,17 +49,29 @@ const getPage = async (id, { force = false } = {}) => {
   // Add page data to api store
   kirbyApiStore.addPage({ id, data: page })
 
-  // When `site` object is fetched via homepage,
-  // save modified timestamp pages index to store as well
+  // Since `site` object is provided via `home` page data, save it
   if (persistStore && id === 'home') {
-    kirbyApiStore.addModifiedIndex(page.site.modifiedIndex)
+    kirbyApiStore.addSite(page.site)
   }
 
   return page
 }
 
+/**
+ * Retrieve the global `site` object
+ *
+ * @returns {object} Global `site` object
+ */
+const getSite = () => kirbyApiStore.getSite()
+
+/**
+ * Export the hook
+ *
+ * @returns {object} Methods to handle the Kirby API anywhere
+ */
 export const useKirbyAPI = () => {
   return {
+    getSite,
     getPage
   }
 }
