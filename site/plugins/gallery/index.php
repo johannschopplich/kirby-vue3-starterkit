@@ -1,12 +1,6 @@
 <?php
 
-/**
- * Plugins extend Kirby's core functionality.
- * You can extend/replace almost any system-relevant part.
- * This plugin uses a hook to replace the `{{ gallery }}` placeholders used in the note pages
- * with images from the selected album page that servers as gallery provider
- * More about plugins: https://getkirby.com/docs/guide/plugins/plugin-basics
- */
+use Kirby\Cms\App as Kirby;
 
 Kirby::plugin('starterkit/gallery', [
     'hooks' => [
