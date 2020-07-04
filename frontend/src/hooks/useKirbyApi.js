@@ -57,21 +57,8 @@ const getPage = async (id, { force = false } = {}) => {
   return page
 }
 
-/**
- * Retrieve the global `site` object
- *
- * @returns {object} Global `site` object
- */
-const getSite = () => kirbyApiStore.getSite()
-
-/**
- * Export the hook
- *
- * @returns {object} Methods to handle the Kirby API anywhere
- */
 export const useKirbyAPI = () => {
   return {
-    getSite,
     getPage
   }
 }

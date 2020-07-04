@@ -2,6 +2,11 @@ import { reactive } from 'vue'
 import { useRoute } from 'vue-router'
 import { useKirbyAPI } from './useKirbyApi'
 
+/**
+ * Return the corressponding page object for the current path
+ *
+ * @returns {object}
+ */
 export const usePage = () => {
   const { path } = useRoute()
   const { getPage } = useKirbyAPI()
