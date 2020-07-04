@@ -1,5 +1,7 @@
 <?php
 
+use Kirby\Cms\Page;
+
 /**
  * Page models extend Kirby's default page object.
  * In page models you can define methods that are then available everywhere in Kirby where you call a page of the extended type.
