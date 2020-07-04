@@ -1,7 +1,8 @@
 <?php
 
 /**
- * Remove `home` page from cache after any changes to other pages or `site`
+ * Remove `home` page from cache after any changes to other pages or `site`.
+ * Only necessary if Kirby pages cache is active.
  */
 return [
     'page.changeNum:after' => function () {

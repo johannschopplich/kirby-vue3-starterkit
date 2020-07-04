@@ -27,7 +27,9 @@ return [
         'pattern' => ['(:all).json'],
         'action'  => function ($pageId) {
             // Required, otherwise CORS disallows fetching API calls from the decoupled frontend in development
-            if (option('debug') === true) header('Access-Control-Allow-Origin: *');
+            if (option('debug') === true) {
+                header('Access-Control-Allow-Origin: *');
+            }
 
             kirby()->response()->json();
             return (page($pageId) ?? page('error'))->render();
