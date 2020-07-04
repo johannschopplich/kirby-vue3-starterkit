@@ -1,5 +1,4 @@
 <template>
-  <!-- eslint-disable vue/no-v-html -->
   <main id="main">
     <Intro :title="page.title" />
 

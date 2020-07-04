@@ -1,5 +1,4 @@
 <template>
-  <!-- eslint-disable vue/no-v-html -->
   <main id="main">
     <article class="note">
       <header class="note-header intro">
