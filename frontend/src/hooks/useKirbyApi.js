@@ -44,7 +44,7 @@ const getPage = async (id, { force = false } = {}) => {
   // Add page data to api store
   kirbyApiStore.addPage({ id, data: page })
 
-  // Since `site` object is provided via `home` page data, save it
+  // Add `site` object is provided via `home` page to api store
   if (id === 'home') {
     kirbyApiStore.addSite(page.site)
   }
