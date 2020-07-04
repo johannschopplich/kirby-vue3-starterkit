@@ -20,8 +20,9 @@ class KirbyApiStore extends PersistentStore {
 
     // Check if stored page is outdated and was changed since last cached
     if (import.meta.env.VITE_PERSIST_API_STORE) {
-      const modified = this.getState().modifiedIndex.find(i => i.id === id).modified
-      if (modified !== page.modified) return
+      const indexedPage = this.getState().modifiedIndex.find(i => i.id === id)
+      if (!('modified' in indexedPage) || !('modified' in page)) return
+      if (indexedPage.modified !== page.modified) return
     }
 
     return page
