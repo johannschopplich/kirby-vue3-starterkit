@@ -148,9 +148,13 @@ kirby-vue3-starterkit/
 
 ## Setup
 
-Duplicate the [`.env.example`](.env.example) as `.env` and optionally adapt its values.
+1. Duplicate the [`.env.example`](.env.example) as `.env` and optionally adapt its values:
 
-Install npm dependencies.
+```bash
+cp .env.example .env
+```
+
+2. Install npm dependencies:
 
 ```bash
 npm install
@@ -163,25 +167,27 @@ npm install
 ### Serve backend & frontend for development
 
 ```bash
-# Same as `npm run kirby:serve` and `npm run dev` but run in parallel
+# Runs `npm run kirby:serve` and `npm run dev` in parallel
 npm run start
 ```
 
-Out of the box the backend is automatically served while developing. `npm run kirby:serve` spawns a PHP built-in web server by Node. You can also serve the backend by a web server of your choice. If done so, please specify hostname and port in the [`.env.example`](.env.example) if they differ from `127.0.0.1:8080` so that the decoupled frontend can access the JSON content representations in development.
+Out of the box the backend is automatically served while developing. `npm run kirby:serve` spawns the PHP built-in web server by Node. You can also serve the backend by a web server of your choice. If done so, please specify hostname and port in your `.env` if they differ from `127.0.0.1`and `8080` respectifely so that the decoupled frontend can call the Kirby API for JSON content in development.
 
 ### Compile for production
+
+Build the frontend assets (CSS & JS files) to `public/assets`:
 
 ```bash
 npm run build
 ```
 
-This builds the frontend assets (CSS & JS files) and moves them to the `public/assets`.
+**Note**: If you wish to target older browsers, run `npm run build:compat` which transpiles to `es2017`. For even older browsers, you can change the target in the `package.json`'s npm script.
 
 ### Configuration
 
 All development and production related configurations for both backend and frontend code are located in your `.env` file:
-- `KIRBY_SERVER_HOSTNAME` and `KIRBY_SERVER_PORT` specifies the address where you wish the Kirby backend to be served from. It is used by the frontend to fetch content data.
-- Keys starting with `VITE_` are available in your code with e.g. `import.meta.env.VITE_CUSTOM_VARIABLE`.
+- `KIRBY_SERVER_HOSTNAME` and `KIRBY_SERVER_PORT` specify the address where you wish the Kirby backend to be served from. It is used by the frontend to fetch content data as JSON.
+- Keys starting with `VITE_` are available in your code following the `import.meta.env.VITE_CUSTOM_VARIABLE` syntax.
 
 ### Caching
 
