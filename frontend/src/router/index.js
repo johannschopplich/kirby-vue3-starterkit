@@ -45,7 +45,7 @@ export const initRouter = async site => {
         path: `/${child.id}`,
         component: () => import(`../views/${capitalize(child.template)}.vue`).catch(() => Default),
         meta: {
-          modified: page.modified,
+          modified: child.modified,
           scrollToTop: true
         }
       })
