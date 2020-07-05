@@ -4,11 +4,13 @@ import { routes } from '../router'
 /**
  * Centralized `site` and pages data
  *
- * @extends PersistentStore
+ * @augments PersistentStore
  */
 class KirbyApiStore extends PersistentStore {
   /**
    * The state object
+   *
+   * @returns {object} The central state
    */
   data () {
     return {
@@ -22,7 +24,7 @@ class KirbyApiStore extends PersistentStore {
    * timestamp matches the content's actual timestamp in backend
    *
    * @param {string} id Page id to retrieve
-   * @returns {Object}
+   * @returns {object} Current page object
    */
   getPage (id) {
     const page = this.getState().pages.find(i => i.__id === id)
@@ -51,7 +53,9 @@ class KirbyApiStore extends PersistentStore {
   /**
    * Adds a page to the store
    *
-   * @param {object} data Includes page `id` and `data` object
+   * @param {object} options Set of options
+   * @param {string} options.id Page id
+   * @param {object} options.data Page data
    */
   addPage ({ id, data }) {
     this.state.pages.push({ __id: id, ...data })
@@ -71,7 +75,7 @@ class KirbyApiStore extends PersistentStore {
   /**
    * Gets the global `site` data
    *
-   * @returns {Object}
+   * @returns {object} Readonly `site` state
    */
   getSite () {
     return this.getState().site
@@ -89,12 +93,14 @@ class KirbyApiStore extends PersistentStore {
 
 /**
  * Internal store name
- * @const {string}
+ *
+ * @constant {string}
  */
 const storeName = 'KIRBY_API_STORE'
 
 /**
  * Ready-to-use Kirby API store
- * @const {class}
+ *
+ * @constant {object}
  */
 export const kirbyApiStore = new KirbyApiStore(storeName)

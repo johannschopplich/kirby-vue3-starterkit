@@ -5,14 +5,14 @@ import { set, get } from 'idb-keyval'
 /**
  * Centralized state management with persisting state between sessions
  *
- * @extends Store
+ * @augments Store
  */
 export class PersistentStore extends Store {
   /**
    * Constructor
    *
    * @param {string} storeName Name of the store
-   * @constructor
+   * @class
    */
   constructor (storeName) {
     super(storeName)

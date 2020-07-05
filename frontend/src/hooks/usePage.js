@@ -5,7 +5,7 @@ import { useKirbyAPI } from './useKirbyApi'
 /**
  * Hook for the corresponding page of the current path
  *
- * @returns {Object}
+ * @returns {object} Current page object
  */
 export const usePage = () => {
   const { path } = useRoute()

@@ -8,7 +8,7 @@ export class Store {
    * Constructor
    *
    * @param {string} storeName Name of the store
-   * @constructor
+   * @class
    */
   constructor (storeName) {
     this.storeName = storeName
@@ -19,7 +19,7 @@ export class Store {
   /**
    * Returns the current state readonly
    *
-   * @returns {*}
+   * @returns {*} Readonly state
    */
   getState () {
     return readonly(this.state)

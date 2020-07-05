@@ -5,6 +5,7 @@
   },
   "extends": [
     "plugin:vue/vue3-essential",
+    "plugin:jsdoc/recommended",
     "standard"
   ],
   "parserOptions": {
@@ -12,7 +13,8 @@
     "sourceType": "module"
   },
   "plugins": [
-    "vue"
+    "vue",
+    "jsdoc"
   ],
   "rules": {
     "vue/no-v-html": "off"

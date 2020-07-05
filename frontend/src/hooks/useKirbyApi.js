@@ -1,7 +1,9 @@
 import { kirbyApiStore } from '../store/kirbyApiStore'
 
 /**
- * @const {string}
+ * API Url of the Kirby backend
+ *
+ * @constant {string}
  */
 const apiUrl = process.env.NODE_ENV === 'development'
   ? import.meta.env.KIRBY_API_URL
@@ -11,8 +13,9 @@ const apiUrl = process.env.NODE_ENV === 'development'
  * Retrieve a page by id from either store or fetch it freshly
  *
  * @param {string} id Page id to retrieve
- * @param {Object} options Set of options
- * @returns {Object}
+ * @param {object} options Set of options
+ * @param {boolean} options.force Skip store and fetch page freshly
+ * @returns {object} Page data
  */
 const getPage = async (id, { force = false } = {}) => {
   await kirbyApiStore.init()
@@ -56,6 +59,11 @@ const getPage = async (id, { force = false } = {}) => {
   return page
 }
 
+/**
+ * Hook for common Kirby API handling methods
+ *
+ * @returns {object} Object with functions
+ */
 export const useKirbyAPI = () => {
   return {
     getPage

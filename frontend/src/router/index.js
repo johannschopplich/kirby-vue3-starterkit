@@ -6,26 +6,29 @@ import Default from '../views/Default.vue'
  * Capizalizes a string
  *
  * @param {string} string Character string to capitalize
- * @returns {string}
+ * @returns {string} Capitalized string
  */
 const capitalize = ([first, ...rest]) => first.toUpperCase() + rest.join('')
 
 /**
- * Routes used by Vue Router
- * @const {Array}
+ * Routes filled by site tree for use by Vue Router
+ *
+ * @constant {Array}
  */
 export const routes = []
 
 /**
  * Vue Router history
- * @const {Array}
+ *
+ * @constant {Array}
  */
 export const history = createWebHistory()
 
 /**
- * Build history array from site tree and initialize Vue Router
+ * Create Vue Router instance
  *
- * @param {Object} site Global `site` object
+ * @param {object} site Global `site` object
+ * @returns {object} Output of `createRouter`
  */
 export const initRouter = async site => {
   // Published pages
