@@ -3,11 +3,11 @@
   "version": "1.2.0",
   "scripts": {
     "kirby:serve": "node serve-kirby.js",
-    "build:post": "rm -rf public/assets && cp -r frontend/dist/assets public/assets",
-    "build:transpile": "npx del-cli public/assets/*.js && esbuild frontend/dist/assets/**.js --target=es2017 --minify --outdir=public/assets",
+    "esbuild:transpile": "esbuild frontend/dist/assets/**.js --target=es2017 --minify --outdir=public/assets",
+    "build:after": "rm -rf public/assets && cp -r frontend/dist/assets public/assets",
     "dev": "vite",
-    "build": "vite build && npm run build:post",
-    "build:compat": "vite build --minify=false && npm run build:post && npm run build:transpile",
+    "build": "vite build && npm run build:after",
+    "build:compat": "vite build --minify=false && npm run build:after && npm run esbuild:transpile",
     "start": "concurrently \"npm run kirby:serve\" \"npm run dev\"",
     "lint": "eslint \"frontend/src/**/*.{js,vue}\""
   },
