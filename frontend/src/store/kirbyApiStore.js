@@ -1,8 +1,15 @@
 import { PersistentStore } from './PersistentStore'
+import { routes } from '../router'
 
-const storeName = 'KIRBY_API_STORE'
-
+/**
+ * Centralized `site` and pages data
+ *
+ * @extends PersistentStore
+ */
 class KirbyApiStore extends PersistentStore {
+  /**
+   * The state object
+   */
   data () {
     return {
       site: [],
@@ -11,18 +18,27 @@ class KirbyApiStore extends PersistentStore {
   }
 
   /**
-   * Gets a page from store and compares its modified timestamp with the latest one
+   * Gets a cached page from store if found and if its last modified
+   * timestamp matches the content's actual timestamp in backend
+   *
    * @param {string} id Page id to retrieve
+   * @returns {Object}
    */
   getPage (id) {
     const page = this.getState().pages.find(i => i.__id === id)
     if (!page) return
 
-    // Check if stored page is outdated and was changed since last cached
-    if (this.persistState) {
-      const indexedPage = this.getState().site.index.find(i => i.id === id)
-      if (!indexedPage || !('modified' in page)) return
-      if (indexedPage.modified !== page.modified) return
+    // Check if stored page is outdated if state is persisted,
+    // except for homepage which has always latest data
+    if (this.persistState && id !== 'home') {
+      // Get the current page meta from router which gets initialized
+      // with the up-to-date last modified timestamps
+      const routerPageData = routes.find(i => i.path === `/${id}`)
+      if (!routerPageData) return
+      if (!('meta' in routerPageData) || !('modified' in page)) return
+
+      // Bail if the timestamp doesn't match
+      if (routerPageData.meta.modified !== page.modified) return
     }
 
     // Deep clone to return object, not proxy, for Safari support
@@ -34,6 +50,7 @@ class KirbyApiStore extends PersistentStore {
 
   /**
    * Adds a page to the store
+   *
    * @param {object} data Includes page `id` and `data` object
    */
   addPage ({ id, data }) {
@@ -42,6 +59,7 @@ class KirbyApiStore extends PersistentStore {
 
   /**
    * Removes a page from the store
+   *
    * @param {string} id Page id to remove
    */
   removePage (id) {
@@ -52,6 +70,8 @@ class KirbyApiStore extends PersistentStore {
 
   /**
    * Gets the global `site` data
+   *
+   * @returns {Object}
    */
   getSite () {
     return this.getState().site
@@ -59,6 +79,7 @@ class KirbyApiStore extends PersistentStore {
 
   /**
    * Adds the global `site` data to the store
+   *
    * @param {object} data Global `site` object
    */
   addSite (data) {
@@ -66,4 +87,13 @@ class KirbyApiStore extends PersistentStore {
   }
 }
 
+/**
+ * Store name
+ * @const {String}
+ */
+const storeName = 'KIRBY_API_STORE'
+
+/**
+ * Initialized Kirby API store
+ */
 export const kirbyApiStore = new KirbyApiStore(storeName)
