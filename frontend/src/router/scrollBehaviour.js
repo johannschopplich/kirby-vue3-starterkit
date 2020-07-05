@@ -2,8 +2,8 @@
  * Handles scroll behaviour
  *
  * @param {object} to Route object of next page
- * @param {*} from Route object of previous page
- * @param {*} savedPosition Used by popstate navigations
+ * @param {object} from Route object of previous page
+ * @param {object} savedPosition Used by popstate navigations
  * @returns {(object|boolean)} Scroll position or `false`
  */
 export const scrollBehavior = async function (to, from, savedPosition) {

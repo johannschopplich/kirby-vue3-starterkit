@@ -12,7 +12,6 @@ export class PersistentStore extends Store {
    * Constructor
    *
    * @param {string} storeName Name of the store
-   * @class
    */
   constructor (storeName) {
     super(storeName)

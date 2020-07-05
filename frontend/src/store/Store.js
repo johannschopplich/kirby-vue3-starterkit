@@ -8,7 +8,6 @@ export class Store {
    * Constructor
    *
    * @param {string} storeName Name of the store
-   * @class
    */
   constructor (storeName) {
     this.storeName = storeName

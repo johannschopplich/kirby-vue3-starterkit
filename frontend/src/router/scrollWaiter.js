@@ -9,7 +9,7 @@ function createScrollWaiter () {
   let promise
 
   /**
-   *
+   * Add scroll waiter
    */
   function add () {
     // eslint-disable-next-line promise/param-names
@@ -19,7 +19,7 @@ function createScrollWaiter () {
   }
 
   /**
-   *
+   * Resolve scroll waiter
    */
   function flush () {
     resolve && resolve()
