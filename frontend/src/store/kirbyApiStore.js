@@ -88,12 +88,13 @@ class KirbyApiStore extends PersistentStore {
 }
 
 /**
- * Store name
- * @const {String}
+ * Internal store name
+ * @const {string}
  */
 const storeName = 'KIRBY_API_STORE'
 
 /**
- * Initialized Kirby API store
+ * Ready-to-use Kirby API store
+ * @const {class}
  */
 export const kirbyApiStore = new KirbyApiStore(storeName)

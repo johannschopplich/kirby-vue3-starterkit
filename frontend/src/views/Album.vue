@@ -13,7 +13,9 @@
 
       <div class="album-text text">
         <span v-if="page.description" v-html="page.description.html" />
-        <p v-if="page.tags" class="album-tags tags">{{ page.tags }}</p>
+        <p v-if="page.tags" class="album-tags tags">
+          {{ page.tags }}
+        </p>
       </div>
 
       <ul v-if="page.gallery" class="album-gallery" :data-even="page.gallery.length % 2 === 0" :data-count="page.gallery.length">

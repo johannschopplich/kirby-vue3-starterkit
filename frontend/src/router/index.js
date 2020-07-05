@@ -5,8 +5,8 @@ import Default from '../views/Default.vue'
 /**
  * Capizalizes a string
  *
- * @param {String} string Character string to capitalize
- * @returns {String}
+ * @param {string} string Character string to capitalize
+ * @returns {string}
  */
 const capitalize = ([first, ...rest]) => first.toUpperCase() + rest.join('')
 

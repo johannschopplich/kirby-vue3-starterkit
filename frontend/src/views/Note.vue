@@ -4,7 +4,9 @@
       <header class="note-header intro">
         <h1>{{ page.title }}</h1>
         <time class="note-date">{{ page.date }}</time>
-        <p v-if="page.tags" class="note-tags tags">{{ page.tags }}</p>
+        <p v-if="page.tags" class="note-tags tags">
+          {{ page.tags }}
+        </p>
       </header>
 
       <div v-if="page.text" class="note-text text" v-html="page.text.html" />

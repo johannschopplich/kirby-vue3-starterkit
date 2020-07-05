@@ -1,7 +1,7 @@
 import { kirbyApiStore } from '../store/kirbyApiStore'
 
 /**
- * @const {String}
+ * @const {string}
  */
 const apiUrl = process.env.NODE_ENV === 'development'
   ? import.meta.env.KIRBY_API_URL
@@ -10,7 +10,7 @@ const apiUrl = process.env.NODE_ENV === 'development'
 /**
  * Retrieve a page by id from either store or fetch it freshly
  *
- * @param {String} id Page id to retrieve
+ * @param {string} id Page id to retrieve
  * @param {Object} options Set of options
  * @returns {Object}
  */

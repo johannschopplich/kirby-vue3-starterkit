@@ -1,5 +1,7 @@
 <template>
-  <router-link to="#main" class="skip-link">Skip to content</router-link>
+  <router-link to="#main" class="skip-link">
+    Skip to content
+  </router-link>
 
   <div class="page">
     <Header />

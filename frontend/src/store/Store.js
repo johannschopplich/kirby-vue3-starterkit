@@ -7,7 +7,7 @@ export class Store {
   /**
    * Constructor
    *
-   * @param {String} storeName Name of the store
+   * @param {string} storeName Name of the store
    * @constructor
    */
   constructor (storeName) {
