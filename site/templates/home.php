@@ -4,7 +4,7 @@ $data = [
   'title' => $page->title()->value(),
   'metaTitle' => $page->customTitle()->or($page->title() . ' – ' . $site->title())->value(),
 
-  // Create a global `site` available through homepage
+  // Create `$site` analogy available through homepage
   'site' => [
     'title' => $site->title()->value(),
     'children' => array_values($site->children()->published()->map(function ($child) {
