@@ -1,5 +1,8 @@
 import { kirbyApiStore } from '../store/kirbyApiStore'
 
+/**
+ * @const {String}
+ */
 const apiUrl = process.env.NODE_ENV === 'development'
   ? import.meta.env.KIRBY_API_URL
   : window.location.origin
@@ -7,8 +10,9 @@ const apiUrl = process.env.NODE_ENV === 'development'
 /**
  * Retrieve a page by id from either store or fetch it freshly
  *
- * @param {number} id Page id to retrieve
- * @param {object} options Set of options
+ * @param {String} id Page id to retrieve
+ * @param {Object} options Set of options
+ * @returns {Object}
  */
 const getPage = async (id, { force = false } = {}) => {
   await kirbyApiStore.init()

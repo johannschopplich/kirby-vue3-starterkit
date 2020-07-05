@@ -3,9 +3,9 @@ import { useRoute } from 'vue-router'
 import { useKirbyAPI } from './useKirbyApi'
 
 /**
- * Return the corressponding page object for the current path
+ * Hook for the corresponding page of the current path
  *
- * @returns {object}
+ * @returns {Object}
  */
 export const usePage = () => {
   const { path } = useRoute()
