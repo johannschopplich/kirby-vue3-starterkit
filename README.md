@@ -144,6 +144,16 @@ kirby-vue3-starterkit/
 
 </details>
 
+## Caching
+
+Even without caching enabled, the frontend will store pages between indiviual routes/views. Once you reload the tab however, every page data has to be fetched from the api once again.
+
+To forestall repetitive HTTP requests, the store state (including cached pages data) may be persisted between tabs or browser sessions. By that, the store state will be saved to `IndexedDB` each time a page has been fetched:
+
+![Caching for Kirby and Vue 3 starterkit](./.github/kirby-vue-3-cache-and-store.png)
+
+While calling up the website for the first time, the `home` page will be always be fetched. It holds `site` data with an index of modification timestamps for each page id. This is relevant, because before using a cached page, the timestamp will be compared with the latest modification timestamp from the site modification index. If it differs, the cached page will be removed and freshly fetched.
+
 ## Prerequisites
 
 - Node.js with npm (only required to build the frontend)
@@ -194,19 +204,9 @@ All development and production related configurations for both backend and front
 - `KIRBY_SERVER_HOSTNAME` and `KIRBY_SERVER_PORT` specify the address where you wish the Kirby backend to be served from. It is used by the frontend to fetch content data as JSON.
 - Keys starting with `VITE_` are available in your code following the `import.meta.env.VITE_CUSTOM_VARIABLE` syntax.
 
-### Caching
-
-Even without caching enabled, the frontend will cache pages between indiviual routes/views. Once you reload the tab however, every page data has to be fetched from the api once again.
-
-![Caching for Kirby and Vue 3 starterkit](./.github/kirby-vue-3-cache-and-store.png)
-
-If you wish to create  apersistent store which caches pages between browser sessions, set:
+To enable the **persistent store** which caches pages between browser sessions, set:
 - `KIRBY_CACHE` to `true`
 - `VITE_PERSIST_API_STORE` to `true`
-
-By that, the pages state will be saved to `IndexedDB` each time a page has been fetched.
-
-While calling up the website for the first time, the `home` page will be always be fetched. It holds `site` data with an index of modification timestamps for each page id. This is relevant, because before returning a cached page, the timestamp will be compared with the latest modification timestamp from the site modification index. If it differs, the cached page will be removed and freshly fetched.
 
 ### Deployment
 
