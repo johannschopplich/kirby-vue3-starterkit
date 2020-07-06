@@ -5,9 +5,7 @@ import { kirbyApiStore } from '../store/kirbyApiStore'
  *
  * @constant {string}
  */
-const apiUrl = process.env.NODE_ENV === 'development'
-  ? import.meta.env.KIRBY_API_URL
-  : window.location.origin
+const apiUrl = window.location.origin
 
 /**
  * Retrieve a page by id from either store or fetch it freshly
@@ -60,12 +58,13 @@ const getPage = async (id, { force = false } = {}) => {
 }
 
 /**
- * Hook for common Kirby API handling methods
+ * Hook to handle Kirby API
  *
- * @returns {object} Object with functions
+ * @returns {object} Object with constants and methods
  */
 export const useKirbyAPI = () => {
   return {
+    apiUrl,
     getPage
   }
 }
