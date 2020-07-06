@@ -9,14 +9,16 @@ const apiLocation = import.meta.env.KIRBY_API_LOCATION || ''
 
 // Safety guards for custom API location
 if (process.env.NODE_ENV === 'development') {
+  const msgPrefix = '[KirbyAPI] Environment variable `KIRBY_API_LOCATION` '
+
   if (apiLocation && apiLocation.endsWith('/')) {
-    throw new Error('[KirbyAPI] Environment variable `KIRBY_API_LOCATION` isn\'t allowed to contain a trailing slash.')
+    throw new Error(msgPrefix + 'isn\'t allowed to contain a trailing slash.')
   }
   if (apiLocation && !apiLocation.startsWith('/')) {
-    throw new Error('[KirbyAPI] Environment variable `KIRBY_API_LOCATION` has to start with a leading slash.')
+    throw new Error(msgPrefix + 'has to start with a leading slash.')
   }
   if (apiLocation === '/api') {
-    throw new Error('[KirbyAPI] Environment variable `KIRBY_API_LOCATION` isn\'t allowed to match Kirby\'s internal API endpoint.')
+    throw new Error(msgPrefix + 'mustn\'t be the same as Kirby\'s internal API endpoint.')
   }
 }
 
