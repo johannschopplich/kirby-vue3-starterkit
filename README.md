@@ -35,11 +35,14 @@ To compile the frontend sources, [Vite](https://github.com/vitejs/vite) comes to
 - Instant hot module replacement (HMR)
 - [Head over to the GitHub page](https://github.com/vitejs/vite) for more details
 
-### Folder structure
+### Folder Structure
 
 Some notes about the folder structure with some additional comments on important files.
 
-```sh
+<details>
+<summary><b>Expand folder tree</b></summary>
+
+```
 kirby-vue3-starterkit/
 |
 |   # Includes all frontend-related files
@@ -139,6 +142,8 @@ kirby-vue3-starterkit/
 └── vite.config.js
 ```
 
+</details>
+
 ## Prerequisites
 
 - Node.js with npm (only required to build the frontend)
@@ -192,6 +197,8 @@ All development and production related configurations for both backend and front
 ### Caching
 
 Even without caching enabled, the frontend will cache pages between indiviual routes/views. Once you reload the tab however, every page data has to be fetched from the api once again.
+
+![Caching for Kirby and Vue 3 starterkit](./.github/kirby-vue-3-cache-and-store.png)
 
 If you wish to create  apersistent store which caches pages between browser sessions, set:
 - `KIRBY_CACHE` to `true`
