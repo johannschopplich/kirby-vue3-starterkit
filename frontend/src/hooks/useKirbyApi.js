@@ -1,11 +1,24 @@
 import { kirbyApiStore } from '../store/kirbyApiStore'
 
 /**
- * API Url of the Kirby backend
+ * API location of the Kirby backend
  *
  * @constant {string}
  */
-const apiUrl = window.location.origin
+const apiLocation = import.meta.env.KIRBY_API_LOCATION || ''
+
+// Safety guards for custom API location
+if (process.env.NODE_ENV === 'development') {
+  if (apiLocation && apiLocation.endsWith('/')) {
+    throw new Error('[KirbyAPI] Environment variable `KIRBY_API_LOCATION` isn\'t allowed to contain a trailing slash.')
+  }
+  if (apiLocation && !apiLocation.startsWith('/')) {
+    throw new Error('[KirbyAPI] Environment variable `KIRBY_API_LOCATION` has to start with a leading slash.')
+  }
+  if (apiLocation === '/api') {
+    throw new Error('[KirbyAPI] Environment variable `KIRBY_API_LOCATION` isn\'t allowed to match Kirby\'s internal API endpoint.')
+  }
+}
 
 /**
  * Retrieve a page by id from either store or fetch it freshly
@@ -25,7 +38,7 @@ const getPage = async (id, { force = false } = {}) => {
     // Use cached page if already fetched once
     if (storedPage) {
       if (process.env.NODE_ENV === 'development') {
-        console.log(`[KirbyAPI] Use ${apiUrl}/${id}.json from store`)
+        console.log(`[KirbyAPI] Pulling ${id} page data from store.`)
       }
 
       return storedPage
@@ -33,12 +46,15 @@ const getPage = async (id, { force = false } = {}) => {
   }
 
   // Otherwise fetch page for the first time
-  const resp = await fetch(`${apiUrl}/${id}.json`)
+  if (process.env.NODE_ENV === 'development') {
+    console.log(`[KirbyAPI] Fetching ${apiLocation}/${id}.json…`)
+  }
+
+  const resp = await fetch(`${apiLocation}/${id}.json`)
   const page = await resp.json()
 
   if (process.env.NODE_ENV === 'development') {
-    console.log(`[KirbyAPI] Fetch ${apiUrl}/${id}.json`)
-    console.log(page)
+    console.log(`[KirbyAPI] Fetched ${id} page data:`, page)
   }
 
   // Make sure page gets stored freshly if `force` is `true`
@@ -58,13 +74,13 @@ const getPage = async (id, { force = false } = {}) => {
 }
 
 /**
- * Hook to handle Kirby API
+ * Hook to handle the Kirby API
  *
  * @returns {object} Object with constants and methods
  */
 export const useKirbyAPI = () => {
   return {
-    apiUrl,
+    apiLocation,
     getPage
   }
 }

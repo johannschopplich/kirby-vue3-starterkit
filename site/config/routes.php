@@ -24,7 +24,7 @@ return [
      * Respond with JSON-encoded page data for any given URL ending with `.json`.
      */
     [
-        'pattern' => ['(:all).json'],
+        'pattern' => [env('KIRBY_API_LOCATION', '') . '(:all).json'],
         'action'  => function ($pageId) {
             kirby()->response()->json();
             return (page($pageId) ?? page('error'))->render();
