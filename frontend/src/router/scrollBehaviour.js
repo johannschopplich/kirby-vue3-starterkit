@@ -14,12 +14,9 @@ export const scrollBehavior = async function (to, from, savedPosition) {
     // `savedPosition` is only available for popstate navigations
     return { ...savedPosition, behavior }
   } else {
-    let position
-
     // Scroll to anchor by returning the selector
     if (to.hash) {
-      position = { el: decodeURI(to.hash), behavior }
-      return position
+      return { el: decodeURI(to.hash), behavior }
     }
 
     // Check if any matched route config has meta that requires scrolling to top

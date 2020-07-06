@@ -1,8 +1,8 @@
 /**
- * Wait for e.g. transitions
+ * Navigation guard for e.g. page transitions
  *
  * @see https://github.com/vuejs/vue-router-next/blob/master/e2e/scroll-behavior/index.ts
- * @returns {object} Scroll waiter functions
+ * @returns {object} Scroll waiter methods
  */
 function createScrollWaiter () {
   let resolve
