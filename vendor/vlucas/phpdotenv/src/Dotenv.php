@@ -1,52 +1,70 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Dotenv;
 
 use Dotenv\Exception\InvalidPathException;
 use Dotenv\Loader\Loader;
 use Dotenv\Loader\LoaderInterface;
+use Dotenv\Parser\Parser;
+use Dotenv\Parser\ParserInterface;
+use Dotenv\Repository\Adapter\PutenvAdapter;
 use Dotenv\Repository\RepositoryBuilder;
 use Dotenv\Repository\RepositoryInterface;
-use Dotenv\Store\FileStore;
 use Dotenv\Store\StoreBuilder;
+use Dotenv\Store\StoreInterface;
 
 class Dotenv
 {
+    /**
+     * The store instance.
+     *
+     * @var \Dotenv\Store\StoreInterface
+     */
+    private $store;
+
+    /**
+     * The parser instance.
+     *
+     * @var \Dotenv\Parser\ParserInterface
+     */
+    private $parser;
+
     /**
      * The loader instance.
      *
      * @var \Dotenv\Loader\LoaderInterface
      */
-    protected $loader;
+    private $loader;
 
     /**
      * The repository instance.
      *
      * @var \Dotenv\Repository\RepositoryInterface
      */
-    protected $repository;
-
-    /**
-     * The store instance.
-     *
-     * @var \Dotenv\Store\StoreInterface
-     */
-    protected $store;
+    private $repository;
 
     /**
      * Create a new dotenv instance.
      *
+     * @param \Dotenv\Store\StoreInterface           $store
+     * @param \Dotenv\Parser\ParserInterface         $parser
      * @param \Dotenv\Loader\LoaderInterface         $loader
      * @param \Dotenv\Repository\RepositoryInterface $repository
-     * @param \Dotenv\Store\StoreInterface|string[]  $store
      *
      * @return void
      */
-    public function __construct(LoaderInterface $loader, RepositoryInterface $repository, $store)
-    {
+    public function __construct(
+        StoreInterface $store,
+        ParserInterface $parser,
+        LoaderInterface $loader,
+        RepositoryInterface $repository
+    ) {
+        $this->store = $store;
+        $this->parser = $parser;
         $this->loader = $loader;
         $this->repository = $repository;
-        $this->store = is_array($store) ? new FileStore($store, true) : $store;
     }
 
     /**
@@ -56,18 +74,27 @@ class Dotenv
      * @param string|string[]                        $paths
      * @param string|string[]|null                   $names
      * @param bool                                   $shortCircuit
+     * @param string|null                            $fileEncoding
      *
      * @return \Dotenv\Dotenv
      */
-    public static function create(RepositoryInterface $repository, $paths, $names = null, $shortCircuit = true)
+    public static function create(RepositoryInterface $repository, $paths, $names = null, bool $shortCircuit = true, string $fileEncoding = null)
     {
-        $builder = StoreBuilder::create()->withPaths($paths)->withNames($names);
+        $builder = $names === null ? StoreBuilder::createWithDefaultName() : StoreBuilder::createWithNoNames();
+
+        foreach ((array) $paths as $path) {
+            $builder = $builder->addPath($path);
+        }
+
+        foreach ((array) $names as $name) {
+            $builder = $builder->addName($name);
+        }
 
         if ($shortCircuit) {
             $builder = $builder->shortCircuit();
         }
 
-        return new self(new Loader(), $repository, $builder->make());
+        return new self($builder->fileEncoding($fileEncoding)->make(), new Parser(), new Loader(), $repository);
     }
 
     /**
@@ -76,14 +103,34 @@ class Dotenv
      * @param string|string[]      $paths
      * @param string|string[]|null $names
      * @param bool                 $shortCircuit
+     * @param string|null          $fileEncoding
      *
      * @return \Dotenv\Dotenv
      */
-    public static function createMutable($paths, $names = null, $shortCircuit = true)
+    public static function createMutable($paths, $names = null, bool $shortCircuit = true, string $fileEncoding = null)
     {
-        $repository = RepositoryBuilder::create()->make();
+        $repository = RepositoryBuilder::createWithDefaultAdapters()->make();
 
-        return self::create($repository, $paths, $names, $shortCircuit);
+        return self::create($repository, $paths, $names, $shortCircuit, $fileEncoding);
+    }
+
+    /**
+     * Create a new mutable dotenv instance with default repository with the putenv adapter.
+     *
+     * @param string|string[]      $paths
+     * @param string|string[]|null $names
+     * @param bool                 $shortCircuit
+     * @param string|null          $fileEncoding
+     *
+     * @return \Dotenv\Dotenv
+     */
+    public static function createUnsafeMutable($paths, $names = null, bool $shortCircuit = true, string $fileEncoding = null)
+    {
+        $repository = RepositoryBuilder::createWithDefaultAdapters()
+            ->addAdapter(PutenvAdapter::class)
+            ->make();
+
+        return self::create($repository, $paths, $names, $shortCircuit, $fileEncoding);
     }
 
     /**
@@ -92,32 +139,55 @@ class Dotenv
      * @param string|string[]      $paths
      * @param string|string[]|null $names
      * @param bool                 $shortCircuit
+     * @param string|null          $fileEncoding
      *
      * @return \Dotenv\Dotenv
      */
-    public static function createImmutable($paths, $names = null, $shortCircuit = true)
+    public static function createImmutable($paths, $names = null, bool $shortCircuit = true, string $fileEncoding = null)
     {
-        $repository = RepositoryBuilder::create()->immutable()->make();
+        $repository = RepositoryBuilder::createWithDefaultAdapters()->immutable()->make();
 
-        return self::create($repository, $paths, $names, $shortCircuit);
+        return self::create($repository, $paths, $names, $shortCircuit, $fileEncoding);
+    }
+
+    /**
+     * Create a new immutable dotenv instance with default repository with the putenv adapter.
+     *
+     * @param string|string[]      $paths
+     * @param string|string[]|null $names
+     * @param bool                 $shortCircuit
+     * @param string|null          $fileEncoding
+     *
+     * @return \Dotenv\Dotenv
+     */
+    public static function createUnsafeImmutable($paths, $names = null, bool $shortCircuit = true, string $fileEncoding = null)
+    {
+        $repository = RepositoryBuilder::createWithDefaultAdapters()
+            ->addAdapter(PutenvAdapter::class)
+            ->immutable()
+            ->make();
+
+        return self::create($repository, $paths, $names, $shortCircuit, $fileEncoding);
     }
 
     /**
      * Read and load environment file(s).
      *
-     * @throws \Dotenv\Exception\InvalidPathException|\Dotenv\Exception\InvalidFileException
+     * @throws \Dotenv\Exception\InvalidPathException|\Dotenv\Exception\InvalidEncodingException|\Dotenv\Exception\InvalidFileException
      *
      * @return array<string,string|null>
      */
     public function load()
     {
-        return $this->loader->load($this->repository, $this->store->read());
+        $entries = $this->parser->parse($this->store->read());
+
+        return $this->loader->load($this->repository, $entries);
     }
 
     /**
      * Read and load environment file(s), silently failing if no files can be read.
      *
-     * @throws \Dotenv\Exception\InvalidFileException
+     * @throws \Dotenv\Exception\InvalidEncodingException|\Dotenv\Exception\InvalidFileException
      *
      * @return array<string,string|null>
      */
@@ -140,7 +210,7 @@ class Dotenv
      */
     public function required($variables)
     {
-        return new Validator($this->repository, (array) $variables);
+        return (new Validator($this->repository, (array) $variables))->required();
     }
 
     /**
@@ -152,6 +222,6 @@ class Dotenv
      */
     public function ifPresent($variables)
     {
-        return new Validator($this->repository, (array) $variables, false);
+        return new Validator($this->repository, (array) $variables);
     }
 }

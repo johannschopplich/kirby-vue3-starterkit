@@ -9,5 +9,20 @@ of which one is commonly misapplied. Thus, the laminas-escaper component was wri
 It offers developers a way to escape output and defend from XSS and related
 vulnerabilities by introducing contextual escaping based on peer-reviewed rules.
 
-- File issues at https://github.com/laminas/laminas-escaper/issues
-- Documentation is at https://docs.laminas.dev/laminas-escaper/
+## Installation
+
+Run the following to install this library:
+
+```bash
+$ composer require laminas/laminas-escaper
+```
+
+## Documentation
+
+Browse the documentation online at https://docs.laminas.dev/laminas-escaper/
+
+## Support
+
+* [Issues](https://github.com/laminas/laminas-escaper/issues/)
+* [Chat](https://laminas.dev/chat/)
+* [Forum](https://discourse.laminas.dev/)

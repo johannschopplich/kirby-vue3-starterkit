@@ -1,0 +1,55 @@
+{
+    "name": "spatie/schema-org",
+    "description": "A fluent builder Schema.org types and ld+json generator",
+    "keywords": [
+        "spatie",
+        "schema-org"
+    ],
+    "homepage": "https://github.com/spatie/schema-org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Sebastian De Deyne",
+            "email": "sebastian@spatie.be",
+            "homepage": "https://spatie.be",
+            "role": "Developer"
+        },
+        {
+            "name": "Tom Witkowski",
+            "email": "dev.gummibeer@gmail.com",
+            "homepage": "https://gummibeer.de",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.3",
+        "ext-json": "*"
+    },
+    "require-dev": {
+        "graham-campbell/analyzer": "^2.3",
+        "league/flysystem": "^1.0",
+        "phpunit/phpunit": "^8.0",
+        "symfony/console": "^3.2",
+        "symfony/css-selector": "^3.2",
+        "symfony/dom-crawler": "^3.2",
+        "twig/twig": "^1.28"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "Spatie\\SchemaOrg\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Spatie\\SchemaOrg\\Generator\\": "generator",
+            "Spatie\\SchemaOrg\\Test\\": "tests"
+        }
+    },
+    "scripts": {
+        "generate": "php ./generate.php",
+        "test": "vendor/bin/phpunit"
+    }
+}
