@@ -157,7 +157,7 @@ While calling up the website for the first time, the `home` page will be always 
 ## Prerequisites
 
 - Node.js with npm (only required to build the frontend)
-- Kirby requires PHP 7.2+
+- PHP 7.4+
 
 > Kirby is not a free software. You can try it for free on your local machine but in order to run Kirby on a public server you must purchase a [valid license](https://getkirby.com/buy).
 
