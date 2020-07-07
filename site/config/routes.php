@@ -1,6 +1,20 @@
 <?php
 
 use Kirby\Toolkit\Tpl;
+use Kirby\Toolkit\Str;
+
+$apiLocation = env('KIRBY_API_LOCATION', '');
+
+if (!empty($apiLocation)) {
+    // Remove leading slash if present
+    if (Str::startsWith($apiLocation, '/')) {
+        Str::rtrim($apiLocation, '/');
+    }
+    // Add trailing slash if not given
+    if (!Str::endsWith($apiLocation, '/')) {
+        $apiLocation .= '/';
+    }
+}
 
 return [
     /**
@@ -24,7 +38,7 @@ return [
      * Respond with JSON-encoded page data for any given URL ending with `.json`.
      */
     [
-        'pattern' => [env('KIRBY_API_LOCATION', '') . '(:all).json'],
+        'pattern' => [$apiLocation . '(:all).json'],
         'action'  => function ($pageId) {
             kirby()->response()->json();
             return (page($pageId) ?? page('error'))->render();

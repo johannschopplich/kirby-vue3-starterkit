@@ -4,8 +4,9 @@ module.exports = {
   root: 'frontend',
   assetsDir: 'assets',
   emitIndex: false,
+
   env: {
-    KIRBY_API_LOCATION: process.env.KIRBY_API_LOCATION
+    VITE_KIRBY_API_LOCATION: process.env.KIRBY_API_LOCATION
   },
 
   proxy: {
