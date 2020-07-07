@@ -16,7 +16,7 @@ if (apiLocation) {
 
 if (apiLocation === '/api') {
   if (process.env.NODE_ENV === 'development') {
-    throw new Error('Environment variable `KIRBY_API_LOCATION` mustn\'t be the same as Kirby\'s internal API endpoint.')
+    throw new Error('[KirbyAPI] API location mustn\'t be the same as Kirby\'s internal API endpoint.')
   }
 }
 
