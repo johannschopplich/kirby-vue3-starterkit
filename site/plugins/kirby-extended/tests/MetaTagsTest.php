@@ -40,7 +40,7 @@ class MetaTagsTest extends TestCase
 
         $expectedHtml = <<<'EOD'
 <link rel="alternate" hreflang="pt-br" href="https://br.pedroborg.es">
-    <link rel="alternate" hreflang="en-us" href="https://en.pedroborg.es">
+  <link rel="alternate" hreflang="en-us" href="https://en.pedroborg.es">
 
 EOD;
 
@@ -157,18 +157,18 @@ EOD;
 
         $expectedHtml = <<<'EOD'
 <title>&lt;title&gt; tag test</title>
-    <meta name="description" content="&quot;Meta Tags&quot; test">
-    <meta property="og:title" content="Open Graph test">
-    <meta name="twitter:card" content="summary">
-    <link rel="canonical" href="https://pedroborg.es">
-    <script type="application/ld+json">
-    {
-        "@context": "http://schema.org",
-        "@type": "Organization",
-        "name": "Example Co",
-        "url": "https://www.example.com"
-    }
-    </script>
+  <meta name="description" content="&quot;Meta Tags&quot; test">
+  <meta property="og:title" content="Open Graph test">
+  <meta name="twitter:card" content="summary">
+  <link rel="canonical" href="https://pedroborg.es">
+  <script type="application/ld+json">
+  {
+      "@context": "http://schema.org",
+      "@type": "Organization",
+      "name": "Example Co",
+      "url": "https://www.example.com"
+  }
+  </script>
 
 EOD;
 
@@ -198,7 +198,7 @@ EOD;
 
         $expectedHtml = <<<'EOD'
 <meta property="og:title" content="Open Graph test">
-    <meta name="description" content="&quot;Meta Tags&quot; test">
+  <meta name="description" content="&quot;Meta Tags&quot; test">
 
 EOD;
 

@@ -26,7 +26,7 @@
     "vlucas/phpdotenv": "^5.0"
   },
   "require-dev": {
-    "getkirby/cms": "^3",
+    "getkirby/cms": "^3.0",
     "phpstan/phpstan": "^0.12",
     "phpunit/phpunit": "^9.0"
   },

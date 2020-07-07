@@ -16,8 +16,20 @@ class MetaTagsAdapter
     protected static array $instances = [];
     protected ?string $indentation;
     protected ?array $order;
-    protected $page;
-    protected $data;
+
+    /**
+     * Current page
+     *
+     * @var \Kirby\Cms\Page
+     */
+    protected Page $page;
+
+    /**
+     * Holds default and template meta data
+     *
+     * @var array
+     */
+    protected array $data;
 
     /**
      * Constructor

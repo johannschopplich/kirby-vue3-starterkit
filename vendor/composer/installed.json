@@ -316,17 +316,17 @@
     },
     {
         "name": "johannschopplich/kirby-extended",
-        "version": "v1.0.9",
-        "version_normalized": "1.0.9.0",
+        "version": "v1.0.10",
+        "version_normalized": "1.0.10.0",
         "source": {
             "type": "git",
             "url": "https://github.com/johannschopplich/kirby-extended.git",
-            "reference": "6eb460fb375669391c4eb04a0516bd0edea7cff3"
+            "reference": "a6b9bf58eff8013dca56b769e23f39c2010a94ba"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/johannschopplich/kirby-extended/zipball/6eb460fb375669391c4eb04a0516bd0edea7cff3",
-            "reference": "6eb460fb375669391c4eb04a0516bd0edea7cff3",
+            "url": "https://api.github.com/repos/johannschopplich/kirby-extended/zipball/a6b9bf58eff8013dca56b769e23f39c2010a94ba",
+            "reference": "a6b9bf58eff8013dca56b769e23f39c2010a94ba",
             "shasum": ""
         },
         "require": {
@@ -337,11 +337,11 @@
             "vlucas/phpdotenv": "^5.0"
         },
         "require-dev": {
-            "getkirby/cms": "^3",
+            "getkirby/cms": "^3.0",
             "phpstan/phpstan": "^0.12",
             "phpunit/phpunit": "^9.0"
         },
-        "time": "2020-06-28T19:32:00+00:00",
+        "time": "2020-07-07T18:41:31+00:00",
         "type": "kirby-plugin",
         "extra": {
             "kirby-cms-path": false
