@@ -8,12 +8,10 @@ $data = [
   'phone' => $page->phone()->value(),
   'address' => ['html' => $page->address()->kt()->value()],
   'text' => ['html' => $page->text()->kt()->value()],
-  'social' => array_values($page->social()->toStructure()->map(function ($social) {
-    return [
-      'url' => $social->url()->value(),
-      'platform' => $social->platform()->value()
-    ];
-  })->data())
+  'social' => array_values($page->social()->toStructure()->map(fn($social) => [
+    'url' => $social->url()->value(),
+    'platform' => $social->platform()->value()
+  ])->data())
 ];
 
 echo json_encode($data);
