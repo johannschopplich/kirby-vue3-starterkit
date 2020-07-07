@@ -8,8 +8,9 @@ $apiLocation = env('KIRBY_API_LOCATION', '');
 if (!empty($apiLocation)) {
     // Remove leading slash if present
     if (Str::startsWith($apiLocation, '/')) {
-        Str::rtrim($apiLocation, '/');
+        $apiLocation = Str::ltrim($apiLocation, '/');
     }
+
     // Add trailing slash if not given
     if (!Str::endsWith($apiLocation, '/')) {
         $apiLocation .= '/';
