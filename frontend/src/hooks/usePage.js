@@ -13,8 +13,9 @@ export const usePage = () => {
 
   // Setup up page waiter
   let resolve
-  // eslint-disable-next-line promise/param-names
-  let promise = new Promise(r => { resolve = r })
+  let promise = new Promise(r => { // eslint-disable-line promise/param-names
+    resolve = r
+  })
 
   // Transform route `path` to `pageId` for use with api
   const pageId = (path.endsWith('/') ? path.slice(0, -1) : path).slice(1) || 'home'
