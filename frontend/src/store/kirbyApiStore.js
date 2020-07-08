@@ -1,4 +1,5 @@
-import { PersistentStore } from './PersistentStore'
+import { toRaw } from 'vue'
+import { PersistentStore } from './base/PersistentStore'
 import { routes } from '../router'
 
 /**
@@ -43,11 +44,8 @@ class KirbyApiStore extends PersistentStore {
       if (routerPageData.meta.modified !== page.modified) return
     }
 
-    // Deep clone to return object, not proxy, for Safari support
-    // This works fine, as long as no `Date`s, functions, `undefined`, [NaN], Maps, Sets
-    // and other complex types appear within the object – which is the case
-    // for fetched JSON from Kirby backend anyway
-    return JSON.parse(JSON.stringify(page))
+    // Return the raw, original object of athe reactive `page` object for Safari support
+    return toRaw(page)
   }
 
   /**
