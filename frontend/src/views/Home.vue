@@ -31,17 +31,18 @@ export default {
   components: { Intro },
 
   setup () {
-    const { getPage } = useKirbyAPI()
+    const page = usePage()
     const photography = reactive({
       children: null
     })
 
     ;(async () => {
+      const { getPage } = useKirbyAPI()
       Object.assign(photography, { ...(await getPage('photography')) })
     })()
 
     return {
-      page: usePage(),
+      page,
       photography
     }
   }

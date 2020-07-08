@@ -10,7 +10,7 @@ module.exports = {
   },
 
   proxy: {
-    [`${process.env.KIRBY_API_LOCATION}/*.json`]: {
+    '/*.json': {
       target: `http://${process.env.KIRBY_SERVER_HOSTNAME}:${process.env.KIRBY_SERVER_PORT}`,
       changeOrigin: true
     }

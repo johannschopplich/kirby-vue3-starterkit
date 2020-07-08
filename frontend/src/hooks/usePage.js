@@ -11,6 +11,11 @@ export const usePage = () => {
   const { path } = useRoute()
   const { getPage } = useKirbyAPI()
 
+  // Setup up page waiter
+  let resolve
+  // eslint-disable-next-line promise/param-names
+  let promise = new Promise(r => { resolve = r })
+
   // Transform route `path` to `pageId` for use with api
   const pageId = (path.endsWith('/') ? path.slice(0, -1) : path).slice(1) || 'home'
 
@@ -22,12 +27,28 @@ export const usePage = () => {
     text: null
   })
 
+  /**
+   * @example
+   * (async () => {
+   *   await page.isLoaded
+   *   document.title = page.metaTitle
+   * })()
+   */
+  Object.defineProperty(page, 'isLoaded', {
+    get: () => promise
+  })
+
   ;(async () => {
     // Get page from cache or freshly fetch it
     Object.assign(page, { ...(await getPage(pageId)) })
 
     // Set document title
     document.title = page.metaTitle
+
+    // Flush page waiter
+    resolve && resolve()
+    resolve = undefined
+    promise = undefined
   })()
 
   return page
