@@ -13,17 +13,17 @@
   },
   "dependencies": {
     "idb-keyval": "^3.2.0",
-    "vue": "^3.0.0-beta.19",
+    "vue": "^3.0.0-beta.20",
     "vue-router": "^4.0.0-beta.2"
   },
   "devDependencies": {
-    "@vue/compiler-sfc": "^3.0.0-beta.19",
+    "@vue/compiler-sfc": "^3.0.0-beta.20",
     "concurrently": "^5.2.0",
     "dotenv": "^8.2.0",
     "eslint": "^7.4.0",
     "eslint-config-standard": "^14.1.1",
     "eslint-plugin-import": "^2.22.0",
-    "eslint-plugin-jsdoc": "^29.1.0",
+    "eslint-plugin-jsdoc": "^29.1.2",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
