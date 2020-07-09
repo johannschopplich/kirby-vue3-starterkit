@@ -75,6 +75,5 @@ function minify (input) {
   const minified = minify(bundle)
   await writeFile(swDistPath, minified)
 
-  console.log('\x1b[32m%s\x1b[0m', `Generating service worker to ${swDistPath}`)
-  console.log('\x1b[32m%s\x1b[0m', `Generated service worker with additional ${assetFiles.length} assets to precache`)
+  console.log('\x1b[32m%s\x1b[0m', `Generated service worker to ${swDistPath} with ${assetFiles.length} additional assets to precache`)
 })()
