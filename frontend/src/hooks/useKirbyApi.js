@@ -33,14 +33,6 @@ const getPage = async (id, { force = false } = {}) => {
     }
   }
 
-  if (!navigator.onLine) {
-    if (process.env.NODE_ENV === 'development') {
-      console.log('[KirbyAPI] User agent seems to be offline. Redirecting to offline page…')
-    }
-
-    router.push({ path: '/offline' })
-  }
-
   // Otherwise fetch page for the first time
   if (process.env.NODE_ENV === 'development') {
     console.log(`[KirbyAPI] Fetching ${apiLocation}/${id}.json…`)
@@ -53,6 +45,22 @@ const getPage = async (id, { force = false } = {}) => {
     console.log(`[KirbyAPI] Fetched ${id} page data:`, page)
   }
 
+  // If service returns fallback JSON data and the user is
+  // therefore offline, redirect to offline page
+  if ('isOffline' in page) {
+    if (process.env.NODE_ENV === 'development') {
+      console.log('[KirbyAPI] User agent seems to be offline. Redirecting to offline page…')
+    }
+
+    router.push({ path: '/offline' })
+    return
+  }
+
+  // Add `site` object provided via `home` page to api store
+  if (id === 'home') {
+    kirbyApiStore.addSite(page.site)
+  }
+
   // Make sure page gets stored freshly if `force` is `true`
   if (force) {
     kirbyApiStore.removePage(id)
@@ -60,11 +68,6 @@ const getPage = async (id, { force = false } = {}) => {
 
   // Add page data to api store
   kirbyApiStore.addPage({ id, data: page })
-
-  // Add `site` object provided via `home` page to api store
-  if (id === 'home') {
-    kirbyApiStore.addSite(page.site)
-  }
 
   return page
 }

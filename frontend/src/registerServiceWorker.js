@@ -2,12 +2,13 @@ if (process.env.NODE_ENV !== 'development') {
   ;(async () => {
     if (!('serviceWorker' in navigator)) return
 
+    // `VITE_ENABLE_SW` returns a string, but we need a boolean
+    const enableSw = JSON.parse(import.meta.env.VITE_ENABLE_SW || false)
     const hasExistingSw = !!navigator.serviceWorker.controller
 
-    if (import.meta.env.VITE_ENABLE_SW) {
+    if (enableSw) {
       try {
         navigator.serviceWorker.register('/service-worker.js')
-        console.log('Init service worker:')
       } catch (err) {
         console.log('Failed to register service worker:', err)
       }

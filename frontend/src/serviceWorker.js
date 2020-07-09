@@ -7,7 +7,6 @@ const MAX_CACHED_IMAGES = 50
 const CACHE_KEYS = {
   STATIC: `static-${VERSION}`,
   PAGES: `pages-${VERSION}`,
-  API: `api-${VERSION}`,
   IMAGES: `images-${VERSION}`
 }
 
@@ -21,6 +20,7 @@ const PRECACHE_URLS = [
   '/',
   '/offline',
   `${API_LOCATION}/home.json`,
+  `${API_LOCATION}/notes.json`,
   `${API_LOCATION}/offline.json`,
   ...(self.__PRECACHE_ASSET_URLS || [])
 ]
@@ -61,7 +61,6 @@ self.addEventListener('message', ({ data }) => {
   if (data.command !== 'trimCaches') return
 
   trimCache(CACHE_KEYS.PAGES, MAX_CACHED_PAGES)
-  trimCache(CACHE_KEYS.API, MAX_CACHED_PAGES)
   trimCache(CACHE_KEYS.IMAGES, MAX_CACHED_IMAGES)
 })
 
@@ -108,7 +107,7 @@ self.addEventListener('fetch', event => {
 
   event.respondWith(async function () {
     const isHTML = acceptHeadersIncludes('text/html')
-    const isJSON = acceptHeadersIncludes('application/json')
+    const isJSON = request.url.endsWith('.json')
     const isImage = acceptHeadersIncludes('image')
 
     // Network-first strategy
@@ -121,21 +120,28 @@ self.addEventListener('fetch', event => {
         PRECACHE_URLS.includes(normalizedUrl.pathname + '/')
       ) {
         stashInCache(CACHE_KEYS.STATIC, request, copy)
-      } else if (isHTML) {
-        stashInCache(CACHE_KEYS.PAGES, request, copy)
       } else if (isJSON) {
-        stashInCache(CACHE_KEYS.API, request, copy)
+        stashInCache(CACHE_KEYS.PAGES, request, copy)
       } else if (isImage) {
         stashInCache(CACHE_KEYS.IMAGES, request, copy)
       }
 
       return response
-    } catch (error) {
+    } catch (fetchError) {
       const cachedResponse = await caches.match(request)
       if (cachedResponse) return cachedResponse
-      if (isHTML) return Response.redirect('/offline', 303)
 
-      console.error(`${request.url} couldn't be fetched by service worker.`)
+      if (isHTML) return Response.redirect('/offline', 303)
+      if (isJSON) {
+        return new Response(JSON.stringify({ isOffline: true }), {
+          headers: {
+            'Content-Type': 'application/json',
+            'Cache-Control': 'no-store'
+          }
+        })
+      }
+
+      console.error(fetchError)
     }
   }())
 })
