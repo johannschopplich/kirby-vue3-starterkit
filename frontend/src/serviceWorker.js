@@ -1,7 +1,6 @@
 /* eslint-env serviceworker */
 /* global API_LOCATION, VERSION */
 
-const MAX_CACHED_PAGES = 25
 const MAX_CACHED_IMAGES = 50
 
 const CACHE_KEYS = {
@@ -60,7 +59,6 @@ async function trimCache (cacheName, maxItems) {
 self.addEventListener('message', ({ data }) => {
   if (data.command !== 'trimCaches') return
 
-  trimCache(CACHE_KEYS.PAGES, MAX_CACHED_PAGES)
   trimCache(CACHE_KEYS.IMAGES, MAX_CACHED_IMAGES)
 })
 
@@ -94,14 +92,11 @@ self.addEventListener('activate', event => {
 
 self.addEventListener('fetch', event => {
   const { request } = event
-
-  // Normalize the incoming URL by removing query parameters
-  const normalizedUrl = new URL(request.url)
-  normalizedUrl.search = ''
+  const url = new URL(request.url)
 
   if (request.method !== 'GET') return
-  if (!ALLOWED_HOSTS.find(host => normalizedUrl.hostname === host)) return
-  if (EXCLUDED_URLS.some(page => normalizedUrl.href.includes(page))) return
+  if (!ALLOWED_HOSTS.find(host => url.hostname === host)) return
+  if (EXCLUDED_URLS.some(page => request.url.includes(page))) return
 
   const acceptHeadersIncludes = type => request.headers.get('Accept').includes(type)
 
@@ -116,8 +111,8 @@ self.addEventListener('fetch', event => {
       const copy = response.clone()
 
       if (
-        PRECACHE_URLS.includes(normalizedUrl.pathname) ||
-        PRECACHE_URLS.includes(normalizedUrl.pathname + '/')
+        PRECACHE_URLS.includes(url.pathname) ||
+        PRECACHE_URLS.includes(url.pathname + '/')
       ) {
         stashInCache(CACHE_KEYS.STATIC, request, copy)
       } else if (isJSON) {
