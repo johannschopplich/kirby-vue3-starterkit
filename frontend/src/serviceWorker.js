@@ -18,7 +18,7 @@ const PRECACHE_URLS = [
   '/',
   '/index.html',
   `${API_LOCATION}/home.json`,
-  `${API_LOCATION}/notes.json`,
+  `${API_LOCATION}/error.json`,
   `${API_LOCATION}/offline.json`,
   ...(self.__PRECACHE_ASSET_URLS || [])
 ]
@@ -122,10 +122,16 @@ self.addEventListener('fetch', event => {
 
       return response
     } catch (fetchError) {
+      // Return cached response, if available
       const cachedResponse = await caches.match(request)
       if (cachedResponse) return cachedResponse
 
+      // Return HTML of index page, the frontend will handle redirecting
+      // to offline page if applicable
       if (isHTML) return await caches.match('/')
+
+      // When offline and JSON data for the requested page wasn't cached
+      // before, return a fallback JSON
       if (isJSON) {
         return new Response(JSON.stringify({ error: 'offline' }), {
           headers: {
@@ -137,6 +143,7 @@ self.addEventListener('fetch', event => {
 
       console.error(fetchError)
 
+      // Provide a catch-all image fallback
       // if (isImage) {
       //   return new Response(
       //     `<svg role="img" aria-labelledby="offline-title" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">

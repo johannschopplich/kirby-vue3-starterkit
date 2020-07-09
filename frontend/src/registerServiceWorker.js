@@ -9,8 +9,8 @@ if (process.env.NODE_ENV !== 'development') {
     if (enableSw) {
       try {
         navigator.serviceWorker.register('/service-worker.js')
-      } catch (err) {
-        console.log('Failed to register service worker:', err)
+      } catch (error) {
+        console.log('Failed to register service worker:', error)
       }
 
       if (hasExistingSw) {

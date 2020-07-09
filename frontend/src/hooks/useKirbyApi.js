@@ -1,5 +1,6 @@
 import { kirbyApiStore } from '../store/kirbyApiStore'
 import { router } from '../router'
+import { devLog } from '../helpers'
 
 /**
  * Location of the Kirby API backend
@@ -25,35 +26,33 @@ const getPage = async (id, { force = false } = {}) => {
 
     // Use cached page if already fetched once
     if (storedPage) {
-      if (process.env.NODE_ENV === 'development') {
-        console.log(`[KirbyAPI] Pulling ${id} page data from store.`)
-      }
-
+      devLog(`[KirbyAPI] Pulling ${id} page data from store.`)
       return storedPage
     }
   }
 
   // Otherwise fetch page for the first time
-  if (process.env.NODE_ENV === 'development') {
-    console.log(`[KirbyAPI] Fetching ${apiLocation}/${id}.json…`)
+  devLog(`[KirbyAPI] Fetching ${apiLocation}/${id}.json…`)
+
+  let page
+  try {
+    const resp = await fetch(`${apiLocation}/${id}.json`)
+    page = await resp.json()
+  } catch (error) {
+    console.error(error)
+    devLog(`[KirbyAPI] ${id} page data couldn't be fetched. Redirecting to offline page…`)
+    router.push({ path: '/error' })
+    return
   }
 
-  const resp = await fetch(`${apiLocation}/${id}.json`)
-  const page = await resp.json()
-
-  if (process.env.NODE_ENV === 'development') {
-    console.log(`[KirbyAPI] Fetched ${id} page data:`, page)
-  }
+  devLog(`[KirbyAPI] Fetched ${id} page data:`, page)
 
   // Redirect to offline page if fetched page data indicates
   // the response JSON was serverd by the service worker
   // Note: `home.json` and `offline.json` are always available since
   // they are precached
   if ('error' in page && page.error === 'offline') {
-    if (process.env.NODE_ENV === 'development') {
-      console.log('[KirbyAPI] Device seems to be offline. Redirecting to offline page…')
-    }
-
+    devLog('[KirbyAPI] Device seems to be offline. Redirecting to offline page…')
     router.push({ path: '/offline' })
     return
   }
