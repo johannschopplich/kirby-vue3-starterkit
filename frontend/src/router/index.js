@@ -1,28 +1,28 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { scrollBehavior } from './scrollBehaviour'
+import { capitalize } from '../helpers'
 import Default from '../views/Default.vue'
 
 /**
- * Capizalizes a string
- *
- * @param {string} string Character string to capitalize
- * @returns {string} Capitalized string
- */
-const capitalize = ([first, ...rest]) => first.toUpperCase() + rest.join('')
-
-/**
- * Routes filled by site tree for use by Vue Router
+ * The routes record
  *
  * @constant {Array}
  */
 export const routes = []
 
 /**
- * Vue Router history
+ * The router history
  *
  * @constant {Array}
  */
 export const history = createWebHistory()
+
+/**
+ * The Router instance
+ *
+ * @constant {Function|null}
+ */
+export let router = null
 
 /**
  * Creates the Vue Router instance
@@ -62,9 +62,11 @@ export const initRouter = async site => {
   // Catch-all fallback
   routes.push({ path: '/:catchAll(.*)', component: Default })
 
-  return createRouter({
+  router = createRouter({
     history,
     scrollBehavior,
     routes
   })
+
+  return router
 }

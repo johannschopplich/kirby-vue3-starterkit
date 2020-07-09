@@ -2,11 +2,12 @@
   "name": "kirby-vue3-starterkit",
   "version": "1.3.0",
   "scripts": {
-    "kirby:serve": "node serve-kirby.js",
+    "kirby:serve": "node scripts/serveKirby.js",
     "esbuild:transpile": "esbuild frontend/dist/assets/**.js --target=es2017 --minify --outdir=public/assets",
     "build:after": "rm -rf public/assets && cp -r frontend/dist/assets public/assets",
+    "build:sw": "node scripts/buildSw.js",
     "dev": "vite",
-    "build": "vite build && npm run build:after",
+    "build": "vite build && npm run build:after && npm run build:sw",
     "build:compat": "vite build --minify=false && npm run build:after && npm run esbuild:transpile",
     "start": "concurrently \"npm run kirby:serve\" \"npm run dev\"",
     "lint": "eslint \"frontend/src/**/*.{js,vue}\""

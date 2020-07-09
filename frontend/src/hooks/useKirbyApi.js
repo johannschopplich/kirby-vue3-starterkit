@@ -1,24 +1,12 @@
 import { kirbyApiStore } from '../store/kirbyApiStore'
+import { router } from '../router'
 
 /**
  * Location of the Kirby API backend
  *
  * @constant {string}
  */
-let apiLocation = import.meta.env.VITE_KIRBY_API_LOCATION || ''
-
-if (apiLocation) {
-  // Add leading slash if not given
-  if (!apiLocation.startsWith('/')) apiLocation = '/' + apiLocation
-  // Remove trailing slash if present
-  if (apiLocation.endsWith('/')) apiLocation = apiLocation.slice(0, -1)
-}
-
-if (apiLocation === '/api') {
-  if (process.env.NODE_ENV === 'development') {
-    throw new Error('[KirbyAPI] API location mustn\'t be the same as Kirby\'s internal API endpoint.')
-  }
-}
+const apiLocation = import.meta.env.VITE_KIRBY_API_LOCATION
 
 /**
  * Retrieve a page by id from either store or fetch it freshly
@@ -43,6 +31,14 @@ const getPage = async (id, { force = false } = {}) => {
 
       return storedPage
     }
+  }
+
+  if (!navigator.onLine) {
+    if (process.env.NODE_ENV === 'development') {
+      console.log('[KirbyAPI] User agent seems to be offline. Redirecting to offline page…')
+    }
+
+    router.push({ path: '/offline' })
   }
 
   // Otherwise fetch page for the first time

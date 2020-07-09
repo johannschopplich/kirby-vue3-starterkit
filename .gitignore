@@ -7,6 +7,7 @@ node_modules/
 # Frontend
 /frontend/dist/
 /public/assets/
+/public/service-worker.js
 
 # Kirby
 .lock

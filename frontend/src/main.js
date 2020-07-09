@@ -2,6 +2,7 @@ import { createApp } from 'vue'
 import { initRouter } from './router'
 import { useKirbyAPI } from './hooks/useKirbyApi'
 import App from './App.vue'
+import './registerServiceWorker'
 
 ;(async () => {
   const { getPage } = useKirbyAPI()

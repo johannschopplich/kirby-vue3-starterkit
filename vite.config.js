@@ -1,4 +1,5 @@
 require('dotenv').config()
+const { useApiLocation } = require('./scripts/useApiLocation')
 
 module.exports = {
   root: 'frontend',
@@ -6,7 +7,7 @@ module.exports = {
   emitIndex: false,
 
   env: {
-    VITE_KIRBY_API_LOCATION: process.env.KIRBY_API_LOCATION
+    VITE_KIRBY_API_LOCATION: useApiLocation()
   },
 
   proxy: {

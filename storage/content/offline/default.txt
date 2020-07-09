@@ -1,0 +1,17 @@
+Title: Offline
+
+----
+
+Intro: Offline
+
+----
+
+Text: It looks like you're offline right now.
+
+Not to worry, much of this site is available regardless of network connection.
+
+- (link: home text: Home)
+- (link: photography text: Photography)
+- (link: notes text: Notes)
+
+Along with any other pages you've previously viewed.
