@@ -128,7 +128,7 @@ self.addEventListener('fetch', event => {
 
       if (isHTML) return Response.redirect('/offline', 303)
       if (isJSON) {
-        return new Response(JSON.stringify({ isOffline: true }), {
+        return new Response(JSON.stringify({ error: 'offline' }), {
           headers: {
             'Content-Type': 'application/json',
             'Cache-Control': 'no-store'
@@ -137,6 +137,26 @@ self.addEventListener('fetch', event => {
       }
 
       console.error(fetchError)
+
+      // if (isImage) {
+      //   return new Response(
+      //     `<svg role="img" aria-labelledby="offline-title" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+      //       <title id="offline-title">Offline</title>
+      //       <g fill="none" fill-rule="evenodd">
+      //         <path fill="hsl(0, 0%, 85%)" d="M0 0h400v300H0z"/>
+      //         <text fill="hsl(0, 0%, 40%)" font-family="system-ui, sans-serif" font-size="72" font-weight="600">
+      //           <tspan x="93" y="172">offline</tspan>
+      //         </text>
+      //       </g>
+      //     </svg>`,
+      //     {
+      //       headers: {
+      //         'Content-Type': 'image/svg+xml',
+      //         'Cache-Control': 'no-store'
+      //       }
+      //     }
+      //   )
+      // }
     }
   }())
 })

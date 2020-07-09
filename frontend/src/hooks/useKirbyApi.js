@@ -45,11 +45,13 @@ const getPage = async (id, { force = false } = {}) => {
     console.log(`[KirbyAPI] Fetched ${id} page data:`, page)
   }
 
-  // If service returns fallback JSON data and the user is
-  // therefore offline, redirect to offline page
-  if ('isOffline' in page) {
+  // Redirect to offline page if fetched page data indicates
+  // the response JSON was serverd by the service worker
+  // Note: `home.json` and `offline.json` are always available since
+  // they are precached
+  if ('error' in page && page.error === 'offline') {
     if (process.env.NODE_ENV === 'development') {
-      console.log('[KirbyAPI] User agent seems to be offline. Redirecting to offline page…')
+      console.log('[KirbyAPI] Device seems to be offline. Redirecting to offline page…')
     }
 
     router.push({ path: '/offline' })
