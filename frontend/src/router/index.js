@@ -25,7 +25,7 @@ export const routes = []
 export const history = createWebHistory()
 
 /**
- * Create Vue Router instance
+ * Creates the Vue Router instance
  *
  * @param {object} site Global `site` object
  * @returns {object} Output of `createRouter`

@@ -1,7 +1,7 @@
 import { kirbyApiStore } from '../store/kirbyApiStore'
 
 /**
- * Hook for global `site`
+ * Hook containing the global `site`
  *
  * @returns {object} Readonly `site` state
  */

@@ -25,7 +25,7 @@ class KirbyApiStore extends PersistentStore {
    * timestamp matches the content's actual timestamp in backend
    *
    * @param {string} id Page id to retrieve
-   * @returns {object} Current page object
+   * @returns {(object|undefined)} Current page object
    */
   getPage (id) {
     const page = this.getState().pages.find(i => i.__id === id)

@@ -29,10 +29,13 @@ export const usePage = () => {
   })
 
   /**
+   * Define a promise indicating if the page data is available
+   *
    * @example
+   * const page = usePage()
    * (async () => {
    *   await page.isLoaded
-   *   document.title = page.metaTitle
+   *   console.log(page.title)
    * })()
    */
   Object.defineProperty(page, 'isLoaded', {

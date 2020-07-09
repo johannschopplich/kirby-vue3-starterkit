@@ -1,5 +1,5 @@
 /**
- * Handles scroll behaviour
+ * Handles scroll behaviour for Vue Router
  *
  * @param {object} to Route object of next page
  * @param {object} from Route object of previous page

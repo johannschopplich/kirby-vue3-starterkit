@@ -1,7 +1,7 @@
 import { kirbyApiStore } from '../store/kirbyApiStore'
 
 /**
- * API location of the Kirby backend
+ * Location of the Kirby API backend
  *
  * @constant {string}
  */
@@ -25,8 +25,8 @@ if (apiLocation === '/api') {
  *
  * @param {string} id Page id to retrieve
  * @param {object} options Set of options
- * @param {boolean} options.force Skip store and fetch page freshly
- * @returns {object} Page data
+ * @param {boolean} options.force Skip page lookup in store and fetch page freshly
+ * @returns {object} The page data
  */
 const getPage = async (id, { force = false } = {}) => {
   await kirbyApiStore.init()
@@ -74,9 +74,9 @@ const getPage = async (id, { force = false } = {}) => {
 }
 
 /**
- * Hook to handle the Kirby API
+ * Hook containing API the methods
  *
- * @returns {object} Object with constants and methods
+ * @returns {object} Object with API location and page methods
  */
 export const useKirbyAPI = () => {
   return {
