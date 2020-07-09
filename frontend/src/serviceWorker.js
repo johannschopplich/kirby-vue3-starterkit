@@ -15,9 +15,8 @@ const EXCLUDED_URLS = [
 ]
 
 const PRECACHE_URLS = [
-  '/index.html',
   '/',
-  '/offline',
+  '/index.html',
   `${API_LOCATION}/home.json`,
   `${API_LOCATION}/notes.json`,
   `${API_LOCATION}/offline.json`,
@@ -126,7 +125,7 @@ self.addEventListener('fetch', event => {
       const cachedResponse = await caches.match(request)
       if (cachedResponse) return cachedResponse
 
-      if (isHTML) return Response.redirect('/offline', 303)
+      if (isHTML) return await caches.match('/')
       if (isJSON) {
         return new Response(JSON.stringify({ error: 'offline' }), {
           headers: {
