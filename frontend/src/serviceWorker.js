@@ -56,9 +56,9 @@ async function trimCache (cacheName, maxItems) {
 }
 
 self.addEventListener('message', ({ data }) => {
-  if (data.command !== 'trimCaches') return
-
-  trimCache(CACHE_KEYS.IMAGES, MAX_CACHED_IMAGES)
+  if (data.command === 'trimCaches') {
+    trimCache(CACHE_KEYS.IMAGES, MAX_CACHED_IMAGES)
+  }
 })
 
 self.addEventListener('install', event => {
@@ -92,19 +92,25 @@ self.addEventListener('activate', event => {
 self.addEventListener('fetch', event => {
   const { request } = event
   const url = new URL(request.url)
+  const hasAcceptHeader = type => request.headers.get('Accept').includes(type)
 
   if (request.method !== 'GET') return
   if (!ALLOWED_HOSTS.find(host => url.hostname === host)) return
   if (EXCLUDED_URLS.some(page => request.url.includes(page))) return
 
-  const acceptHeadersIncludes = type => request.headers.get('Accept').includes(type)
-
+  // Cache-first strategy for images, network-first strategy
+  // for everything else
   event.respondWith(async function () {
-    const isHTML = acceptHeadersIncludes('text/html')
+    const isHTML = hasAcceptHeader('text/html')
     const isJSON = request.url.endsWith('.json')
-    const isImage = acceptHeadersIncludes('image')
+    const isImage = hasAcceptHeader('image')
 
-    // Network-first strategy
+    // Lookup cached response of the given request
+    const cachedResponse = await caches.match(request)
+
+    // Return cached image, if available
+    if (isImage && cachedResponse) return cachedResponse
+
     try {
       const response = await fetch(request)
       const copy = response.clone()
@@ -123,7 +129,6 @@ self.addEventListener('fetch', event => {
       return response
     } catch (fetchError) {
       // Return cached response, if available
-      const cachedResponse = await caches.match(request)
       if (cachedResponse) return cachedResponse
 
       // Return HTML of index page, the frontend will handle redirecting
@@ -142,27 +147,6 @@ self.addEventListener('fetch', event => {
       }
 
       console.error(fetchError)
-
-      // Provide a catch-all image fallback
-      // if (isImage) {
-      //   return new Response(
-      //     `<svg role="img" aria-labelledby="offline-title" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
-      //       <title id="offline-title">Offline</title>
-      //       <g fill="none" fill-rule="evenodd">
-      //         <path fill="hsl(0, 0%, 85%)" d="M0 0h400v300H0z"/>
-      //         <text fill="hsl(0, 0%, 40%)" font-family="system-ui, sans-serif" font-size="72" font-weight="600">
-      //           <tspan x="93" y="172">offline</tspan>
-      //         </text>
-      //       </g>
-      //     </svg>`,
-      //     {
-      //       headers: {
-      //         'Content-Type': 'image/svg+xml',
-      //         'Cache-Control': 'no-store'
-      //       }
-      //     }
-      //   )
-      // }
     }
   }())
 })
