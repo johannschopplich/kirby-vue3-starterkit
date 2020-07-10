@@ -135,6 +135,20 @@ self.addEventListener('fetch', event => {
       // to offline page if applicable
       if (isHTML) return await caches.match('/')
 
+      // When offline and JSON data for the requested page wasn't cached
+      // before, return a fallback JSON
+      if (isJSON) {
+        return new Response(
+          JSON.stringify({ status: 'offline' }),
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              'Cache-Control': 'no-store'
+            }
+          }
+        )
+      }
+
       console.error(fetchError)
     }
   }())

@@ -31,16 +31,6 @@ const getPage = async (id, { force = false } = {}) => {
     }
   }
 
-  // Redirect to offline page if no stored page entry was found and the
-  // device indicates to be offline
-  // Note: `home` and `offline` page are always available since they are
-  // essential for routing and precached by service worker
-  if (!navigator.onLine && !['home', 'offline', 'error'].some(i => i === id)) {
-    devLog('[useApi] Device seems to be offline. Redirecting to offline page…')
-    router.push({ path: '/offline' })
-    return
-  }
-
   // Otherwise fetch page for the first time
   devLog(`[useApi] Fetching ${apiLocation}/${id}.json…`)
 
@@ -52,6 +42,18 @@ const getPage = async (id, { force = false } = {}) => {
     console.error(error)
     devLog(`[useApi] ${id} page data couldn't be fetched. Redirecting to offline page…`)
     router.push({ path: '/error' })
+    return
+  }
+
+  // Redirect to offline page if no stored data was found and no data
+  // for the page id has been cached by the service worker
+  // This could be simplified in a `router.beforeEach` hook, but if IndexedDB
+  // is disabled we have to rely on the service worker fallback response
+  // Note: data for `home` and `offline` pages are always available since they
+  // are precached by service worker
+  if ('status' in page && page.status === 'offline') {
+    devLog('[useApi] Device seems to be offline. Redirecting to offline page…')
+    router.push({ path: '/offline' })
     return
   }
 
