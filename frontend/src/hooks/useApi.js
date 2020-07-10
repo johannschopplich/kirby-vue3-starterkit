@@ -35,7 +35,7 @@ const getPage = async (id, { force = false } = {}) => {
   // device indicates to be offline
   // Note: `home` and `offline` page are always available since they are
   // essential for routing and precached by service worker
-  if (!navigator.onLine && id !== 'home' && id !== 'offline') {
+  if (!navigator.onLine && !['home', 'offline', 'error'].some(i => i === id)) {
     devLog('[useApi] Device seems to be offline. Redirecting to offline page…')
     router.push({ path: '/offline' })
     return
