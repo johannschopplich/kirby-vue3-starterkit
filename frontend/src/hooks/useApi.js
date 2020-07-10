@@ -31,13 +31,23 @@ const getPage = async (id, { force = false } = {}) => {
     }
   }
 
+  // Redirect to offline page if no stored page entry was found and the
+  // device indicates to be offline
+  // Note: `home` and `offline` page are always available since they are
+  // essential for routing and precached by service worker
+  if (!navigator.onLine && id !== 'home' && id !== 'offline') {
+    devLog('[useApi] Device seems to be offline. Redirecting to offline page…')
+    router.push({ path: '/offline' })
+    return
+  }
+
   // Otherwise fetch page for the first time
   devLog(`[useApi] Fetching ${apiLocation}/${id}.json…`)
 
   let page
   try {
-    const resp = await fetch(`${apiLocation}/${id}.json`)
-    page = await resp.json()
+    const response = await fetch(`${apiLocation}/${id}.json`)
+    page = await response.json()
   } catch (error) {
     console.error(error)
     devLog(`[useApi] ${id} page data couldn't be fetched. Redirecting to offline page…`)
@@ -46,16 +56,6 @@ const getPage = async (id, { force = false } = {}) => {
   }
 
   devLog(`[useApi] Fetched ${id} page data:`, page)
-
-  // Redirect to offline page if fetched page data indicates
-  // the response JSON was serverd by the service worker
-  // Note: `home.json` and `offline.json` are always available since
-  // they are precached
-  if ('error' in page && page.error === 'offline') {
-    devLog('[useApi] Device seems to be offline. Redirecting to offline page…')
-    router.push({ path: '/offline' })
-    return
-  }
 
   // Add `site` object provided via `home` page to api store
   if (id === 'home') {
