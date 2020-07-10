@@ -59,7 +59,7 @@ kirby-vue3-starterkit/
 |   |   ├── hooks/
 |   |   |   |
 |   |   |   |   # Handle retrieval of pages through Kirby API as JSON
-|   |   |   ├── useKirbyApi.js
+|   |   |   ├── useApi.js
 |   |   |   |
 |   |   |   |   # Returns page for current path corresponding to Kirby's `$page` object
 |   |   |   └── usePage.js
@@ -93,6 +93,18 @@ kirby-vue3-starterkit/
 |   |
 |   |   # Kirby's media folder for thumbnails and more (contents not tracked)
 |   └── media/
+|
+|   # Various development-centric Node scripts
+├── scripts/
+|   |
+|   |   # Service worker generator
+|   ├── buildSw.js
+|   |
+|   |   # Starts a PHP server for Kirby, run by `npm run kirby:serve` from root
+|   ├── serveKirby.js
+|   |
+|   |   # Builds the API location string
+|   └── useApiLocation.js
 |
 |   # Kirby's core folder containing templates, blueprints, snippets etc. for Kirby
 ├── site/
@@ -132,10 +144,7 @@ kirby-vue3-starterkit/
 |   # Handles NPM dependencies
 ├── package.json
 |
-|   # Node script to start a PHP server for Kirby
-├── serve-kirby.js
-|
-|   # Router for the PHP built-in development server (used by the script above)
+|   # Router for the PHP built-in development server (used by `serveKirby.js`)
 ├── server.php
 |
 |   # Configuration file for Vite

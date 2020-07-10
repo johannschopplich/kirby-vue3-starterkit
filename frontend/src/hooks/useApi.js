@@ -1,4 +1,4 @@
-import { kirbyApiStore } from '../store/kirbyApiStore'
+import { apiStore } from '../store/apiStore'
 import { router } from '../router'
 import { devLog } from '../helpers'
 
@@ -18,21 +18,21 @@ const apiLocation = import.meta.env.VITE_KIRBY_API_LOCATION
  * @returns {object} The page data
  */
 const getPage = async (id, { force = false } = {}) => {
-  await kirbyApiStore.init()
+  await apiStore.init()
 
   // Try to get cached page from api store, except when `force` is `true`
   if (!force) {
-    const storedPage = kirbyApiStore.getPage(id)
+    const storedPage = apiStore.getPage(id)
 
     // Use cached page if already fetched once
     if (storedPage) {
-      devLog(`[KirbyAPI] Pulling ${id} page data from store.`)
+      devLog(`[useApi] Pulling ${id} page data from store.`)
       return storedPage
     }
   }
 
   // Otherwise fetch page for the first time
-  devLog(`[KirbyAPI] Fetching ${apiLocation}/${id}.json…`)
+  devLog(`[useApi] Fetching ${apiLocation}/${id}.json…`)
 
   let page
   try {
@@ -40,35 +40,35 @@ const getPage = async (id, { force = false } = {}) => {
     page = await resp.json()
   } catch (error) {
     console.error(error)
-    devLog(`[KirbyAPI] ${id} page data couldn't be fetched. Redirecting to offline page…`)
+    devLog(`[useApi] ${id} page data couldn't be fetched. Redirecting to offline page…`)
     router.push({ path: '/error' })
     return
   }
 
-  devLog(`[KirbyAPI] Fetched ${id} page data:`, page)
+  devLog(`[useApi] Fetched ${id} page data:`, page)
 
   // Redirect to offline page if fetched page data indicates
   // the response JSON was serverd by the service worker
   // Note: `home.json` and `offline.json` are always available since
   // they are precached
   if ('error' in page && page.error === 'offline') {
-    devLog('[KirbyAPI] Device seems to be offline. Redirecting to offline page…')
+    devLog('[useApi] Device seems to be offline. Redirecting to offline page…')
     router.push({ path: '/offline' })
     return
   }
 
   // Add `site` object provided via `home` page to api store
   if (id === 'home') {
-    kirbyApiStore.addSite(page.site)
+    apiStore.addSite(page.site)
   }
 
   // Make sure page gets stored freshly if `force` is `true`
   if (force) {
-    kirbyApiStore.removePage(id)
+    apiStore.removePage(id)
   }
 
   // Add page data to api store
-  kirbyApiStore.addPage({ id, data: page })
+  apiStore.addPage({ id, data: page })
 
   return page
 }
@@ -78,7 +78,7 @@ const getPage = async (id, { force = false } = {}) => {
  *
  * @returns {object} Object with API location and page methods
  */
-export const useKirbyAPI = () => {
+export const useApi = () => {
   return {
     apiLocation,
     getPage

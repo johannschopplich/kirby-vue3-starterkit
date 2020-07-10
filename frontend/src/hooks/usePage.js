@@ -1,6 +1,6 @@
 import { reactive } from 'vue'
 import { useRoute } from 'vue-router'
-import { useKirbyAPI } from './useKirbyApi'
+import { useApi } from './useApi'
 
 /**
  * Hook for the corresponding page of the current path
@@ -9,7 +9,7 @@ import { useKirbyAPI } from './useKirbyApi'
  */
 export const usePage = () => {
   const { path } = useRoute()
-  const { getPage } = useKirbyAPI()
+  const { getPage } = useApi()
 
   // Setup up page waiter
   let resolve

@@ -7,7 +7,7 @@ import { routes } from '../router'
  *
  * @augments PersistentStore
  */
-class KirbyApiStore extends PersistentStore {
+class ApiStore extends PersistentStore {
   /**
    * The state object
    *
@@ -101,4 +101,4 @@ const storeName = 'KIRBY_API_STORE'
  *
  * @constant {object}
  */
-export const kirbyApiStore = new KirbyApiStore(storeName)
+export const apiStore = new ApiStore(storeName)

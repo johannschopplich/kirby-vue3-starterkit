@@ -64,7 +64,7 @@ self.addEventListener('message', ({ data }) => {
 self.addEventListener('install', event => {
   self.skipWaiting()
 
-  // These items must be cached for the Service Worker to complete installation
+  // These items must be cached for the service worker to complete installation
   event.waitUntil(
     (async () => {
       const cache = await caches.open(CACHE_KEYS.STATIC)

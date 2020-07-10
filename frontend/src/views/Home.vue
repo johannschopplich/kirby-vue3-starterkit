@@ -23,7 +23,7 @@
 <script>
 import Intro from '../components/Intro.vue'
 import { reactive } from 'vue'
-import { useKirbyAPI } from '../hooks/useKirbyApi'
+import { useApi } from '../hooks/useApi'
 import { usePage } from '../hooks/usePage'
 
 export default {
@@ -37,7 +37,7 @@ export default {
     })
 
     ;(async () => {
-      const { getPage } = useKirbyAPI()
+      const { getPage } = useApi()
       Object.assign(photography, { ...(await getPage('photography')) })
     })()
 
