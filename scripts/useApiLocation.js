@@ -16,9 +16,7 @@ function useApiLocation () {
   }
 
   if (apiLocation === '/api') {
-    if (process.env.NODE_ENV === 'development') {
-      throw new Error('API location mustn\'t be the same as Kirby\'s internal API endpoint.')
-    }
+    throw new Error('API location mustn\'t be the same as Kirby\'s internal API endpoint.')
   }
 
   return apiLocation

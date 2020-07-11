@@ -40,15 +40,16 @@ const getPage = async (id, { force = false } = {}) => {
     page = await response.json()
   } catch (error) {
     console.error(error)
-    devLog(`[useApi] ${id} page data couldn't be fetched. Redirecting to offline page…`)
+    devLog(`[useApi] ${id} page data couldn't be fetched. Redirecting to error page…`)
     router.push({ path: '/error' })
     return
   }
 
-  // Redirect to offline page if no stored data was found and no data
-  // for the page id has been cached by the service worker
+  // Redirect to offline page if no stored data was found and no data for the
+  // page id has been cached by the service worker
   // This could be simplified in a `router.beforeEach` hook, but if IndexedDB
-  // is disabled we have to rely on the service worker fallback response
+  // is disabled we have to rely on the service worker to return cached data
+  // or a fallback response (see below)
   // Note: data for `home` and `offline` pages are always available since they
   // are precached by service worker
   if ('status' in page && page.status === 'offline') {
