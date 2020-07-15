@@ -43,14 +43,11 @@
         "ext-filter": "Required to use the boolean validator."
     },
     "config": {
-        "preferred-install": "dist",
-        "platform-check": false
+        "preferred-install": "dist"
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "5.0-dev"
+            "dev-master": "5.1-dev"
         }
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    }
 }
