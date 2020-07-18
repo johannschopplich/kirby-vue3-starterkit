@@ -1,12 +1,13 @@
 /* eslint-env serviceworker */
 /* global API_LOCATION, VERSION */
 
+const MAX_CACHED_PAGES = false // 50
 const MAX_CACHED_IMAGES = 50
 
 const CACHE_KEYS = {
   STATIC: `static-${VERSION}`,
-  PAGES: `pages-${VERSION}`,
-  IMAGES: `images-${VERSION}`
+  PAGES: 'pages',
+  IMAGES: 'images'
 }
 
 const EXCLUDED_URLS = [
@@ -57,12 +58,17 @@ async function trimCache (cacheName, maxItems) {
 
 self.addEventListener('message', ({ data }) => {
   if (data.command === 'trimCaches') {
-    trimCache(CACHE_KEYS.IMAGES, MAX_CACHED_IMAGES)
+    MAX_CACHED_PAGES && trimCache(CACHE_KEYS.PAGES, MAX_CACHED_PAGES)
+    MAX_CACHED_IMAGES && trimCache(CACHE_KEYS.IMAGES, MAX_CACHED_IMAGES)
+  }
+
+  if (data.command === 'skipWaiting') {
+    self.skipWaiting()
   }
 })
 
 self.addEventListener('install', event => {
-  self.skipWaiting()
+  // self.skipWaiting()
 
   // These items must be cached for the service worker to complete installation
   event.waitUntil(
@@ -74,7 +80,7 @@ self.addEventListener('install', event => {
 })
 
 self.addEventListener('activate', event => {
-  self.clients.claim()
+  // self.clients.claim()
 
   // Remove caches whose name is no longer valid
   event.waitUntil(
