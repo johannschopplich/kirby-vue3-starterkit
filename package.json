@@ -1,6 +1,6 @@
 {
   "name": "kirby-vue3-starterkit",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "scripts": {
     "kirby:serve": "node scripts/serveKirby.js",
     "esbuild:transpile": "esbuild frontend/dist/assets/**.js --target=es2017 --minify --outdir=public/assets",
@@ -14,17 +14,17 @@
   },
   "dependencies": {
     "idb-keyval": "^3.2.0",
-    "vue": "^3.0.0-rc.1",
+    "vue": "^3.0.0-rc.2",
     "vue-router": "^4.0.0-beta.2"
   },
   "devDependencies": {
-    "@vue/compiler-sfc": "^3.0.0-rc.1",
+    "@vue/compiler-sfc": "^3.0.0-rc.2",
     "concurrently": "^5.2.0",
     "dotenv": "^8.2.0",
     "eslint": "^7.5.0",
     "eslint-config-standard": "^14.1.1",
     "eslint-plugin-import": "^2.22.0",
-    "eslint-plugin-jsdoc": "^29.2.0",
+    "eslint-plugin-jsdoc": "^30.0.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",

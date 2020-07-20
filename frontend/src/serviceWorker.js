@@ -25,7 +25,7 @@ const PRECACHE_URLS = [
 ]
 
 const ALLOWED_HOSTS = [
-  location.host // or predefined host like `example.com`
+  location.hostname // or predefined host like `example.com`
 ]
 
 /**
@@ -68,7 +68,7 @@ self.addEventListener('message', ({ data }) => {
 })
 
 self.addEventListener('install', event => {
-  // self.skipWaiting()
+  self.skipWaiting()
 
   // These items must be cached for the service worker to complete installation
   event.waitUntil(
@@ -80,7 +80,7 @@ self.addEventListener('install', event => {
 })
 
 self.addEventListener('activate', event => {
-  // self.clients.claim()
+  self.clients.claim()
 
   // Remove caches whose name is no longer valid
   event.waitUntil(
@@ -97,33 +97,35 @@ self.addEventListener('activate', event => {
 
 self.addEventListener('fetch', event => {
   const { request } = event
-  const url = new URL(request.url)
-  const hasAcceptHeader = type => request.headers.get('Accept').includes(type)
+  const normalizedUrl = new URL(request.url)
+  normalizedUrl.search = ''
 
   if (request.method !== 'GET') return
-  if (!ALLOWED_HOSTS.find(host => url.hostname === host)) return
+  if (!ALLOWED_HOSTS.find(h => normalizedUrl.hostname === h)) return
   if (EXCLUDED_URLS.some(page => request.url.includes(page))) return
 
-  // Cache-first strategy for images, network-first strategy
-  // for everything else
-  event.respondWith(async function () {
-    const isHTML = hasAcceptHeader('text/html')
-    const isJSON = request.url.endsWith('.json')
-    const isImage = hasAcceptHeader('image')
+  const hasAcceptHeader = type => request.headers.get('Accept').includes(type)
+  const isHTML = hasAcceptHeader('text/html')
+  const isJSON = request.url.endsWith('.json')
+  const isAsset = request.url.includes('/assets/')
+  const isImage = hasAcceptHeader('image')
 
+  // Cache-first strategy for static assets and images,
+  // network-first strategy for everything else
+  event.respondWith(async function () {
     // Lookup cached response of the given request
     const cachedResponse = await caches.match(request)
 
     // Return cached image, if available
-    if (isImage && cachedResponse) return cachedResponse
+    if (cachedResponse && (isAsset || isImage)) return cachedResponse
 
     try {
       const response = await fetch(request)
       const copy = response.clone()
 
       if (
-        PRECACHE_URLS.includes(url.pathname) ||
-        PRECACHE_URLS.includes(url.pathname + '/')
+        PRECACHE_URLS.includes(normalizedUrl.pathname) ||
+        PRECACHE_URLS.includes(normalizedUrl.pathname + '/')
       ) {
         stashInCache(CACHE_KEYS.STATIC, request, copy)
       } else if (isJSON) {

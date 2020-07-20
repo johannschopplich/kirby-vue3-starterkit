@@ -56,7 +56,7 @@ function random () {
 function minify (input) {
   const result = require('terser').minify(input, { warnings: true })
   if (result.error) throw new Error(result.error)
-  if (result.warnings) console.log(result.warnings)
+  // if (result.warnings) console.log(result.warnings)
   return result.code
 }
 
