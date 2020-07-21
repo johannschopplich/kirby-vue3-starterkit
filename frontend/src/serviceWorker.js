@@ -106,8 +106,8 @@ self.addEventListener('fetch', event => {
 
   const hasAcceptHeader = type => request.headers.get('Accept').includes(type)
   const isHTML = hasAcceptHeader('text/html')
-  const isJSON = request.url.endsWith('.json')
   const isAsset = request.url.includes('/assets/')
+  const isJSON = request.url.endsWith('.json')
   const isImage = hasAcceptHeader('image')
 
   // Cache-first strategy for static assets and images,
@@ -116,8 +116,8 @@ self.addEventListener('fetch', event => {
     // Lookup cached response of the given request
     const cachedResponse = await caches.match(request)
 
-    // Return cached image, if available
-    if (cachedResponse && (isAsset || isImage)) return cachedResponse
+    // Return cached HTML, asset or image, if available
+    if (cachedResponse && (isHTML || isAsset || isImage)) return cachedResponse
 
     try {
       const response = await fetch(request)
