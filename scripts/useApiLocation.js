@@ -10,10 +10,14 @@ function useApiLocation () {
   if (!apiLocation) return ''
 
   // Add leading slash if not given
-  if (!apiLocation.startsWith('/')) apiLocation = '/' + apiLocation
+  if (!apiLocation.startsWith('/')) {
+    apiLocation = '/' + apiLocation
+  }
 
   // Remove trailing slash if present
-  if (apiLocation.endsWith('/')) apiLocation = apiLocation.slice(0, -1)
+  if (apiLocation.endsWith('/')) {
+    apiLocation = apiLocation.slice(0, -1)
+  }
 
   if (apiLocation === '/api') {
     throw new Error('API location mustn\'t be the same as Kirby\'s internal API endpoint.')
