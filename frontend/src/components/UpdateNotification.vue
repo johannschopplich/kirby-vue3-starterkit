@@ -1,7 +1,9 @@
 <template>
-  <button class="update-notification">
-    New app version available. Click to install.
-  </button>
+  <aside aria-live="polite">
+    <button class="update-notification">
+      New app version available. Click to install.
+    </button>
+  </aside>
 </template>
 
 <style>
@@ -21,12 +23,12 @@
   cursor: pointer;
   z-index: 10;
 }
-.update-notification:not(.show) {
-  transform: translate(-50%, calc(100% + .5rem));
-}
 .update-notification:hover,
 .update-notification:focus {
   background: #000;
   color: #fff;
+}
+.update-notification:not(.show) {
+  display: none;
 }
 </style>
