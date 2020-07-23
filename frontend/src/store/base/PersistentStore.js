@@ -46,9 +46,7 @@ export class PersistentStore extends Store {
         set(this.storeName, JSON.stringify(val))
       }, { deep: true })
     } catch (error) {
-      if (process.env.NODE_ENV === 'development') {
-        console.error(error)
-      }
+      console.error(error)
 
       this.persistState = false
     }

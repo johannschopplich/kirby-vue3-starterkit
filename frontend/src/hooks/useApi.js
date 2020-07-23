@@ -52,7 +52,8 @@ const getPage = async (id, { force = false } = {}) => {
   // or a fallback response (see below)
   // Note: data for `home` and `offline` pages are always available since they
   // are precached by service worker
-  if ('status' in page && page.status === 'offline') {
+  const { status } = page
+  if (status === 'offline') {
     devLog('[useApi] Device seems to be offline. Redirecting to offline page…')
     router.push({ path: '/offline' })
     return
