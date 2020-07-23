@@ -2,6 +2,9 @@
   <router-link to="#main" class="skip-link">
     Skip to content
   </router-link>
+  <button class="app-update-notification">
+    New app version available. Click to install.
+  </button>
 
   <div class="page">
     <Header />
@@ -40,14 +43,39 @@ html {
 
 .skip-link {
   position: absolute;
-  top: -1px;
+  top: -4px;
   left: 50%;
-  border: 1px solid #000;
-  padding: .25rem .5rem;
+  border: 2px solid #000;
+  padding: .5rem 1rem;
   transform: translate(-50%, -100%);
 }
 .skip-link:focus {
   transform: translate(-50%, 0%);
+}
+
+.app-update-notification {
+  -webkit-appearance: button;
+  position: fixed;
+  bottom: 4px;
+  left: 50%;
+  background: white;
+  border: 2px solid #000;
+  font-family: inherit;
+  font-size: 1rem;
+  padding: .5rem 1rem;
+  margin: 0;
+  white-space: nowrap;
+  transform: translate(-50%, 0%);
+  cursor: pointer;
+  z-index: 10;
+}
+.app-update-notification:not(.show) {
+  transform: translate(-50%, calc(100% + 4px));
+}
+.app-update-notification:hover,
+.app-update-notification:focus {
+  background: #000;
+  color: #fff;
 }
 
 li {
