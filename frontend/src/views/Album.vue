@@ -33,8 +33,6 @@
 import { usePage } from '../hooks/usePage'
 
 export default {
-  name: 'Album',
-
   setup () {
     return {
       page: usePage()

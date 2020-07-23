@@ -16,8 +16,6 @@
 import { usePage } from '../hooks/usePage'
 
 export default {
-  name: 'Note',
-
   setup () {
     return {
       page: usePage()

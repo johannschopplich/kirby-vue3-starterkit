@@ -18,7 +18,6 @@ import Intro from '../components/Intro.vue'
 import { usePage } from '../hooks/usePage'
 
 export default {
-  name: 'Notes',
   components: { Intro },
 
   setup () {

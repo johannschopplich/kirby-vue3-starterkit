@@ -9,7 +9,6 @@ import Intro from '../components/Intro.vue'
 import { usePage } from '../hooks/usePage'
 
 export default {
-  name: 'Default',
   components: { Intro },
 
   setup () {

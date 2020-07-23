@@ -25,7 +25,6 @@ import { useApi } from '../hooks/useApi'
 import { usePage } from '../hooks/usePage'
 
 export default {
-  name: 'Home',
   components: { Intro },
 
   setup () {

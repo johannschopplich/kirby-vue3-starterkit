@@ -1,34 +1,50 @@
 import { reactive } from 'vue'
 
 const defaultOptions = {
-  politeness: 'polite',
-  complementRoute: 'has loaded'
+  politeness: 'polite'
 }
 
 const announcer = reactive({
   content: '',
-  politeness: defaultOptions.politeness,
-  complementRoute: defaultOptions.complementRoute
+  politeness: defaultOptions.politeness
 })
-
-/**
- * Reset the announcer text content and politeness
- */
-const resetAnnouncer = () => {
-  announcer.content = ''
-  announcer.politeness = defaultOptions.politeness
-}
 
 /**
  * Announce any useful information for screen readers
  *
- * @param {string} message The text content to announce
+ * @param {string} message The content to announce
  * @param {string} politeness The degree of importance
  */
 const setAnnouncer = (message, politeness = defaultOptions.politeness) => {
   resetAnnouncer()
   announcer.politeness = politeness
   announcer.content = message
+}
+
+/**
+ * Announce the information politely
+ *
+ * @param {string} message The content to announce
+ */
+const announcePolite = message => {
+  setAnnouncer(message, 'polite')
+}
+
+/**
+ * Announce the information assertively
+ *
+ * @param {string} message The content to announce
+ */
+const announceAssertive = message => {
+  setAnnouncer(message, 'assertive')
+}
+
+/**
+ * Reset the announcer content and politeness
+ */
+const resetAnnouncer = () => {
+  announcer.content = ''
+  announcer.politeness = defaultOptions.politeness
 }
 
 /**
@@ -39,7 +55,9 @@ const setAnnouncer = (message, politeness = defaultOptions.politeness) => {
 export const useAnnouncer = () => {
   return {
     announcer,
-    resetAnnouncer,
-    setAnnouncer
+    setAnnouncer,
+    announcePolite,
+    announceAssertive,
+    resetAnnouncer
   }
 }
