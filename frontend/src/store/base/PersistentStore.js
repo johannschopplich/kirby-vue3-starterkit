@@ -20,7 +20,7 @@ export class PersistentStore extends Store {
 
     // Optionally persist state between browser sessions
     // `VITE_PERSIST_API_STORE` returns a string, but we need a boolean
-    this.persistState = JSON.parse(import.meta.env.VITE_PERSIST_API_STORE || false)
+    this.persistState = import.meta.env.VITE_PERSIST_API_STORE === 'true'
   }
 
   /**

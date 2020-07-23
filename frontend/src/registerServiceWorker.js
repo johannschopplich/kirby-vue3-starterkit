@@ -3,7 +3,7 @@ if (process.env.NODE_ENV !== 'development') {
     if (!('serviceWorker' in navigator)) return
 
     // `VITE_ENABLE_SW` returns a string, but we need a boolean
-    const enableSw = JSON.parse(import.meta.env.VITE_ENABLE_SW || false)
+    const enableSw = import.meta.env.VITE_ENABLE_SW === 'true'
     const hasExistingSw = !!navigator.serviceWorker.controller
 
     let newWorker
@@ -11,7 +11,7 @@ if (process.env.NODE_ENV !== 'development') {
      * Notify the user that a new app version is available to install
      */
     function showUpdateNotification () {
-      const element = document.querySelector('.app-update-notification')
+      const element = document.querySelector('.update-notification')
       element.classList.add('show')
 
       // Activate the new service worker as soon as the user interacts
@@ -31,7 +31,7 @@ if (process.env.NODE_ENV !== 'development') {
 
           // Handle state changes of new service worker
           newWorker.addEventListener('statechange', () => {
-            // `installed` state means that the install is complete
+            // Make sure new service worker installation is complete
             if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
               showUpdateNotification()
             }
