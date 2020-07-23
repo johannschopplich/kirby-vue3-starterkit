@@ -6,7 +6,7 @@ const MAX_CACHED_IMAGES = 50
 
 const CACHE_KEYS = {
   STATIC: `static-${VERSION}`,
-  PAGES: 'pages',
+  PAGES: `static-${VERSION}`,
   IMAGES: 'images'
 }
 
