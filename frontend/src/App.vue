@@ -1,10 +1,6 @@
 <template>
-  <router-link to="#main" class="skip-link">
-    Skip to content
-  </router-link>
-  <button class="app-update-notification">
-    New app version available. Click to install.
-  </button>
+  <skip-to-content-link />
+  <update-notification />
 
   <div class="page">
     <Header />
@@ -17,10 +13,12 @@
 <script>
 import Header from './components/Header.vue'
 import Footer from './components/Footer.vue'
+import UpdateNotification from './components/UpdateNotification.vue'
+import SkipToContentLink from './components/SkipToContentLink.vue'
 
 export default {
   name: 'App',
-  components: { Header, Footer }
+  components: { Header, Footer, UpdateNotification, SkipToContentLink }
 }
 </script>
 
@@ -39,43 +37,6 @@ export default {
 
 html {
   font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
-}
-
-.skip-link {
-  position: absolute;
-  top: -4px;
-  left: 50%;
-  border: 2px solid #000;
-  padding: .5rem 1rem;
-  transform: translate(-50%, -100%);
-}
-.skip-link:focus {
-  transform: translate(-50%, 0%);
-}
-
-.app-update-notification {
-  -webkit-appearance: button;
-  position: fixed;
-  bottom: 4px;
-  left: 50%;
-  background: white;
-  border: 2px solid #000;
-  font-family: inherit;
-  font-size: 1rem;
-  padding: .5rem 1rem;
-  margin: 0;
-  white-space: nowrap;
-  transform: translate(-50%, 0%);
-  cursor: pointer;
-  z-index: 10;
-}
-.app-update-notification:not(.show) {
-  transform: translate(-50%, calc(100% + 4px));
-}
-.app-update-notification:hover,
-.app-update-notification:focus {
-  background: #000;
-  color: #fff;
 }
 
 li {
