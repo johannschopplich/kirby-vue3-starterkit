@@ -1,23 +1,21 @@
 <template>
-  <main id="main">
-    <Intro :title="page.title" />
+  <Intro :title="page.title" />
 
-    <ul v-if="photography.children" class="grid">
-      <li v-for="album in photography.children" :key="album.id">
-        <router-link :to="`/${album.id}`">
-          <figure>
-            <img :src="album.cover.urlHome" :alt="album.cover.alt">
+  <ul v-if="photography.children" class="grid">
+    <li v-for="album in photography.children" :key="album.id">
+      <router-link :to="`/${album.id}`">
+        <figure>
+          <img :src="album.cover.urlHome" :alt="album.cover.alt">
 
-            <figcaption>
-              <span>
-                <span class="example-name">{{ album.title }}</span>
-              </span>
-            </figcaption>
-          </figure>
-        </router-link>
-      </li>
-    </ul>
-  </main>
+          <figcaption>
+            <span>
+              <span class="example-name">{{ album.title }}</span>
+            </span>
+          </figcaption>
+        </figure>
+      </router-link>
+    </li>
+  </ul>
 </template>
 
 <script>

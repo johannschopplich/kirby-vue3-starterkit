@@ -1,9 +1,7 @@
 <template>
-  <main id="main">
-    <Intro :title="page.title" />
+  <Intro :title="page.title" />
 
-    <div v-if="page.text" class="text" v-html="page.text.html" />
-  </main>
+  <div v-if="page.text" class="text" v-html="page.text.html" />
 </template>
 
 <script>

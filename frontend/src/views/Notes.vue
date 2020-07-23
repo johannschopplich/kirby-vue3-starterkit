@@ -1,18 +1,16 @@
 <template>
-  <main id="main">
-    <Intro :title="page.title" />
+  <Intro :title="page.title" />
 
-    <div v-if="page.children" class="notes">
-      <article v-for="note in page.children" :key="note.id" class="note">
-        <header class="note-header">
-          <router-link :to="`/${note.id}`">
-            <h2>{{ note.title }}</h2>
-            <time>{{ note.date }}</time>
-          </router-link>
-        </header>
-      </article>
-    </div>
-  </main>
+  <div v-if="page.children" class="notes">
+    <article v-for="note in page.children" :key="note.id" class="note">
+      <header class="note-header">
+        <router-link :to="`/${note.id}`">
+          <h2>{{ note.title }}</h2>
+          <time>{{ note.date }}</time>
+        </router-link>
+      </header>
+    </article>
+  </div>
 </template>
 
 <script>

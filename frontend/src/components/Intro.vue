@@ -6,8 +6,6 @@
 
 <script>
 export default {
-  name: 'Intro',
-
   props: {
     title: {
       type: String,

@@ -30,18 +30,10 @@
   </header>
 </template>
 
-<script>
+<script setup>
 import { useSite } from '../hooks/useSite'
 
-export default {
-  name: 'Header',
-
-  setup () {
-    return {
-      site: useSite()
-    }
-  }
-}
+export const site = useSite()
 </script>
 
 <style>

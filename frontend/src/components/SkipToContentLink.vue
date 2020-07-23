@@ -1,8 +1,18 @@
 <template>
-  <router-link to="#main" class="skip-to-content-link">
+  <a href="#main" class="skip-to-content-link" ref="skipLink">
     Skip to content
-  </router-link>
+  </a>
 </template>
+
+<script>
+export default {
+  watch: {
+    $route () {
+      this.$refs.skipLink.focus()
+    }
+  }
+}
+</script>
 
 <style>
 .skip-to-content-link {

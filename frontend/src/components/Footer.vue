@@ -8,18 +8,10 @@
   </footer>
 </template>
 
-<script>
+<script setup>
 import { useSite } from '../hooks/useSite'
 
-export default {
-  name: 'Footer',
-
-  setup () {
-    return {
-      site: useSite()
-    }
-  }
-}
+export const site = useSite()
 </script>
 
 <style>

@@ -7,20 +7,10 @@
   />
 </template>
 
-<script>
+<script setup>
 import { useAnnouncer } from '../hooks/useAnnouncer'
 
-export default {
-  name: 'Announcer',
-
-  setup () {
-    const { announcer } = useAnnouncer()
-
-    return {
-      announcer
-    }
-  }
-}
+export const { announcer } = useAnnouncer()
 </script>
 
 <style scoped>

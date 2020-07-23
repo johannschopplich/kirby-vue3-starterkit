@@ -1,43 +1,41 @@
 <template>
-  <main id="main">
-    <Intro :title="page.title" />
+  <Intro :title="page.title" />
 
-    <div class="layout">
-      <aside>
-        <section>
-          <h2>Address</h2>
-          <div v-if="page.address" class="text" v-html="page.address.html" />
-        </section>
+  <div class="layout">
+    <aside>
+      <section>
+        <h2>Address</h2>
+        <div v-if="page.address" class="text" v-html="page.address.html" />
+      </section>
 
-        <section>
-          <h2>Email</h2>
-          <div class="text">
-            <a :href="`mailto:${page.email}`">{{ page.email }}</a>
-          </div>
-        </section>
+      <section>
+        <h2>Email</h2>
+        <div class="text">
+          <a :href="`mailto:${page.email}`">{{ page.email }}</a>
+        </div>
+      </section>
 
-        <section>
-          <h2>Phone</h2>
-          <div class="text">
-            <a :href="`tel:${page.phone}`">{{ page.phone }}</a>
-          </div>
-        </section>
+      <section>
+        <h2>Phone</h2>
+        <div class="text">
+          <a :href="`tel:${page.phone}`">{{ page.phone }}</a>
+        </div>
+      </section>
 
-        <section>
-          <h2>On the web</h2>
-          <div class="text">
-            <ul>
-              <li v-for="social in page.social" :key="social.id">
-                <a :href="social.url">{{ social.platform }}</a>
-              </li>
-            </ul>
-          </div>
-        </section>
-      </aside>
+      <section>
+        <h2>On the web</h2>
+        <div class="text">
+          <ul>
+            <li v-for="social in page.social" :key="social.id">
+              <a :href="social.url">{{ social.platform }}</a>
+            </li>
+          </ul>
+        </div>
+      </section>
+    </aside>
 
-      <div v-if="page.text" class="text" v-html="page.text.html" />
-    </div>
-  </main>
+    <div v-if="page.text" class="text" v-html="page.text.html" />
+  </div>
 </template>
 
 <script>

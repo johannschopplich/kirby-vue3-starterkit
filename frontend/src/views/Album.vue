@@ -1,34 +1,32 @@
 <template>
-  <main id="main" class="album">
-    <article>
-      <header>
-        <figure v-if="page.cover" class="album-cover">
-          <img :src="page.cover.url" :alt="page.cover.alt">
+  <article>
+    <header>
+      <figure v-if="page.cover" class="album-cover">
+        <img :src="page.cover.url" :alt="page.cover.alt">
 
-          <figcaption>
-            <h1>{{ page.headline }}</h1>
-          </figcaption>
+        <figcaption>
+          <h1>{{ page.headline }}</h1>
+        </figcaption>
+      </figure>
+    </header>
+
+    <div class="album-text text">
+      <span v-if="page.description" v-html="page.description.html" />
+      <p v-if="page.tags" class="album-tags tags">
+        {{ page.tags }}
+      </p>
+    </div>
+
+    <ul v-if="page.gallery" class="album-gallery" :data-even="page.gallery.length % 2 === 0" :data-count="page.gallery.length">
+      <li v-for="image in page.gallery" :key="image.url">
+        <figure>
+          <a :href="image.link">
+            <img :src="image.url" :alt="image.alt">
+          </a>
         </figure>
-      </header>
-
-      <div class="album-text text">
-        <span v-if="page.description" v-html="page.description.html" />
-        <p v-if="page.tags" class="album-tags tags">
-          {{ page.tags }}
-        </p>
-      </div>
-
-      <ul v-if="page.gallery" class="album-gallery" :data-even="page.gallery.length % 2 === 0" :data-count="page.gallery.length">
-        <li v-for="image in page.gallery" :key="image.url">
-          <figure>
-            <a :href="image.link">
-              <img :src="image.url" :alt="image.alt">
-            </a>
-          </figure>
-        </li>
-      </ul>
-    </article>
-  </main>
+      </li>
+    </ul>
+  </article>
 </template>
 
 <script>

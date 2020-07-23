@@ -4,7 +4,9 @@
 
   <div class="page">
     <Header />
-    <router-view />
+    <main id="main" tabindex="-1">
+      <router-view />
+    </main>
   </div>
 
   <UpdateNotification />
@@ -20,6 +22,7 @@ import UpdateNotification from './components/UpdateNotification.vue'
 
 export default {
   name: 'App',
+
   components: {
     Header,
     Footer,
