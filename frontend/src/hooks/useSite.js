@@ -1,7 +1,7 @@
 import { apiStore } from '../store/apiStore'
 
 /**
- * Hook containing the global `site`
+ * Hook for the global `site` object
  *
  * @returns {object} Readonly `site` state
  */

@@ -78,9 +78,9 @@ const getPage = async (id, { force = false } = {}) => {
 }
 
 /**
- * Hook containing API the methods
+ * Hook for API location and handling methods
  *
- * @returns {object} Object with API location and page methods
+ * @returns {object} API location and handling method
  */
 export const useApi = () => {
   return {

@@ -1,6 +1,7 @@
 import { reactive } from 'vue'
 import { useRoute } from 'vue-router'
 import { useApi } from './useApi'
+import { useAnnouncer } from './useAnnouncer'
 
 /**
  * Hook for the corresponding page of the current path
@@ -10,6 +11,7 @@ import { useApi } from './useApi'
 export const usePage = () => {
   const { path } = useRoute()
   const { getPage } = useApi()
+  const { setAnnouncer } = useAnnouncer()
 
   // Setup up page waiter
   let resolve
@@ -48,6 +50,9 @@ export const usePage = () => {
 
     // Set document title
     document.title = page.metaTitle
+
+    // Announce new route
+    setAnnouncer(`Navigated to ${page.title}`)
 
     // Flush page waiter
     resolve && resolve()

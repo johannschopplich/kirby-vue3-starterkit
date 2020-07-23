@@ -1,24 +1,32 @@
 <template>
-  <skip-to-content-link />
-  <update-notification />
+  <SkipToContentLink />
+  <Announcer />
 
   <div class="page">
     <Header />
     <router-view />
   </div>
 
+  <UpdateNotification />
   <Footer />
 </template>
 
 <script>
 import Header from './components/Header.vue'
 import Footer from './components/Footer.vue'
-import UpdateNotification from './components/UpdateNotification.vue'
+import Announcer from './components/Announcer.vue'
 import SkipToContentLink from './components/SkipToContentLink.vue'
+import UpdateNotification from './components/UpdateNotification.vue'
 
 export default {
   name: 'App',
-  components: { Header, Footer, UpdateNotification, SkipToContentLink }
+  components: {
+    Header,
+    Footer,
+    Announcer,
+    SkipToContentLink,
+    UpdateNotification
+  }
 }
 </script>
 
