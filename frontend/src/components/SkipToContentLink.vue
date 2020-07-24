@@ -1,6 +1,6 @@
 <template>
   <a href="#main" class="skip-to-content-link" ref="skipLink">
-    Skip to content
+    Skip to content (press enter)
   </a>
 </template>
 

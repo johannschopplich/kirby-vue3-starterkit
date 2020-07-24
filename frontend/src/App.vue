@@ -4,7 +4,7 @@
 
   <div class="page">
     <Header />
-    <main id="main" tabindex="-1">
+    <main id="main">
       <router-view />
     </main>
   </div>
