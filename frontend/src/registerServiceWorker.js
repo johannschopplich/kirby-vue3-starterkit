@@ -12,6 +12,8 @@ if (process.env.NODE_ENV !== 'development') {
      */
     function showUpdateNotification () {
       const element = document.querySelector('.update-notification')
+      if (!element) return
+
       element.classList.add('show')
 
       // Activate the new service worker as soon as the user interacts
@@ -41,10 +43,10 @@ if (process.env.NODE_ENV !== 'development') {
         console.log('Failed to register service worker:', error)
       }
 
-      let isRefreshing
       // Wait for the current service worker controlling this page to change,
       // specifically when the new worker has skipped waiting and become
       // the new active worker
+      let isRefreshing
       navigator.serviceWorker.addEventListener('controllerchange', () => {
         if (isRefreshing) return
         window.location.reload()

@@ -4,7 +4,7 @@
 
   <div class="page">
     <Header />
-    <main id="main">
+    <main id="main" tabindex="-1">
       <router-view />
     </main>
   </div>
@@ -78,6 +78,9 @@ img {
 
 main {
   min-height: calc(100vh - 10rem);
+}
+main:focus {
+  outline: none;
 }
 
 .tags {
