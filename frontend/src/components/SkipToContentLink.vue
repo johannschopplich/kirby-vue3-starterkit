@@ -1,6 +1,6 @@
 <template>
   <a href="#main" class="skip-to-content-link" ref="skipLink">
-    Skip to content (press enter)
+    Skip to content
   </a>
 </template>
 
@@ -17,11 +17,10 @@ export default {
 <style>
 .skip-to-content-link {
   position: absolute;
-  top: -2px;
+  top: 0;
   left: 50%;
-  border: 2px solid #000;
-  padding: .5rem 1rem;
-  transform: translate(-50%, 0%);
+  padding: .5rem;
+  transform: translate(-50%, .25rem);
 }
 .skip-to-content-link:not(:focus) {
   transform: translate(-50%, -100%);
