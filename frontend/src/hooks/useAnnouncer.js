@@ -50,7 +50,7 @@ const resetAnnouncer = () => {
 /**
  * Hook for announce object and methods
  *
- * @returns {object} Object with announcer hook methods
+ * @returns {object} Object containing announcer-related methods
  */
 export const useAnnouncer = () => {
   return {
