@@ -1,6 +1,6 @@
 <template>
   <aside aria-live="polite">
-    <button id="update-notification">
+    <button id="update-notification" hidden>
       New app version available. Click to install.
     </button>
   </aside>
@@ -27,8 +27,5 @@
 #update-notification:focus {
   background: #000;
   color: #fff;
-}
-#update-notification:not(.show) {
-  display: none;
 }
 </style>

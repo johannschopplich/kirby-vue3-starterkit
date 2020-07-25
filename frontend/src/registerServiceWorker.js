@@ -14,12 +14,15 @@ if (process.env.NODE_ENV !== 'development') {
       const element = document.querySelector('#update-notification')
       if (!element) return
 
-      element.classList.add('show')
+      // Show the update notification
+      element.removeAttribute('hidden')
 
       // Activate the new service worker as soon as the user interacts
-      element.addEventListener('click', () => {
-        newWorker.postMessage({ command: 'skipWaiting' })
-      })
+      for (const event of ['click', 'touchend']) {
+        element.addEventListener(event, () => {
+          newWorker.postMessage({ command: 'skipWaiting' })
+        })
+      }
     }
 
     if (enableSw) {
