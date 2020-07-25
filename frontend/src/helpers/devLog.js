@@ -1,5 +1,5 @@
 /**
- * Log message to console if in development environment
+ * Log information to console in development environment
  *
  * @param {...*} args Arguments to pass to `console.log`
  */

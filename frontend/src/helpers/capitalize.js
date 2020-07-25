@@ -1,5 +1,5 @@
 /**
- * Capizalizes a string
+ * Capizalize a string
  *
  * @param {string} string Character string to capitalize
  * @returns {string} Capitalized string

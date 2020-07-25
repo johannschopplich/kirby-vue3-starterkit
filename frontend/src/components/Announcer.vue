@@ -1,7 +1,6 @@
 <template>
   <div
     id="announcer"
-    class="announcer"
     :aria-live="announcer.politeness"
     v-text="announcer.content"
   />
@@ -14,7 +13,7 @@ export const { announcer } = useAnnouncer()
 </script>
 
 <style scoped>
-.announcer {
+#announcer {
   position: absolute;
   width: 1px;
   height: 1px;
