@@ -7,8 +7,8 @@
  * @returns {(object|boolean)} Scroll position or `false`
  */
 export const scrollBehavior = async function (to, from, savedPosition) {
-  // Defaults to no scroll behaviour
-  const behavior = 'auto' // or `smooth`
+  // Can be `auto` or `smooth`, defaults to no scroll behaviour
+  const behavior = document.documentElement.style.scrollBehavior || 'auto'
 
   if (savedPosition) {
     // `savedPosition` is only available for popstate navigations
