@@ -1,13 +1,13 @@
 <template>
   <aside aria-live="polite">
-    <button class="update-notification">
+    <button id="update-notification">
       New app version available. Click to install.
     </button>
   </aside>
 </template>
 
 <style>
-.update-notification {
+#update-notification {
   -webkit-appearance: button;
   position: fixed;
   bottom: .5rem;
@@ -23,12 +23,12 @@
   cursor: pointer;
   z-index: 10;
 }
-.update-notification:hover,
-.update-notification:focus {
+#update-notification:hover,
+#update-notification:focus {
   background: #000;
   color: #fff;
 }
-.update-notification:not(.show) {
+#update-notification:not(.show) {
   display: none;
 }
 </style>

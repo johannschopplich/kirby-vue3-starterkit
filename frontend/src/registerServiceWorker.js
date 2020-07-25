@@ -11,7 +11,7 @@ if (process.env.NODE_ENV !== 'development') {
      * Notify the user that a new app version is available to install
      */
     function showUpdateNotification () {
-      const element = document.querySelector('.update-notification')
+      const element = document.querySelector('#update-notification')
       if (!element) return
 
       element.classList.add('show')
