@@ -17,19 +17,13 @@ export class PersistentStore extends Store {
     super(storeName)
     this.storeName = storeName
     this.isInitialized = false
-
-    // Optionally persist state between browser sessions
-    // `VITE_PERSIST_API_STORE` returns a string, but we need a boolean
-    this.persistState = import.meta.env.VITE_PERSIST_API_STORE === 'true'
   }
 
   /**
+   * Persists the state between sessions
    * Fills the state from IndexedDB and watches for store changes
    */
   async init () {
-    // Initialization is only needed for persisting the state
-    if (!this.persistState) return
-
     // Catch multiple initialization calls
     if (this.isInitialized) return
 
@@ -47,8 +41,6 @@ export class PersistentStore extends Store {
       }, { deep: true })
     } catch (error) {
       console.error(error)
-
-      this.persistState = false
     }
 
     this.isInitialized = true

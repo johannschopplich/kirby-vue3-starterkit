@@ -1,6 +1,7 @@
-import { toRaw } from 'vue'
+import { watch, toRaw } from 'vue'
 import { PersistentStore } from './base/PersistentStore'
 import { routes } from '../router'
+import { set, get } from 'idb-keyval'
 
 /**
  * Centralized `site` and pages data
@@ -16,7 +17,7 @@ class ApiStore extends PersistentStore {
   data () {
     return {
       site: [],
-      pages: []
+      pages: new Map()
     }
   }
 
@@ -28,7 +29,7 @@ class ApiStore extends PersistentStore {
    * @returns {(object|undefined)} Current page object
    */
   getPage (id) {
-    const page = this.getState().pages.find(i => i.__id === id)
+    const page = this.state.pages.get(id)
     if (!page) return
 
     // Check if stored page is outdated if state is persisted,
@@ -56,7 +57,7 @@ class ApiStore extends PersistentStore {
    * @param {object} options.data Page data
    */
   addPage ({ id, data }) {
-    this.state.pages.push({ __id: id, ...data })
+    this.state.pages.set(id, data)
   }
 
   /**
@@ -65,9 +66,7 @@ class ApiStore extends PersistentStore {
    * @param {string} id Page id to remove
    */
   removePage (id) {
-    const index = this.getState().pages.findIndex(i => i.__id === id)
-    if (index === -1) return
-    this.state.pages.splice(index, 1)
+    this.state.pages.delete(id)
   }
 
   /**
@@ -86,6 +85,36 @@ class ApiStore extends PersistentStore {
    */
   addSite (data) {
     this.state.site = data
+  }
+
+  /**
+   * Optionally persists the pages state between sessions
+   * (Overwrites the base class's function)
+   */
+  async init () {
+    // `VITE_PERSIST_API_STORE` returns a string, but we need a boolean
+    if (import.meta.env.VITE_PERSIST_API_STORE !== 'true') return
+
+    // Catch multiple initialization calls
+    if (this.isInitialized) return
+
+    // Mutation operations on a database aren't allowed in incognito mode
+    try {
+      // Check if persisted state exists and if so, use it
+      const stateFromIndexedDB = await get(this.storeName)
+      if (stateFromIndexedDB) {
+        this.state.pages = new Map(JSON.parse(stateFromIndexedDB))
+      }
+
+      // Watch for pages state changes and immediately save it to IndexedDB
+      watch(() => this.state.pages, val => {
+        set(this.storeName, JSON.stringify([...val]))
+      }, { deep: true })
+    } catch (error) {
+      console.error(error)
+    }
+
+    this.isInitialized = true
   }
 }
 
