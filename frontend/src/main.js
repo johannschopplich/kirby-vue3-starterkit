@@ -1,8 +1,11 @@
 import { createApp } from 'vue'
 import { initRouter } from './router'
 import { useApi } from './hooks/useApi'
+import { useServiceWorker } from './hooks/useServiceWorker'
 import App from './App.vue'
-import './registerServiceWorker'
+
+const { register } = useServiceWorker()
+register()
 
 ;(async () => {
   const { getPage } = useApi()
