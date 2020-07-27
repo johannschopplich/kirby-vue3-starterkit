@@ -1,6 +1,6 @@
 <?php
 
-$pathToAsset = function ($pattern, $root = '/assets/') {
+$pathToAsset = function (string $pattern, string $root = '/assets/') {
   return $root . basename(glob(kirby()->roots()->index() . $root . $pattern)[0]);
 }
 
