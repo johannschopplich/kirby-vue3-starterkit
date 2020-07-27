@@ -13,9 +13,6 @@ module.exports = {
   },
 
   proxy: {
-    '/img/': {
-      target: kirbyUrl
-    },
     '/*.json': {
       target: kirbyUrl,
       changeOrigin: true
