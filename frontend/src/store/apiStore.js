@@ -1,5 +1,5 @@
+import { Store } from './base/Store'
 import { watch, toRaw } from 'vue'
-import { PersistentStore } from './base/PersistentStore'
 import { routes } from '../router'
 import { set, get } from 'idb-keyval'
 
@@ -8,7 +8,20 @@ import { set, get } from 'idb-keyval'
  *
  * @augments PersistentStore
  */
-class ApiStore extends PersistentStore {
+class ApiStore extends Store {
+  /**
+   * Constructor
+   *
+   * @param {string} storeName Name of the store
+   */
+  constructor (storeName) {
+    super(storeName)
+    this.storeName = storeName
+    this.isInitialized = false
+    // `VITE_PERSIST_API_STORE` returns a string, but we need a boolean
+    this.persistState = import.meta.env.VITE_PERSIST_API_STORE === 'true'
+  }
+
   /**
    * The state object
    *
@@ -92,8 +105,8 @@ class ApiStore extends PersistentStore {
    * (Overwrites the base class's function)
    */
   async init () {
-    // `VITE_PERSIST_API_STORE` returns a string, but we need a boolean
-    if (import.meta.env.VITE_PERSIST_API_STORE !== 'true') return
+    // Initialize only if state persistance is enabled
+    if (!this.persistState) return
 
     // Catch multiple initialization calls
     if (this.isInitialized) return
@@ -112,6 +125,8 @@ class ApiStore extends PersistentStore {
       }, { deep: true })
     } catch (error) {
       console.error(error)
+
+      this.persistState = false
     }
 
     this.isInitialized = true
