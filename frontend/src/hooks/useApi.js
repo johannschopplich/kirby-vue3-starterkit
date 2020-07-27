@@ -66,11 +66,6 @@ const getPage = async (id, { force = false } = {}) => {
     apiStore.addSite(page.site)
   }
 
-  // Make sure page gets stored freshly if `force` is `true`
-  if (force) {
-    apiStore.removePage(id)
-  }
-
   // Add page data to api store
   apiStore.addPage({ id, data: page })
 
