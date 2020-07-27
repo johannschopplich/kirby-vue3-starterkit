@@ -20,7 +20,7 @@ export default {
   top: 0;
   left: 50%;
   padding: .5rem;
-  transform: translate(-50%, .25rem);
+  transform: translate(-50%, 0);
 }
 .skip-to-content-link:not(:focus) {
   transform: translate(-50%, -100%);
