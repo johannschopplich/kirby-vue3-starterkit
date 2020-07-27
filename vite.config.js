@@ -1,5 +1,7 @@
 require('dotenv').config()
+
 const { useApiLocation } = require('./scripts/useApiLocation')
+const kirbyUrl = `http://${process.env.KIRBY_SERVER_HOSTNAME}:${process.env.KIRBY_SERVER_PORT}`
 
 module.exports = {
   root: 'frontend',
@@ -11,8 +13,11 @@ module.exports = {
   },
 
   proxy: {
+    '/img/': {
+      target: kirbyUrl
+    },
     '/*.json': {
-      target: `http://${process.env.KIRBY_SERVER_HOSTNAME}:${process.env.KIRBY_SERVER_PORT}`,
+      target: kirbyUrl,
       changeOrigin: true
     }
   }
