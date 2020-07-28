@@ -8,16 +8,6 @@ import { toRaw } from 'vue'
  */
 class ApiStore extends Store {
   /**
-   * Constructor
-   *
-   * @param {string} storeName Name of the store
-   */
-  constructor (storeName) {
-    super(storeName)
-    this.storeName = storeName
-  }
-
-  /**
    * The state object
    *
    * @returns {object} The central state
@@ -37,10 +27,8 @@ class ApiStore extends Store {
    */
   getPage (id) {
     const page = this.state.pages.get(id)
-    if (!page) return
-
     // Return the raw, original object of athe reactive `page` object for Safari support
-    return toRaw(page)
+    if (page) return toRaw(page)
   }
 
   /**
