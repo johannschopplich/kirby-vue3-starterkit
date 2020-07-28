@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { useRoute } from 'vue-roter'
+import { useRoute } from 'vue-router'
 import Header from './components/Header.vue'
 import Footer from './components/Footer.vue'
 import Announcer from './components/Announcer.vue'
