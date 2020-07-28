@@ -8,7 +8,7 @@
     "build:sw": "node scripts/buildSw.js",
     "dev": "vite",
     "build": "vite build && npm run build:after && npm run build:sw",
-    "build:compat": "vite build --minify=false && npm run build:after && npm run esbuild:transpile",
+    "build:compat": "vite build --minify=false && npm run build:after && npm run esbuild:transpile && npm run build:sw",
     "start": "concurrently \"npm run kirby:serve\" \"npm run dev\"",
     "lint": "eslint \"frontend/src/**/*.{js,vue}\""
   },
