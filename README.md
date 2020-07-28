@@ -170,15 +170,11 @@ kirby-vue3-starterkit/
 
 </details>
 
-## Caching
+## Caching & Offline Capability
 
-Even without caching enabled, the frontend will store pages between indiviual routes/views (**session store**). Once you reload the tab however, every page data has to be fetched from the API once again.
+Even without a service worker installed, the frontend will store pages between indiviual routes/views (session store). When you reload the tab, the data for each page is freshly fetched from the API once again.
 
 For offline capability of your Vue app, you can choose to activate the included [service worker](#service-worker).
-
-To forestall repetitive HTTP requests between website sessions you can [persistent the pages store](#persistent-api-store).
-
-Both methods can be used in conjunction with each other.
 
 A visual explanation of both methods can be found in the following flow chart:
 
@@ -188,13 +184,7 @@ A visual explanation of both methods can be found in the following flow chart:
 
 The service worker precaches all CSS & JS assets required by the Vue app and caches the data of every requested page. All assets are versioned and served from the service worker cache directly.
 
-Each JSON request will be freshly fetched from the network and saved to the cache. A page request will only be returned from the cache when the navigator is offline.
-
-### Persistent API Store
-
-You can persist already stored page data from the session store between tabs or browser sessions. By that, the store state will be saved to `IndexedDB` each time a page has been fetched as well as retrieved from in a new session.
-
-When visiting any page of the website, the `home` page will be always be fetched. It holds `site` data with an index of modification timestamps for each page id. This is relevant, because before using a stored page, the timestamp will be compared with the latest modification timestamp from the site modification index. If it differs, the cached page will be removed and freshly fetched.
+Each JSON request will be freshly fetched from the network and saved to the cache. If the user's navigator turns out to be offline, the cached page request will be returned.
 
 ## Prerequisites
 
@@ -246,9 +236,6 @@ All development and production related configurations for both backend and front
 - `KIRBY_SERVER_HOSTNAME` and `KIRBY_SERVER_PORT` specify the address where you wish the Kirby backend to be served from. It is used by the frontend to fetch content data as JSON.
 - Keys starting with `VITE_` are available in your code following the `import.meta.env.VITE_CUSTOM_VARIABLE` syntax.
 
-To enable the **persistent store** which caches pages between browser sessions, set:
-- `VITE_PERSIST_API_STORE` to `true`
-
 To enable the **service worker** which precaches essential assets and page API calls for offline capability, set:
 - `VITE_ENABLE_SW` to `true`
 
@@ -261,7 +248,6 @@ To enable the **service worker** which precaches essential assets and page API c
    - `KIRBY_DEBUG` to `false`
    - `KIRBY_CACHE` to `true` (recommended)
    - `VITE_ENABLE_SW` to `true` (recommended)
-   - `VITE_PERSIST_API_STORE` to `true` (optional)
 5. Point your web server to the `public` folder.
 6. Some hosting environments require to uncomment `RewriteBase /` in [`.htaccess`](public/.htaccess) to make site links work.
 

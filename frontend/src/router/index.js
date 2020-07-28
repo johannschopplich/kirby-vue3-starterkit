@@ -38,7 +38,6 @@ export const initRouter = async site => {
       path: `/${page.id}`,
       component: () => import(`../views/${capitalize(page.template)}.vue`).catch(() => /* Default */ import('../views/Default.vue')),
       meta: {
-        modified: page.modified,
         scrollToTop: true
       }
     })
@@ -49,7 +48,6 @@ export const initRouter = async site => {
         path: `/${child.id}`,
         component: () => import(`../views/${capitalize(child.template)}.vue`).catch(() => /* Default */ import('../views/Default.vue')),
         meta: {
-          modified: child.modified,
           scrollToTop: true
         }
       })

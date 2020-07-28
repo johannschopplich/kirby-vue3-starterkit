@@ -12,11 +12,9 @@ $data = [
       'title' => $child->content()->title()->value(),
       'template' => $child->intendedTemplate()->name(),
       'isListed' => $child->isListed(),
-      'modified' => $child->modified(),
       'children' => array_values($child->children()->published()->map(fn($grandChild) => [
         'id' => $grandChild->id(),
-        'template' => $grandChild->intendedTemplate()->name(),
-        'modified' => $grandChild->modified(),
+        'template' => $grandChild->intendedTemplate()->name()
       ])->data())
     ])->data()),
     'social' => array_values(page('about')->social()->toStructure()->map(fn($social) => [

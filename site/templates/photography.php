@@ -3,7 +3,6 @@
 $data = [
   'title' => $page->title()->value(),
   'metaTitle' => $page->customTitle()->or($page->title() . ' – ' . $site->title())->value(),
-  'modified' => $page->modified(),
   'children' => array_values($page->children()->listed()->map(fn($album) => [
     'id' => $album->id(),
     'title' => $album->title()->value(),

@@ -1,12 +1,10 @@
 import { Store } from './base/Store'
-import { watch, toRaw } from 'vue'
-import { routes } from '../router'
-import { set, get } from 'idb-keyval'
+import { toRaw } from 'vue'
 
 /**
  * Centralized `site` and pages data
  *
- * @augments PersistentStore
+ * @augments Store
  */
 class ApiStore extends Store {
   /**
@@ -17,9 +15,6 @@ class ApiStore extends Store {
   constructor (storeName) {
     super(storeName)
     this.storeName = storeName
-    this.isInitialized = false
-    // `VITE_PERSIST_API_STORE` returns a string, but we need a boolean
-    this.persistState = import.meta.env.VITE_PERSIST_API_STORE === 'true'
   }
 
   /**
@@ -35,8 +30,7 @@ class ApiStore extends Store {
   }
 
   /**
-   * Gets a cached page from store if found and if its last modified
-   * timestamp matches the content's actual timestamp in backend
+   * Gets a cached page from store if present
    *
    * @param {string} id Page id to retrieve
    * @returns {(object|undefined)} Current page object
@@ -44,19 +38,6 @@ class ApiStore extends Store {
   getPage (id) {
     const page = this.state.pages.get(id)
     if (!page) return
-
-    // Check if stored page is outdated if state is persisted,
-    // except for homepage which has always latest data
-    if (this.persistState && id !== 'home') {
-      // Get the current page meta from router which gets initialized
-      // with the up-to-date last modified timestamps
-      const routerPageData = routes.find(i => i.path === `/${id}`)
-      if (!routerPageData) return
-      if (!('meta' in routerPageData) || !('modified' in page)) return
-
-      // Bail if the timestamp doesn't match
-      if (routerPageData.meta.modified !== page.modified) return
-    }
 
     // Return the raw, original object of athe reactive `page` object for Safari support
     return toRaw(page)
@@ -98,38 +79,6 @@ class ApiStore extends Store {
    */
   addSite (data) {
     this.state.site = data
-  }
-
-  /**
-   * Optionally persists the pages state between sessions
-   * (Overwrites the base class's function)
-   */
-  async init () {
-    // Initialize only if state persistance is enabled
-    if (!this.persistState) return
-
-    // Catch multiple initialization calls
-    if (this.isInitialized) return
-
-    // Mutation operations on a database aren't allowed in incognito mode
-    try {
-      // Check if persisted state exists and if so, use it
-      const stateFromIndexedDB = await get(this.storeName)
-      if (stateFromIndexedDB) {
-        this.state.pages = new Map(JSON.parse(stateFromIndexedDB))
-      }
-
-      // Watch for pages state changes and immediately save it to IndexedDB
-      watch(() => this.state.pages, val => {
-        set(this.storeName, JSON.stringify([...val]))
-      }, { deep: true })
-    } catch (error) {
-      console.error(error)
-
-      this.persistState = false
-    }
-
-    this.isInitialized = true
   }
 }
 

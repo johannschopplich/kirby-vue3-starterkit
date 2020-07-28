@@ -18,8 +18,6 @@ const apiLocation = import.meta.env.VITE_KIRBY_API_LOCATION
  * @returns {object} The page data
  */
 const getPage = async (id, { force = false } = {}) => {
-  await apiStore.init()
-
   // Try to get cached page from api store, except when `force` is `true`
   if (!force) {
     const storedPage = apiStore.getPage(id)
@@ -47,9 +45,6 @@ const getPage = async (id, { force = false } = {}) => {
 
   // Redirect to offline page if no stored data was found and no data for the
   // page id has been cached by the service worker
-  // This could be simplified in a `router.beforeEach` hook, but if IndexedDB
-  // is disabled we have to rely on the service worker to return cached data
-  // or a fallback response (see below)
   // Note: data for `home` and `offline` pages are always available since they
   // are precached by service worker
   const { status } = page

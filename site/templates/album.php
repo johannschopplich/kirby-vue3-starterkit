@@ -3,7 +3,6 @@
 $data = [
   'title' => $page->title()->value(),
   'metaTitle' => $page->customTitle()->or($page->title() . ' – ' . $site->title())->value(),
-  'modified' => $page->modified(),
   'headline' => $page->headline()->or($page->title())->value(),
   'description' => ['html' => $page->description()->kt()->value()],
   'tags' => $page->tags()->isNotEmpty() ? $page->tags()->value() : null,

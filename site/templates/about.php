@@ -3,7 +3,6 @@
 $data = [
   'title' => $page->title()->value(),
   'metaTitle' => $page->customTitle()->or($page->title() . ' – ' . $site->title())->value(),
-  'modified' => $page->modified(),
   'email' => $page->email()->value(),
   'phone' => $page->phone()->value(),
   'address' => ['html' => $page->address()->kt()->value()],
