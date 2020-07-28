@@ -29,16 +29,10 @@
   </article>
 </template>
 
-<script>
+<script setup>
 import { usePage } from '../hooks/usePage'
 
-export default {
-  setup () {
-    return {
-      page: usePage()
-    }
-  }
-}
+export const page = usePage()
 </script>
 
 <style>

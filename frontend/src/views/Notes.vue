@@ -14,11 +14,13 @@
 </template>
 
 <script>
-import Intro from '../components/Intro.vue'
 import { usePage } from '../hooks/usePage'
+import Intro from '../components/Intro.vue'
 
 export default {
-  components: { Intro },
+  components: {
+    Intro
+  },
 
   setup () {
     return {

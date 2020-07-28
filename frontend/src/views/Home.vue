@@ -19,13 +19,15 @@
 </template>
 
 <script>
-import Intro from '../components/Intro.vue'
 import { reactive } from 'vue'
 import { useApi } from '../hooks/useApi'
 import { usePage } from '../hooks/usePage'
+import Intro from '../components/Intro.vue'
 
 export default {
-  components: { Intro },
+  components: {
+    Intro
+  },
 
   setup () {
     const page = usePage()
