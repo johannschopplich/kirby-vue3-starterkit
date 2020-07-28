@@ -61,7 +61,7 @@ export const initRouter = async site => {
   routes.push({ path: '/home', redirect: '/' })
 
   // Catch-all fallback
-  routes.push({ path: '/:catchAll(.*)', component: /* Default */ import('../views/Default.vue') })
+  routes.push({ path: '/:catchAll(.*)', component: /* Default */ () => import('../views/Default.vue') })
 
   router = createRouter({
     history,
