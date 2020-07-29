@@ -29,7 +29,7 @@ export default {
 #update-notification {
   -webkit-appearance: button;
   position: fixed;
-  bottom: .5rem;
+  bottom: 1.5rem;
   left: 50%;
   background: white;
   border: 2px solid #000;
