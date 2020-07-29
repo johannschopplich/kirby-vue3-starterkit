@@ -26,13 +26,6 @@ return [
         ]
     ],
 
-    'thumbs' => [
-        'quality' => '80',
-        'srcsets' => [
-            'default' => [360, 720]
-        ]
-    ],
-
     'cre8ivclick.sitemapper.title' => 'Sitemap'
 
 ];
