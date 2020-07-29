@@ -19,8 +19,7 @@
 - ⚡️ [Vite](https://github.com/vitejs/vite) instead of Vue.js CLI
 - ♿ Accessible routing
 - 🔍 SEO-friendly ([server-side generated](site/snippets/meta.php) meta tags)
-- 🦋 [Cache pages between sessions](#caching) and revalidate with modification timestamps
-- 🚝 Offline-first: Page data caching & offline redirection
+- 🚝 [Offline-first](#caching--offline-capability): Page data caching & offline redirection
 - 🗃️ Centralized state management without Vuex
 - 🤝 Shared `.env` file for frontend & backend
 - 🚀 Modern Kirby folder setup
