@@ -26,7 +26,7 @@ class ApiStore extends Store {
    * @returns {(object|undefined)} Current page object
    */
   getPage (id) {
-    const page = this.state.pages.get(id)
+    const page = this.getState().pages.get(id)
     // Return the raw, original object of athe reactive `page` object for Safari support
     if (page) return toRaw(page)
   }
