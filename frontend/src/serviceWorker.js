@@ -17,7 +17,6 @@ const EXCLUDED_URLS = [
 
 const PRECACHE_URLS = [
   '/',
-  '/index.html',
   `${API_LOCATION}/home.json`,
   `${API_LOCATION}/error.json`,
   `${API_LOCATION}/offline.json`,
