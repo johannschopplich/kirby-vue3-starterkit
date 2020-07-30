@@ -3,19 +3,7 @@
 use Kirby\Toolkit\Tpl;
 use Kirby\Toolkit\Str;
 
-$apiLocation = env('KIRBY_API_LOCATION', '');
-
-if (!empty($apiLocation)) {
-    // Remove leading slash if present
-    if (Str::startsWith($apiLocation, '/')) {
-        $apiLocation = Str::ltrim($apiLocation, '/');
-    }
-
-    // Add trailing slash if not given
-    if (!Str::endsWith($apiLocation, '/')) {
-        $apiLocation .= '/';
-    }
-}
+$apiLocation = Str::replace(env('KIRBY_API_LOCATION', ''), '/', '') . '/';
 
 return [
     /**

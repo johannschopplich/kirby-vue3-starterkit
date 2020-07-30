@@ -9,15 +9,8 @@ function useApiLocation () {
   let apiLocation = process.env.KIRBY_API_LOCATION
   if (!apiLocation) return ''
 
-  // Add leading slash if not given
-  if (!apiLocation.startsWith('/')) {
-    apiLocation = '/' + apiLocation
-  }
-
-  // Remove trailing slash if present
-  if (apiLocation.endsWith('/')) {
-    apiLocation = apiLocation.slice(0, -1)
-  }
+  // Remove any slashes and add leading slash
+  apiLocation = '/' + apiLocation.replace('/', '')
 
   if (apiLocation === '/api') {
     throw new Error('API location mustn\'t be the same as Kirby\'s internal API endpoint.')
