@@ -1,32 +1,14 @@
 <?php
 
 /**
- * Remove `home` page from cache after any changes to other pages or `site`.
- * Only necessary if Kirby pages cache is active.
+ * Remove cached `home` page data after any changes to other pages or `site`
+ * Applies only when Kirby pages cache is active
  */
 return [
-    'page.changeNum:after' => function () {
+    'page.*:after' => function () {
         kirby()->cache('pages')->remove('home.html');
     },
-    'page.changeSlug:after' => function () {
-        kirby()->cache('pages')->remove('home.html');
-    },
-    'page.changeStatus:after' => function () {
-        kirby()->cache('pages')->remove('home.html');
-    },
-    'page.changeTemplate:after' => function () {
-        kirby()->cache('pages')->remove('home.html');
-    },
-    'page.changeTitle:after' => function () {
-        kirby()->cache('pages')->remove('home.html');
-    },
-    'page.update:after' => function () {
-        kirby()->cache('pages')->remove('home.html');
-    },
-    'site.changeTitle:after' => function () {
-        kirby()->cache('pages')->remove('home.html');
-    },
-    'site.update:after' => function () {
+    'site.*:after' => function () {
         kirby()->cache('pages')->remove('home.html');
     }
 ];
