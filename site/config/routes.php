@@ -3,7 +3,10 @@
 use Kirby\Toolkit\Tpl;
 use Kirby\Toolkit\Str;
 
-$apiLocation = Str::replace(env('KIRBY_API_LOCATION', ''), '/', '') . '/';
+$apiLocation = env('KIRBY_API_LOCATION', '');
+if (!empty($apiLocation)) {
+    $apiLocation = Str::replace($apiLocation, '/', '') . '/';
+}
 
 return [
     /**
