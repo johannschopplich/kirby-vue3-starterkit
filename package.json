@@ -3,33 +3,31 @@
   "version": "1.5.0",
   "scripts": {
     "kirby:serve": "node scripts/serveKirby.js",
-    "esbuild:transpile": "esbuild frontend/dist/assets/**.js --target=es2016 --minify --outdir=public/assets",
     "build:after": "rm -rf public/assets && cp -r frontend/dist/assets public/assets",
     "build:sw": "node scripts/buildSw.js",
     "dev": "vite",
     "build": "vite build && npm run build:after && npm run build:sw",
-    "build:compat": "vite build --minify=false && npm run build:after && npm run esbuild:transpile && npm run build:sw",
     "start": "concurrently \"npm run kirby:serve\" \"npm run dev\"",
     "lint": "eslint \"frontend/src/**/*.{js,vue}\""
   },
   "dependencies": {
     "idb-keyval": "^3.2.0",
-    "vue": "^3.0.0-rc.4",
+    "vue": "^3.0.0-rc.5",
     "vue-router": "^4.0.0-beta.4"
   },
   "devDependencies": {
-    "@vue/compiler-sfc": "^3.0.0-rc.4",
+    "@vue/compiler-sfc": "^3.0.0-rc.5",
     "concurrently": "^5.2.0",
     "dotenv": "^8.2.0",
     "eslint": "^7.5.0",
     "eslint-config-standard": "^14.1.1",
     "eslint-plugin-import": "^2.22.0",
-    "eslint-plugin-jsdoc": "^30.0.3",
+    "eslint-plugin-jsdoc": "^30.1.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
     "eslint-plugin-vue": "^7.0.0-alpha.10",
     "php-server": "^0.2.1",
-    "vite": "^1.0.0-rc.3"
+    "vite": "^1.0.0-rc.4"
   }
 }

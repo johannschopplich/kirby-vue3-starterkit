@@ -7,6 +7,7 @@ module.exports = {
   root: 'frontend',
   assetsDir: 'assets',
   emitIndex: false,
+  esbuildTarget: '2017',
 
   env: {
     VITE_KIRBY_API_LOCATION: useApiLocation()
