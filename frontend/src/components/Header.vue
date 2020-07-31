@@ -1,30 +1,14 @@
 <template>
   <header class="header">
-    <router-link v-slot="{ href, isExactActive, navigate }" to="/">
-      <a
-        :href="href"
-        :aria-current="isExactActive ? 'page' : false"
-        class="logo"
-        @click="navigate"
-      >
-        {{ site.title }}
-      </a>
-    </router-link>
+    <router-link to="/" class="logo"> {{ site.title }} </router-link>
 
     <nav id="menu" class="menu">
       <router-link
         v-for="page in site.children.filter(page => page.isListed)"
-        v-slot="{ href, isExactActive, navigate }"
         :key="page.id"
         :to="`/${page.id}`"
       >
-        <a
-          :href="href"
-          :aria-current="isExactActive ? 'page' : false"
-          @click="navigate"
-        >
-          {{ page.title }}
-        </a>
+        {{ page.title }}
       </router-link>
     </nav>
   </header>
