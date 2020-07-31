@@ -6,11 +6,12 @@ require('dotenv').config()
  * @returns {string} The api location like `/pagesapi`
  */
 function useApiLocation () {
-  let apiLocation = process.env.KIRBY_API_LOCATION
-  if (!apiLocation) return ''
+  let apiLocation = (process.env.KIRBY_API_LOCATION || '').replace('/', '')
 
-  // Remove any slashes and add leading slash
-  apiLocation = '/' + apiLocation.replace('/', '')
+  // Add leading slash if location contains any characters
+  if (apiLocation) {
+    apiLocation = '/' + apiLocation
+  }
 
   if (apiLocation === '/api') {
     throw new Error('API location mustn\'t be the same as Kirby\'s internal API endpoint.')
