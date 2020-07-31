@@ -11,7 +11,7 @@ if (!empty($apiLocation)) {
 return [
     /**
      * Redirect robots.txt to instruct robots (typically search engine robots)
-     * how to crawl & index pages on this website.
+     * how to crawl & index pages on this website
      */
     [
         'pattern' => 'robots.txt',
@@ -26,18 +26,20 @@ return [
                 ->body($robots);
         }
     ],
+
     /**
-     * Respond with JSON-encoded page data for any given URL ending with `.json`.
+     * Respond with JSON-encoded page data for any given URL ending with `.json`
      */
     [
         'pattern' => [$apiLocation . '(:all).json'],
         'action'  => function ($pageId) {
             kirby()->response()->json();
-            return (page($pageId) ?? page('error'))->render();
+            return page($pageId);
         }
     ],
+
     /**
-     * Redirect all non-JSON templates to the index snippet.
+     * Redirect all non-JSON templates to the index snippet
      */
     [
         'pattern' => ['(:all)'],
