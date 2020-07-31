@@ -44,11 +44,11 @@ return [
         'action'  => function ($pageId) {
             $site = site();
 
-            if (empty($pageId) === true || $pageId === 'index.html') {
+            if (empty($pageId)) {
                 $pageId = $site->homePage()->id();
             }
 
-            $page = page($pageId) ?? page('error');
+            $page = page($pageId) ?? $site->errorPage();
 
             return Tpl::load(kirby()->roots()->snippets() . '/index.php', compact('page', 'site'));
         }
