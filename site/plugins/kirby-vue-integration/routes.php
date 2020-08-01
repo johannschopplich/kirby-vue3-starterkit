@@ -37,7 +37,7 @@ return [
                 $page = page($pageId) ?? $site->errorPage();
             }
 
-            return Tpl::load(kirby()->roots()->snippets() . '/index.php', compact('page', 'site'));
+            return Tpl::load(kirby()->roots()->snippets() . '/vue-index.php', compact('page', 'site'));
         }
     ]
 ];
