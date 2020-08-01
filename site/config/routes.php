@@ -34,9 +34,9 @@ return [
         'pattern' => [$apiLocation . '(:all).json'],
         'action'  => function ($pageId) {
             kirby()->response()->json();
-            // Manually call the error page, otherwise the service worker
-            // would fail installing with the true error page fall back
-            // response
+            // Prevent Kirby from falling back automatically to the error
+            // page, otherwise the service worker would fail installing
+            // due to the response's http status code
             return (page($pageId) ?? site()->errorPage())->render();
         }
     ],
