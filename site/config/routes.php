@@ -50,10 +50,10 @@ return [
             $site = site();
 
             if (empty($pageId)) {
-                $pageId = $site->homePage()->id();
+                $page = $site->homePage();
+            } else {
+                $page = page($pageId) ?? $site->errorPage();
             }
-
-            $page = page($pageId) ?? $site->errorPage();
 
             return Tpl::load(kirby()->roots()->snippets() . '/index.php', compact('page', 'site'));
         }
