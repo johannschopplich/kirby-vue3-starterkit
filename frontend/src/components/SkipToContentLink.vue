@@ -4,14 +4,18 @@
   </a>
 </template>
 
-<script>
-export default {
-  watch: {
-    $route () {
-      this.$refs.skipLink.focus()
-    }
-  }
-}
+<script setup>
+import { ref, watch, onMounted } from 'vue'
+import { useRoute } from 'vue-router'
+
+export const skipLink = ref(null)
+
+onMounted(() => {
+  const route = useRoute()
+  watch(route, () => {
+    skipLink.value.focus()
+  })
+})
 </script>
 
 <style>
