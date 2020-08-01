@@ -13,7 +13,6 @@ return [
     ],
 
     'routes' => require 'routes.php',
-    'hooks' => require 'hooks.php',
 
     'cache' => [
         'pages' => [
