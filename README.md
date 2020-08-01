@@ -64,11 +64,14 @@ kirby-vue3-starterkit/
 |   |   |   |   # Hook to announce any useful information for screen readers
 |   |   |   ├── useAnnouncer.js
 |   |   |   |
-|   |   |   |   # Handle retrieval of pages through Kirby API as JSON
+|   |   |   |   # Hook for retrieving pages from the Kirby API as JSON
 |   |   |   ├── useApi.js
 |   |   |   |
 |   |   |   |   # Returns page for current path corresponding to Kirby's `$page` object
 |   |   |   └── usePage.js
+|   |   |   |
+|   |   |   |   # Hook for various service worker methods like registering
+|   |   |   └── useServiceWorker.js
 |   |   |   |
 |   |   |   |   # Returns object corresponding to Kirby's global `$site`
 |   |   |   └── useSite.js
@@ -91,7 +94,6 @@ kirby-vue3-starterkit/
 |   |   |
 |   |   ├── App.vue
 |   |   ├── main.js
-|   |   ├── registerServiceWorker.js
 |   |   └── serviceWorker.js
 |   |
 |   |   # Index page used by Vite in development environment
