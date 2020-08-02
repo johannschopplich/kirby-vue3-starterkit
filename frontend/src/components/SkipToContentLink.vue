@@ -1,20 +1,22 @@
 <template>
-  <a href="#main" class="skip-to-content-link" ref="skipLink">
+  <a
+    href="#main"
+    class="skip-to-content-link"
+    ref="skipLink"
+  >
     Skip to content
   </a>
 </template>
 
 <script setup>
-import { ref, watch, onMounted } from 'vue'
+import { ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 
+export const route = useRoute()
 export const skipLink = ref(null)
 
-onMounted(() => {
-  const route = useRoute()
-  watch(route, () => {
-    skipLink.value.focus()
-  })
+watch(route, () => {
+  skipLink.value.focus()
 })
 </script>
 
