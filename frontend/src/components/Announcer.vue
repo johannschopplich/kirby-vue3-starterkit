@@ -12,7 +12,7 @@ import { useAnnouncer } from '../hooks/useAnnouncer'
 export const { announcer } = useAnnouncer()
 </script>
 
-<style scoped>
+<style>
 #announcer {
   position: absolute;
   width: 1px;
