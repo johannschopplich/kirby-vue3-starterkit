@@ -1,6 +1,7 @@
 const { resolve } = require('path')
 const { readdir, readFile, writeFile } = require('fs/promises')
 const { useApiLocation } = require('./useApiLocation')
+const { minify: _minify } = require('terser')
 
 const assetsDir = 'public/assets'
 const assetFiles = []
@@ -53,11 +54,13 @@ function random () {
  * @param {string} input Script to minify
  * @returns {string} Minified code
  */
-function minify (input) {
-  const result = require('terser').minify(input, { warnings: true })
-  if (result.error) throw new Error(result.error)
-  // if (result.warnings) console.log(result.warnings)
-  return result.code
+async function minify (input) {
+  try {
+    const { code } = await _minify(input)
+    return code
+  } catch (error) {
+    throw new Error(error)
+  }
 }
 
 ;(async () => {
@@ -72,7 +75,7 @@ function minify (input) {
     ${await readFile(swSrcPath)}
   `
 
-  const minified = minify(bundle)
+  const minified = await minify(bundle)
   await writeFile(swDistPath, minified)
 
   console.log('\x1b[32m%s\x1b[0m', `Generated service worker to ${swDistPath} with ${assetFiles.length} additional assets to precache`)
