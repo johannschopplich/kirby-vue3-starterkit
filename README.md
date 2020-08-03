@@ -68,10 +68,10 @@ kirby-vue3-starterkit/
 |   |   |   ├── useApi.js
 |   |   |   |
 |   |   |   |   # Returns page for current path corresponding to Kirby's `$page` object
-|   |   |   └── usePage.js
+|   |   |   ├── usePage.js
 |   |   |   |
 |   |   |   |   # Hook for various service worker methods like registering
-|   |   |   └── useServiceWorker.js
+|   |   |   ├── useServiceWorker.js
 |   |   |   |
 |   |   |   |   # Returns object corresponding to Kirby's global `$site`
 |   |   |   └── useSite.js
