@@ -173,7 +173,7 @@ kirby-vue3-starterkit/
 
 ## Caching & Offline Capability
 
-Even without a service worker installed, the frontend will store pages between indiviual routes/views (session store). When you reload the tab, the data for each page is freshly fetched from the API once again.
+Even without a service worker installed, the frontend will store pages between indiviual routes/views (in-memory store). When you reload the tab, the data for each page is freshly fetched from the API once again.
 
 For offline capability of your Vue app, you can choose to activate the included [service worker](#service-worker).
 
@@ -263,4 +263,4 @@ Now your project is hopefully up 'n' running!
 
 [MIT](https://opensource.org/licenses/MIT)
 
-It is discouraged to use this plugin in any project that promotes racism, sexism, homophobia, animal abuse, violence or any other form of hate speech.
+It is discouraged to use this starterkit in any project that promotes racism, sexism, homophobia, animal abuse, violence or any other form of hate speech.
