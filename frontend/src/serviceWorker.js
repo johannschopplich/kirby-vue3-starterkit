@@ -105,11 +105,11 @@ self.addEventListener('fetch', event => {
   if (!ALLOWED_HOSTS.find(h => normalizedUrl.hostname === h)) return
   if (EXCLUDED_URLS.some(page => request.url.includes(page))) return
 
-  const hasAcceptHeader = type => request.headers.get('Accept').includes(type)
-  const isHTML = hasAcceptHeader('text/html')
+  const reqDestination = type => request.headers.get('Accept').startsWith(type)
+  const isHTML = reqDestination('text/html')
+  const isImage = reqDestination('image')
   const isAsset = request.url.includes('/assets/')
   const isJSON = request.url.endsWith('.json')
-  const isImage = hasAcceptHeader('image')
 
   // Cache-first strategy for static assets and images,
   // network-first strategy for everything else
@@ -118,7 +118,7 @@ self.addEventListener('fetch', event => {
     const cachedResponse = await caches.match(request)
 
     // Return cached HTML, asset or image, if available
-    if (cachedResponse && (isHTML || isAsset || isImage)) return cachedResponse
+    if (cachedResponse && (isAsset || isImage)) return cachedResponse
 
     try {
       const response = await fetch(request)
