@@ -1,12 +1,15 @@
 <template>
   <header class="header">
-    <router-link to="/" class="logo"> {{ site.title }} </router-link>
+    <router-link to="/" class="logo">
+      {{ site.title }}
+    </router-link>
 
     <nav id="menu" class="menu">
       <router-link
         v-for="page in site.children.filter(page => page.isListed)"
         :key="page.id"
         :to="`/${page.id}`"
+        :class="{ 'router-link-active': route.path.startsWith(`/${page.id}`) }"
       >
         {{ page.title }}
       </router-link>
@@ -15,12 +18,14 @@
 </template>
 
 <script setup>
+import { useRoute } from 'vue-router'
 import { useSite } from '../hooks/useSite'
 
 export const site = useSite()
+export const route = useRoute()
 </script>
 
-<style>
+<style scoped>
 .header {
   margin-bottom: 1.5rem;
 }
@@ -50,7 +55,8 @@ export const site = useSite()
   margin: 0 .75rem;
 }
 
-.menu a[aria-current="page"] {
+.menu a[aria-current="page"],
+.menu a.router-link-active {
   border-bottom: 2px solid #000;
 }
 
