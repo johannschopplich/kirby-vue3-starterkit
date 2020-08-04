@@ -118,7 +118,7 @@ self.addEventListener('fetch', event => {
     const cachedResponse = await caches.match(request)
 
     // Return cached HTML, asset or image, if available
-    if (cachedResponse && (isAsset || isImage)) return cachedResponse
+    if (cachedResponse && (isHTML || isImage || isAsset)) return cachedResponse
 
     try {
       const response = await fetch(request)
