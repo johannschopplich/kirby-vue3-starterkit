@@ -98,6 +98,7 @@ self.addEventListener('activate', event => {
 
 self.addEventListener('fetch', event => {
   const { request } = event
+  const destination = request.headers.get('Accept')
   const normalizedUrl = new URL(request.url)
   normalizedUrl.search = ''
 
@@ -105,9 +106,8 @@ self.addEventListener('fetch', event => {
   if (!ALLOWED_HOSTS.find(h => normalizedUrl.hostname === h)) return
   if (EXCLUDED_URLS.some(page => request.url.includes(page))) return
 
-  const reqDestination = type => request.headers.get('Accept').startsWith(type)
-  const isHTML = reqDestination('text/html')
-  const isImage = reqDestination('image')
+  const isHTML = destination.startsWith('text/html')
+  const isImage = destination.startsWith('image')
   const isAsset = request.url.includes('/assets/')
   const isJSON = request.url.endsWith('.json')
 
