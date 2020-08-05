@@ -65,7 +65,7 @@ class ApiStore extends Store {
    *
    * @param {object} data Global `site` object
    */
-  addSite (data) {
+  setSite (data) {
     this.state.site = data
   }
 }

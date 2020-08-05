@@ -58,7 +58,7 @@ const getPage = async (id, { force = false } = {}) => {
 
   // Add `site` object provided via `home` page to api store
   if (id === 'home') {
-    apiStore.addSite(page.site)
+    apiStore.setSite(page.site)
   }
 
   // Add page data to api store
