@@ -9,7 +9,7 @@
         v-for="page in site.children.filter(page => page.isListed)"
         :key="page.id"
         :to="`/${page.id}`"
-        :class="{ 'router-link-active': route.path.startsWith(`/${page.id}`) }"
+        :class="{ 'router-link-active': route.path.startsWith(`/${page.id}/`) }"
       >
         {{ page.title }}
       </router-link>
