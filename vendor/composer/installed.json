@@ -205,6 +205,52 @@
         "homepage": "https://getkirby.com"
     },
     {
+        "name": "getkirby/kql",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/getkirby/kql.git",
+            "reference": "7773c785e497127deea193a457f84af13996e2e8"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/getkirby/kql/zipball/7773c785e497127deea193a457f84af13996e2e8",
+            "reference": "7773c785e497127deea193a457f84af13996e2e8",
+            "shasum": ""
+        },
+        "require": {
+            "getkirby/composer-installer": "^1.1"
+        },
+        "time": "2020-07-21T10:51:01+00:00",
+        "type": "kirby-plugin",
+        "installation-source": "source",
+        "autoload": {
+            "psr-4": {
+                "Kirby\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Bastian Allgeier",
+                "email": "bastian@getkirby.com"
+            }
+        ],
+        "description": "Kirby Query Language",
+        "homepage": "https://getkirby.com",
+        "keywords": [
+            "api",
+            "cms",
+            "json",
+            "kirby",
+            "query"
+        ]
+    },
+    {
         "name": "graham-campbell/result-type",
         "version": "v1.0.1",
         "version_normalized": "1.0.1.0",
