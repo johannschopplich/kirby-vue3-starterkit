@@ -32,27 +32,18 @@ export let router = null
  * @returns {object} Output of `createRouter`
  */
 export const initRouter = async site => {
-  // Published pages
-  for (const page of site.children) {
-    routes.push({
+  // Published pages routes
+  const routes = site.children.flatMap(page => [
+    {
       path: `/${page.id}`,
-      component: () => import(`../views/${capitalize(page.template)}.vue`).catch(() => /* Default */ import('../views/Default.vue')),
-      meta: {
-        scrollToTop: true
-      }
-    })
-
-    // Page children
-    for (const child of page.children) {
-      routes.push({
-        path: `/${child.id}`,
-        component: () => import(`../views/${capitalize(child.template)}.vue`).catch(() => /* Default */ import('../views/Default.vue')),
-        meta: {
-          scrollToTop: true
-        }
-      })
-    }
-  }
+      component: () => import(`../views/${capitalize(page.template)}.vue`).catch(() => /* Default */ import('../views/Default.vue'))
+    },
+    // Page children routes
+    ...page.children.map(child => ({
+      path: `/${child.id}`,
+      component: () => import(`../views/${capitalize(child.template)}.vue`).catch(() => /* Default */ import('../views/Default.vue'))
+    }))
+  ])
 
   // Redirect `/home` to `/`
   routes.find(route => route.path === '/home').path = '/'
