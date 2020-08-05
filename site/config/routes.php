@@ -35,7 +35,7 @@ return [
      * Respond with JSON-encoded page data for any given URL ending with `.json`
      */
     [
-        'pattern' => [$apiLocation . '(:all).json'],
+        'pattern' => $apiLocation . '(:all).json',
         'action'  => function ($pageId) {
             kirby()->response()->json();
             // Prevent Kirby from falling back automatically to the error
@@ -49,7 +49,7 @@ return [
      * Redirect all non-JSON templates to the index snippet
      */
     [
-        'pattern' => ['(:all)'],
+        'pattern' => '(:all)',
         'action'  => function ($pageId) {
             $site = site();
 
