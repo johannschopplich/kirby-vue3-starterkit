@@ -76,14 +76,6 @@ class App
     protected $visitor;
 
     /**
-     * List of options that shouldn't be converted
-     * to a tree structure by dot syntax
-     *
-     * @var array
-     */
-    public static $nestIgnoreOptions = ['hooks'];
-
-    /**
      * Creates a new App instance
      *
      * @param array $props
@@ -127,13 +119,8 @@ class App
         $this->extensionsFromSystem();
         $this->extensionsFromProps($props);
         $this->extensionsFromPlugins();
-        $this->extensionsFromFolders();
-
-        // bake the options for the first time
-        $this->bakeOptions();
-
-        // register the extensions from the normalized options
         $this->extensionsFromOptions();
+        $this->extensionsFromFolders();
 
         // trigger hook for use in plugins
         $this->trigger('system.loadPlugins:after');
@@ -141,7 +128,7 @@ class App
         // execute a ready callback from the config
         $this->optionsFromReadyCallback();
 
-        // bake the options again with those from the ready callback
+        // bake config
         $this->bakeOptions();
     }
 
@@ -238,7 +225,30 @@ class App
      */
     protected function bakeOptions()
     {
-        $this->options = A::nest($this->options, static::$nestIgnoreOptions);
+        // convert the old plugin option syntax to the new one
+        foreach ($this->options as $key => $value) {
+            // detect option keys with the `vendor.plugin.option` format
+            if (preg_match('/^([a-z0-9-]+\.[a-z0-9-]+)\.(.*)$/i', $key, $matches) === 1) {
+                list(, $plugin, $option) = $matches;
+
+                // verify that it's really a plugin option
+                if (isset(static::$plugins[str_replace('.', '/', $plugin)]) !== true) {
+                    continue;
+                }
+
+                // ensure that the target option array exists
+                // (which it will if the plugin has any options)
+                if (isset($this->options[$plugin]) !== true) {
+                    $this->options[$plugin] = []; // @codeCoverageIgnore
+                }
+
+                // move the option to the plugin option array
+                // don't overwrite nested arrays completely but merge them
+                $this->options[$plugin] = array_replace_recursive($this->options[$plugin], [$option => $value]);
+                unset($this->options[$key]);
+            }
+        }
+
         Config::$data = $this->options;
         return $this;
     }

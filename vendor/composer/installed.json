@@ -105,17 +105,17 @@
     },
     {
         "name": "getkirby/cms",
-        "version": "3.4.0",
-        "version_normalized": "3.4.0.0",
+        "version": "3.4.1",
+        "version_normalized": "3.4.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/getkirby/kirby.git",
-            "reference": "dbd7fa7f303e7045626adb72c5f0b29c6ccadb44"
+            "reference": "194fe296a45328b9e45eeb7bd8a956689963306e"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/getkirby/kirby/zipball/dbd7fa7f303e7045626adb72c5f0b29c6ccadb44",
-            "reference": "dbd7fa7f303e7045626adb72c5f0b29c6ccadb44",
+            "url": "https://api.github.com/repos/getkirby/kirby/zipball/194fe296a45328b9e45eeb7bd8a956689963306e",
+            "reference": "194fe296a45328b9e45eeb7bd8a956689963306e",
             "shasum": ""
         },
         "require": {
@@ -131,7 +131,7 @@
             "phpmailer/phpmailer": "6.1.6",
             "true/punycode": "2.1.1"
         },
-        "time": "2020-07-07T10:37:11+00:00",
+        "time": "2020-08-04T13:49:21+00:00",
         "type": "kirby-cms",
         "installation-source": "dist",
         "autoload": {
@@ -928,8 +928,8 @@
     },
     {
         "name": "symfony/polyfill-ctype",
-        "version": "v1.18.0",
-        "version_normalized": "1.18.0.0",
+        "version": "v1.18.1",
+        "version_normalized": "1.18.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/polyfill-ctype.git",
@@ -1006,8 +1006,8 @@
     },
     {
         "name": "symfony/polyfill-mbstring",
-        "version": "v1.18.0",
-        "version_normalized": "1.18.0.0",
+        "version": "v1.18.1",
+        "version_normalized": "1.18.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/polyfill-mbstring.git",
@@ -1085,8 +1085,8 @@
     },
     {
         "name": "symfony/polyfill-php80",
-        "version": "v1.18.0",
-        "version_normalized": "1.18.0.0",
+        "version": "v1.18.1",
+        "version_normalized": "1.18.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/polyfill-php80.git",
