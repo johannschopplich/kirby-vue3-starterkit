@@ -1,6 +1,6 @@
 require('dotenv').config()
 
-const { useApiLocation } = require('./scripts/useApiLocation')
+const { useLocation } = require('./scripts/useLocation')
 const kirbyUrl = `http://${process.env.KIRBY_SERVER_HOSTNAME}:${process.env.KIRBY_SERVER_PORT}`
 
 module.exports = {
@@ -10,7 +10,7 @@ module.exports = {
   esbuildTarget: 'es2017',
 
   env: {
-    VITE_KIRBY_API_LOCATION: useApiLocation()
+    VITE_KIRBY_API_LOCATION: useLocation(process.env.KIRBY_API_LOCATION)
   },
 
   proxy: {

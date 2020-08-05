@@ -1,6 +1,6 @@
 import { apiStore } from '../store/apiStore'
 import { router } from '../router'
-import { devLog } from '../helpers'
+import { log } from '../helpers'
 
 /**
  * Location of the Kirby API backend
@@ -24,13 +24,13 @@ const getPage = async (id, { force = false } = {}) => {
 
     // Use cached page if already fetched once
     if (storedPage) {
-      devLog(`[useApi] Pulling ${id} page data from store.`)
+      log(`[useApi] Pulling ${id} page data from store.`)
       return storedPage
     }
   }
 
   // Otherwise fetch page for the first time
-  devLog(`[useApi] Fetching ${apiLocation}/${id}.json…`)
+  log(`[useApi] Fetching ${apiLocation}/${id}.json…`)
 
   let page
   try {
@@ -38,7 +38,7 @@ const getPage = async (id, { force = false } = {}) => {
     page = await response.json()
   } catch (error) {
     console.error(error)
-    devLog(`[useApi] ${id} page data couldn't be fetched. Redirecting to error page…`)
+    log(`[useApi] ${id} page data couldn't be fetched. Redirecting to error page…`)
     router.push({ path: '/error' })
     return
   }
@@ -49,12 +49,12 @@ const getPage = async (id, { force = false } = {}) => {
   // are precached by service worker
   const { status } = page
   if (status === 'offline') {
-    devLog('[useApi] Device seems to be offline. Redirecting to offline page…')
+    log('[useApi] Device seems to be offline. Redirecting to offline page…')
     router.push({ path: '/offline' })
     return
   }
 
-  devLog(`[useApi] Fetched ${id} page data:`, page)
+  log(`[useApi] Fetched ${id} page data:`, page)
 
   // Add `site` object provided via `home` page to api store
   if (id === 'home') {
