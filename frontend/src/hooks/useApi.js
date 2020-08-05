@@ -10,14 +10,28 @@ import { log } from '../helpers'
 const apiLocation = import.meta.env.VITE_KIRBY_API_LOCATION
 
 /**
- * Retrieve a page by id from either store or fetch it freshly
+ * Transform a path to its Kirby page id
  *
- * @param {string} id Page id to retrieve
- * @param {object} options Set of options
+ * @param {string} path The path to parse
+ * @returns {string} The corresponding page id
+ */
+const toPageId = path => {
+  if (path.startsWith('/')) path = path.slice(1)
+  if (path.endsWith('/')) path = path.slice(0, -1)
+  return path || 'home'
+}
+
+/**
+ * Retrieve a page by paht or id from either store or network
+ *
+ * @param {string} path Path or page id to retrieve
+ * @param {object} [options] Optional options
  * @param {boolean} options.force Skip page lookup in store and fetch page freshly
  * @returns {object} The page data
  */
-const getPage = async (id, { force = false } = {}) => {
+const getPage = async (path, { force = false } = {}) => {
+  const id = toPageId(path)
+
   // Try to get cached page from api store, except when `force` is `true`
   if (!force) {
     const storedPage = apiStore.getPage(id)

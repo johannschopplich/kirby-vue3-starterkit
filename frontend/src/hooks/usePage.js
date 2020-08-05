@@ -13,21 +13,18 @@ export const usePage = () => {
   const { getPage } = useApi()
   const { setAnnouncer } = useAnnouncer()
 
-  // Setup up page waiter
-  let resolve
-  let promise = new Promise(r => { // eslint-disable-line promise/param-names
-    resolve = r
-  })
-
-  // Transform route `path` to `pageId` for use with api
-  const pageId = (path.endsWith('/') ? path.slice(0, -1) : path).slice(1) || 'home'
-
   // Setup reactive `page` object with some commonly used keys
   const page = reactive({
     title: null,
     metaTitle: null,
     children: null,
     text: null
+  })
+
+  // Setup up page waiter
+  let resolve
+  let promise = new Promise(r => { // eslint-disable-line promise/param-names
+    resolve = r
   })
 
   /**
@@ -46,7 +43,7 @@ export const usePage = () => {
 
   ;(async () => {
     // Get page from cache or freshly fetch it
-    Object.assign(page, { ...(await getPage(pageId)) })
+    Object.assign(page, { ...(await getPage(path)) })
 
     // Set document title
     document.title = page.metaTitle
