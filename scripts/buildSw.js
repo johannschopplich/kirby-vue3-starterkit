@@ -1,12 +1,14 @@
+require('dotenv').config()
 const { resolve } = require('path')
 const { readdir, readFile, writeFile } = require('fs/promises')
-const { useApiLocation } = require('./useApiLocation')
+const { useLocation } = require('./useLocation')
 const { minify: _minify } = require('terser')
 
 const assetsDir = 'public/assets'
 const assetFiles = []
 const swSrcPath = 'frontend/src/serviceWorker.js'
 const swDistPath = 'public/service-worker.js'
+const apiLocation = useLocation(process.env.KIRBY_API_LOCATION)
 
 /**
  * Extract basename from path and add to asset files array
@@ -71,7 +73,7 @@ async function minify (input) {
   const bundle = `
     self.__PRECACHE_ASSET_URLS = [${assetFiles.map(i => `'${i}'`).join(',')}]
     const VERSION = '${random()}'
-    const API_LOCATION = '${useApiLocation()}'
+    const API_LOCATION = '${apiLocation}'
     ${await readFile(swSrcPath)}
   `
 
