@@ -1,8 +1,8 @@
 /**
- * Mitt: Tiny (~200b) functional event emitter / pubsub
+ * Mitt: Tiny functional event emitter / pubsub
  *
  * @name mitt
- * @param {Map} [all] Optional pre-defined map of events
+ * @param {Map} [all] Optional Map of event names to registered handler functions
  * @returns {Function} The function's instance
  */
 export default function mitt (all = new Map()) {
@@ -49,8 +49,17 @@ export default function mitt (all = new Map()) {
      * @param {*} [evt] Any value (object is recommended and powerful), passed to each handler
      */
     emit (type, evt) {
-      ;(all.get(type) || []).slice().map(handler => { handler(evt) })
-      ;(all.get('*') || []).slice().map(handler => { handler(type, evt) })
+      for (const handler of (all.get(type) || []).slice()) handler(evt)
+      for (const handler of (all.get('*') || []).slice()) handler(type, evt)
+    },
+
+    /**
+     * Remove all event handlers.
+     *
+     * Note: This will also remove event handlers passed via `mitt(all: EventHandlerMap)`.
+     */
+    clear () {
+      all.clear()
     }
   }
 }
