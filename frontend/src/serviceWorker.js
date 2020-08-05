@@ -56,6 +56,7 @@ async function trimCache (cacheName, maxItems) {
 }
 
 self.addEventListener('message', event => {
+  if (!('data' in event)) return
   const { command } = event.data
 
   if (command === 'skipWaiting') {
