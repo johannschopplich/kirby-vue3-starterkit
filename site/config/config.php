@@ -12,8 +12,8 @@ return [
         'slug' => env('KIRBY_PANEL_SLUG', 'panel')
     ],
 
-    'hooks' => require 'hooks.php',
     'routes' => require 'routes.php',
+    'hooks' => require 'hooks.php',
 
     'cache' => [
         'pages' => [

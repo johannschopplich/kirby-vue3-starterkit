@@ -1,7 +1,7 @@
 <?php
 
-use Kirby\Toolkit\Tpl;
 use Kirby\Toolkit\Str;
+use Kirby\Toolkit\Tpl;
 
 $apiLocation = env('KIRBY_API_LOCATION', '');
 if (!empty($apiLocation)) {
