@@ -219,7 +219,7 @@ npm install
 npm run start
 ```
 
-Out of the box the backend is automatically served while developing. `npm run kirby:serve` spawns the PHP built-in web server by Node. You can also serve the backend by a web server of your choice. If done so, please specify hostname and port in your `.env` if they differ from `127.0.0.1`and `8080` respectively so that the decoupled frontend can call the Kirby API for JSON content in development.
+Out of the box the backend is automatically served while developing. `npm run kirby:serve` spawns the PHP built-in web server by Node. You can also serve the backend by a web server of your choice. If done so, please specify hostname and port in your `.env` if they differ from `localhost`and `8080` respectively so that the decoupled frontend can call the Kirby API for JSON content in development.
 
 ### Compile for production
 
