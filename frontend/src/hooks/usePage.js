@@ -28,7 +28,7 @@ export const usePage = () => {
   })
 
   /**
-   * Define a promise to wait for when the page data is available
+   * Define a promise to wait for until the page data is available
    *
    * @example
    * const page = usePage()

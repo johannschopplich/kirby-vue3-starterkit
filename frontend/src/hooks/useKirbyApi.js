@@ -61,8 +61,7 @@ const getPage = async (path, { force = false } = {}) => {
   // page id has been cached by the service worker
   // Note: data for `home` and `offline` pages are always available since they
   // are precached by service worker
-  const { status } = page
-  if (status === 'offline') {
+  if ('status' in page && page.status === 'offline') {
     log('[kirby] Device seems to be offline. Redirecting to offline page…')
     router.push({ path: '/offline' })
     return
@@ -82,7 +81,7 @@ const getPage = async (path, { force = false } = {}) => {
 }
 
 /**
- * Hook for API location and handling methods
+ * Hook for API location and handling methods of the Kirby API
  *
  * @returns {object} Object containing API-related methods
  */
