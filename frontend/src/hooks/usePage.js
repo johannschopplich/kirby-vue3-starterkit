@@ -1,6 +1,6 @@
 import { reactive } from 'vue'
 import { useRoute } from 'vue-router'
-import { useApi } from './useApi'
+import { useKirbyApi } from './useKirbyApi'
 import { useAnnouncer } from './useAnnouncer'
 
 /**
@@ -10,7 +10,7 @@ import { useAnnouncer } from './useAnnouncer'
  */
 export const usePage = () => {
   const { path } = useRoute()
-  const { getPage } = useApi()
+  const { getPage } = useKirbyApi()
   const { setAnnouncer } = useAnnouncer()
 
   // Setup reactive `page` object with some commonly used keys
@@ -28,7 +28,7 @@ export const usePage = () => {
   })
 
   /**
-   * Define a promise indicating if the page data is available
+   * Define a promise to wait for when the page data is available
    *
    * @example
    * const page = usePage()
@@ -43,7 +43,7 @@ export const usePage = () => {
 
   ;(async () => {
     // Get page from cache or freshly fetch it
-    Object.assign(page, { ...(await getPage(path)) })
+    Object.assign(page, await getPage(path))
 
     // Set document title
     document.title = page.metaTitle

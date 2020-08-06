@@ -1,8 +1,8 @@
-import { apiStore } from '../store/apiStore'
+import { kirbyStore } from '../store/kirbyStore'
 
 /**
  * Hook for the global `site` object
  *
  * @returns {object} Readonly `site` state
  */
-export const useSite = () => apiStore.getSite()
+export const useSite = () => kirbyStore.getSite()

@@ -65,7 +65,7 @@ kirby-vue3-starterkit/
 |   |   |   ├── useAnnouncer.js
 |   |   |   |
 |   |   |   |   # Hook for retrieving pages from the Kirby API as JSON
-|   |   |   ├── useApi.js
+|   |   |   ├── useKirbyApi.js
 |   |   |   |
 |   |   |   |   # Returns page for current path corresponding to Kirby's `$page` object
 |   |   |   ├── usePage.js
@@ -121,8 +121,8 @@ kirby-vue3-starterkit/
 |   |   # Starts a PHP server for Kirby, run by `npm run kirby:serve` from root
 |   ├── serveKirby.js
 |   |
-|   |   # Builds the API location string
-|   └── useApiLocation.js
+|   |   # Builds the location string from a given api path
+|   └── useLocation.js
 |
 |   # Kirby's core folder containing templates, blueprints, snippets etc. for Kirby
 ├── site/

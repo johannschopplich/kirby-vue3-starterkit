@@ -6,7 +6,7 @@ import { toRaw } from 'vue'
  *
  * @augments Store
  */
-class ApiStore extends Store {
+class KirbyStore extends Store {
   /**
    * The state object
    *
@@ -82,4 +82,4 @@ const storeName = 'KIRBY_API_STORE'
  *
  * @constant {object}
  */
-export const apiStore = new ApiStore(storeName)
+export const kirbyStore = new KirbyStore(storeName)
