@@ -121,8 +121,8 @@ kirby-vue3-starterkit/
 |   |   # Starts a PHP server for Kirby, run by `npm run kirby:serve` from root
 |   ├── serveKirby.js
 |   |
-|   |   # Builds the location string from a given api path
-|   └── useLocation.js
+|   |   # Builds the location from a given api path
+|   └── useApiLocation.js
 |
 |   # Kirby's core folder containing templates, blueprints, snippets etc. for Kirby
 ├── site/

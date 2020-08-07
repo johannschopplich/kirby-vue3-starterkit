@@ -1,8 +1,8 @@
 require('dotenv').config()
 
-const { useLocation } = require('./scripts/useLocation')
+const { useApiLocation } = require('./scripts/useApiLocation')
 const kirbyUrl = `http://${process.env.KIRBY_SERVER_HOSTNAME}:${process.env.KIRBY_SERVER_PORT}`
-const kirbyApiLocation = useLocation(process.env.KIRBY_API_LOCATION)
+const kirbyApiLocation = useApiLocation(process.env.KIRBY_API_LOCATION)
 
 module.exports = {
   root: 'frontend',

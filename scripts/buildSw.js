@@ -1,14 +1,14 @@
 require('dotenv').config()
 const { resolve } = require('path')
 const { readdir, readFile, writeFile } = require('fs/promises')
-const { useLocation } = require('./useLocation')
+const { useApiLocation } = require('./useApiLocation')
 const { minify: _minify } = require('terser')
 
 const assetsDir = 'public/assets'
 const assetFiles = []
 const swSrcPath = 'frontend/src/serviceWorker.js'
 const swDistPath = 'public/service-worker.js'
-const apiLocation = useLocation(process.env.KIRBY_API_LOCATION)
+const apiLocation = useApiLocation(process.env.KIRBY_API_LOCATION)
 
 /**
  * Extract basename from path and add to asset files array

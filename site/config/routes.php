@@ -5,7 +5,8 @@ use Kirby\Toolkit\Tpl;
 
 $apiLocation = env('KIRBY_API_LOCATION', '');
 if (!empty($apiLocation)) {
-    $apiLocation = Str::replace($apiLocation, '/', '') . '/';
+    if (Str::startsWith($apiLocation, '/')) $apiLocation = Str::substr($apiLocation, 1);
+    if (!Str::endsWith($apiLocation, '/')) $apiLocation .= '/';
 }
 
 return [
