@@ -1,16 +1,12 @@
-const phpServer = require('php-server')
 require('dotenv').config()
-
-const baseDir = 'public'
-const hostname = process.env.KIRBY_SERVER_HOSTNAME
-const port = process.env.KIRBY_SERVER_PORT
+const phpServer = require('php-server')
 
 ;(async () => {
   const server = await phpServer({
     binary: 'php',
-    hostname: hostname,
-    port: port,
-    base: baseDir,
+    hostname: process.env.KIRBY_SERVER_HOSTNAME,
+    port: process.env.KIRBY_SERVER_PORT,
+    base: 'public',
     router: 'server.php'
   })
 
