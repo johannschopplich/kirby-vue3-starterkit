@@ -17,7 +17,7 @@ return array(
     'PHPMailer\\PHPMailer\\' => array($vendorDir . '/phpmailer/phpmailer/src'),
     'Laminas\\ZendFrameworkBridge\\' => array($vendorDir . '/laminas/laminas-zendframework-bridge/src'),
     'Laminas\\Escaper\\' => array($vendorDir . '/laminas/laminas-escaper/src'),
-    'Kirby\\' => array($vendorDir . '/getkirby/cms/src', $vendorDir . '/getkirby/composer-installer/src', $baseDir . '/site/plugins/kql/src'),
+    'Kirby\\' => array($vendorDir . '/getkirby/cms/src', $vendorDir . '/getkirby/composer-installer/src'),
     'KirbyExtended\\' => array($baseDir . '/site/plugins/kirby-extended/src'),
     'GrahamCampbell\\ResultType\\' => array($vendorDir . '/graham-campbell/result-type/src'),
     'Dotenv\\' => array($vendorDir . '/vlucas/phpdotenv/src'),

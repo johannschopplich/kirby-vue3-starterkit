@@ -17,7 +17,7 @@
   },
   "devDependencies": {
     "@vue/compiler-sfc": "^3.0.0-rc.5",
-    "concurrently": "^5.2.0",
+    "concurrently": "^5.3.0",
     "dotenv": "^8.2.0",
     "eslint": "^7.6.0",
     "eslint-config-standard": "^14.1.1",
