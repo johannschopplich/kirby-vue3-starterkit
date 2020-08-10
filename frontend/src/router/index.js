@@ -54,8 +54,8 @@ export const initRouter = async site => {
 
   router = createRouter({
     history,
-    scrollBehavior,
-    routes
+    routes,
+    scrollBehavior
   })
 
   return router

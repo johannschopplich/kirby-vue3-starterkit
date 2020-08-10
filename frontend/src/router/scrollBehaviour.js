@@ -20,16 +20,12 @@ export const scrollBehavior = async function (to, from, savedPosition) {
     return { el: decodeURI(to.hash), behavior }
   }
 
-  // Check if any matched route config has meta that requires scrolling to top
-  if (to.matched.some(m => m.meta.scrollToTop)) {
-    // Coordinates will be used if no selector is provided,
-    // or if the selector didn't match any element
-    return { left: 0, top: 0, behavior }
+  // Check if any matched route config has meta that discourages scrolling to top
+  if (to.matched.some(m => m.meta.scrollToTop === false)) {
+    // Leave scroll as it is by not returning anything
+    return false
   }
 
-  // Either leave scroll as it is or …
-  // return false
-
-  // … always scroll to top
+  // Always scroll to top
   return { left: 0, top: 0, behavior }
 }
