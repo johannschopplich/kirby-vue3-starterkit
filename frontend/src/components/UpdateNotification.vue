@@ -13,7 +13,8 @@
 <script setup>
 import { useServiceWorker } from '../hooks/useServiceWorker'
 
-export const { hasNewWorker, activateNewWorker } = useServiceWorker()
+const { hasNewWorker, activateNewWorker } = useServiceWorker()
+export { hasNewWorker, activateNewWorker }
 </script>
 
 <style>
