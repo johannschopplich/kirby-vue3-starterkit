@@ -1,3 +1,9 @@
+# User blueprints are used to create new user roles, define form fields for each user role and set role permissions.
+# By default, Kirby only has the `admin` role, a user role that is allowed to do anything.
+# The title is required, everything else is optional.
+# The default user blueprint does not define a role, but a standard set of fields
+# available for each defined user role with blueprints that only contain a title.
+# More about users, roles and permissions: https://getkirby.com/docs/guide/users/managing-users
 title: API
 
 description: Read-only rights
