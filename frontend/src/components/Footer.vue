@@ -20,7 +20,7 @@ import { useSite } from '../hooks/useSite'
 export const site = useSite()
 </script>
 
-<style scoped>
+<style>
 .footer {
   padding: 1.5rem 5vw 10vh;
   text-align: center;

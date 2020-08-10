@@ -10,19 +10,10 @@
   </aside>
 </template>
 
-<script>
+<script setup>
 import { useServiceWorker } from '../hooks/useServiceWorker'
 
-export default {
-  setup () {
-    const { hasNewWorker, activateNewWorker } = useServiceWorker()
-
-    return {
-      hasNewWorker,
-      activateNewWorker
-    }
-  }
-}
+export const { hasNewWorker, activateNewWorker } = useServiceWorker()
 </script>
 
 <style>
