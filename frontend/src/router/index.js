@@ -9,7 +9,7 @@ import { capitalize } from '../helpers'
  *
  * @constant {Array}
  */
-export const routes = []
+export let routes = []
 
 /**
  * The router history
@@ -19,13 +19,6 @@ export const routes = []
 export const history = createWebHistory()
 
 /**
- * The Router instance
- *
- * @constant {Function|null}
- */
-export let router = null
-
-/**
  * Creates the Vue Router instance
  *
  * @param {object} site Global `site` object
@@ -33,7 +26,7 @@ export let router = null
  */
 export const initRouter = async site => {
   // Published pages routes
-  const routes = site.children.flatMap(page => [
+  routes = site.children.flatMap(page => [
     {
       path: `/${page.id}`,
       component: () => import(`../views/${capitalize(page.template)}.vue`).catch(() => /* Default */ import('../views/Default.vue'))
@@ -52,11 +45,9 @@ export const initRouter = async site => {
   // Catch-all fallback
   routes.push({ path: '/:catchAll(.*)', component: /* Default */ () => import('../views/Default.vue') })
 
-  router = createRouter({
+  return createRouter({
     history,
     routes,
     scrollBehavior
   })
-
-  return router
 }
