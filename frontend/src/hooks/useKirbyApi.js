@@ -1,5 +1,5 @@
+import { useRouter } from 'vue-router'
 import { kirbyStore } from '../store/kirbyStore'
-import { router } from '../router'
 import { log } from '../helpers'
 
 /**
@@ -31,6 +31,7 @@ const toPageId = path => {
  */
 const getPage = async (path, { force = false } = {}) => {
   const id = toPageId(path)
+  const router = useRouter()
 
   // Try to get cached page from api store, except when `force` is `true`
   if (!force) {
