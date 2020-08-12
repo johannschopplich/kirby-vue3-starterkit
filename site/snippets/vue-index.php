@@ -1,7 +1,9 @@
 <?php
 
 $pathToAsset = function (string $pattern, string $root = '/assets/') {
-  return $root . basename(glob(kirby()->roots()->index() . $root . $pattern)[0]);
+  $filename = glob(kirby()->roots()->index() . $root . $pattern)[0] ?? null;
+  if ($filename === null) throw new Exception('No production assets found. You have to bundle the app first. Run `npm run build`.');
+  return $root . basename($filename);
 }
 
 ?>
