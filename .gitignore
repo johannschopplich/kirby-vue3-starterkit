@@ -14,9 +14,9 @@ node_modules/
 /public/media/*
 !/public/media/index.html
 /storage/accounts/*
-!/storage/accounts/index.html
+!/storage/accounts/.gitkeep
 /storage/cache/*
-!/storage/cache/index.html
+!/storage/cache/.gitkeep
 /storage/sessions/*
-!/storage/sessions/index.html
+!/storage/sessions/.gitkeep
 /site/config/.license
