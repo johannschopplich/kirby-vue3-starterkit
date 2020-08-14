@@ -43,7 +43,11 @@ export const usePage = () => {
 
   ;(async () => {
     // Get page from cache or freshly fetch it
-    Object.assign(page, await getPage(path))
+    const data = await getPage(path)
+    if (!data) return
+
+    // Append page data to reactive page object
+    Object.assign(page, data)
 
     // Set document title
     document.title = page.metaTitle

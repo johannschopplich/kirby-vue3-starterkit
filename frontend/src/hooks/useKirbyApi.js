@@ -56,7 +56,6 @@ const getPage = async (
     page = await response.json()
   } catch (error) {
     console.error(error)
-    log(`[getPage] ${id} page data couldn't be fetched. Redirecting to error page…`)
     router.push({ path: '/error' })
     return
   }
@@ -65,9 +64,8 @@ const getPage = async (
   // page id has been cached by the service worker
   // Note: data for `home` and `offline` pages are always available since they
   // are precached by service worker
-  if ('status' in page && page.status === 'offline') {
-    log('[getPage] Device seems to be offline. Redirecting to offline page…')
-    router.push({ path: '/offline' })
+  if (page.status === 'offline') {
+    router.replace({ path: '/offline' })
     return
   }
 
