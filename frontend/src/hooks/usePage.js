@@ -28,22 +28,23 @@ export const usePage = id => {
     text: null
   })
 
-  // Setup up page waiter and flush method
+  // Setup up page waiter
   let resolve
-  let promise = new Promise(r => { resolve = r }) // eslint-disable-line promise/param-names
 
   /**
-   * Define a promise to wait for until the page data is available
+   * Define a promise to wait for until page data is available
    *
    * @example
    * const page = usePage()
    * ;(async () => {
-   *   await page.isReady
+   *   await page.isReady()
    *   console.log(page.title)
    * })()
+   *
+   * @returns {Promise} The scroll waiter promise
    */
-  Object.defineProperty(page, 'isReady', {
-    get: () => promise
+  page.isReady = () => new Promise(r => { // eslint-disable-line promise/param-names
+    resolve = r
   })
 
   ;(async () => {
@@ -72,7 +73,6 @@ export const usePage = id => {
     // Flush page waiter
     resolve && resolve()
     resolve = undefined
-    promise = undefined
 
     // Further actions only if the hook was called for the current route
     if (!id) {
