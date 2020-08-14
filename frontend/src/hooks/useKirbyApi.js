@@ -26,26 +26,29 @@ const toPageId = path => {
  *
  * @param {string} path Path or page id to retrieve
  * @param {object} [options] Optional options
- * @param {boolean} options.force Skip page lookup in store and fetch page freshly
+ * @param {boolean} options.revalidate Skip cached page lookup and fetch page freshly
  * @returns {object} The page data
  */
-const getPage = async (path, { force = false } = {}) => {
+const getPage = async (
+  path,
+  { revalidate = false } = {}
+) => {
   const id = toPageId(path)
   const router = useRouter()
 
-  // Try to get cached page from api store, except when `force` is `true`
-  if (!force) {
+  // Try to get cached page from api store, except when `revalidate` is `true`
+  if (!revalidate) {
     const storedPage = kirbyStore.getPage(id)
 
     // Use cached page if already fetched once
     if (storedPage) {
-      log(`[kirby] Pulling ${id} page data from store.`)
+      log(`[getPage] Pulling ${id} page data from store.`)
       return storedPage
     }
   }
 
   // Otherwise fetch page for the first time
-  log(`[kirby] Fetching ${apiLocation}/${id}.json…`)
+  log(`[getPage] Fetching ${apiLocation}/${id}.json…`)
 
   let page
   try {
@@ -53,7 +56,7 @@ const getPage = async (path, { force = false } = {}) => {
     page = await response.json()
   } catch (error) {
     console.error(error)
-    log(`[kirby] ${id} page data couldn't be fetched. Redirecting to error page…`)
+    log(`[getPage] ${id} page data couldn't be fetched. Redirecting to error page…`)
     router.push({ path: '/error' })
     return
   }
@@ -63,12 +66,12 @@ const getPage = async (path, { force = false } = {}) => {
   // Note: data for `home` and `offline` pages are always available since they
   // are precached by service worker
   if ('status' in page && page.status === 'offline') {
-    log('[kirby] Device seems to be offline. Redirecting to offline page…')
+    log('[getPage] Device seems to be offline. Redirecting to offline page…')
     router.push({ path: '/offline' })
     return
   }
 
-  log(`[kirby] Fetched ${id} page data:`, page)
+  log(`[getPage] Fetched ${id} page data:`, page)
 
   // Add `site` object provided via `home` page to api store
   if (id === 'home') {

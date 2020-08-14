@@ -11,7 +11,7 @@ const { register } = useServiceWorker()
 register()
 
 ;(async () => {
-  const home = await getPage('home', { force: true })
+  const home = await getPage('home')
   const router = await initRouter(home.site)
 
   const app = createApp(App)
