@@ -1,10 +1,7 @@
 <template>
   <Intro :title="page.title" />
 
-  <div v-if="photography.isLoading">
-    <strong>Loading …</strong>
-  </div>
-  <ul v-else class="grid">
+  <ul v-if="photography.isLoaded" class="grid">
     <li v-for="album in photography.children" :key="album.id">
       <router-link :to="`/${album.id}`">
         <figure>
@@ -19,6 +16,9 @@
       </router-link>
     </li>
   </ul>
+  <div v-else>
+    Loading …
+  </div>
 </template>
 
 <script>

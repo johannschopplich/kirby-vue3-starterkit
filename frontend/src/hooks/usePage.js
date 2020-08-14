@@ -19,9 +19,9 @@ export const usePage = id => {
   const page = reactive({
     // State
     status: 'pending',
-    isLoading: true,
+    isLoaded: false,
 
-    // Commonly used keys
+    // Commonly used keys in views
     title: null,
     metaTitle: null,
     children: null,
@@ -38,11 +38,11 @@ export const usePage = id => {
    * @example
    * const page = usePage()
    * ;(async () => {
-   *   await page.hasLoaded
+   *   await page.isReady
    *   console.log(page.title)
    * })()
    */
-  Object.defineProperty(page, 'hasLoaded', {
+  Object.defineProperty(page, 'isReady', {
     get: () => promise
   })
 
@@ -67,7 +67,7 @@ export const usePage = id => {
     }
 
     page.status = 'success'
-    page.isLoading = false
+    page.isLoaded = true
 
     // Flush page waiter
     resolve && resolve()
