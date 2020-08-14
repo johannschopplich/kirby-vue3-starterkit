@@ -1,7 +1,10 @@
 <template>
   <Intro :title="page.title" />
 
-  <ul v-if="photography.children" class="grid">
+  <div v-if="photography.isLoading">
+    <strong>Loading …</strong>
+  </div>
+  <ul v-else class="grid">
     <li v-for="album in photography.children" :key="album.id">
       <router-link :to="`/${album.id}`">
         <figure>
@@ -19,8 +22,6 @@
 </template>
 
 <script>
-import { reactive } from 'vue'
-import { useKirbyApi } from '../hooks/useKirbyApi'
 import { usePage } from '../hooks/usePage'
 import Intro from '../components/Intro.vue'
 
@@ -31,14 +32,7 @@ export default {
 
   setup () {
     const page = usePage()
-    const photography = reactive({
-      children: null
-    })
-
-    ;(async () => {
-      const { getPage } = useKirbyApi()
-      Object.assign(photography, await getPage('photography'))
-    })()
+    const photography = usePage('photography')
 
     return {
       page,

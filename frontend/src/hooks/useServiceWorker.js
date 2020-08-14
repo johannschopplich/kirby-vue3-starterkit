@@ -76,7 +76,7 @@ const activateNewWorker = () => {
 /**
  * Hook for handling service worker registrations and updates
  *
- * @returns {object} Object with service worker-related methods
+ * @returns {object} Object containing service worker-related methods
  */
 export const useServiceWorker = () => {
   return {

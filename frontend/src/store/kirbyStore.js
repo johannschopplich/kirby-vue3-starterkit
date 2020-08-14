@@ -23,16 +23,16 @@ class KirbyStore extends Store {
    * Gets a cached page from store if present
    *
    * @param {string} id Page id to retrieve
-   * @returns {(object|undefined)} Current page object
+   * @returns {(object|undefined)} Corresponding page object
    */
   getPage (id) {
     const page = this.getState().pages.get(id)
-    // Return the raw, original object of athe reactive `page` object for Safari support
+    // Return the raw object for Safari support
     if (page) return toRaw(page)
   }
 
   /**
-   * Adds a page to or overwrites in the store
+   * Adds a page to the store or overwrites it
    *
    * @param {object} options Set of options
    * @param {string} options.id Page id
@@ -61,7 +61,7 @@ class KirbyStore extends Store {
   }
 
   /**
-   * Adds the global `site` data to the store
+   * Sets the global `site` data to the store
    *
    * @param {object} data Global `site` object
    */

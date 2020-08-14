@@ -1,4 +1,3 @@
-import { useRouter } from 'vue-router'
 import { kirbyStore } from '../store/kirbyStore'
 import { log } from '../helpers'
 
@@ -12,8 +11,8 @@ const apiLocation = import.meta.env.VITE_KIRBY_API_LOCATION
 /**
  * Transform a path to a Kirby-compatible page id
  *
- * @param {string} path The path to parse and transform
- * @returns {string} The corresponding page id
+ * @param {string} path Path to parse and transform
+ * @returns {string} Corresponding page id
  */
 const toPageId = path => {
   if (path.startsWith('/')) path = path.slice(1)
@@ -22,50 +21,39 @@ const toPageId = path => {
 }
 
 /**
- * Retrieve a path or page id from either store or network
+ * Retrieve a page data by id from either store or network
  *
  * @param {string} path Path or page id to retrieve
  * @param {object} [options] Optional options
  * @param {boolean} options.revalidate Skip cached page lookup and fetch page freshly
- * @returns {object} The page data
+ * @returns {object} The page's data
  */
 const getPage = async (
   path,
   { revalidate = false } = {}
 ) => {
   const id = toPageId(path)
-  const router = useRouter()
+  let page
 
   // Try to get cached page from api store, except when `revalidate` is `true`
   if (!revalidate) {
-    const storedPage = kirbyStore.getPage(id)
+    const cachedPage = kirbyStore.getPage(id)
 
     // Use cached page if already fetched once
-    if (storedPage) {
-      log(`[getPage] Pulling ${id} page data from store.`)
-      return storedPage
+    if (cachedPage) {
+      log(`[getPage] Pulling ${id} page data from cache.`)
+      return cachedPage
     }
   }
 
   // Otherwise fetch page for the first time
   log(`[getPage] Fetching ${apiLocation}/${id}.json…`)
 
-  let page
   try {
     const response = await fetch(`${apiLocation}/${id}.json`)
     page = await response.json()
   } catch (error) {
     console.error(error)
-    router.push({ path: '/error' })
-    return
-  }
-
-  // Redirect to offline page if no stored data was found and no data for the
-  // page id has been cached by the service worker
-  // Note: data for `home` and `offline` pages are always available since they
-  // are precached by service worker
-  if (page.status === 'offline') {
-    router.replace({ path: '/offline' })
     return
   }
 
@@ -83,7 +71,7 @@ const getPage = async (
 }
 
 /**
- * Hook for API location and handling methods of the Kirby API
+ * Hook for handling Kirby API data retrieval and its location
  *
  * @returns {object} Object containing API-related methods
  */

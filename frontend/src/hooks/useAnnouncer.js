@@ -12,8 +12,8 @@ const announcer = reactive({
 /**
  * Announce any useful information for screen readers
  *
- * @param {string} message The content to announce
- * @param {string} politeness The degree of importance
+ * @param {string} message Content to announce
+ * @param {string} politeness Degree of importance
  */
 const setAnnouncer = (message, politeness = defaultOptions.politeness) => {
   resetAnnouncer()
@@ -24,7 +24,7 @@ const setAnnouncer = (message, politeness = defaultOptions.politeness) => {
 /**
  * Announce the information politely
  *
- * @param {string} message The content to announce
+ * @param {string} message Content to announce
  */
 const announcePolite = message => {
   setAnnouncer(message, 'polite')
@@ -48,7 +48,7 @@ const resetAnnouncer = () => {
 }
 
 /**
- * Hook for announce object and methods
+ * Hook for announce reactive object and methods
  *
  * @returns {object} Object containing announcer-related methods
  */
