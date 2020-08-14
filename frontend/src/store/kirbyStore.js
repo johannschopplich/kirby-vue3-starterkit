@@ -32,13 +32,13 @@ class KirbyStore extends Store {
   }
 
   /**
-   * Adds a page to the store
+   * Adds a page to or overwrites in the store
    *
    * @param {object} options Set of options
    * @param {string} options.id Page id
    * @param {object} options.data Page data
    */
-  addPage ({ id, data }) {
+  setPage ({ id, data }) {
     this.state.pages.set(id, data)
   }
 
@@ -47,7 +47,7 @@ class KirbyStore extends Store {
    *
    * @param {string} id Page id to remove
    */
-  removePage (id) {
+  deletePage (id) {
     this.state.pages.delete(id)
   }
 

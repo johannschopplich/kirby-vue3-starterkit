@@ -76,7 +76,7 @@ const getPage = async (path, { force = false } = {}) => {
   }
 
   // Add page data to api store
-  kirbyStore.addPage({ id, data: page })
+  kirbyStore.setPage({ id, data: page })
 
   return page
 }
