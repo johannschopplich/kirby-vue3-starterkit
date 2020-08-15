@@ -9,6 +9,13 @@ import { log } from '../helpers'
 const apiLocation = import.meta.env.VITE_KIRBY_API_LOCATION
 
 /**
+ * Indicates if global `site` object has been loaded
+ *
+ * @constant {boolean}
+ */
+let isInitialized = false
+
+/**
  * Transform a path to a Kirby-compatible page id
  *
  * @param {string} path Path to parse and transform
@@ -25,18 +32,18 @@ const toPageId = path => {
  *
  * @param {string} path Path or page id to retrieve
  * @param {object} [options] Optional options
- * @param {boolean} options.revalidate Skip cached page lookup and fetch page freshly
+ * @param {boolean} options.refetch Skip page lookup in cache and fetch page freshly
  * @returns {object} The page's data
  */
 const getPage = async (
   path,
-  { revalidate = false } = {}
+  { refetch = false } = {}
 ) => {
-  const id = toPageId(path)
   let page
+  const id = toPageId(path)
 
-  // Try to get cached page from api store, except when `revalidate` is `true`
-  if (!revalidate) {
+  // Try to get cached page from api store, except when `refetch` is `true`
+  if (!refetch) {
     const cachedPage = kirbyStore.getPage(id)
 
     // Use cached page if already fetched once
@@ -60,8 +67,9 @@ const getPage = async (
   log(`[getPage] Fetched ${id} page data:`, page)
 
   // Add `site` object provided via `home` page to api store
-  if (id === 'home') {
+  if (id === 'home' && !isInitialized) {
     kirbyStore.setSite(page.site)
+    isInitialized = true
   }
 
   // Add page data to api store

@@ -15,11 +15,15 @@ export const usePage = id => {
   const { getPage } = useKirbyApi()
   const { setAnnouncer } = useAnnouncer()
 
+  // Setup page waiter promise
+  let resolve
+  let promise = new Promise(r => { resolve = r }) // eslint-disable-line promise/param-names
+
   // Setup reactive page object
   const page = reactive({
-    // State
-    status: 'pending',
+    __status: 'pending',
     isLoaded: false,
+    isReady: () => promise,
 
     // Commonly used keys in views
     title: null,
@@ -28,31 +32,9 @@ export const usePage = id => {
     text: null
   })
 
-  // Setup up page waiter
-  let resolve
-  let promise = new Promise(r => { resolve = r }) // eslint-disable-line promise/param-names
-
-  /**
-   * Define a promise to wait for until page data is available
-   *
-   * @example
-   * const page = usePage()
-   * ;(async () => {
-   *   await page.isReady()
-   *   console.log(page.title)
-   * })()
-   *
-   * @returns {Promise} The scroll waiter promise
-   */
-  page.isReady = () => promise
-
   ;(async () => {
     // Get page from cache or freshly fetch it
     const data = await getPage(id || path)
-
-    if (!data) {
-      page.status = 'error'
-    }
 
     // Append page data to reactive page object
     Object.assign(page, data)
@@ -61,12 +43,17 @@ export const usePage = id => {
     // by the service worker and the offline fallback JSON was returned
     // Note: data for `home` and `offline` pages are always available since they
     // are precached by the service worker
-    if (!id && page.status === 'offline') {
+    if (!id && page.__status === 'offline') {
       router.replace({ path: '/offline' })
       return
     }
 
-    page.status = 'success'
+    if (!data) {
+      page.__status = 'error'
+      return
+    }
+
+    page.__status = 'success'
     page.isLoaded = true
 
     // Flush page waiter

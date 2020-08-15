@@ -23,6 +23,7 @@
 
 <script>
 import { usePage } from '../hooks/usePage'
+import { log } from '../helpers'
 import Intro from '../components/Intro.vue'
 
 export default {
@@ -33,6 +34,12 @@ export default {
   setup () {
     const page = usePage()
     const photography = usePage('photography')
+
+    // Example of `isReady()` page method
+    ;(async () => {
+      await page.isReady()
+      log(page.title)
+    })()
 
     return {
       page,
