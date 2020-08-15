@@ -21,7 +21,7 @@ export const usePage = id => {
 
   // Setup reactive page object
   const page = reactive({
-    __status: 'fetching',
+    __status: 'loading',
     isReady: false,
     isReadyPromise: () => promise
   })
