@@ -1,5 +1,5 @@
 <template>
-  <article class="note">
+  <article v-if="page.isReady" class="note">
     <header class="note-header intro">
       <h1>{{ page.title }}</h1>
       <time class="note-date">{{ page.date }}</time>
@@ -10,6 +10,9 @@
 
     <div v-if="page.text" class="note-text text" v-html="page.text.html" />
   </article>
+  <div v-else>
+    Loading …
+  </div>
 </template>
 
 <script setup>

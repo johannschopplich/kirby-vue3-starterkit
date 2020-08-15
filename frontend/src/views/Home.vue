@@ -1,7 +1,7 @@
 <template>
   <Intro :title="page.title" />
 
-  <ul v-if="photography.isLoaded" class="grid">
+  <ul v-if="photography.isReady" class="grid">
     <li v-for="album in photography.children" :key="album.id">
       <router-link :to="`/${album.id}`">
         <figure>
@@ -23,7 +23,6 @@
 
 <script>
 import { usePage } from '../hooks/usePage'
-import { log } from '../helpers'
 import Intro from '../components/Intro.vue'
 
 export default {
@@ -35,10 +34,10 @@ export default {
     const page = usePage()
     const photography = usePage('photography')
 
-    // Example of `isReady()` page method
+    // Example of `isReadyPromise()` page method
     ;(async () => {
-      await page.isReady()
-      log(page.title)
+      await page.isReadyPromise()
+      // Do something with the reactive page object
     })()
 
     return {

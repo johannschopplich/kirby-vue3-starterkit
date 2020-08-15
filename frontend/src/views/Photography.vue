@@ -1,7 +1,7 @@
 <template>
   <Intro :title="page.title" />
 
-  <ul v-if="page.children" class="albums" :data-even="page.children.length % 2 === 0">
+  <ul v-if="page.isReady" class="albums" :data-even="page.children.length % 2 === 0">
     <li v-for="album in page.children" :key="album.id">
       <router-link :to="`/${album.id}`">
         <figure>
@@ -12,6 +12,9 @@
       </router-link>
     </li>
   </ul>
+  <div v-else>
+    Loading …
+  </div>
 </template>
 
 <script>

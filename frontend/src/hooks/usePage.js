@@ -21,15 +21,9 @@ export const usePage = id => {
 
   // Setup reactive page object
   const page = reactive({
-    __status: 'pending',
-    isLoaded: false,
-    isReady: () => promise,
-
-    // Commonly used keys in views
-    title: null,
-    metaTitle: null,
-    children: null,
-    text: null
+    __status: 'fetching',
+    isReady: false,
+    isReadyPromise: () => promise
   })
 
   ;(async () => {
@@ -54,7 +48,7 @@ export const usePage = id => {
     }
 
     page.__status = 'success'
-    page.isLoaded = true
+    page.isReady = true
 
     // Flush page waiter
     resolve && resolve()

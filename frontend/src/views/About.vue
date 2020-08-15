@@ -1,7 +1,7 @@
 <template>
   <Intro :title="page.title" />
 
-  <div class="layout">
+  <div v-if="page.isReady" class="layout">
     <aside>
       <section>
         <h2>Address</h2>

@@ -1,7 +1,7 @@
 <template>
   <Intro :title="page.title" />
 
-  <div v-if="page.children" class="notes">
+  <div v-if="page.isReady" class="notes">
     <article v-for="note in page.children" :key="note.id" class="note">
       <header class="note-header">
         <router-link :to="`/${note.id}`">
@@ -10,6 +10,9 @@
         </router-link>
       </header>
     </article>
+  </div>
+  <div v-else>
+    Loading …
   </div>
 </template>
 
