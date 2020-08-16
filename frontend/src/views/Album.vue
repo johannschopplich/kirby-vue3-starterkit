@@ -1,5 +1,5 @@
 <template>
-  <article v-if="page.isReady">
+  <article>
     <header>
       <figure v-if="page.cover" class="album-cover">
         <img :src="page.cover.url" :alt="page.cover.alt">
@@ -27,9 +27,6 @@
       </li>
     </ul>
   </article>
-  <div v-else>
-    Loading …
-  </div>
 </template>
 
 <script setup>
