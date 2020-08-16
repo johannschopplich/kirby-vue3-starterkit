@@ -11,8 +11,9 @@ const { register } = useServiceWorker()
 register()
 
 ;(async () => {
-  const home = await getPage('home')
-  const router = await initRouter(home.site)
+  // Fetch `home` page which includes the global `site` object
+  await getPage('home')
+  const router = initRouter()
 
   const app = createApp(App)
   app.use(router)
