@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { scrollBehavior } from './scrollBehaviour'
-import { kirbyStore } from '../store/kirbyStore'
+import { useSite } from '../hooks/useSite'
 import { capitalize } from '../helpers'
 // TODO: Use again once Vite fixes a bug with dynamic imports
 // import Default from '../views/Default.vue'
@@ -11,7 +11,7 @@ import { capitalize } from '../helpers'
  * @returns {object} Created router instance for the Vue app
  */
 export const initRouter = () => {
-  const site = kirbyStore.getSite()
+  const site = useSite()
 
   // Published pages routes
   const routes = site.children.flatMap(page => [
