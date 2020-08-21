@@ -51,7 +51,7 @@ async function trimCache (cacheName, maxItems) {
   const keys = await cache.keys()
   if (keys.length > maxItems) {
     await cache.delete(keys[0])
-    return trimCache(cacheName, maxItems)
+    trimCache(cacheName, maxItems)
   }
 }
 

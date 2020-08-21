@@ -8,7 +8,7 @@ import App from './App.vue'
 
 const { getPage } = useKirbyApi()
 const { register } = useServiceWorker()
-register()
+window.addEventListener('load', register)
 
 ;(async () => {
   // Fetch `home` page which includes the global `site` object
