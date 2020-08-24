@@ -33,17 +33,17 @@ export const usePage = id => {
     // Append page data to reactive page object
     Object.assign(page, data)
 
+    if (!data) {
+      page.__status = 'error'
+      return
+    }
+
     // Redirect to offline page if page hasn't been cached either in-memory or
     // by the service worker and the offline fallback JSON was returned
     // Note: data for `home` and `offline` pages are always available since they
     // are precached by the service worker
     if (!id && page.__status === 'offline') {
       router.replace({ path: '/offline' })
-      return
-    }
-
-    if (!data) {
-      page.__status = 'error'
       return
     }
 
