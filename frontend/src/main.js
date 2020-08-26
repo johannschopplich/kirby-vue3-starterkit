@@ -6,13 +6,12 @@ import { useKirbyApi } from './hooks/useKirbyApi'
 import { useServiceWorker } from './hooks/useServiceWorker'
 import App from './App.vue'
 
-const { getPage } = useKirbyApi()
+const { fetchSite } = useKirbyApi()
 const { register } = useServiceWorker()
 window.addEventListener('load', register)
 
 ;(async () => {
-  // Fetch `home` page which includes the global `site` object
-  await getPage('home')
+  await fetchSite()
   const router = initRouter()
 
   const app = createApp(App)

@@ -9,13 +9,6 @@ import { log } from '../helpers'
 const apiLocation = import.meta.env.VITE_KIRBY_API_LOCATION
 
 /**
- * Indicates if global `site` object has been loaded
- *
- * @constant {boolean}
- */
-let isInitialized = false
-
-/**
  * Transform a path to a Kirby-compatible page id
  *
  * @param {string} path Path to parse and transform
@@ -66,16 +59,19 @@ const getPage = async (
 
   log(`[getPage] Fetched ${id} page data:`, page)
 
-  // Add `site` object provided via `home` page to api store
-  if (id === 'home' && !isInitialized) {
-    kirbyStore.setSite(page.site)
-    isInitialized = true
-  }
-
   // Add page data to api store
   kirbyStore.setPage({ id, data: page })
 
   return page
+}
+
+/**
+ * Fetch global `site` object and add it to the store
+ */
+const fetchSite = async () => {
+  // `site` is provided by `home` page
+  const home = await getPage('home')
+  kirbyStore.setSite(home.site)
 }
 
 /**
@@ -86,6 +82,7 @@ const getPage = async (
 export const useKirbyApi = () => {
   return {
     apiLocation,
+    fetchSite,
     getPage
   }
 }
