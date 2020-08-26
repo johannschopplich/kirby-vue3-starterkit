@@ -1,5 +1,4 @@
 import { Store } from './base/Store'
-import { toRaw } from 'vue'
 
 /**
  * Centralized `site` and pages data
@@ -27,8 +26,7 @@ class KirbyStore extends Store {
    */
   getPage (id) {
     const page = this.getState().pages.get(id)
-    // Return the raw object for Safari support
-    if (page) return toRaw(page)
+    if (page) return page
   }
 
   /**
