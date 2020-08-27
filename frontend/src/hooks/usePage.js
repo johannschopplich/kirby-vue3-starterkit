@@ -28,7 +28,7 @@ export const usePage = id => {
 
   ;(async () => {
     // Get page from cache or freshly fetch it
-    const data = await getPage(id || path)
+    const { data, servedFromCache } = await getPage(id || path)
 
     // Append page data to reactive page object
     Object.assign(page, data)
@@ -62,6 +62,16 @@ export const usePage = id => {
 
       // Announce new route
       setAnnouncer(`Navigated to ${page.title}`)
+    }
+
+    // If stale-while-revalidate is enabled, revalidate the stale asset asynchronously
+    const enableSWR = import.meta.env.VITE_ENABLE_SWR === 'true'
+    if (enableSWR && servedFromCache) {
+      const { data } = await getPage(id || path, { revalidate: true })
+
+      if (!data) return
+      if ('__status' in data && data.__status === 'offline') return
+      Object.assign(page, data)
     }
   })()
 

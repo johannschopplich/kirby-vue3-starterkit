@@ -1,4 +1,5 @@
 import { Store } from './base/Store'
+import { toRaw } from 'vue'
 
 /**
  * Centralized `site` and pages data
@@ -19,6 +20,16 @@ class KirbyStore extends Store {
   }
 
   /**
+   * Checks if a cached page exists
+   *
+   * @param {string} id Page id to retrieve
+   * @returns {boolean} `true` if the page exists
+   */
+  hasPage (id) {
+    return this.getState().pages.has(id)
+  }
+
+  /**
    * Gets a cached page from store if present
    *
    * @param {string} id Page id to retrieve
@@ -26,7 +37,7 @@ class KirbyStore extends Store {
    */
   getPage (id) {
     const page = this.getState().pages.get(id)
-    if (page) return page
+    if (page) return toRaw(page)
   }
 
   /**
