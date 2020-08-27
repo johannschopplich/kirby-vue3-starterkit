@@ -25,7 +25,7 @@ const toPageId = path => {
  *
  * @param {string} path Path or page id to retrieve
  * @param {object} [options] Optional options
- * @param {boolean} options.revalidate Skip page lookup in cache and fetch page freshly
+ * @param {boolean} options.revalidate Skip cache look-up and fetch page freshly
  * @returns {object} The page's data
  */
 const getPage = async (
@@ -35,22 +35,18 @@ const getPage = async (
   let page
   const id = toPageId(path)
 
-  // Try to get cached page from api store, except when `revalidate` is `true`
-  if (!revalidate) {
-    const cachedPage = kirbyStore.getPage(id)
+  // Use cached page if present in api store, except when `revalidate` is `true`
+  if (!revalidate && kirbyStore.hasPage(id)) {
+    log(`[getPage] Pulling ${id} page data from cache.`)
 
-    // Use cached page if already fetched once
-    if (cachedPage) {
-      log(`[getPage] Pulling ${id} page data from cache.`)
-      return {
-        data: cachedPage,
-        servedFromCache: true
-      }
+    return {
+      data: kirbyStore.getPage(id),
+      servedFromCache: true
     }
   }
 
   // Otherwise fetch page for the first time
-  log(`[getPage] ${revalidate ? 'Revalidating' : 'Fetching'} ${apiLocation}/${id}.json…`)
+  log('[getPage] ' + (revalidate ? `Revalidating ${id} page data.` : `Fetching ${apiLocation}/${id}.json…`))
 
   try {
     const response = await fetch(`${apiLocation}/${id}.json`)

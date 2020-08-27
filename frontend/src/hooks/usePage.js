@@ -14,6 +14,7 @@ export const usePage = id => {
   const { path } = useRoute()
   const { getPage } = useKirbyApi()
   const { setAnnouncer } = useAnnouncer()
+  const enableSWR = import.meta.env.VITE_ENABLE_SWR === 'true'
 
   // Setup page waiter promise
   let resolve
@@ -30,9 +31,6 @@ export const usePage = id => {
     // Get page from cache or freshly fetch it
     const { data, servedFromCache } = await getPage(id || path)
 
-    // Append page data to reactive page object
-    Object.assign(page, data)
-
     if (!data) {
       page.__status = 'error'
       return
@@ -42,10 +40,14 @@ export const usePage = id => {
     // by the service worker and the offline fallback JSON was returned
     // Note: data for `home` and `offline` pages are always available since they
     // are precached by the service worker
-    if (!id && page.__status === 'offline') {
+    if (!id && data.__status === 'offline') {
       router.replace({ path: '/offline' })
+      page.__status = 'offline'
       return
     }
+
+    // Append page data to reactive page object
+    Object.assign(page, data)
 
     page.__status = 'success'
     page.isReady = true
@@ -64,14 +66,13 @@ export const usePage = id => {
       setAnnouncer(`Navigated to ${page.title}`)
     }
 
-    // If stale-while-revalidate is enabled, revalidate the stale asset asynchronously
-    const enableSWR = import.meta.env.VITE_ENABLE_SWR === 'true'
+    // Revalidate the stale asset asynchronously when SWR is enabled
     if (enableSWR && servedFromCache) {
       const { data } = await getPage(id || path, { revalidate: true })
 
-      if (!data) return
-      if ('__status' in data && data.__status === 'offline') return
-      Object.assign(page, data)
+      if (data && data.__status !== 'offline') {
+        Object.assign(page, data)
+      }
     }
   })()
 
