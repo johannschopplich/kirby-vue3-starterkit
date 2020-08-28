@@ -14,15 +14,15 @@ class KirbyStore extends Store {
    */
   data () {
     return {
-      site: [],
+      site: null,
       pages: new Map()
     }
   }
 
   /**
-   * Checks if a cached page exists
+   * Checks if a page has been cached
    *
-   * @param {string} id Page id to retrieve
+   * @param {string} id Id of page to look up
    * @returns {boolean} `true` if the page exists
    */
   hasPage (id) {

@@ -21,6 +21,14 @@ const toPageId = path => {
 }
 
 /**
+ * Check if a page has been cached
+ *
+ * @param {string} path Path or page id to look up
+ * @returns {boolean} `true` if the page exists
+ */
+const hasPage = path => kirbyStore.hasPage(toPageId(path))
+
+/**
  * Retrieve a page data by id from either store or network
  *
  * @param {string} path Path or page id to retrieve
@@ -30,19 +38,17 @@ const toPageId = path => {
  */
 const getPage = async (
   path,
-  { revalidate = false } = {}
+  {
+    revalidate = false
+  } = {}
 ) => {
   let page
   const id = toPageId(path)
 
-  // Use cached page if present in api store, except when `revalidate` is `true`
+  // Use cached page if present in store, except when revalidating
   if (!revalidate && kirbyStore.hasPage(id)) {
     log(`[getPage] Pulling ${id} page data from cache.`)
-
-    return {
-      data: kirbyStore.getPage(id),
-      servedFromCache: true
-    }
+    return kirbyStore.getPage(id)
   }
 
   // Otherwise fetch page for the first time
@@ -61,18 +67,15 @@ const getPage = async (
   // Add page data to api store
   kirbyStore.setPage({ id, data: page })
 
-  return {
-    data: page,
-    servedFromCache: false
-  }
+  return page
 }
 
 /**
- * Fetch global `site` object and add it to the store
+ * Fetch global `site` object and save it in the store
  */
 const fetchSite = async () => {
   // `site` is provided by `home` page
-  const { data: home } = await getPage('home')
+  const home = await getPage('home')
   kirbyStore.setSite(home.site)
 }
 
@@ -85,6 +88,7 @@ export const useKirbyApi = () => {
   return {
     apiLocation,
     fetchSite,
+    hasPage,
     getPage
   }
 }

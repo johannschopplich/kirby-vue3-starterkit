@@ -6,15 +6,16 @@ import { useAnnouncer } from './useAnnouncer'
 /**
  * Hook for the page data of a given page id or the current route path
  *
- * @param {string} [id] Page id to fetch or current path if not present
+ * @param {string} [path] Optional path or page id to retrieve
  * @returns {object} Reactive page object
  */
-export const usePage = id => {
+export const usePage = path => {
   const router = useRouter()
-  const { path } = useRoute()
-  const { getPage } = useKirbyApi()
+  const { path: currentPath } = useRoute()
+  const { hasPage, getPage } = useKirbyApi()
   const { setAnnouncer } = useAnnouncer()
   const enableSWR = import.meta.env.VITE_ENABLE_SWR === 'true'
+  const id = path || currentPath
 
   // Setup page waiter promise
   let resolve
@@ -28,8 +29,10 @@ export const usePage = id => {
   })
 
   ;(async () => {
+    // Check if cached page exists (used later for SWR)
+    const isCached = hasPage(id)
     // Get page from cache or freshly fetch it
-    const { data, servedFromCache } = await getPage(id || path)
+    const data = await getPage(id)
 
     if (!data) {
       page.__status = 'error'
@@ -40,7 +43,7 @@ export const usePage = id => {
     // by the service worker and the offline fallback JSON was returned
     // Note: data for `home` and `offline` pages are always available since they
     // are precached by the service worker
-    if (!id && data.__status === 'offline') {
+    if (!path && data.__isOffline === true) {
       router.replace({ path: '/offline' })
       page.__status = 'offline'
       return
@@ -58,7 +61,7 @@ export const usePage = id => {
     promise = undefined
 
     // Further actions only if the hook was called for the current route
-    if (!id) {
+    if (!path) {
       // Set document title
       document.title = page.metaTitle
 
@@ -67,10 +70,10 @@ export const usePage = id => {
     }
 
     // Revalidate the stale asset asynchronously when SWR is enabled
-    if (enableSWR && servedFromCache) {
-      const { data } = await getPage(id || path, { revalidate: true })
+    if (enableSWR && isCached) {
+      const data = await getPage(id, { revalidate: true })
 
-      if (data && data.__status !== 'offline') {
+      if (data && data.__isOffline !== true) {
         Object.assign(page, data)
       }
     }
