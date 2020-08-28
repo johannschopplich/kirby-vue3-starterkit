@@ -4,18 +4,30 @@ import { useKirbyApi } from './useKirbyApi'
 import { useAnnouncer } from './useAnnouncer'
 
 /**
+ * Transform a path to a Kirby-compatible page id
+ *
+ * @param {string} path Path to parse and transform
+ * @returns {string} Corresponding page id
+ */
+const toPageId = path => {
+  if (path.startsWith('/')) path = path.slice(1)
+  if (path.endsWith('/')) path = path.slice(0, -1)
+  return path || 'home'
+}
+
+/**
  * Hook for the page data of a given page id or the current route path
  *
  * @param {string} [path] Optional path or page id to retrieve
  * @returns {object} Reactive page object
  */
 export const usePage = path => {
+  const enableSWR = import.meta.env.VITE_ENABLE_SWR === 'true'
   const router = useRouter()
   const { path: currentPath } = useRoute()
   const { hasPage, getPage } = useKirbyApi()
   const { setAnnouncer } = useAnnouncer()
-  const enableSWR = import.meta.env.VITE_ENABLE_SWR === 'true'
-  const id = path || currentPath
+  const id = toPageId(path || currentPath)
 
   // Setup page waiter promise
   let resolve
@@ -29,7 +41,7 @@ export const usePage = path => {
   })
 
   ;(async () => {
-    // Check if cached page exists (used later for SWR)
+    // Check if cached page exists (otherwise skip SWR)
     const isCached = hasPage(id)
     // Get page from cache or freshly fetch it
     const data = await getPage(id)
@@ -69,13 +81,10 @@ export const usePage = path => {
       setAnnouncer(`Navigated to ${page.title}`)
     }
 
-    // Revalidate the stale asset asynchronously when SWR is enabled
-    if (enableSWR && isCached) {
+    // Revalidate the stale asset asynchronously
+    if (enableSWR && isCached && navigator.onLine) {
       const data = await getPage(id, { revalidate: true })
-
-      if (data && data.__isOffline !== true) {
-        Object.assign(page, data)
-      }
+      if (data) Object.assign(page, data)
     }
   })()
 

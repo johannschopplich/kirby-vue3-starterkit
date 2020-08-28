@@ -9,41 +9,28 @@ import { log } from '../helpers'
 const apiLocation = import.meta.env.VITE_KIRBY_API_LOCATION
 
 /**
- * Transform a path to a Kirby-compatible page id
- *
- * @param {string} path Path to parse and transform
- * @returns {string} Corresponding page id
- */
-const toPageId = path => {
-  if (path.startsWith('/')) path = path.slice(1)
-  if (path.endsWith('/')) path = path.slice(0, -1)
-  return path || 'home'
-}
-
-/**
  * Check if a page has been cached
  *
- * @param {string} path Path or page id to look up
+ * @param {string} id Page id to look up
  * @returns {boolean} `true` if the page exists
  */
-const hasPage = path => kirbyStore.hasPage(toPageId(path))
+const hasPage = id => kirbyStore.hasPage(id)
 
 /**
  * Retrieve a page data by id from either store or network
  *
- * @param {string} path Path or page id to retrieve
+ * @param {string} id Page id to retrieve
  * @param {object} [options] Optional options
  * @param {boolean} options.revalidate Skip cache look-up and fetch page freshly
  * @returns {object} The page's data
  */
 const getPage = async (
-  path,
+  id,
   {
     revalidate = false
   } = {}
 ) => {
   let page
-  const id = toPageId(path)
 
   // Use cached page if present in store, except when revalidating
   if (!revalidate && kirbyStore.hasPage(id)) {
@@ -73,7 +60,7 @@ const getPage = async (
 /**
  * Fetch global `site` object and save it in the store
  */
-const fetchSite = async () => {
+const initSite = async () => {
   // `site` is provided by `home` page
   const home = await getPage('home')
   kirbyStore.setSite(home.site)
@@ -87,7 +74,7 @@ const fetchSite = async () => {
 export const useKirbyApi = () => {
   return {
     apiLocation,
-    fetchSite,
+    initSite,
     hasPage,
     getPage
   }
