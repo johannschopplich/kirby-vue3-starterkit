@@ -55,9 +55,8 @@ export const usePage = path => {
     // by the service worker and the offline fallback JSON was returned
     // Note: data for `home` and `offline` pages are always available since they
     // are precached by the service worker
-    if (!path && data.__isOffline === true) {
+    if (!path && data.__isOffline) {
       router.replace({ path: '/offline' })
-      page.__status = 'offline'
       return
     }
 
