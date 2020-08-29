@@ -86,6 +86,7 @@ export const usePage = path => {
 
       if (!newData) return
       if (JSON.stringify(newData) === JSON.stringify(data)) return
+
       Object.assign(page, newData)
     }
   })()

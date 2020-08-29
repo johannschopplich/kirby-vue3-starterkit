@@ -54,7 +54,7 @@ const getPage = async (
     log(`[getPage] Fetched ${id} page data:`, page)
   }
 
-  // Add page data to store
+  // Add page data to the store
   kirbyStore.setPage({ id, data: page })
 
   return page
