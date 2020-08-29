@@ -31,11 +31,12 @@ const getPage = async (
   } = {}
 ) => {
   let page
+  const cachedPage = kirbyStore.getPage(id)
 
-  // Use cached page if present in store, except when revalidating
-  if (!revalidate && kirbyStore.hasPage(id)) {
+  // Use cached page if present in the store, except when revalidating
+  if (!revalidate && cachedPage) {
     log(`[getPage] Pulling ${id} page data from cache.`)
-    return kirbyStore.getPage(id)
+    return cachedPage
   }
 
   // Otherwise fetch page for the first time
@@ -49,16 +50,18 @@ const getPage = async (
     return
   }
 
-  !revalidate && log(`[getPage] Fetched ${id} page data:`, page)
+  if (!revalidate) {
+    log(`[getPage] Fetched ${id} page data:`, page)
+  }
 
-  // Add page data to api store
+  // Add page data to store
   kirbyStore.setPage({ id, data: page })
 
   return page
 }
 
 /**
- * Fetch global `site` object and save it in the store
+ * Fetch global `site` object and save it to the store
  */
 const initSite = async () => {
   // `site` is provided by `home` page

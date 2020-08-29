@@ -82,8 +82,11 @@ export const usePage = path => {
 
     // Revalidate the stale asset asynchronously
     if (enableSWR && isCached && navigator.onLine) {
-      const data = await getPage(id, { revalidate: true })
-      if (data) Object.assign(page, data)
+      const newData = await getPage(id, { revalidate: true })
+
+      if (!newData) return
+      if (JSON.stringify(newData) === JSON.stringify(data)) return
+      Object.assign(page, newData)
     }
   })()
 
