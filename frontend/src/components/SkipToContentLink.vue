@@ -1,11 +1,12 @@
 <template>
-  <a
-    href="#main"
-    class="skip-to-content-link"
-    ref="skipLink"
-  >
-    Skip to content
-  </a>
+  <router-link to="#main" v-slot="{ href }">
+    <a
+      :href="href"
+      class="skip-to-content-link"
+      ref="skipLink">
+      Skip to content
+    </a>
+  </router-link>
 </template>
 
 <script setup>
