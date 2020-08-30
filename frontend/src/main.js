@@ -8,7 +8,6 @@ import App from './App.vue'
 
 const { initSite } = useKirbyApi()
 const { register } = useServiceWorker()
-window.addEventListener('load', register)
 
 ;(async () => {
   await initSite()
@@ -18,4 +17,7 @@ window.addEventListener('load', register)
   app.use(router)
   await router.isReady()
   app.mount('#app')
+
+  // Register service worker lazily
+  register()
 })()
