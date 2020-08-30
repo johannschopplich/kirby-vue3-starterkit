@@ -96,14 +96,14 @@ self.addEventListener('activate', event => {
 self.addEventListener('fetch', event => {
   const { request } = event
   const url = new URL(request.url)
-  const acceptHeaders = request.headers.get('Accept')
+  const destination = request.headers.get('Accept')
 
   if (request.method !== 'GET') return
   if (!ALLOWED_HOSTS.find(host => url.host === host)) return
   if (EXCLUDED_URLS.some(page => request.url.includes(page))) return
 
-  const isHTML = acceptHeaders.startsWith('text/html')
-  const isImage = acceptHeaders.startsWith('image')
+  const isHTML = destination.startsWith('text/html')
+  const isImage = destination.startsWith('image')
   const isAsset = url.pathname.startsWith('/assets/')
   const isJSON = url.pathname.endsWith('.json')
 
@@ -140,7 +140,7 @@ self.addEventListener('fetch', event => {
 
       return response
     } catch (error) {
-      if (error.name === 'AbortError') console.log('Fetch aborted')
+      if (error.name === 'AbortError') console.log('Fetch aborted after timeout for', request.url)
 
       // Return cached response, if available
       if (cachedResponse) return cachedResponse
