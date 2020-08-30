@@ -3,6 +3,7 @@
 
 const MAX_CACHED_PAGES = false // 50
 const MAX_CACHED_IMAGES = 50
+const FETCH_TIMEOUT = 5000
 
 const CACHE_KEYS = {
   STATIC: `static-${VERSION}`,
@@ -69,8 +70,6 @@ self.addEventListener('message', event => {
 })
 
 self.addEventListener('install', event => {
-  // self.skipWaiting()
-
   // These items must be cached for the service worker to complete installation
   event.waitUntil(
     (async () => {
@@ -81,8 +80,6 @@ self.addEventListener('install', event => {
 })
 
 self.addEventListener('activate', event => {
-  // self.clients.claim()
-
   // Remove caches whose name is no longer valid
   event.waitUntil(
     (async () => {
@@ -98,18 +95,17 @@ self.addEventListener('activate', event => {
 
 self.addEventListener('fetch', event => {
   const { request } = event
-  const destination = request.headers.get('Accept')
-  const normalizedUrl = new URL(request.url)
-  normalizedUrl.search = ''
+  const url = new URL(request.url)
+  const acceptHeaders = request.headers.get('Accept')
 
   if (request.method !== 'GET') return
-  if (!ALLOWED_HOSTS.find(h => normalizedUrl.hostname === h)) return
+  if (!ALLOWED_HOSTS.find(host => url.host === host)) return
   if (EXCLUDED_URLS.some(page => request.url.includes(page))) return
 
-  const isHTML = destination.startsWith('text/html')
-  const isImage = destination.startsWith('image')
-  const isAsset = request.url.includes('/assets/')
-  const isJSON = request.url.endsWith('.json')
+  const isHTML = acceptHeaders.startsWith('text/html')
+  const isImage = acceptHeaders.startsWith('image')
+  const isAsset = url.pathname.startsWith('/assets/')
+  const isJSON = url.pathname.endsWith('.json')
 
   // Cache-first strategy for static assets and images,
   // network-first strategy for everything else
@@ -120,13 +116,20 @@ self.addEventListener('fetch', event => {
     // Return cached HTML, asset or image, if available
     if (cachedResponse && (isHTML || isImage || isAsset)) return cachedResponse
 
+    // Create a controller to abort fetch requests after timeout
+    const controller = new AbortController()
+    const signal = controller.signal
+
+    const timeoutId = setTimeout(() => controller.abort(), FETCH_TIMEOUT)
+
     try {
-      const response = await fetch(request)
+      const response = await fetch(request, { signal })
       const copy = response.clone()
+      clearTimeout(timeoutId)
 
       if (
-        PRECACHE_URLS.includes(normalizedUrl.pathname) ||
-        PRECACHE_URLS.includes(normalizedUrl.pathname + '/')
+        PRECACHE_URLS.includes(url.pathname) ||
+        PRECACHE_URLS.includes(url.pathname + '/')
       ) {
         stashInCache(CACHE_KEYS.STATIC, request, copy)
       } else if (isJSON) {
@@ -136,7 +139,9 @@ self.addEventListener('fetch', event => {
       }
 
       return response
-    } catch (fetchError) {
+    } catch (error) {
+      if (error.name === 'AbortError') console.log('Fetch aborted')
+
       // Return cached response, if available
       if (cachedResponse) return cachedResponse
 
@@ -158,7 +163,7 @@ self.addEventListener('fetch', event => {
         )
       }
 
-      console.error(fetchError)
+      console.error(error)
     }
   }())
 })

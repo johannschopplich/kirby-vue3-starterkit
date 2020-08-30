@@ -4,6 +4,13 @@ import { useKirbyApi } from './useKirbyApi'
 import { useAnnouncer } from './useAnnouncer'
 
 /**
+ * Indicates if stale-while-revalidation is enabled
+ *
+ * @constant {boolean}
+ */
+const enableSWR = import.meta.env.VITE_ENABLE_SWR === 'true'
+
+/**
  * Transform a path to a Kirby-compatible page id
  *
  * @param {string} path Path to parse and transform
@@ -22,7 +29,6 @@ const toPageId = path => {
  * @returns {object} Reactive page object
  */
 export const usePage = path => {
-  const enableSWR = import.meta.env.VITE_ENABLE_SWR === 'true'
   const router = useRouter()
   const { path: currentPath } = useRoute()
   const { hasPage, getPage } = useKirbyApi()
@@ -84,10 +90,9 @@ export const usePage = path => {
     if (enableSWR && isCached && navigator.onLine) {
       const newData = await getPage(id, { revalidate: true })
 
-      if (!newData) return
-      if (JSON.stringify(newData) === JSON.stringify(data)) return
-
-      Object.assign(page, newData)
+      if (JSON.stringify(newData) !== JSON.stringify(data)) {
+        Object.assign(page, newData)
+      }
     }
   })()
 
