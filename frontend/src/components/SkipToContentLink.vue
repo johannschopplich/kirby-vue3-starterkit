@@ -37,9 +37,12 @@ watch(route, () => {
   top: 0;
   left: 50%;
   padding: .5rem;
-  transform: translate(-50%, 0);
-}
-.skip-to-content-link:not(:focus) {
   transform: translate(-50%, -100%);
+}
+.skip-to-content-link:focus {
+  transform: translate(-50%, 0);
+  /* Copy the browser's native focus styles */
+  outline: 5px auto Highlight;
+  outline: 5px auto -webkit-focus-ring-color;
 }
 </style>
