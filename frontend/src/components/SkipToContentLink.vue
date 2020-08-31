@@ -3,6 +3,7 @@
     href="#main"
     class="skip-to-content-link"
     ref="skipLink"
+    @click.prevent="handleFocusElement"
   >
     Skip to content
   </a>
@@ -12,9 +13,19 @@
 import { ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 
-export const route = useRoute()
-export const skipLink = ref(null)
+const focusElement = id => {
+  const element = document.querySelector(id)
+  if (!id || !element) return
+  element.scrollIntoView()
+  element.focus()
+}
 
+export const skipLink = ref(null)
+export const handleFocusElement = ({ target }) => {
+  focusElement(target.hash)
+}
+
+const route = useRoute()
 watch(route, () => {
   skipLink.value.focus()
 })
