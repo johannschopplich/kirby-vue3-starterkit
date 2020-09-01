@@ -253,7 +253,7 @@ class MusicRelease extends BaseType implements MusicReleaseContract, CreativeWor
     /**
      * An embedded audio object.
      *
-     * @param \Spatie\SchemaOrg\Contracts\AudioObjectContract|\Spatie\SchemaOrg\Contracts\AudioObjectContract[]|\Spatie\SchemaOrg\Contracts\ClipContract|\Spatie\SchemaOrg\Contracts\ClipContract[] $audio
+     * @param \Spatie\SchemaOrg\Contracts\AudioObjectContract|\Spatie\SchemaOrg\Contracts\AudioObjectContract[]|\Spatie\SchemaOrg\Contracts\ClipContract|\Spatie\SchemaOrg\Contracts\ClipContract[]|\Spatie\SchemaOrg\Contracts\MusicRecordingContract|\Spatie\SchemaOrg\Contracts\MusicRecordingContract[] $audio
      *
      * @return static
      *
@@ -574,6 +574,21 @@ class MusicRelease extends BaseType implements MusicReleaseContract, CreativeWor
     }
 
     /**
+     * The duration of the item (movie, audio recording, event, etc.) in [ISO
+     * 8601 date format](http://en.wikipedia.org/wiki/ISO_8601).
+     *
+     * @param \Spatie\SchemaOrg\Contracts\DurationContract|\Spatie\SchemaOrg\Contracts\DurationContract[] $duration
+     *
+     * @return static
+     *
+     * @see http://schema.org/duration
+     */
+    public function duration($duration)
+    {
+        return $this->setProperty('duration', $duration);
+    }
+
+    /**
      * Specifies the Person who edited the CreativeWork.
      *
      * @param \Spatie\SchemaOrg\Contracts\PersonContract|\Spatie\SchemaOrg\Contracts\PersonContract[] $editor
@@ -589,6 +604,10 @@ class MusicRelease extends BaseType implements MusicReleaseContract, CreativeWor
 
     /**
      * An alignment to an established educational framework.
+     * 
+     * This property should not be used where the nature of the alignment can be
+     * described using a simple property, for example to express that a resource
+     * [[teaches]] or [[assesses]] a competency.
      *
      * @param \Spatie\SchemaOrg\Contracts\AlignmentObjectContract|\Spatie\SchemaOrg\Contracts\AlignmentObjectContract[] $educationalAlignment
      *

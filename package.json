@@ -19,7 +19,7 @@
     "@vue/compiler-sfc": "^3.0.0-rc.9",
     "concurrently": "^5.3.0",
     "dotenv": "^8.2.0",
-    "eslint": "^7.7.0",
+    "eslint": "^7.8.0",
     "eslint-config-standard": "^14.1.1",
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-jsdoc": "^30.3.0",

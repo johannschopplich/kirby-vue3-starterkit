@@ -267,7 +267,7 @@ class AudioObject extends BaseType implements AudioObjectContract, CreativeWorkC
     /**
      * An embedded audio object.
      *
-     * @param \Spatie\SchemaOrg\Contracts\AudioObjectContract|\Spatie\SchemaOrg\Contracts\AudioObjectContract[]|\Spatie\SchemaOrg\Contracts\ClipContract|\Spatie\SchemaOrg\Contracts\ClipContract[] $audio
+     * @param \Spatie\SchemaOrg\Contracts\AudioObjectContract|\Spatie\SchemaOrg\Contracts\AudioObjectContract[]|\Spatie\SchemaOrg\Contracts\ClipContract|\Spatie\SchemaOrg\Contracts\ClipContract[]|\Spatie\SchemaOrg\Contracts\MusicRecordingContract|\Spatie\SchemaOrg\Contracts\MusicRecordingContract[] $audio
      *
      * @return static
      *
@@ -647,6 +647,10 @@ class AudioObject extends BaseType implements AudioObjectContract, CreativeWorkC
 
     /**
      * An alignment to an established educational framework.
+     * 
+     * This property should not be used where the nature of the alignment can be
+     * described using a simple property, for example to express that a resource
+     * [[teaches]] or [[assesses]] a competency.
      *
      * @param \Spatie\SchemaOrg\Contracts\AlignmentObjectContract|\Spatie\SchemaOrg\Contracts\AlignmentObjectContract[] $educationalAlignment
      *
@@ -1412,7 +1416,7 @@ class AudioObject extends BaseType implements AudioObjectContract, CreativeWorkC
      * free). Allowed values are ```true``` or ```false``` (note that an earlier
      * version had 'yes', 'no').
      *
-     * @param bool|bool[] $requiresSubscription
+     * @param \Spatie\SchemaOrg\Contracts\MediaSubscriptionContract|\Spatie\SchemaOrg\Contracts\MediaSubscriptionContract[]|bool|bool[] $requiresSubscription
      *
      * @return static
      *

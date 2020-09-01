@@ -857,17 +857,17 @@
     },
     {
         "name": "spatie/schema-org",
-        "version": "2.14.1",
-        "version_normalized": "2.14.1.0",
+        "version": "2.16.0",
+        "version_normalized": "2.16.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/spatie/schema-org.git",
-            "reference": "a17c65150f97caf81cea490294b376fd37bee660"
+            "reference": "31f1fd54584d98b50026ecb17fe7067384ec209a"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/spatie/schema-org/zipball/a17c65150f97caf81cea490294b376fd37bee660",
-            "reference": "a17c65150f97caf81cea490294b376fd37bee660",
+            "url": "https://api.github.com/repos/spatie/schema-org/zipball/31f1fd54584d98b50026ecb17fe7067384ec209a",
+            "reference": "31f1fd54584d98b50026ecb17fe7067384ec209a",
             "shasum": ""
         },
         "require": {
@@ -879,11 +879,10 @@
             "league/flysystem": "^1.0",
             "phpunit/phpunit": "^8.0",
             "symfony/console": "^3.2",
-            "symfony/css-selector": "^3.2",
-            "symfony/dom-crawler": "^3.2",
+            "tightenco/collect": "^7.25",
             "twig/twig": "^1.28"
         },
-        "time": "2020-06-10T17:06:18+00:00",
+        "time": "2020-08-27T16:55:28+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -921,8 +920,8 @@
                 "type": "custom"
             },
             {
-                "url": "https://www.patreon.com/spatie",
-                "type": "patreon"
+                "url": "https://github.com/spatie",
+                "type": "github"
             }
         ]
     },

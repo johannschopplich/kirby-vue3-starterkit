@@ -255,7 +255,7 @@ class BookSeries extends BaseType implements BookSeriesContract, CreativeWorkCon
     /**
      * An embedded audio object.
      *
-     * @param \Spatie\SchemaOrg\Contracts\AudioObjectContract|\Spatie\SchemaOrg\Contracts\AudioObjectContract[]|\Spatie\SchemaOrg\Contracts\ClipContract|\Spatie\SchemaOrg\Contracts\ClipContract[] $audio
+     * @param \Spatie\SchemaOrg\Contracts\AudioObjectContract|\Spatie\SchemaOrg\Contracts\AudioObjectContract[]|\Spatie\SchemaOrg\Contracts\ClipContract|\Spatie\SchemaOrg\Contracts\ClipContract[]|\Spatie\SchemaOrg\Contracts\MusicRecordingContract|\Spatie\SchemaOrg\Contracts\MusicRecordingContract[] $audio
      *
      * @return static
      *
@@ -515,22 +515,6 @@ class BookSeries extends BaseType implements BookSeriesContract, CreativeWorkCon
     }
 
     /**
-     * A director of e.g. tv, radio, movie, video gaming etc. content, or of an
-     * event. Directors can be associated with individual items or with a
-     * series, episode, clip.
-     *
-     * @param \Spatie\SchemaOrg\Contracts\PersonContract|\Spatie\SchemaOrg\Contracts\PersonContract[] $director
-     *
-     * @return static
-     *
-     * @see http://schema.org/director
-     */
-    public function director($director)
-    {
-        return $this->setProperty('director', $director);
-    }
-
-    /**
      * A sub property of description. A short description of the item used to
      * disambiguate from other, similar items. Information from other properties
      * (in particular, name) may be necessary for the description to be useful
@@ -577,6 +561,10 @@ class BookSeries extends BaseType implements BookSeriesContract, CreativeWorkCon
 
     /**
      * An alignment to an established educational framework.
+     * 
+     * This property should not be used where the nature of the alignment can be
+     * described using a simple property, for example to express that a resource
+     * [[teaches]] or [[assesses]] a competency.
      *
      * @param \Spatie\SchemaOrg\Contracts\AlignmentObjectContract|\Spatie\SchemaOrg\Contracts\AlignmentObjectContract[] $educationalAlignment
      *
