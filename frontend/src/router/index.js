@@ -2,7 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 import { scrollBehavior } from './scrollBehaviour'
 import { useSite } from '../hooks/useSite'
 import { capitalize } from '../helpers'
-import Default from '../views/Default.vue'
+// TODO: Use again once Vite fixes a bug with dynamic imports
+// import Default from '../views/Default.vue'
 
 /**
  * Creates the Vue Router instance
@@ -16,12 +17,12 @@ export const initRouter = () => {
   const routes = site.children.flatMap(page => [
     {
       path: `/${page.id}`,
-      component: () => import(`../views/${capitalize(page.template)}.vue`).catch(() => Default)
+      component: () => import(`../views/${capitalize(page.template)}.vue`).catch(() => /* Default */ import('../views/Default.vue'))
     },
     // Page children routes
     ...page.children.map(child => ({
       path: `/${child.id}`,
-      component: () => import(`../views/${capitalize(child.template)}.vue`).catch(() => Default)
+      component: () => import(`../views/${capitalize(child.template)}.vue`).catch(() => /* Default */ import('../views/Default.vue'))
     }))
   ])
 
@@ -30,7 +31,7 @@ export const initRouter = () => {
   routes.push({ path: '/home', redirect: '/' })
 
   // Catch-all fallback
-  routes.push({ path: '/:catchAll(.*)', component: Default })
+  routes.push({ path: '/:catchAll(.*)', component: /* Default */ () => import('../views/Default.vue') })
 
   return createRouter({
     history: createWebHistory(),
