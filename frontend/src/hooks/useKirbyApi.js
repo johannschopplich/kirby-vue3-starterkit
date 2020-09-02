@@ -40,7 +40,7 @@ const getPage = async (
   }
 
   // Otherwise fetch page for the first time
-  log('[getPage] ' + (revalidate ? `Revalidating ${id} page data.` : `Fetching ${apiLocation}/${id}.json…`))
+  log(`[getPage] ${revalidate ? `Revalidating ${id} page data.` : `Fetching ${apiLocation}/${id}.json…`}`)
 
   try {
     const response = await fetch(`${apiLocation}/${id}.json`)
@@ -55,7 +55,9 @@ const getPage = async (
   }
 
   // Add page data to the store
-  kirbyStore.setPage({ id, data: page })
+  if (JSON.stringify(cachedPage) !== JSON.stringify(page)) {
+    kirbyStore.setPage({ id, data: page })
+  }
 
   return page
 }
