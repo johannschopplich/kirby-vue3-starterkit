@@ -41,7 +41,7 @@ return [
             kirby()->response()->json();
             // Prevent Kirby from falling back automatically to the error
             // page, otherwise the service worker would fail installing
-            // due to the response's http status code
+            // due to the response's HTTP status code
             return (page($pageId) ?? site()->errorPage())->render();
         }
     ],
