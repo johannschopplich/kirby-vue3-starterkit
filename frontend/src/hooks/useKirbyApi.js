@@ -22,7 +22,7 @@ const hasPage = id => kirbyStore.hasPage(id)
  * @param {string} id Page id to retrieve
  * @param {object} [options] Optional options
  * @param {boolean} options.revalidate Skip cache look-up and fetch page freshly
- * @returns {object} The page's data
+ * @returns {(object|boolean)} The page's data or `false` if fetch request failed
  */
 const getPage = async (
   id,
@@ -58,7 +58,7 @@ const getPage = async (
     page = await response.json()
   } catch (error) {
     console.error(error)
-    return
+    return false
   }
 
   if (!revalidate) {
