@@ -25,7 +25,7 @@ const PRECACHE_URLS = [
 ]
 
 const ALLOWED_HOSTS = [
-  location.hostname // or predefined host like `example.com`
+  self.location.host
 ]
 
 /**

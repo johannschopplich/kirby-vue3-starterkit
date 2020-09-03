@@ -32,6 +32,7 @@ const getPage = async (
 ) => {
   let page
   const cachedPage = kirbyStore.getPage(id)
+  const targetUrl = `${apiLocation}/${id}.json`
 
   // Use cached page if present in the store, except when revalidating
   if (!revalidate && cachedPage) {
@@ -40,10 +41,20 @@ const getPage = async (
   }
 
   // Otherwise fetch page for the first time
-  log(`[getPage] ${revalidate ? `Revalidating ${id} page data.` : `Fetching ${apiLocation}/${id}.json…`}`)
+  log(`[getPage] ${revalidate ? `Revalidating ${id} page data.` : `Fetching ${targetUrl}…`}`)
 
   try {
-    const response = await fetch(`${apiLocation}/${id}.json`)
+    const response = await fetch(targetUrl)
+
+    if (!response.ok) {
+      throw new Error(`The requested URL ${targetUrl} failed with response error \`${response.statusText}\`.`)
+    }
+
+    const contentType = response.headers.get('Content-Type')
+    if (!contentType || !contentType.includes('application/json')) {
+      throw new TypeError('The response is not a valid JSON response.')
+    }
+
     page = await response.json()
   } catch (error) {
     console.error(error)
