@@ -7,7 +7,7 @@ import { useServiceWorker } from './hooks/useServiceWorker'
 import App from './App.vue'
 
 const { initSite } = useKirbyApi()
-const { register } = useServiceWorker()
+const { handleRegistration } = useServiceWorker()
 
 ;(async () => {
   await initSite()
@@ -18,6 +18,5 @@ const { register } = useServiceWorker()
   await router.isReady()
   app.mount('#app')
 
-  // Register service worker lazily
-  register()
+  handleRegistration()
 })()

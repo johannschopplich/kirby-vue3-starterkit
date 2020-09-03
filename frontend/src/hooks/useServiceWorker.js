@@ -14,11 +14,10 @@ const hasNewWorker = ref(false)
  * Register the default service worker when `VITE_ENABLE_SW` is enabled,
  * otherwise unregister active service workers
  */
-const register = async () => {
+const handleRegistration = async () => {
   if (process.env.NODE_ENV === 'development') return
   if (!('serviceWorker' in navigator)) return
 
-  // `VITE_ENABLE_SW` returns a string, but we need a boolean
   const enableWorker = import.meta.env.VITE_ENABLE_SW === 'true'
   const hasExistingWorker = !!navigator.serviceWorker.controller
 
@@ -80,7 +79,7 @@ const activateNewWorker = () => {
  */
 export const useServiceWorker = () => {
   return {
-    register,
+    handleRegistration,
     newWorker,
     hasNewWorker,
     activateNewWorker
