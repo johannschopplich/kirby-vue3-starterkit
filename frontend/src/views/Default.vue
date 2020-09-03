@@ -1,12 +1,12 @@
 <template>
   <Intro :title="page.title" />
 
-  <div v-if="page.text" class="text" v-html="page.text.html" />
+  <div v-if="page.text" class="text" v-html="page.text.html" v-kirbytext />
 </template>
 
 <script>
-import Intro from '../components/Intro.vue'
 import { usePage } from '../hooks/usePage'
+import Intro from '../components/Intro.vue'
 
 export default {
   components: {

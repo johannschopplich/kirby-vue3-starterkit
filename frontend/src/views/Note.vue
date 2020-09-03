@@ -8,7 +8,7 @@
       </p>
     </header>
 
-    <div v-if="page.text" class="note-text text" v-html="page.text.html" />
+    <div v-if="page.text" class="note-text text" v-html="page.text.html" v-kirbytext />
   </article>
 </template>
 

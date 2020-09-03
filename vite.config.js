@@ -11,6 +11,7 @@ module.exports = {
   esbuildTarget: 'es2017',
 
   env: {
+    VITE_KIRBY_URL: kirbyUrl,
     VITE_KIRBY_API_LOCATION: kirbyApiLocation
   },
 

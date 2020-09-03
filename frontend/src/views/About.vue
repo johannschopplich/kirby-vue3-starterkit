@@ -34,7 +34,7 @@
       </section>
     </aside>
 
-    <div v-if="page.text" class="text" v-html="page.text.html" />
+    <div v-if="page.text" class="text" v-html="page.text.html" v-kirbytext />
   </div>
 </template>
 
