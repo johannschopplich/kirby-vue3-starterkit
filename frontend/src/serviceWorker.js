@@ -64,8 +64,8 @@ self.addEventListener('message', event => {
   }
 
   if (command === 'trimCaches') {
-    MAX_CACHED_PAGES && trimCache(CACHE_KEYS.PAGES, MAX_CACHED_PAGES)
-    MAX_CACHED_IMAGES && trimCache(CACHE_KEYS.IMAGES, MAX_CACHED_IMAGES)
+    if (MAX_CACHED_PAGES) trimCache(CACHE_KEYS.PAGES, MAX_CACHED_PAGES)
+    if (MAX_CACHED_IMAGES) trimCache(CACHE_KEYS.IMAGES, MAX_CACHED_IMAGES)
   }
 })
 
