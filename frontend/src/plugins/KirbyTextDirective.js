@@ -33,14 +33,6 @@ export default {
         el.addEventListener(EVENT_TYPE, navigate)
       },
 
-      beforeUpdate (el) {
-        el.removeEventListener(EVENT_TYPE, navigate)
-      },
-
-      updated (el) {
-        el.addEventListener(EVENT_TYPE, navigate)
-      },
-
       beforeUnmount (el) {
         el.removeEventListener(EVENT_TYPE, navigate)
       }
