@@ -20,7 +20,7 @@ $pathToAsset = function (string $pattern) use ($assetsDir) {
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <?php snippet('meta', compact('page', 'site')) ?>
 
-  <link rel="preload" href="<?= $apiLocation . '/home.json' ?>" as="fetch">
+  <link rel="preload" href="<?= $apiLocation . '/home.json' ?>" as="fetch" crossorigin>
   <link rel="stylesheet" href="<?= $pathToAsset('style.*.css') ?>">
 
 </head>
