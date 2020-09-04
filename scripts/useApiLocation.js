@@ -1,12 +1,12 @@
 /**
- * Build the location for the frontend from a given api path
+ * Parse and transform an api path for use with fetch requests etc.
  *
- * @param {string} [location] An optional path to parse
- * @returns {string} The transformed location
+ * @param {string} [location] Optional path to parse
+ * @returns {string} The parsed location
  */
 function useApiLocation (location = '') {
   // Add leading slash if missing
-  if (!location.startsWith('/')) location = '/' + location
+  if (!location.startsWith('/')) location = `/${location}`
   // Remove trailing slash if present
   if (location.endsWith('/')) location = location.slice(0, -1)
 

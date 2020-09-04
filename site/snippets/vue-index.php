@@ -1,9 +1,14 @@
 <?php
 
-$pathToAsset = function (string $pattern, string $root = '/assets/') {
-  $filename = glob(kirby()->roots()->index() . $root . $pattern)[0] ?? null;
+use Kirby\Cms\Url;
+
+$assetsDir = '/assets/';
+$apiLocation = Url::path(env('KIRBY_API_LOCATION', ''), true);
+
+$pathToAsset = function (string $pattern) use ($assetsDir) {
+  $filename = glob(kirby()->roots()->index() . $assetsDir . $pattern)[0] ?? null;
   if ($filename === null) throw new Exception('No production assets found. You have to bundle the app first. Run `npm run build`.');
-  return $root . basename($filename);
+  return $assetsDir . basename($filename);
 }
 
 ?>

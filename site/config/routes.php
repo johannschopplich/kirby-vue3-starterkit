@@ -1,13 +1,10 @@
 <?php
 
+use Kirby\Cms\Url;
 use Kirby\Toolkit\Str;
 use Kirby\Toolkit\Tpl;
 
-$apiLocation = env('KIRBY_API_LOCATION', '');
-if (!empty($apiLocation)) {
-    if (Str::startsWith($apiLocation, '/')) $apiLocation = Str::substr($apiLocation, 1);
-    if (!Str::endsWith($apiLocation, '/')) $apiLocation .= '/';
-}
+$apiLocation = Url::path(env('KIRBY_API_LOCATION', ''), false, true);
 
 return [
     /**
