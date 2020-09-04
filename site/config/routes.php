@@ -1,7 +1,6 @@
 <?php
 
 use Kirby\Cms\Url;
-use Kirby\Toolkit\Str;
 use Kirby\Toolkit\Tpl;
 
 $apiLocation = Url::path(env('KIRBY_API_LOCATION', ''), false, true);
