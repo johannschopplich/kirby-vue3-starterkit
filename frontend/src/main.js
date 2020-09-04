@@ -15,9 +15,8 @@ const { handleRegistration } = useServiceWorker()
   const router = initRouter()
   const app = createApp(App)
 
-  app.use(KirbyTextDirective)
   app.use(router)
-  await router.isReady()
+  app.use(KirbyTextDirective)
   app.mount('#app')
 
   handleRegistration()
