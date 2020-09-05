@@ -1,6 +1,6 @@
-let router = null
 const origin = process.env.NODE_ENV === 'development' ? import.meta.env.VITE_KIRBY_URL : window.location.origin
 const EVENT_TYPE = 'click'
+let router
 
 /**
  * Handle absolute links inside dynamically added HTML with Vue Router

@@ -118,7 +118,7 @@ self.addEventListener('fetch', event => {
 
     // Create a controller to abort fetch requests after timeout
     const controller = new AbortController()
-    const signal = controller.signal
+    const { signal } = controller
 
     const timeoutId = setTimeout(() => controller.abort(), FETCH_TIMEOUT)
 
