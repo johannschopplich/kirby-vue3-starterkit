@@ -19,7 +19,8 @@
 - ⚡️ [Vite](https://github.com/vitejs/vite) instead of Vue.js CLI
 - ♿ Accessible routing
 - 🔍 SEO-friendly ([server-side generated](site/snippets/meta.php) meta tags)
-- 🚝 [Offline-first](#caching--offline-capability): Page data caching & offline redirection
+- 🚝 [Offline-first](#caching-offline-capability--stale-while-revalidate): Page data caching & offline redirection
+- 💫 [Stale-while-revalidate](#stale-while-revalidate) page data
 - 🗃️ Centralized state management without Vuex
 - 🤝 Shared `.env` file for frontend & backend
 - 🚀 Modern Kirby folder setup
@@ -171,7 +172,7 @@ kirby-vue3-starterkit/
 
 </details>
 
-## Caching & Offline Capability
+## Caching, Offline Capability & Stale-While-Revalidate
 
 Even without a service worker installed, the frontend will store pages between indiviual routes/views (in-memory store). When you reload the tab, the data for each page is freshly fetched from the API once again.
 
@@ -186,6 +187,10 @@ A visual explanation of both methods can be found in the following flow chart:
 The service worker precaches all CSS & JS assets required by the Vue app and caches the data of every requested page. All assets are versioned and served from the service worker cache directly.
 
 Each JSON request will be freshly fetched from the network and saved to the cache. If the user's navigator turns out to be offline, the cached page request will be returned.
+
+### Stale-While-Revalidate
+
+The stale-while-revalidate mechanism for the [`usePage`](frontend/src/hooks/usePage.js) hook allows you to respond as quickly as possible with cached page data if available, falling back to the network request if it's not cached. The network request is then used to update the cached page data – which directly affects the view after lazily assigning changes (if any), thanks to Vue's reactivity.
 
 ## Prerequisites
 
@@ -239,6 +244,9 @@ All development and production related configurations for both backend and front
 
 To enable the **service worker** which precaches essential assets and page API calls for offline capability, set:
 - `VITE_ENABLE_SW` to `true`
+
+To keep page data fresh with **stale-while-revalidate**, set:
+- `VITE_ENABLE_SWR` to `true`
 
 ### Deployment
 
