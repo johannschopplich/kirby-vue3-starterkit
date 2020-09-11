@@ -19,7 +19,7 @@
 - ⚡️ [Vite](https://github.com/vitejs/vite) instead of Vue.js CLI
 - ♿ Accessible routing
 - 🔍 SEO-friendly ([server-side generated](site/snippets/meta.php) meta tags)
-- 🚝 [Offline-first](#caching-offline-capability--stale-while-revalidate): Page data caching & offline redirection
+- 🚝 [Offline-first](#caching--offline-capability-with-service-worker): Page data caching & offline redirection
 - 💫 [Stale-while-revalidate](#stale-while-revalidate) page data
 - 🗃️ Centralized state management without Vuex
 - 🤝 Shared `.env` file for frontend & backend
@@ -35,6 +35,10 @@ To compile the frontend sources, [Vite](https://github.com/vitejs/vite) comes to
 - Lightning fast cold server start
 - Instant hot module replacement (HMR)
 - [Head over to the GitHub page](https://github.com/vitejs/vite) for more details
+
+### Lighthouse Report
+
+![Lighthouse Report](./.github/lighthouse-report.png)
 
 ### Folder Structure
 
@@ -172,7 +176,7 @@ kirby-vue3-starterkit/
 
 </details>
 
-## Caching, Offline Capability & Stale-While-Revalidate
+## Caching & Offline Capability With Service Worker
 
 Even without a service worker installed, the frontend will store pages between indiviual routes/views (in-memory store). When you reload the tab, the data for each page is freshly fetched from the API once again.
 
@@ -182,13 +186,11 @@ A visual explanation of both methods can be found in the following flow chart:
 
 ![Caching for Kirby and Vue 3 starterkit](./.github/kirby-vue-3-cache-and-store.png)
 
-### Service Worker
-
 The service worker precaches all CSS & JS assets required by the Vue app and caches the data of every requested page. All assets are versioned and served from the service worker cache directly.
 
 Each JSON request will be freshly fetched from the network and saved to the cache. If the user's navigator turns out to be offline, the cached page request will be returned.
 
-### Stale-While-Revalidate
+## Stale-While-Revalidate
 
 The stale-while-revalidate mechanism for the [`usePage`](frontend/src/hooks/usePage.js) hook allows you to respond as quickly as possible with cached page data if available, falling back to the network request if it's not cached. The network request is then used to update the cached page data – which directly affects the view after lazily assigning changes (if any), thanks to Vue's reactivity.
 
@@ -217,7 +219,7 @@ npm install
 
 ## Usage
 
-### Serve backend & frontend for development
+### Serve Backend & Frontend for Development
 
 ```bash
 # Runs `npm run kirby:serve` and `npm run dev` in parallel
@@ -226,7 +228,7 @@ npm run start
 
 Out of the box the backend is automatically served while developing. `npm run kirby:serve` spawns the PHP built-in web server by Node. You can also serve the backend by a web server of your choice. If done so, please specify hostname and port in your `.env` if they differ from `localhost`and `8080` respectively so that the decoupled frontend can call the Kirby API for JSON content in development.
 
-### Compile for production
+### Compile for Production
 
 Build the frontend assets (CSS & JS files) to `public/assets`:
 
