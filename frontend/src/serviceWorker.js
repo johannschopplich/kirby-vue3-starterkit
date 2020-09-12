@@ -153,7 +153,7 @@ self.addEventListener('fetch', event => {
       // before, return a fallback JSON
       if (isJSON) {
         return new Response(
-          JSON.stringify({ __isOffline: true }),
+          JSON.stringify({ __origin: 'offline' }),
           {
             headers: {
               'Content-Type': 'application/json',

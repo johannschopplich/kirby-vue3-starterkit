@@ -57,20 +57,25 @@ export const usePage = path => {
       return
     }
 
-    // Redirect to error page if data returned equals error content,
-    // except on error page itself
-    if (!path && data.isErrorPage && currentPath !== '/error') {
-      router.replace({ path: '/error' })
-      return
-    }
+    // Check data origin when the hook is used on the current route
+    if (!path) {
+      const { __origin: origin } = data
 
-    // Redirect to offline page if page hasn't been cached either in-memory or
-    // by the service worker and the offline fallback JSON was returned
-    // Note: data for `home` and `offline` pages are always available since they
-    // are precached by the service worker
-    if (!path && data.__isOffline) {
-      router.replace({ path: '/offline' })
-      return
+      // Redirect to error page if data returned equals error content,
+      // except on error page itself
+      if (origin === 'error' && currentPath !== '/error') {
+        router.replace({ path: '/error' })
+        return
+      }
+
+      // Redirect to offline page if page hasn't been cached either in-memory or
+      // by the service worker and the offline fallback JSON was returned
+      // Note: data for `home` and `offline` pages are always available since they
+      // are precached by the service worker
+      if (origin === 'offline') {
+        router.replace({ path: '/offline' })
+        return
+      }
     }
 
     // Append page data to reactive page object
