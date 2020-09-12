@@ -4,7 +4,7 @@ $data = [
   'title' => $page->title()->value(),
   'metaTitle' => $page->customTitle()->or($page->title() . ' – ' . $site->title())->value(),
   'text' => ['html' => $page->text()->kt()->value()],
-  'isErrorPage' => $page->isErrorPage()
+  'isErrorPage' => true
 ];
 
 echo json_encode($data);
