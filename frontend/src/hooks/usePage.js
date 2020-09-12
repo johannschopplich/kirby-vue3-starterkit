@@ -41,7 +41,7 @@ export const usePage = path => {
 
   // Setup reactive page object
   const page = reactive({
-    __status: 'loading',
+    __status: 'pending',
     isReady: false,
     isReadyPromise: () => promise
   })
@@ -57,6 +57,13 @@ export const usePage = path => {
       return
     }
 
+    // Redirect to error page if data returned equals error content,
+    // except on error page itself
+    if (!path && data.isErrorPage && currentPath !== '/error') {
+      router.replace({ path: '/error' })
+      return
+    }
+
     // Redirect to offline page if page hasn't been cached either in-memory or
     // by the service worker and the offline fallback JSON was returned
     // Note: data for `home` and `offline` pages are always available since they
@@ -69,7 +76,7 @@ export const usePage = path => {
     // Append page data to reactive page object
     Object.assign(page, data)
 
-    page.__status = 'success'
+    page.__status = 'resolved'
     page.isReady = true
 
     // Flush page waiter

@@ -12,10 +12,8 @@ $data = [
       'title' => $child->content()->title()->value(),
       'template' => $child->intendedTemplate()->name(),
       'isListed' => $child->isListed(),
-      'children' => array_values($child->children()->published()->map(fn($grandChild) => [
-        'id' => $grandChild->id(),
-        'template' => $grandChild->intendedTemplate()->name()
-      ])->data())
+      'hasChildren' => $child->hasChildren(),
+      'childTemplate' => $child->hasChildren() ? $child->children()->published()->first()->intendedTemplate()->name() : null
     ])->data()),
     'social' => array_values(page('about')->social()->toStructure()->map(fn($social) => [
       'url' => $social->url()->value(),
