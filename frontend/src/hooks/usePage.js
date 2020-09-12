@@ -59,11 +59,9 @@ export const usePage = path => {
 
     // Check data origin when the hook is used on the current route
     if (!path) {
-      const { __origin: origin } = data
-
       // Redirect to error page if data returned equals error content,
       // except on error page itself
-      if (origin === 'error' && currentPath !== '/error') {
+      if (data.__isErrorPage && currentPath !== '/error') {
         router.replace({ path: '/error' })
         return
       }
@@ -72,7 +70,7 @@ export const usePage = path => {
       // by the service worker and the offline fallback JSON was returned
       // Note: data for `home` and `offline` pages are always available since they
       // are precached by the service worker
-      if (origin === 'offline') {
+      if (data.__isOffline) {
         router.replace({ path: '/offline' })
         return
       }
