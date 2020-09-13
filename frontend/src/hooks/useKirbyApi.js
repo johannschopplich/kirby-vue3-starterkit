@@ -87,11 +87,9 @@ const initSite = async () => {
  *
  * @returns {object} Object containing API-related methods
  */
-export const useKirbyApi = () => {
-  return {
-    apiLocation,
-    initSite,
-    hasPage,
-    getPage
-  }
-}
+export const useKirbyApi = () => ({
+  apiLocation,
+  initSite,
+  hasPage,
+  getPage
+})

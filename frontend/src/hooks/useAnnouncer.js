@@ -52,12 +52,10 @@ const resetAnnouncer = () => {
  *
  * @returns {object} Object containing announcer-related methods
  */
-export const useAnnouncer = () => {
-  return {
-    announcer,
-    setAnnouncer,
-    announcePolite,
-    announceAssertive,
-    resetAnnouncer
-  }
-}
+export const useAnnouncer = () => ({
+  announcer,
+  setAnnouncer,
+  announcePolite,
+  announceAssertive,
+  resetAnnouncer
+})
