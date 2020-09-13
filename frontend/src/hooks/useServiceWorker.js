@@ -71,6 +71,8 @@ const register = async (swUrl = '/service-worker.js', hooks = {}) => {
 
     if (registration.waiting) {
       emit('updated', registration)
+      newWorker = registration.waiting
+      hasNewWorker.value = true
     } else {
       // Handle service worker updates
       // @see https://developers.google.com/web/fundamentals/primers/service-workers/lifecycle#handling_updates
@@ -84,15 +86,17 @@ const register = async (swUrl = '/service-worker.js', hooks = {}) => {
           if (newWorker.state === 'installed') {
             if (navigator.serviceWorker.controller) {
               // At this point, the old content will have been purged and
-              // the fresh content will have been added to the cache.
-              // Notify the user that a new service worker is ready to be installed
+              // the fresh content will have been added to the cache
+              // Perfect time to notify the user that a new service worker
+              // is ready to be installed
               emit('updated', registration)
               hasNewWorker.value = true
+            } else {
+              // At this point, everything has been precached
+              // Perfect time to notify the user that content is cached
+              // for offline use
+              emit('cached', registration)
             }
-          } else {
-            // At this point, everything has been precached, the perfect time
-            // to display a "Content is cached for offline use." message
-            emit('cached', registration)
           }
         })
       })
