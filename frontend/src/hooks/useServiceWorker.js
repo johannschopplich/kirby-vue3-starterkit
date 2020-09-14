@@ -16,6 +16,18 @@ const hasNewWorker = ref(false)
 let newWorker
 
 /**
+ * A promise resolving when the document and all sub-resources have
+ * finished loading
+ */
+const documentLoaded = new Promise(resolve => {
+  if (document.readyState === 'complete') {
+    resolve()
+  } else {
+    window.addEventListener('load', resolve)
+  }
+})
+
+/**
  * Register a service worker
  *
  * @param {string} [swUrl] Absolute URL for the worker to register
@@ -87,34 +99,6 @@ const register = async (swUrl = '/service-worker.js', hooks = {}) => {
   })
 }
 
-// Thanks to Evan You for this pattern
-/*
-register('/service-worker.js', {
-  registrationOptions: { scope: './' },
-  ready (registration) {
-    console.log('Service worker is active.')
-  },
-  registered (registration) {
-    console.log('Service worker has been registered.')
-  },
-  cached (registration) {
-    console.log('Content has been cached for offline use.')
-  },
-  updatefound (registration) {
-    console.log('New content is downloading.')
-  },
-  updated (registration) {
-    console.log('New content is available; please refresh.')
-  },
-  offline () {
-    console.log('No internet connection found. App is running in offline mode.')
-  },
-  error (error) {
-    console.error('Error during service worker registration:', error)
-  }
-})
-*/
-
 /**
  * Unregister existing service workers
  */
@@ -144,7 +128,36 @@ const initSw = async () => {
 
   const enableWorker = import.meta.env.VITE_ENABLE_SW === 'true'
 
+  // Thanks to Evan You for this pattern
+  /*
+  register('/service-worker.js', {
+    registrationOptions: { scope: './' },
+    ready (registration) {
+      console.log('Service worker is active.')
+    },
+    registered (registration) {
+      console.log('Service worker has been registered.')
+    },
+    cached (registration) {
+      console.log('Content has been cached for offline use.')
+    },
+    updatefound (registration) {
+      console.log('New content is downloading.')
+    },
+    updated (registration) {
+      console.log('New content is available; please refresh.')
+    },
+    offline () {
+      console.log('No internet connection found. App is running in offline mode.')
+    },
+    error (error) {
+      console.error('Error during service worker registration:', error)
+    }
+  })
+  */
+
   if (enableWorker) {
+    await documentLoaded()
     await register()
     if (hasExistingWorker) {
       navigator.serviceWorker.controller.postMessage({ command: 'trimCaches' })
