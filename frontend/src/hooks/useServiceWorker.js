@@ -1,4 +1,10 @@
+import { ref } from 'vue'
 import { log } from '../helpers'
+
+/**
+ * Reactive boolean indicating if a service worker update is available
+ */
+const hasNewWorker = ref(false)
 
 /**
  * The new service worker waiting to be installed (if any)
@@ -126,9 +132,10 @@ const initSw = async () => {
       updated (registration) {
         log('New content is available; please refresh.')
 
-        document.dispatchEvent(
-          new CustomEvent('swUpdated', { detail: registration })
-        )
+        hasNewWorker.value = true
+        // document.dispatchEvent(
+        //   new CustomEvent('swUpdated', { detail: registration })
+        // )
       },
       offline () {
         log('No internet connection found. App is running in offline mode.')
@@ -164,6 +171,7 @@ const initSw = async () => {
 export const useServiceWorker = () => ({
   register,
   unregister,
+  hasNewWorker,
   newWorker,
   activateNewWorker,
   initSw
