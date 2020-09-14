@@ -105,7 +105,7 @@ const initSw = async () => {
   const hasExistingWorker = !!navigator.serviceWorker.controller
 
   if (enableWorker) {
-    await documentLoaded()
+    await documentLoaded
     await register('/service-worker.js', {
       // Thanks to Evan You for this pattern
       // @see https://github.com/yyx990803/register-service-worker
