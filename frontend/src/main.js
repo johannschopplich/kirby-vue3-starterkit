@@ -7,9 +7,8 @@ import { useServiceWorker } from './hooks/useServiceWorker'
 import KirbyTextDirective from './plugins/KirbyTextDirective'
 import App from './App.vue'
 
-const enableWorker = import.meta.env.VITE_ENABLE_SW === 'true'
 const { initSite } = useKirbyApi()
-const { hasExistingWorker, register, unregister } = useServiceWorker()
+const { initSw } = useServiceWorker()
 
 ;(async () => {
   await initSite()
@@ -20,12 +19,5 @@ const { hasExistingWorker, register, unregister } = useServiceWorker()
   app.use(KirbyTextDirective)
   app.mount('#app')
 
-  if (enableWorker) {
-    await register()
-    if (hasExistingWorker) {
-      navigator.serviceWorker.controller.postMessage({ command: 'trimCaches' })
-    }
-  } else {
-    unregister()
-  }
+  initSw()
 })()
