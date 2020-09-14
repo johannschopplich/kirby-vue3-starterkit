@@ -11,9 +11,16 @@
 </template>
 
 <script setup>
+import { ref } from 'vue'
 import { useServiceWorker } from '../hooks/useServiceWorker'
 
-const { hasNewWorker, activateNewWorker } = useServiceWorker()
+const { activateNewWorker } = useServiceWorker()
+const hasNewWorker = ref(false)
+
+document.addEventListener('swUpdated', () => {
+  hasNewWorker.value = true
+}, { once: true })
+
 export { hasNewWorker, activateNewWorker }
 </script>
 
