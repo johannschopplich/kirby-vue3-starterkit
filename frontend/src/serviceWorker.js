@@ -13,7 +13,8 @@ const CACHE_KEYS = {
 
 const EXCLUDED_URLS = [
   '/media/plugins/',
-  '/panel/'
+  '/panel/',
+  '/api/'
 ]
 
 const PRECACHE_URLS = [
