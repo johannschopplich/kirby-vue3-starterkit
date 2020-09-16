@@ -105,17 +105,17 @@
     },
     {
         "name": "getkirby/cms",
-        "version": "3.4.2",
-        "version_normalized": "3.4.2.0",
+        "version": "3.4.3",
+        "version_normalized": "3.4.3.0",
         "source": {
             "type": "git",
             "url": "https://github.com/getkirby/kirby.git",
-            "reference": "29b36fffa6527804ac0fdea757c77878c3ccd1b8"
+            "reference": "7525553b8d9976d6ed08b702f62fc3d368116777"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/getkirby/kirby/zipball/29b36fffa6527804ac0fdea757c77878c3ccd1b8",
-            "reference": "29b36fffa6527804ac0fdea757c77878c3ccd1b8",
+            "url": "https://api.github.com/repos/getkirby/kirby/zipball/7525553b8d9976d6ed08b702f62fc3d368116777",
+            "reference": "7525553b8d9976d6ed08b702f62fc3d368116777",
             "shasum": ""
         },
         "require": {
@@ -131,7 +131,7 @@
             "phpmailer/phpmailer": "6.1.6",
             "true/punycode": "2.1.1"
         },
-        "time": "2020-08-07T11:09:54+00:00",
+        "time": "2020-09-15T08:09:34+00:00",
         "type": "kirby-cms",
         "installation-source": "dist",
         "autoload": {
@@ -418,17 +418,17 @@
     },
     {
         "name": "laminas/laminas-zendframework-bridge",
-        "version": "1.1.0",
-        "version_normalized": "1.1.0.0",
+        "version": "1.1.1",
+        "version_normalized": "1.1.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/laminas/laminas-zendframework-bridge.git",
-            "reference": "4939c81f63a8a4968c108c440275c94955753b19"
+            "reference": "6ede70583e101030bcace4dcddd648f760ddf642"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/laminas/laminas-zendframework-bridge/zipball/4939c81f63a8a4968c108c440275c94955753b19",
-            "reference": "4939c81f63a8a4968c108c440275c94955753b19",
+            "url": "https://api.github.com/repos/laminas/laminas-zendframework-bridge/zipball/6ede70583e101030bcace4dcddd648f760ddf642",
+            "reference": "6ede70583e101030bcace4dcddd648f760ddf642",
             "shasum": ""
         },
         "require": {
@@ -438,13 +438,9 @@
             "phpunit/phpunit": "^5.7 || ^6.5 || ^7.5 || ^8.1 || ^9.3",
             "squizlabs/php_codesniffer": "^3.5"
         },
-        "time": "2020-08-18T16:34:51+00:00",
+        "time": "2020-09-14T14:23:00+00:00",
         "type": "library",
         "extra": {
-            "branch-alias": {
-                "dev-master": "1.0.x-dev",
-                "dev-develop": "1.1.x-dev"
-            },
             "laminas": {
                 "module": "Laminas\\ZendFrameworkBridge"
             }
@@ -1214,17 +1210,17 @@
     },
     {
         "name": "vlucas/phpdotenv",
-        "version": "v5.1.0",
-        "version_normalized": "5.1.0.0",
+        "version": "v5.2.0",
+        "version_normalized": "5.2.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/vlucas/phpdotenv.git",
-            "reference": "448c76d7a9e30c341ff5bc367a923af74ae18467"
+            "reference": "fba64139db67123c7a57072e5f8d3db10d160b66"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/448c76d7a9e30c341ff5bc367a923af74ae18467",
-            "reference": "448c76d7a9e30c341ff5bc367a923af74ae18467",
+            "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/fba64139db67123c7a57072e5f8d3db10d160b66",
+            "reference": "fba64139db67123c7a57072e5f8d3db10d160b66",
             "shasum": ""
         },
         "require": {
@@ -1244,11 +1240,11 @@
         "suggest": {
             "ext-filter": "Required to use the boolean validator."
         },
-        "time": "2020-07-14T19:26:25+00:00",
+        "time": "2020-09-14T15:57:31+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "5.1-dev"
+                "dev-master": "5.2-dev"
             }
         },
         "installation-source": "dist",
