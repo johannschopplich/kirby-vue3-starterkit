@@ -101,10 +101,9 @@ const activateNewWorker = () => {
 }
 
 /**
- * Handle service worker registrations
+ * Handle the service worker registration process
  */
 const initSw = async () => {
-  if (process.env.NODE_ENV === 'development') return
   if (!('serviceWorker' in navigator)) return
 
   const enableWorker = import.meta.env.VITE_ENABLE_SW === 'true'
@@ -133,9 +132,6 @@ const initSw = async () => {
         log('New content is available; please refresh.')
 
         hasNewWorker.value = true
-        // document.dispatchEvent(
-        //   new CustomEvent('swUpdated', { detail: registration })
-        // )
       },
       offline () {
         log('No internet connection found. App is running in offline mode.')
