@@ -33,7 +33,7 @@ const announcePolite = message => {
 /**
  * Announce the information assertively
  *
- * @param {string} message The content to announce
+ * @param {string} message Content to announce
  */
 const announceAssertive = message => {
   setAnnouncer(message, 'assertive')

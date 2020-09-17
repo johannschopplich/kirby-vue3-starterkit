@@ -130,7 +130,6 @@ const initSw = async () => {
       },
       updated (registration) {
         log('New content is available; please refresh.')
-
         hasNewWorker.value = true
       },
       offline () {
