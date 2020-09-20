@@ -65,7 +65,7 @@ class Env
     }
 
     /**
-     * Gets the value of an environment variable
+     * Get the value of an environment variable
      *
      * @param string $key
      * @param mixed $default

@@ -39,7 +39,7 @@
       "helpers.php"
     ],
     "psr-4": {
-      "KirbyExtended\\": "src/"
+      "KirbyExtended\\": "classes/KirbyExtended/"
     }
   },
   "scripts": {

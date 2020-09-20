@@ -18,21 +18,21 @@ class MetaTagsAdapter
     protected ?array $order;
 
     /**
-     * Current page
+     * The current page
      *
      * @var \Kirby\Cms\Page
      */
     protected Page $page;
 
     /**
-     * Holds default and template meta data
+     * The default and template meta data array
      *
      * @var array
      */
     protected array $data;
 
     /**
-     * Constructor
+     * Create a new instance
      *
      * @param \Kirby\Cms\Page $page
      * @return void
@@ -95,7 +95,7 @@ class MetaTagsAdapter
     }
 
     /**
-     * Render current tag list
+     * Render the current tag list
      *
      * @param array|string|null $groups
      * @return string
@@ -137,7 +137,7 @@ class MetaTagsAdapter
     }
 
     /**
-     * Add single tag
+     * Add a single tag
      *
      * @param string $tag
      * @param mixed $value
@@ -193,7 +193,7 @@ class MetaTagsAdapter
     }
 
     /**
-     * Add JSON-LD
+     * Add JSON-LD tags
      *
      * @param string $type
      * @param array $schema
@@ -215,7 +215,7 @@ class MetaTagsAdapter
     }
 
     /**
-     * Calling magic
+     * Dynamically pass method calls to the target
      *
      * @param mixed $method
      * @param mixed $arguments

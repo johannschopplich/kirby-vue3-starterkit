@@ -110,7 +110,7 @@ class ComposerStaticInit1cbc4f918cf4254b9395feafd54ef06e
         ),
         'KirbyExtended\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/site/plugins/kirby-extended/src',
+            0 => __DIR__ . '/../..' . '/site/plugins/kirby-extended/classes/KirbyExtended',
         ),
         'GrahamCampbell\\ResultType\\' => 
         array (
@@ -188,11 +188,11 @@ class ComposerStaticInit1cbc4f918cf4254b9395feafd54ef06e
         'GrahamCampbell\\ResultType\\Error' => __DIR__ . '/..' . '/graham-campbell/result-type/src/Error.php',
         'GrahamCampbell\\ResultType\\Result' => __DIR__ . '/..' . '/graham-campbell/result-type/src/Result.php',
         'GrahamCampbell\\ResultType\\Success' => __DIR__ . '/..' . '/graham-campbell/result-type/src/Success.php',
-        'KirbyExtended\\Env' => __DIR__ . '/../..' . '/site/plugins/kirby-extended/src/Env.php',
-        'KirbyExtended\\EnvAdapter' => __DIR__ . '/../..' . '/site/plugins/kirby-extended/src/EnvAdapter.php',
-        'KirbyExtended\\HigherOrderTapProxy' => __DIR__ . '/../..' . '/site/plugins/kirby-extended/src/HigherOrderTapProxy.php',
-        'KirbyExtended\\MetaTags' => __DIR__ . '/../..' . '/site/plugins/kirby-extended/src/MetaTags.php',
-        'KirbyExtended\\MetaTagsAdapter' => __DIR__ . '/../..' . '/site/plugins/kirby-extended/src/MetaTagsAdapter.php',
+        'KirbyExtended\\Env' => __DIR__ . '/../..' . '/site/plugins/kirby-extended/classes/KirbyExtended/Env.php',
+        'KirbyExtended\\EnvAdapter' => __DIR__ . '/../..' . '/site/plugins/kirby-extended/classes/KirbyExtended/EnvAdapter.php',
+        'KirbyExtended\\HigherOrderTapProxy' => __DIR__ . '/../..' . '/site/plugins/kirby-extended/classes/KirbyExtended/HigherOrderTapProxy.php',
+        'KirbyExtended\\MetaTags' => __DIR__ . '/../..' . '/site/plugins/kirby-extended/classes/KirbyExtended/MetaTags.php',
+        'KirbyExtended\\MetaTagsAdapter' => __DIR__ . '/../..' . '/site/plugins/kirby-extended/classes/KirbyExtended/MetaTagsAdapter.php',
         'Kirby\\Api\\Api' => __DIR__ . '/..' . '/getkirby/cms/src/Api/Api.php',
         'Kirby\\Api\\Collection' => __DIR__ . '/..' . '/getkirby/cms/src/Api/Collection.php',
         'Kirby\\Api\\Model' => __DIR__ . '/..' . '/getkirby/cms/src/Api/Model.php',

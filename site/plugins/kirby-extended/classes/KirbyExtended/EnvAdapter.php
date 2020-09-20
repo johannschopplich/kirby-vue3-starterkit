@@ -7,14 +7,14 @@ use Dotenv\Dotenv;
 class EnvAdapter
 {
     /**
-     * Indicates if dotenv has been loaded
+     * Indicates if `dotenv` has been loaded
      *
      * @var bool
      */
     protected static bool $loaded = false;
 
     /**
-     * Load the environment file in given directory
+     * Load the environment file from a given directory
      *
      * @param string|null $path
      * @param string|null $filename
@@ -37,7 +37,7 @@ class EnvAdapter
     }
 
     /**
-     * Indicates if dotenv has been loaded
+     * Indicates if `dotenv` has been loaded
      *
      * @return bool
      */
