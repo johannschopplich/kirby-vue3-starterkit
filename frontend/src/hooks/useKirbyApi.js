@@ -31,13 +31,13 @@ const getPage = async (
   } = {}
 ) => {
   let page
-  const cachedPage = kirbyStore.getPage(id)
+  const isCached = kirbyStore.hasPage(id)
   const targetUrl = `${apiLocation}/${id}.json`
 
   // Use cached page if present in the store, except when revalidating
-  if (!revalidate && cachedPage) {
+  if (!revalidate && isCached) {
     log(`[getPage] Pulling ${id} page data from cache.`)
-    return cachedPage
+    return kirbyStore.getPage(id)
   }
 
   // Otherwise fetch page for the first time
@@ -66,7 +66,7 @@ const getPage = async (
   }
 
   // Add page data to the store
-  if (JSON.stringify(cachedPage) !== JSON.stringify(page)) {
+  if (!isCached || revalidate) {
     kirbyStore.setPage({ id, data: page })
   }
 
@@ -89,7 +89,7 @@ const initSite = async () => {
  */
 export const useKirbyApi = () => ({
   apiLocation,
-  initSite,
   hasPage,
-  getPage
+  getPage,
+  initSite
 })
