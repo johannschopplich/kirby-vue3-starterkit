@@ -1,19 +1,8 @@
 <template>
   <header class="intro">
-    <h1>{{ title }}</h1>
+    <h1><slot></slot></h1>
   </header>
 </template>
-
-<script>
-export default {
-  props: {
-    title: {
-      type: String,
-      default: ''
-    }
-  }
-}
-</script>
 
 <style>
 .intro {

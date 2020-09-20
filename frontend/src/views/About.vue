@@ -1,5 +1,5 @@
 <template>
-  <Intro :title="page.title" />
+  <Intro>{{ page.title }}</Intro>
 
   <div class="layout">
     <aside>

@@ -1,5 +1,5 @@
 <template>
-  <Intro :title="page.title" />
+  <Intro>{{ page.title }}</Intro>
 
   <ul v-if="page.isReady" class="albums" :data-even="page.children.length % 2 === 0">
     <li v-for="album in page.children" :key="album.id">

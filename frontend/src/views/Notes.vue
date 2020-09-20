@@ -1,5 +1,5 @@
 <template>
-  <Intro :title="page.title" />
+  <Intro>{{ page.title }}</Intro>
 
   <div v-if="page.isReady" class="notes">
     <article v-for="note in page.children" :key="note.id" class="note">

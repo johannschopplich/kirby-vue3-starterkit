@@ -1,5 +1,5 @@
 <template>
-  <Intro :title="page.title" />
+  <Intro>{{ page.title }}</Intro>
 
   <ul v-if="photography.isReady" class="grid">
     <li v-for="album in photography.children" :key="album.id">
