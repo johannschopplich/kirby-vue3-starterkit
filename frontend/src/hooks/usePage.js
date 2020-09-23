@@ -103,6 +103,8 @@ export const usePage = path => {
       if (JSON.stringify(newData) !== JSON.stringify(data)) {
         Object.assign(page, newData)
       }
+
+      page.__status = 'revalidated'
     }
   })()
 
