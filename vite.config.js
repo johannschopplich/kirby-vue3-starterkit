@@ -1,4 +1,4 @@
-const path = require('path')
+const { resolve } = require('path')
 const { useApiLocation } = require('./scripts/useApiLocation')
 require('dotenv').config()
 
@@ -6,11 +6,11 @@ const kirbyUrl = `http://${process.env.KIRBY_SERVER_HOSTNAME}:${process.env.KIRB
 const kirbyApiLocation = useApiLocation(process.env.KIRBY_API_LOCATION)
 
 module.exports = {
-  alias: {
-    '/~/': path.resolve(__dirname, 'src')
-  },
   root: 'frontend',
-  assetsDir: 'assets',
+  alias: {
+    '/~/': resolve(__dirname, 'src')
+  },
+  assetsDir: process.env.VITE_ASSETS_DIR,
   emitIndex: false,
   esbuildTarget: 'es2017',
 
