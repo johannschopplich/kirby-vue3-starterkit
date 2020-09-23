@@ -38,21 +38,11 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { usePage } from '../hooks/usePage'
-import Intro from '../components/Intro.vue'
 
-export default {
-  components: {
-    Intro
-  },
-
-  setup () {
-    return {
-      page: usePage()
-    }
-  }
-}
+export { default as Intro } from '../components/Intro.vue'
+export const page = usePage()
 </script>
 
 <style>
