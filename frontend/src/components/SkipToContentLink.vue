@@ -13,6 +13,13 @@
 import { ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 
+const skipLink = ref(null)
+const route = useRoute()
+
+watch(route, () => {
+  skipLink.value.focus()
+})
+
 const focusElement = id => {
   const element = document.querySelector(id)
   if (!id || !element) return
@@ -20,15 +27,14 @@ const focusElement = id => {
   element.focus()
 }
 
-export const skipLink = ref(null)
-export const handleFocusElement = ({ target }) => {
+const handleFocusElement = ({ target }) => {
   focusElement(target.hash)
 }
 
-const route = useRoute()
-watch(route, () => {
-  skipLink.value.focus()
-})
+export {
+  skipLink,
+  handleFocusElement
+}
 </script>
 
 <style>
