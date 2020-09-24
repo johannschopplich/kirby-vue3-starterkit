@@ -1,4 +1,4 @@
-import { Store } from './base/Store'
+import { Store } from './classes/Store'
 import { toRaw } from 'vue'
 
 /**
