@@ -2,6 +2,7 @@ import { reactive } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useKirbyApi } from './useKirbyApi'
 import { useAnnouncer } from './useAnnouncer'
+import { kirbyStore } from '../store/kirbyStore'
 
 /**
  * Indicates if stale-while-revalidation is enabled
@@ -31,7 +32,7 @@ const toPageId = path => {
 export const usePage = path => {
   const router = useRouter()
   const { path: currentPath } = useRoute()
-  const { hasPage, getPage } = useKirbyApi()
+  const { getPage } = useKirbyApi()
   const { setAnnouncer } = useAnnouncer()
   const id = toPageId(path || currentPath)
 
@@ -48,7 +49,7 @@ export const usePage = path => {
 
   ;(async () => {
     // Check if cached page exists (otherwise skip SWR)
-    const isCached = hasPage(id)
+    const isCached = kirbyStore.hasPage(id)
     // Get page from cache or freshly fetch it
     const data = await getPage(id)
 

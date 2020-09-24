@@ -9,12 +9,25 @@ import { log } from '../helpers'
 const apiLocation = import.meta.env.VITE_KIRBY_API_LOCATION
 
 /**
- * Check if a page has been cached
+ * Fetcher function to request JSON data from the server
  *
- * @param {string} id Page id to look up
- * @returns {boolean} `true` if the page exists
+ * @param {string} url Url to fetch data from
+ * @returns {object} Extracted JSON body content from the response
  */
-const hasPage = id => kirbyStore.hasPage(id)
+const fetcher = async url => {
+  const response = await fetch(url)
+
+  if (!response.ok) {
+    throw new Error(`The requested URL ${url} failed with response error "${response.statusText}".`)
+  }
+
+  const contentType = response.headers.get('Content-Type')
+  if (!contentType || !contentType.includes('application/json')) {
+    throw new TypeError('The response is not a valid JSON response.')
+  }
+
+  return await response.json()
+}
 
 /**
  * Retrieve a page data by id from either store or network
@@ -44,18 +57,7 @@ const getPage = async (
   log(`[getPage] ${revalidate ? `Revalidating ${id} page data.` : `Fetching ${targetUrl}…`}`)
 
   try {
-    const response = await fetch(targetUrl)
-
-    if (!response.ok) {
-      throw new Error(`The requested URL ${targetUrl} failed with response error \`${response.statusText}\`.`)
-    }
-
-    const contentType = response.headers.get('Content-Type')
-    if (!contentType || !contentType.includes('application/json')) {
-      throw new TypeError('The response is not a valid JSON response.')
-    }
-
-    page = await response.json()
+    page = await fetcher(targetUrl)
   } catch (error) {
     console.error(error)
     return false
@@ -89,7 +91,6 @@ const initSite = async () => {
  */
 export const useKirbyApi = () => ({
   apiLocation,
-  hasPage,
   getPage,
   initSite
 })
