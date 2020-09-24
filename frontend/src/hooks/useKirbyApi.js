@@ -67,7 +67,7 @@ const getPage = async (
 
   // Add page data to the store
   if (!isCached || revalidate) {
-    kirbyStore.setPage({ id, data: page })
+    kirbyStore.setPage(id, page)
   }
 
   return page

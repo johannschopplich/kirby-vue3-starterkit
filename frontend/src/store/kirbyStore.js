@@ -8,9 +8,9 @@ import { toRaw } from 'vue'
  */
 class KirbyStore extends Store {
   /**
-   * The state object
+   * Data later wrapped as reactive object
    *
-   * @returns {object} The central state
+   * @returns {object} Data for central state
    */
   data () {
     return {
@@ -26,7 +26,7 @@ class KirbyStore extends Store {
    * @returns {boolean} `true` if the page exists
    */
   hasPage (id) {
-    return this.getState().pages.has(id)
+    return this.state.pages.has(id)
   }
 
   /**
@@ -36,18 +36,17 @@ class KirbyStore extends Store {
    * @returns {(object|undefined)} Corresponding page object
    */
   getPage (id) {
-    const page = this.getState().pages.get(id)
+    const page = this.state.pages.get(id)
     if (page) return toRaw(page)
   }
 
   /**
    * Adds a page to the store or overwrites it
    *
-   * @param {object} options Set of options
-   * @param {string} options.id Page id
-   * @param {object} options.data Page data
+   * @param {string} id Page id
+   * @param {any} data Page data
    */
-  setPage ({ id, data }) {
+  setPage (id, data) {
     this.state.pages.set(id, data)
   }
 
