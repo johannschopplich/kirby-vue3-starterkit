@@ -529,39 +529,6 @@
         ]
     },
     {
-        "name": "lukaskleinschmidt/kirby-resolve",
-        "version": "1.0.2",
-        "version_normalized": "1.0.2.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/lukaskleinschmidt/kirby-resolve.git",
-            "reference": "4c87912678774a2c2b3b945c65fe7cdc116d4648"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/lukaskleinschmidt/kirby-resolve/zipball/4c87912678774a2c2b3b945c65fe7cdc116d4648",
-            "reference": "4c87912678774a2c2b3b945c65fe7cdc116d4648",
-            "shasum": ""
-        },
-        "require": {
-            "getkirby/composer-installer": "^1.1"
-        },
-        "time": "2020-04-23T08:02:53+00:00",
-        "type": "kirby-plugin",
-        "installation-source": "dist",
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Lukas Kleinschmidt",
-                "email": "public@kleinschmidt.at"
-            }
-        ],
-        "description": "Kirby Resolve"
-    },
-    {
         "name": "michelf/php-smartypants",
         "version": "1.8.1",
         "version_normalized": "1.8.1.0",
