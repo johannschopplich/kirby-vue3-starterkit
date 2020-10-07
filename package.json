@@ -3,10 +3,11 @@
   "version": "1.5.0",
   "scripts": {
     "kirby:serve": "node scripts/serveKirby.js",
-    "build:after": "rm -rf public/assets && cp -r frontend/dist/assets public/assets",
-    "build:sw": "node scripts/buildSw.js",
+    "kirby:flush-cache": "find storage/cache -maxdepth 1 -mindepth 1 -type d -exec rm -rf '{}' \\;",
+    "assets:copy": "rm -rf public/assets && cp -r frontend/dist/assets public/assets",
+    "sw:build": "node scripts/buildSw.js",
     "dev": "vite",
-    "build": "vite build && npm run build:after && npm run build:sw",
+    "build": "vite build && npm run assets:copy && npm run sw:build && npm run kirby:flush-cache",
     "start": "concurrently \"npm run kirby:serve\" \"npm run dev\"",
     "lint": "eslint \"frontend/src/**/*.{js,vue}\""
   },

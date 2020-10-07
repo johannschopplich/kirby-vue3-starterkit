@@ -2,7 +2,7 @@
 
 use Kirby\Cms\Url;
 
-$assetsDir = '/' . env('VITE_ASSETS_DIR') . '/';
+$assetsDir = Url::path(env('VITE_ASSETS_DIR'), true, true);
 $apiLocation = Url::path(env('KIRBY_API_LOCATION'), true);
 
 $assetPath = function (string $pattern) use ($assetsDir) {
