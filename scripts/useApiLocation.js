@@ -14,7 +14,7 @@ function useApiLocation (location = '') {
 
   const kirbyApiSlug = process.env.KIRBY_API_SLUG || 'api'
   if (location === `/${kirbyApiSlug}`) {
-    throw new Error('API location mustn\'t be the same as Kirby\'s internal API endpoint.')
+    throw new Error('Content API slug mustn\'t be the same as Kirby\'s internal API endpoint.')
   }
 
   return location

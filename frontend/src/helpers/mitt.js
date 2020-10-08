@@ -6,9 +6,9 @@
  * @returns {Function} The function's instance
  */
 export default class Mitt {
-  constructor () {
+  constructor (all = new Map()) {
     // A Map of event names to registered handler functions.
-    this.all = new Map()
+    this.all = all
   }
 
   /**
