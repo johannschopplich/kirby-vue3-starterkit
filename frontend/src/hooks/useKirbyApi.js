@@ -6,7 +6,7 @@ import { log } from '../helpers'
  *
  * @constant {string}
  */
-const apiLocation = import.meta.env.VITE_KIRBY_API_LOCATION
+const apiLocation = import.meta.env.VITE_BACKEND_API_LOCATION
 
 /**
  * Fetcher function to request JSON data from the server

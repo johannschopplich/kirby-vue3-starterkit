@@ -12,6 +12,10 @@ return [
         'slug' => env('KIRBY_PANEL_SLUG', 'panel')
     ],
 
+    'api' => [
+        'slug' => env('KIRBY_API_SLUG', 'api')
+    ],
+
     'routes' => require __DIR__ . '/routes.php',
 
     'cache' => [

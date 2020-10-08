@@ -1,4 +1,4 @@
-const origin = process.env.NODE_ENV === 'development' ? import.meta.env.VITE_KIRBY_URL : window.location.origin
+const origin = process.env.NODE_ENV === 'development' ? import.meta.env.VITE_BACKEND_URL : window.location.origin
 const EVENT_TYPE = 'click'
 let router
 

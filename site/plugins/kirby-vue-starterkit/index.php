@@ -1,7 +1,6 @@
 <?php
 
 use Kirby\Cms\App as Kirby;
-use Kirby\Toolkit\A;
 
 Kirby::plugin('johannschopplich/kirby-vue-starterkit', [
     'options' => [

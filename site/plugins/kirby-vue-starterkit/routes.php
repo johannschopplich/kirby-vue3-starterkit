@@ -3,7 +3,7 @@
 use Kirby\Cms\Url;
 use Kirby\Toolkit\Tpl;
 
-$apiLocation = Url::path(env('KIRBY_API_LOCATION', ''), false, true);
+$apiLocation = Url::path(env('CONTENT_API_SLUG', ''), false, true);
 
 return [
     /**
