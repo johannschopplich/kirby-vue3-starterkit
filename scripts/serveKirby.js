@@ -10,5 +10,5 @@ require('dotenv').config()
     router: 'server.php'
   })
 
-  console.log('\x1b[32m%s\x1b[0m', `Kirby backend running at ${server.url}\n`)
+  console.log('\x1b[32m%s\x1b[0m', `Kirby backend running at ${server.url}`)
 })()

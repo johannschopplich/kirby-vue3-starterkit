@@ -17,6 +17,7 @@ return [
     ],
 
     'routes' => require __DIR__ . '/routes.php',
+    'hooks' => require __DIR__ . '/hooks.php',
 
     'cache' => [
         'pages' => [
@@ -26,7 +27,8 @@ return [
                 $options = $page->blueprint()->options();
                 return isset($options['cache']) ? !$options['cache'] : false;
             }
-        ]
+        ],
+        'templates' => true
     ],
 
     'cre8ivclick.sitemapper.title' => 'Sitemap'

@@ -1,7 +1,7 @@
 <?php
 
 $flush = function () {
-    kirby()->cache('johannschopplich.kirby-vue-starterkit')->flush();
+    kirby()->cache('templates')->flush();
 };
 
 return [
