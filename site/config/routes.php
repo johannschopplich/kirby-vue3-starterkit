@@ -48,9 +48,9 @@ return [
     [
         'pattern' => '(:all)',
         'action'  => function ($pageId) {
-            $cachingActive = env('KIRBY_CACHE', false) && kirby()->user() === null;
+            $cachingActive = env('KIRBY_CACHE', false) === true && kirby()->user() === null;
 
-            if ($cachingActive === true) {
+            if ($cachingActive) {
                 $cacheBucket = kirby()->cache('templates');
                 $pageProxy = $cacheBucket->get($pageId);
 
@@ -67,7 +67,8 @@ return [
             }
 
             $renderedPage = Tpl::load(kirby()->roots()->snippets() . '/vue-index.php', compact('page', 'site'));
-            if ($cachingActive === true && !$page->isErrorPage()) {
+
+            if ($cachingActive && !$page->isErrorPage()) {
                 $cacheBucket->set($pageId, $renderedPage);
             }
 
