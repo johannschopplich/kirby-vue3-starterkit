@@ -1,11 +1,11 @@
 <template>
   <Intro>{{ page.title }}</Intro>
 
-  <div class="layout">
+  <div v-if="page.isReady" class="layout">
     <aside>
       <section>
         <h2>Address</h2>
-        <div v-if="page.address" class="text" v-html="page.address.html" />
+        <div class="text" v-html="page.address" />
       </section>
 
       <section>
@@ -34,7 +34,7 @@
       </section>
     </aside>
 
-    <div v-if="page.text" class="text" v-html="page.text.html" v-kirbytext />
+    <div class="text" v-html="page.text" v-kirbytext />
   </div>
 </template>
 

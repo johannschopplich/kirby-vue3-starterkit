@@ -1,7 +1,7 @@
 <template>
-  <article>
+  <article v-if="page.isReady">
     <header>
-      <figure v-if="page.cover" class="album-cover">
+      <figure class="album-cover">
         <img :src="page.cover.url" :alt="page.cover.alt">
 
         <figcaption>
@@ -11,13 +11,13 @@
     </header>
 
     <div class="album-text text">
-      <span v-if="page.description" v-html="page.description.html" />
-      <p v-if="page.tags" class="album-tags tags">
+      <span v-html="page.description" />
+      <p class="album-tags tags">
         {{ page.tags }}
       </p>
     </div>
 
-    <ul v-if="page.gallery" class="album-gallery" :data-even="page.gallery.length % 2 === 0" :data-count="page.gallery.length">
+    <ul class="album-gallery" :data-even="page.gallery.length % 2 === 0" :data-count="page.gallery.length">
       <li v-for="image in page.gallery" :key="image.url">
         <figure>
           <a :href="image.link">

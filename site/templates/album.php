@@ -4,7 +4,7 @@ $data = [
   'title' => $page->title()->value(),
   'metaTitle' => $page->customTitle()->or($page->title() . ' – ' . $site->title())->value(),
   'headline' => $page->headline()->or($page->title())->value(),
-  'description' => ['html' => $page->description()->kt()->value()],
+  'description' => $page->description()->kt()->value(),
   'tags' => $page->tags()->isNotEmpty() ? $page->tags()->value() : null,
   'cover' => $page->cover() === null ? null : [
     'url' => $page->cover()->crop(1024, 768)->url(),
