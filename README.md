@@ -174,7 +174,7 @@ kirby-vue3-starterkit/
 
 ## Caching & Offline Capability With Service Worker
 
-Even without a service worker installed, the frontend will store pages between indiviual routes/views (in-memory store). When you reload the tab, the data for each page is freshly fetched from the API once again.
+Even without a service worker installed, the frontend will store pages between indiviual routes/views ([in-memory store](frontend/src/store/kirbyStore.js)). When you reload the tab, the data for each page is freshly fetched from the API once again.
 
 For offline capability of your Vue app, you can choose to activate the included [service worker](#service-worker).
 
@@ -185,6 +185,8 @@ A visual explanation of both methods can be found in the following flow chart:
 The service worker precaches all CSS & JS assets required by the Vue app and caches the data of every requested page. All assets are versioned and served from the service worker cache directly.
 
 Each JSON request will be freshly fetched from the network and saved to the cache. If the user's navigator turns out to be offline, the cached page request will be returned.
+
+> ⚠️ Don't change the `CONTENT_API_SLUG` once you deployed your app publicly and thus a service worker is installed on clients. Otherwise fetch requests will fail and a blank page will show until the new service worker is activated, which then is only possible by closing the tab/PWA.
 
 ## Stale-While-Revalidate
 
@@ -259,6 +261,14 @@ To keep page data fresh with **stale-while-revalidate**, set:
 6. Some hosting environments require to uncomment `RewriteBase /` in [`.htaccess`](public/.htaccess) to make site links work.
 
 Now your project is hopefully up 'n' running!
+
+## FAQ
+
+### Why is `home.json` fetched on every page?
+
+The global `site` object is required to provide the Vue Router with possible routes. Thus the `site` object has to be loaded before any other page content. For a minimum amount of HTTP requests, this `site` object resides through the [home](site/templates/home.php) template.
+
+Users will probably visit the homepage first anyway. Adding an extra route just to provide the `site` content seems superfluous to me.
 
 ## Credits
 
