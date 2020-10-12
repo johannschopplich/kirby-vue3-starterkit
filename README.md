@@ -56,7 +56,7 @@ kirby-vue3-starterkit/
 |   |   # Vue.js sources
 |   ├── src/
 |   |   |
-|   |   |   # `Header`, `Footer`, `Intro` and more components
+|   |   |   # `Header`, `Footer`, `Intro` and other components
 |   |   |   # (Vue.js components correspond to Kirby snippets)
 |   |   ├── components/
 |   |   |
@@ -69,16 +69,16 @@ kirby-vue3-starterkit/
 |   |   |   |   # Hook to announce any useful information for screen readers
 |   |   |   ├── useAnnouncer.js
 |   |   |   |
-|   |   |   |   # Hook for retrieving pages from the Kirby API as JSON
+|   |   |   |   # Hook for retrieving pages from the Kirby API
 |   |   |   ├── useKirbyApi.js
 |   |   |   |
-|   |   |   |   # Returns page for current path corresponding to Kirby's `$page` object
+|   |   |   |   # Hook returning the page for current path corresponding to Kirby's `$page` object
 |   |   |   ├── usePage.js
 |   |   |   |
 |   |   |   |   # Hook for various service worker methods like registering
 |   |   |   ├── useServiceWorker.js
 |   |   |   |
-|   |   |   |   # Returns object corresponding to Kirby's global `$site`
+|   |   |   |   # Hook returning a object corresponding to Kirby's global `$site`
 |   |   |   └── useSite.js
 |   |   |
 |   |   |   # Vue Router related methods and exports
@@ -90,7 +90,7 @@ kirby-vue3-starterkit/
 |   |   |   |   # Handles the router's scroll behaviour
 |   |   |   └── scrollBehaviour.js
 |   |   |
-|   |   |   # Minimal store to cache page data fetched via api (Vuex-free)
+|   |   |   # Minimal store to cache page data fetched via api
 |   |   ├── store/
 |   |   |
 |   |   |   # Vue.js views correspond to Kirby templates
@@ -124,10 +124,7 @@ kirby-vue3-starterkit/
 |   ├── buildSw.js
 |   |
 |   |   # Starts a PHP server for Kirby, run by `npm run kirby:serve` from root
-|   ├── serveKirby.js
-|   |
-|   |   # Builds the location from a given api path
-|   └── useApiLocation.js
+|   └── serveKirby.js
 |
 |   # Kirby's core folder containing templates, blueprints, snippets etc. for Kirby
 ├── site/
@@ -154,11 +151,10 @@ kirby-vue3-starterkit/
 |   ├── content/
 |   └── sessions/
 |
-|   # Kirby CMS and other PHP dependencies handled by Composer
+|   # Kirby CMS and other PHP dependencies (handled by Composer)
 ├── vendor/
 |
-|   # Shared environment variables accessible from both Kirby and Vue.js
-|   # To be duplicated as `.env`
+|   # Environment variables for both Kirby and Vite (to be duplicated as `.env`)
 ├── .env.example
 |
 |   # Handles PHP dependencies

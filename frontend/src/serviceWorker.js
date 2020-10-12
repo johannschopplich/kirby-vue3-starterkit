@@ -1,5 +1,5 @@
 /* eslint-env serviceworker */
-/* global API_LOCATION, VERSION */
+/* global VERSION, KIRBY_API_SLUG, CONTENT_API_SLUG */
 
 const MAX_CACHED_PAGES = false // 50
 const MAX_CACHED_IMAGES = 50
@@ -14,14 +14,14 @@ const CACHE_KEYS = {
 const EXCLUDED_URLS = [
   '/media/plugins/',
   '/panel/',
-  '/api/'
+  `/${KIRBY_API_SLUG}/`
 ]
 
 const PRECACHE_URLS = [
   '/',
-  `${API_LOCATION}/home.json`,
-  `${API_LOCATION}/error.json`,
-  `${API_LOCATION}/offline.json`,
+  `/${CONTENT_API_SLUG}/home.json`,
+  `/${CONTENT_API_SLUG}/error.json`,
+  `/${CONTENT_API_SLUG}/offline.json`,
   ...(self.__PRECACHE_ASSET_URLS || [])
 ]
 
