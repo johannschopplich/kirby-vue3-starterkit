@@ -69,7 +69,7 @@ async function minify (input) {
   }
 
   const bundle = `
-    self.__PRECACHE_ASSET_URLS = [${assetFiles.map(i => `'${i}'`).join(',')}]
+    self.__PRECACHE_MANIFEST = [${assetFiles.map(i => `'${i}'`).join(',')}]
     const VERSION = '${random()}'
     const KIRBY_API_SLUG = '${process.env.KIRBY_API_SLUG || 'api'}'
     const CONTENT_API_SLUG = '${process.env.CONTENT_API_SLUG}'

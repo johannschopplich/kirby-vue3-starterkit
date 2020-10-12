@@ -1,7 +1,7 @@
 /* eslint-env serviceworker */
 /* global VERSION, KIRBY_API_SLUG, CONTENT_API_SLUG */
 
-const MAX_CACHED_PAGES = false // 50
+const MAX_CACHED_PAGES = false
 const MAX_CACHED_IMAGES = 50
 const FETCH_TIMEOUT = 5000
 
@@ -18,11 +18,11 @@ const EXCLUDED_URLS = [
 ]
 
 const PRECACHE_URLS = [
+  ...(self.__PRECACHE_MANIFEST || []),
   '/',
   `/${CONTENT_API_SLUG}/home.json`,
   `/${CONTENT_API_SLUG}/error.json`,
-  `/${CONTENT_API_SLUG}/offline.json`,
-  ...(self.__PRECACHE_ASSET_URLS || [])
+  `/${CONTENT_API_SLUG}/offline.json`
 ]
 
 const ALLOWED_HOSTS = [
