@@ -38,10 +38,10 @@ export const page = usePage()
   margin-bottom: 1.5rem;
   padding: 3rem 0;
 }
-::v-deep(.gallery) figure a {
+::v-deep(.gallery figure a) {
   border: 0;
 }
-::v-deep(.gallery) figure {
+::v-deep(.gallery figure) {
   margin: 0;
   padding: 0;
 }
