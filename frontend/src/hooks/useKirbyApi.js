@@ -93,6 +93,7 @@ const initSite = async () => {
  */
 export const useKirbyApi = () => ({
   apiLocation,
+  fetcher,
   getPage,
   initSite
 })

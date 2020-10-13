@@ -134,12 +134,11 @@ kirby-vue3-starterkit/
 |   ├── plugins/
 |   ├── snippets/
 |   |   |
-|   |   |   # Other files
 |   |   ├── [...]
 |   |   |
 |   |   |   # Index page used in production environment – almost identical to `frontend/index.html`
 |   |   |   # Handles build asset paths, embeds the `site` object, includes SEO meta tags, …
-|   |   └── vue-index.php
+|   |   ├── vue-index.php
 |   |   |
 |   |   |   # Builds a JSON-encoded `site` object
 |   |   |   # For example used by Vue Router to populate routes
