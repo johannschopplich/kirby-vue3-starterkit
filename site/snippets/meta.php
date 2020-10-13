@@ -4,9 +4,10 @@ use Kirby\Cms\Url;
 
 $title = $page->customTitle()->or($page->title() . ' – ' . $site->title());
 $description = $page->description()->or($site->description());
-$thumbnail = ($image = $page->thumbnail()->toFile())
-    ? $image->resize(1280)->url()
-    : (($siteImage = $site->thumbnail()->toFile()) ? $siteImage->resize(1280)->url() : '/img/android-chrome-512x512.png');
+$thumbnail = (function () use ($page, $site) {
+  $file = $page->thumbnail()->toFile() ?? $site->thumbnail()->toFile();
+  return $file ? $file->resize(1280)->url() : '/img/android-chrome-512x512.png';
+})();
 
 ?>
 

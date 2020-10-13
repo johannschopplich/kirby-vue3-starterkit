@@ -35,9 +35,14 @@ return [
         'pattern' => $apiLocation . '(:all).json',
         'action'  => function ($pageId) {
             kirby()->response()->json();
-            // Prevent Kirby from falling back automatically to the error
-            // page, otherwise the service worker would fail installing
-            // due to the response's HTTP status code
+
+            // Return the global `site` object, used singly in development environment
+            if ($pageId === '__site') {
+                return Tpl::load(kirby()->roots()->snippets() . '/vue-site.php', ['site' => site()]);
+            }
+
+            // Prerender the page to prevent Kirby from using the error page's
+            // HTTP status code, otherwise the service worker fails installing
             return (page($pageId) ?? site()->errorPage())->render();
         }
     ],

@@ -11,7 +11,9 @@ const { initSite } = useKirbyApi()
 const { initSw } = useServiceWorker()
 
 ;(async () => {
+  // Router relies on children tree of `site` object
   await initSite()
+
   const router = initRouter()
   const app = createApp(App)
 

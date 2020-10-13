@@ -137,9 +137,13 @@ kirby-vue3-starterkit/
 |   |   |   # Other files
 |   |   ├── [...]
 |   |   |
-|   |   |   # Index page used by Kirby in production environment
-|   |   |   # Except for asset loading identical to `frontend/index.html`
-|   |   └── index.php
+|   |   |   # Index page used in production environment – almost identical to `frontend/index.html`
+|   |   |   # Handles build asset paths, embeds the `site` object, includes SEO meta tags, …
+|   |   └── vue-index.php
+|   |   |
+|   |   |   # Builds a JSON-encoded `site` object
+|   |   |   # For example used by Vue Router to populate routes
+|   |   └── vue-site.php
 |   |
 |   |   # Templates for JSON content representations fetched by frontend
 |   └── templates/
@@ -261,14 +265,6 @@ To keep page data fresh with **stale-while-revalidate**, set:
 6. Some hosting environments require to uncomment `RewriteBase /` in [`.htaccess`](public/.htaccess) to make site links work.
 
 Now your project is hopefully up 'n' running!
-
-## FAQ
-
-### Why is `home.json` fetched on every page?
-
-The global `site` object is required to provide the Vue Router with possible routes. Thus the `site` object has to be loaded before any other page content. For a minimum amount of HTTP requests, this `site` object resides through the [home](site/templates/home.php) template.
-
-Users will probably visit the homepage first anyway. Adding an extra route just to provide the `site` content seems superfluous to me.
 
 ## Credits
 

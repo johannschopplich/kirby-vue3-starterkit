@@ -76,12 +76,14 @@ const getPage = async (
 }
 
 /**
- * Fetch global `site` object and save it to the store
+ * Initialize global `site` object and save it to the store
  */
 const initSite = async () => {
-  // `site` is provided by `home` page
-  const home = await getPage('home')
-  kirbyStore.setSite(home.site)
+  const site = process.env.NODE_ENV === 'development'
+    ? await fetcher(`${apiLocation}/__site.json`)
+    : JSON.parse(document.getElementById('site-data').textContent)
+
+  kirbyStore.setSite(site)
 }
 
 /**
