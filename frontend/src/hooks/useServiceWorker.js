@@ -1,5 +1,9 @@
 import { ref } from 'vue'
-import { log } from '../helpers'
+
+/**
+ * Will be `true` when mode is `development`
+ */
+const __DEV__ = import.meta.env.DEV
 
 /**
  * Reactive boolean indicating if a service worker update is available
@@ -117,23 +121,23 @@ const initSw = async () => {
 
       // registrationOptions: { scope: './' },
       ready (registration) {
-        log('Service worker is active.')
+        if (__DEV__) console.log('Service worker is active.')
       },
       registered (registration) {
-        log('Service worker has been registered.')
+        if (__DEV__) console.log('Service worker has been registered.')
       },
       cached (registration) {
-        log('Content has been cached for offline use.')
+        if (__DEV__) console.log('Content has been cached for offline use.')
       },
       updatefound (registration) {
-        log('New content is downloading.')
+        if (__DEV__) console.log('New content is downloading.')
       },
       updated (registration) {
-        log('New content is available; please refresh.')
+        if (__DEV__) console.log('New content is available; please refresh.')
         hasNewWorker.value = true
       },
       offline () {
-        log('No internet connection found. App is running in offline mode.')
+        if (__DEV__) console.log('No internet connection found. App is running in offline mode.')
       },
       error (error) {
         console.error('Error during service worker registration:', error)

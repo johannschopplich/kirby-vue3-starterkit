@@ -1,5 +1,9 @@
 import { kirbyStore } from '../store/kirbyStore'
-import { log } from '../helpers'
+
+/**
+ * Will be `true` when mode is `development`
+ */
+const __DEV__ = import.meta.env.DEV
 
 /**
  * Location of the Kirby API backend
@@ -49,12 +53,17 @@ const getPage = async (
 
   // Use cached page if present in the store, except when revalidating
   if (!revalidate && isCached) {
-    log(`[getPage] Pulling ${id} page data from cache.`)
+    if (__DEV__) {
+      console.log(`[getPage] Pulling ${id} page data from cache.`)
+    }
+
     return kirbyStore.getPage(id)
   }
 
   // Otherwise fetch page for the first time
-  log(`[getPage] ${revalidate ? `Revalidating ${id} page data.` : `Fetching ${targetUrl}…`}`)
+  if (__DEV__) {
+    console.log(`[getPage] ${revalidate ? `Revalidating ${id} page data.` : `Fetching ${targetUrl}…`}`)
+  }
 
   try {
     page = await fetcher(targetUrl)
@@ -64,7 +73,9 @@ const getPage = async (
   }
 
   if (!revalidate) {
-    log(`[getPage] Fetched ${id} page data:`, page)
+    if (__DEV__) {
+      console.log(`[getPage] Fetched ${id} page data:`, page)
+    }
   }
 
   // Add page data to the store
@@ -79,7 +90,7 @@ const getPage = async (
  * Initialize global `site` object and save it to the store
  */
 const initSite = async () => {
-  const site = process.env.NODE_ENV === 'development'
+  const site = import.meta.env.DEV
     ? await fetcher(`${apiLocation}/__site.json`)
     : JSON.parse(document.getElementById('site-data').textContent)
 
