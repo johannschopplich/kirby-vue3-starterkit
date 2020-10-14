@@ -1,7 +1,9 @@
 import { ref } from 'vue'
 
 /**
- * Will be `true` when mode is `development`
+ * Will be `true` in development environment
+ *
+ * @see https://github.com/vitejs/vite/blob/master/CHANGELOG.md#breaking-changes-3
  */
 const __DEV__ = import.meta.env.DEV
 
