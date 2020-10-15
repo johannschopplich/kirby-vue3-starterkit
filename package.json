@@ -1,6 +1,6 @@
 {
   "name": "kirby-vue3-starterkit",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "scripts": {
     "kirby:serve": "node scripts/serveKirby.js",
     "kirby:flush-cache": "find storage/cache -maxdepth 1 -mindepth 1 -type d -exec rm -rf '{}' \\;",
