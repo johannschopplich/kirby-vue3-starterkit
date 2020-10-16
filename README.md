@@ -121,7 +121,7 @@ kirby-vue3-starterkit/
 ├── scripts/
 |   |
 |   |   # Service worker generator
-|   ├── buildSw.js
+|   ├── buildServiceWorker.js
 |   |
 |   |   # Starts a PHP server for Kirby, run by `npm run kirby:serve` from root
 |   └── serveKirby.js

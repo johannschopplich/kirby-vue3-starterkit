@@ -5,7 +5,7 @@
     "kirby:serve": "node scripts/serveKirby.js",
     "kirby:flush-cache": "find storage/cache -maxdepth 1 -mindepth 1 -type d -exec rm -rf '{}' \\;",
     "assets:copy": "rm -rf public/assets && cp -r frontend/dist/assets public/assets",
-    "sw:build": "node scripts/buildSw.js",
+    "sw:build": "node scripts/buildServiceWorker.js",
     "dev": "vite",
     "build": "vite build && npm run assets:copy && npm run sw:build && npm run kirby:flush-cache",
     "start": "concurrently \"npm run kirby:serve\" \"npm run dev\"",
