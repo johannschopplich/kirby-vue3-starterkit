@@ -3,10 +3,10 @@
 use Kirby\Cms\App as Kirby;
 
 $flush = function () {
-    kirby()->cache('kirby-extended.vue-integration')->flush();
+    kirby()->cache('kirby-extended.spa-integration')->flush();
 };
 
-Kirby::plugin('kirby-extended/vue-integration', [
+Kirby::plugin('kirby-extended/spa-integration', [
     'options' => [
         'cache' => true
     ],
@@ -19,7 +19,7 @@ Kirby::plugin('kirby-extended/vue-integration', [
         'system.loadPlugins:after' => function () {
             kirby()->extend([
                 'routes' => require __DIR__ . '/routes.php'
-            ], kirby()->plugin('kirby-extended/vue-integration'));
+            ], kirby()->plugin('kirby-extended/spa-integration'));
         }
     ],
     // (2)

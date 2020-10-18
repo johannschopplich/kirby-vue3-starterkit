@@ -29,6 +29,8 @@ return [
         ]
     ],
 
-    'cre8ivclick.sitemapper.title' => 'Sitemap'
+    'cre8ivclick.sitemapper' => [
+        'title' => 'Sitemap'
+    ]
 
 ];

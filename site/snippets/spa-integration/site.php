@@ -1,8 +1,8 @@
 <?php
 
-$site = [
-  'title' => $site->title()->value(),
-  'children' => array_values($site->children()->published()->map(fn($child) => [
+$data = [
+  'title' => site()->title()->value(),
+  'children' => array_values(site()->children()->published()->map(fn($child) => [
     'id' => $child->id(),
     'title' => $child->content()->title()->value(),
     'template' => $child->intendedTemplate()->name(),
@@ -16,4 +16,4 @@ $site = [
   ])->data())
 ];
 
-echo json_encode($site);
+return \Kirby\Data\Data::encode($data, 'json');

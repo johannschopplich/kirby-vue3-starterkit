@@ -10,4 +10,4 @@ $data = [
   ])->data())
 ];
 
-echo json_encode($data);
+echo \Kirby\Data\Data::encode($data, 'json');

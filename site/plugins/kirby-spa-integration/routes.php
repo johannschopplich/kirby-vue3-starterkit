@@ -16,7 +16,7 @@ return [
 
             // Return the global `site` object, used singly in development environment
             if ($pageId === '__site') {
-                return Tpl::load(kirby()->roots()->snippets() . '/vue-site.php', ['site' => site()]);
+                return require kirby()->roots()->snippets() . '/spa-integration/site.php';
             }
 
             // Prerender the page to prevent Kirby from using the error page's
@@ -26,7 +26,7 @@ return [
     ],
 
     /**
-     * Redirect all non-JSON templates to the index snippet
+     * Serve the index snippet to all non-JSON templates
      */
     [
         'pattern' => '(:all)',
@@ -35,7 +35,7 @@ return [
             $cachingActive = env('KIRBY_CACHE', false) === true && kirby()->user() === null;
 
             if ($cachingActive) {
-                $cacheBucket = kirby()->cache('kirby-extended.vue-integration');
+                $cacheBucket = kirby()->cache('kirby-extended.spa-integration');
                 $pageProxy = $cacheBucket->get($pageId ?? $site->homePageId());
 
                 if ($pageProxy !== null) {
@@ -49,7 +49,7 @@ return [
                 $page = page($pageId) ?? $site->errorPage();
             }
 
-            $renderedPage = Tpl::load(kirby()->roots()->snippets() . '/vue-index.php', compact('page', 'site'));
+            $renderedPage = Tpl::load(kirby()->roots()->snippets() . '/spa-integration/index.php', compact('page', 'site'));
 
             if ($cachingActive && !$page->isErrorPage()) {
                 $cacheBucket->set($page->id(), $renderedPage);
