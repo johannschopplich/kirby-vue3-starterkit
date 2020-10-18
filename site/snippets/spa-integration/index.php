@@ -14,6 +14,13 @@ $assetPath = function ($pattern) use ($assetsDir) {
 };
 
 /**
+ * Preloads the JSON-encoded page data for a given page
+ */
+$dataPreloadLink = function ($name) use ($apiLocation) {
+  return '<link rel="preload" href="' . $apiLocation . '/' . $name . '.json" as="fetch" crossorigin>';
+};
+
+/**
  * Preloads the view module for a given page, e.g. `Home.e701bdef.js`
  */
 $modulePreloadLink = function ($name) use ($assetsDir) {
@@ -31,6 +38,7 @@ $modulePreloadLink = function ($name) use ($assetsDir) {
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <?php snippet('meta', compact('page', 'site')) ?>
 
+  <?= $dataPreloadLink($page->id()) ?>
   <?= $modulePreloadLink($page->intendedTemplate()->name()) ?>
   <link rel="stylesheet" href="<?= $assetPath('style.*.css') ?>">
 
@@ -38,7 +46,6 @@ $modulePreloadLink = function ($name) use ($assetsDir) {
 <body>
 
   <div id="app" data-site="<?= htmlspecialchars($siteData, ENT_QUOTES) ?>"></div>
-  <script type="application/json" data-for="<?= $page->id() ?>"><?= $page->render() ?></script>
   <script type="module" src="<?= $assetPath('index.*.js') ?>"></script>
 
 </body>

@@ -53,9 +53,6 @@ const getPage = async (
   const isCached = kirbyStore.hasPage(id)
   const targetUrl = `${apiLocation}/${id}.json`
 
-  // Check if the page data is available inlined
-  const dataElement = document.querySelector(`[data-for="${id}"]`)
-
   // Use cached page if present in the store, except when revalidating
   if (!revalidate && isCached) {
     if (__DEV__) {
@@ -65,32 +62,21 @@ const getPage = async (
     return kirbyStore.getPage(id)
   }
 
-  // Otherwise retrieve page data for the first time:
-  // 1. From inlined data for the first page view only (in production)
-  // 2. Via fetch request in every other case
-  if (!__DEV__ && !revalidate && dataElement) {
-    const inlinedData = JSON.parse(dataElement.textContent)
-    page = inlinedData
+  // Otherwise retrieve page data for the first time
+  if (__DEV__) {
+    console.log(`[getPage] ${revalidate ? `Revalidating ${id} page data.` : `Fetching ${targetUrl}…`}`)
+  }
 
+  try {
+    page = await fetcher(targetUrl)
+  } catch (error) {
+    console.error(error)
+    return false
+  }
+
+  if (!revalidate) {
     if (__DEV__) {
-      console.log(`[getPage] Using inlined ${id} page data for the first page view.`)
-    }
-  } else {
-    if (__DEV__) {
-      console.log(`[getPage] ${revalidate ? `Revalidating ${id} page data.` : `Fetching ${targetUrl}…`}`)
-    }
-
-    try {
-      page = await fetcher(targetUrl)
-    } catch (error) {
-      console.error(error)
-      return false
-    }
-
-    if (!revalidate) {
-      if (__DEV__) {
-        console.log(`[getPage] Fetched ${id} page data:`, page)
-      }
+      console.log(`[getPage] Fetched ${id} page data:`, page)
     }
   }
 
