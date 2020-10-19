@@ -35,7 +35,7 @@ class SpaAdapter {
      * @return string
      */
     public static function useAssetsDir(): string {
-        return static::$assetsDir ??= Url::path(env('VITE_ASSETS_DIR'), true, true);
+        return static::$assetsDir ??= Url::path(env('VITE_ASSETS_DIR'), true);
     }
 
     /**
@@ -53,8 +53,8 @@ class SpaAdapter {
      * @return array
      */
     public static function useSite(): string {
-        $rawData = require kirby()->roots()->config() . '/site.php';
-        return static::$site ??= Data::encode($rawData, 'json');
+        $site = require kirby()->root('config') . '/site.php';
+        return static::$site ??= Data::encode($site, 'json');
     }
 
     /**
@@ -64,37 +64,36 @@ class SpaAdapter {
      * @return string
      * @throws Exception
      */
-    public static function pathToAsset ($pattern): string {
-        $filename = glob(kirby()->roots()->index() . static::useAssetsDir() . $pattern)[0] ?? null;
-        if ($filename === null) {
+    public static function pathToAsset (string $pattern): string {
+        $match = glob(kirby()->root() . static::useAssetsDir() . '/' . $pattern);
+        if (empty($match)) {
             throw new Exception('No production assets found. You have to bundle the app first. Run `npm run build`.');
         }
 
-        return static::useAssetsDir() . basename($filename);
+        return static::useAssetsDir() . '/' . basename($match[0]);
     }
 
     /**
      * Preloads the JSON-encoded page data for a given page
      *
-     * @param mixed $name Page id
+     * @param string $name Page id
      * @return void|string
      * @throws InvalidArgumentException
      */
-    public static function jsonPreloadLink ($name) {
-        if (empty($name)) return;
+    public static function jsonPreloadLink (string $name) {
         return '<link rel="preload" href="' . static::useApiLocation() . '/' . $name . '.json" as="fetch" crossorigin>';
     }
 
     /**
      * Preloads the view module for a given page, e.g. `Home.e701bdef.js`
      *
-     * @param mixed $name Page template name or other module name
+     * @param string $name Page template name or other module name
      * @return void|string
      * @throws InvalidArgumentException
      */
-    public static function modulePreloadLink ($name) {
-      $filename = glob(kirby()->roots()->index() . static::useAssetsDir() . ucfirst($name) . '.*.js')[0] ?? null;
-      if ($filename === null) return;
-      return '<link rel="modulepreload" href="' . static::useAssetsDir() . basename($filename) . '">';
+    public static function modulePreloadLink (string $name) {
+      $match = glob(kirby()->root() . static::useAssetsDir() . '/' . ucfirst($name) . '.*.js');
+      if (empty($match)) return;
+      return '<link rel="modulepreload" href="' . static::useAssetsDir() . '/' . basename($match[0]) . '">';
     }
 }
