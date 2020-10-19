@@ -2,11 +2,15 @@
 
 use Kirby\Cms\App as Kirby;
 
+load([
+    'KirbyExtended\\SpaAdapter' => 'classes/SpaAdapter.php'
+], __DIR__);
+
 $flush = function () {
-    kirby()->cache('kirby-extended.spa-integration')->flush();
+    kirby()->cache('kirby-extended.spa-adapter')->flush();
 };
 
-Kirby::plugin('kirby-extended/spa-integration', [
+Kirby::plugin('kirby-extended/spa-adapter', [
     'options' => [
         'cache' => true
     ],
@@ -19,7 +23,7 @@ Kirby::plugin('kirby-extended/spa-integration', [
         'system.loadPlugins:after' => function () {
             kirby()->extend([
                 'routes' => require __DIR__ . '/routes.php'
-            ], kirby()->plugin('kirby-extended/spa-integration'));
+            ], kirby()->plugin('kirby-extended/spa-adapter'));
         }
     ],
     // (2)

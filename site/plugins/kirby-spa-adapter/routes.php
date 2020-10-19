@@ -2,6 +2,7 @@
 
 use Kirby\Cms\Url;
 use Kirby\Toolkit\Tpl;
+use KirbyExtended\SpaAdapter;
 
 $apiLocation = Url::path(env('CONTENT_API_SLUG', ''), false, true);
 
@@ -16,7 +17,7 @@ return [
 
             // Return the global `site` object, used singly in development environment
             if ($pageId === '__site') {
-                return require kirby()->roots()->snippets() . '/spa-integration/site.php';
+                return SpaAdapter::useSite();
             }
 
             // Prerender the page to prevent Kirby from using the error page's
@@ -35,7 +36,7 @@ return [
             $cachingActive = env('KIRBY_CACHE', false) === true && kirby()->user() === null;
 
             if ($cachingActive) {
-                $cacheBucket = kirby()->cache('kirby-extended.spa-integration');
+                $cacheBucket = kirby()->cache('kirby-extended.spa-adapter');
                 $pageProxy = $cacheBucket->get($pageId ?? $site->homePageId());
 
                 if ($pageProxy !== null) {
@@ -49,7 +50,7 @@ return [
                 $page = page($pageId) ?? $site->errorPage();
             }
 
-            $renderedPage = Tpl::load(kirby()->roots()->snippets() . '/spa-integration/index.php', compact('page', 'site'));
+            $renderedPage = Tpl::load(kirby()->roots()->snippets() . '/spa-adapter/index.php', compact('page', 'site'));
 
             if ($cachingActive && !$page->isErrorPage()) {
                 $cacheBucket->set($page->id(), $renderedPage);

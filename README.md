@@ -131,7 +131,7 @@ kirby-vue3-starterkit/
 |   ├── blueprints/
 |   ├── config/
 |   ├── models/
-|   ├── plugins/spa-integration/
+|   ├── plugins/spa-adapter/
 |   |   |
 |   |   |   # Core of the SPA integration plugin, mainly registeres routes
 |   |   ├── index.php
@@ -139,7 +139,7 @@ kirby-vue3-starterkit/
 |   |   |   # Routes to handle `.json` requests and serving the `index.php` snippet
 |   |   └── routes.php
 |   |
-|   ├── snippets/spa-integration/
+|   ├── snippets/spa-adapter/
 |   |   |
 |   |   |   # Index page used in production environment – almost identical to `frontend/index.html`
 |   |   |   # Handles build asset paths, embeds the `site` object, includes SEO meta tags, …
