@@ -54,7 +54,7 @@ class SpaAdapter {
      */
     public static function useSite(): string {
         $rawData = require kirby()->roots()->config() . '/site.php';
-        return static::$site ??= Data::encode($rawData. 'json');
+        return static::$site ??= Data::encode($rawData, 'json');
     }
 
     /**
