@@ -77,10 +77,10 @@ class SpaAdapter {
      * Preloads the JSON-encoded page data for a given page
      *
      * @param string $name Page id
-     * @return void|string
+     * @return string
      * @throws InvalidArgumentException
      */
-    public static function jsonPreloadLink (string $name) {
+    public static function jsonPreloadLink (string $name): string {
         return '<link rel="preload" href="' . static::useApiLocation() . '/' . $name . '.json" as="fetch" crossorigin>';
     }
 
