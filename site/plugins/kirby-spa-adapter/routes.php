@@ -50,7 +50,7 @@ return [
                 $page = page($pageId) ?? $site->errorPage();
             }
 
-            $renderedPage = Tpl::load(kirby()->roots()->snippets() . '/spa-adapter/index.php', compact('page', 'site'));
+            $renderedPage = Tpl::load(kirby()->roots()->snippets() . '/spa-index.php', compact('page', 'site'));
 
             if ($cachingActive && !$page->isErrorPage()) {
                 $cacheBucket->set($page->id(), $renderedPage);

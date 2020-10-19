@@ -4,6 +4,7 @@ namespace KirbyExtended;
 
 use InvalidArgumentException;
 use Kirby\Cms\Url;
+use Kirby\Data\Data;
 use Kirby\Exception\Exception;
 
 class SpaAdapter {
@@ -52,7 +53,8 @@ class SpaAdapter {
      * @return array
      */
     public static function useSite(): string {
-        return static::$site ??= require kirby()->roots()->snippets() . '/spa-adapter/site.php';
+        $rawData = require kirby()->roots()->config() . '/site.php';
+        return static::$site ??= Data::encode($rawData. 'json');
     }
 
     /**
