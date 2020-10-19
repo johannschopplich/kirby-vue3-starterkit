@@ -22,7 +22,7 @@
 - 🚝 [Offline-first](#caching--offline-capability-with-service-worker): Page data caching & offline redirection
 - 💫 [Stale-while-revalidate](#stale-while-revalidate) page data
 - 🗃️ Centralized state management without Vuex
-- 🤝 Shared `.env` file for frontend & backend
+- 🤝 Shared [`.env`](.env.example) file for frontend & backend
 - 🚀 Modern Kirby folder setup
 
 ### Introduction
@@ -196,7 +196,7 @@ kirby-vue3-starterkit/
 
 Even without a service worker installed, the frontend will store pages between indiviual routes/views ([in-memory store](frontend/src/store/kirbyStore.js)). When you reload the tab, the data for each page is freshly fetched from the API once again.
 
-For offline capability of your Vue app, you can choose to activate the included [service worker](#service-worker).
+For offline capability of your Vue app, you can choose to activate the included [service worker](frontend/src/serviceWorker.js).
 
 A visual explanation of both methods can be found in the following flow chart:
 
@@ -205,8 +205,6 @@ A visual explanation of both methods can be found in the following flow chart:
 The service worker precaches all CSS & JS assets required by the Vue app and caches the data of every requested page. All assets are versioned and served from the service worker cache directly.
 
 Each JSON request will be freshly fetched from the network and saved to the cache. If the user's navigator turns out to be offline, the cached page request will be returned.
-
-> ⚠️ Don't change the `CONTENT_API_SLUG` once you deployed your app publicly and thus a service worker is installed on clients. Otherwise fetch requests will fail and a blank page will show until the new service worker is activated, which then is only possible by closing the tab/PWA.
 
 ## Stale-While-Revalidate
 
@@ -262,8 +260,21 @@ All development and production related configurations for both backend and front
 - `KIRBY_SERVER_HOSTNAME` and `KIRBY_SERVER_PORT` specify the address where you wish the Kirby backend to be served from. It is used by the frontend to fetch content data as JSON.
 - Keys starting with `VITE_` are available in your code following the `import.meta.env.VITE_CUSTOM_VARIABLE` syntax.
 
+#### Content API Slug
+
+To change the API slug to fetch JSON-encoded page data from, set
+- `CONTENT_API_SLUG` to a value of your liking (defaults to `content`).
+
+> You can't use Kirby's internal API slug (defaults to `api`). If you insist on using `api` for *your* content endpoint, you can rename the Kirby api slug: Add a `KIRBY_API_SLUG` key and set it to something else than `api`.
+
+#### Service Worker
+
 To enable the **service worker** which precaches essential assets and page API calls for offline capability, set:
 - `VITE_ENABLE_SW` to `true`
+
+> ⚠️ Don't change the `CONTENT_API_SLUG` once you deployed your app publicly and thus a service worker is installed on clients. Otherwise fetch requests will fail and a blank page will show until the new service worker is activated, which then is only possible by closing the tab/PWA.
+
+#### Stale-While-Revalidate
 
 To keep page data fresh with **stale-while-revalidate**, set:
 - `VITE_ENABLE_SWR` to `true`
