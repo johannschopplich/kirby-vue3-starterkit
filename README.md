@@ -265,7 +265,7 @@ All development and production related configurations for both backend and front
 To change the API slug to fetch JSON-encoded page data from, set
 - `CONTENT_API_SLUG` to a value of your liking (defaults to `content`).
 
-> You can't use Kirby's internal API slug (defaults to `api`). If you insist on using `api` for *your* content endpoint, you can rename the Kirby api slug: Add a `KIRBY_API_SLUG` key and set it to something else than `api`.
+> You can't use Kirby's internal API slug (defaults to `api`). If you insist on using `api` for *your* content endpoint, you can rename Kirby's by adding a `KIRBY_API_SLUG` key and set it to something else than `api`.
 
 #### Service Worker
 
