@@ -53,7 +53,7 @@ class SpaAdapter {
      * @return array
      */
     public static function useSite(): string {
-        $site = require kirby()->root('config') . '/site.php';
+        $site = require kirby()->root('config') . '/spa-site.php';
         return static::$site ??= Data::encode($site, 'json');
     }
 

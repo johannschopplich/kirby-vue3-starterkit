@@ -144,7 +144,7 @@ kirby-vue3-starterkit/
 |   |   |
 |   |   |   # Builds a JSON-encoded `site` object for the frontend
 |   |   |   # Used by Vue Router to populate routes, but can be extended by commonly used data
-|   |   └── site.php
+|   |   └── spa-site.php
 |   |
 |   ├── models/
 |   ├── plugins/spa-adapter/
