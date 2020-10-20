@@ -1,6 +1,8 @@
 <template>
   <footer class="footer">
-    <router-link to="/">&copy; {{ new Date().getFullYear() }} / {{ site.title }}</router-link>
+    <router-link to="/">
+      &copy; {{ new Date().getFullYear() }} / {{ site.title }}
+    </router-link>
 
     <nav class="social">
       <a

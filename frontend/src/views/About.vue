@@ -34,7 +34,7 @@
       </section>
     </aside>
 
-    <div class="text" v-html="page.text" v-kirbytext />
+    <div v-kirbytext class="text" v-html="page.text" />
   </div>
 </template>
 

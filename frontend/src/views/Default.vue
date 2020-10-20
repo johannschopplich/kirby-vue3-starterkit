@@ -1,7 +1,12 @@
 <template>
   <Intro>{{ page.title }}</Intro>
 
-  <div v-if="page.isReady" class="text" v-html="page.text" v-kirbytext />
+  <div
+    v-if="page.isReady"
+    v-kirbytext
+    class="text"
+    v-html="page.text"
+  />
 </template>
 
 <script setup>

@@ -1,8 +1,8 @@
 <template>
   <a
+    ref="skipLink"
     href="#main"
     class="skip-to-content-link"
-    ref="skipLink"
     @click.prevent="handleFocusElement"
   >
     Skip to content

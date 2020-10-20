@@ -4,7 +4,7 @@
     "es2020": true
   },
   "extends": [
-    "plugin:vue/vue3-essential",
+    "plugin:vue/vue3-recommended",
     "plugin:jsdoc/recommended",
     "standard"
   ],
@@ -17,6 +17,14 @@
     "jsdoc"
   ],
   "rules": {
-    "vue/no-v-html": "off"
+    "vue/max-attributes-per-line": ["error", {
+      "singleline": 3,
+      "multiline": {
+        "max": 1,
+        "allowFirstLine": false
+      }
+    }],
+    "vue/no-v-html": "off",
+    "quote-props": ["error", "consistent-as-needed"]
   }
 }
