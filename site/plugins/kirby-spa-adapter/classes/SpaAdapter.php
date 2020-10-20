@@ -88,12 +88,13 @@ class SpaAdapter {
      * Preloads the view module for a given page, e.g. `Home.e701bdef.js`
      *
      * @param string $name Page template name or other module name
-     * @return void|string
+     * @return string|void
      * @throws InvalidArgumentException
      */
     public static function modulePreloadLink (string $name) {
-      $match = glob(kirby()->root() . static::useAssetsDir() . '/' . ucfirst($name) . '.*.js');
-      if (empty($match)) return;
-      return '<link rel="modulepreload" href="' . static::useAssetsDir() . '/' . basename($match[0]) . '">';
+        $match = glob(kirby()->root() . static::useAssetsDir() . '/' . ucfirst($name) . '.*.js');
+        if (!empty($match)) {
+            return '<link rel="modulepreload" href="' . static::useAssetsDir() . '/' . basename($match[0]) . '">';
+        }
     }
 }
