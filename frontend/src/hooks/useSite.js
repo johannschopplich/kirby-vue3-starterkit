@@ -16,7 +16,7 @@ const site = reactive({})
 export const initSite = async () => {
   const data = import.meta.env.DEV
     ? await fetcher(`${apiLocation}/__site.json`)
-    : JSON.parse(document.getElementById('app').dataset.site)
+    : JSON.parse(document.getElementById('site-data').textContent)
 
   Object.assign(site, data)
 }

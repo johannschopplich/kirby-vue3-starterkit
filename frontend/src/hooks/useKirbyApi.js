@@ -60,6 +60,7 @@ const getPage = async (
       console.log(`[getPage] Pulling ${id} page data from cache.`)
     }
 
+    // Doesn't work in Safari without returning the original object
     return toRaw(pages.get(id))
   }
 
