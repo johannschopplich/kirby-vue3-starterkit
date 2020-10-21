@@ -1,7 +1,6 @@
 import { reactive } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import { useKirbyApi } from './useKirbyApi'
-import { useAnnouncer } from './useAnnouncer'
+import { useAnnouncer, useKirbyApi } from './'
 
 /**
  * Indicates if stale-while-revalidation is enabled
@@ -28,7 +27,7 @@ const toPageId = path => {
  * @param {string} [path] Optional path or page id to retrieve
  * @returns {object} Reactive page object
  */
-export const usePage = path => {
+export default path => {
   const router = useRouter()
   const { path: currentPath } = useRoute()
   const { hasPage, getPage } = useKirbyApi()

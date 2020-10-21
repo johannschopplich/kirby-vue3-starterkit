@@ -39,7 +39,7 @@
 </template>
 
 <script setup>
-import { usePage } from '../hooks/usePage'
+import { usePage } from '../hooks'
 
 export { default as Intro } from '../components/Intro.vue'
 export const page = usePage()

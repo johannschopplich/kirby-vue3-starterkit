@@ -52,7 +52,7 @@ const resetAnnouncer = () => {
  *
  * @returns {object} Object containing announcer-related methods
  */
-export const useAnnouncer = () => ({
+export default () => ({
   announcer,
   setAnnouncer,
   announcePolite,

@@ -30,7 +30,7 @@
 </template>
 
 <script setup>
-import { usePage } from '../hooks/usePage'
+import { usePage } from '../hooks'
 
 export const page = usePage()
 </script>

@@ -11,7 +11,7 @@
 </template>
 
 <script setup>
-import { useServiceWorker } from '../hooks/useServiceWorker'
+import { useServiceWorker } from '../hooks'
 
 const { hasNewWorker, activateNewWorker } = useServiceWorker()
 export { hasNewWorker, activateNewWorker }

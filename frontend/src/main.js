@@ -2,8 +2,7 @@ import './main.css'
 
 import { createApp } from 'vue'
 import { initRouter } from './router'
-import { initSite } from './hooks/useSite'
-import { useServiceWorker } from './hooks/useServiceWorker'
+import { initSite, useServiceWorker } from './hooks'
 import KirbyTextDirective from './plugins/KirbyTextDirective'
 import App from './App.vue'
 

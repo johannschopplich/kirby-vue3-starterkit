@@ -1,5 +1,5 @@
 import { reactive, readonly } from 'vue'
-import { useKirbyApi } from './useKirbyApi'
+import { useKirbyApi } from './'
 
 const { apiLocation, fetcher } = useKirbyApi()
 

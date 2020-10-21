@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { scrollBehavior } from './scrollBehaviour'
-import { useSite } from '../hooks/useSite'
+import { useSite } from '../hooks'
 import { capitalize } from '../helpers'
 
 /**

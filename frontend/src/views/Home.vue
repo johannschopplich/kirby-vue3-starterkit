@@ -22,7 +22,7 @@
 </template>
 
 <script setup>
-import { usePage } from '../hooks/usePage'
+import { usePage } from '../hooks'
 
 const page = usePage()
 const photography = usePage('photography')

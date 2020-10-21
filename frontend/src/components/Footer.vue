@@ -17,7 +17,7 @@
 </template>
 
 <script setup>
-import { useSite } from '../hooks/useSite'
+import { useSite } from '../hooks'
 
 export const site = useSite()
 </script>

@@ -169,7 +169,7 @@ const initSw = async () => {
  *
  * @returns {object} Object containing service worker-related methods
  */
-export const useServiceWorker = () => ({
+export default () => ({
   register,
   unregister,
   hasNewWorker,

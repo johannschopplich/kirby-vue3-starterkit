@@ -19,7 +19,7 @@
 
 <script setup>
 import { useRoute } from 'vue-router'
-import { useSite } from '../hooks/useSite'
+import { useSite } from '../hooks'
 
 export const site = useSite()
 export const route = useRoute()

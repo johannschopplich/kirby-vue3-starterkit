@@ -102,7 +102,7 @@ const hasPage = id => pages.has(id)
  *
  * @returns {object} Object containing API-related methods
  */
-export const useKirbyApi = () => ({
+export default () => ({
   apiLocation,
   fetcher,
   pages,
