@@ -1,11 +1,4 @@
-import { kirbyStore } from '../store/kirbyStore'
-
-/**
- * Will be `true` in development environment
- *
- * @see https://github.com/vitejs/vite/blob/master/CHANGELOG.md#breaking-changes-3
- */
-const __DEV__ = import.meta.env.DEV
+import { reactive, toRaw } from 'vue'
 
 /**
  * Location of the Kirby API backend
@@ -13,6 +6,13 @@ const __DEV__ = import.meta.env.DEV
  * @constant {string}
  */
 const apiLocation = import.meta.env.VITE_BACKEND_API_LOCATION
+
+/**
+ * Reactive map to store pages in
+ *
+ * @constant {object}
+ */
+const pages = reactive(new Map())
 
 /**
  * Fetcher function to request JSON data from the server
@@ -50,7 +50,8 @@ const getPage = async (
   } = {}
 ) => {
   let page
-  const isCached = kirbyStore.hasPage(id)
+  const __DEV__ = import.meta.env.DEV
+  const isCached = pages.has(id)
   const targetUrl = `${apiLocation}/${id}.json`
 
   // Use cached page if present in the store, except when revalidating
@@ -59,7 +60,7 @@ const getPage = async (
       console.log(`[getPage] Pulling ${id} page data from cache.`)
     }
 
-    return kirbyStore.getPage(id)
+    return toRaw(pages.get(id))
   }
 
   // Otherwise retrieve page data for the first time
@@ -82,22 +83,19 @@ const getPage = async (
 
   // Add page data to the store
   if (!isCached || revalidate) {
-    kirbyStore.setPage(id, page)
+    pages.set(id, page)
   }
 
   return page
 }
 
 /**
- * Initialize global `site` object and save it to the store
+ * Check if a page has been cached
+ *
+ * @param {string} id Id of page to look up
+ * @returns {boolean} `true` if the page exists
  */
-const initSite = async () => {
-  const site = __DEV__
-    ? await fetcher(`${apiLocation}/__site.json`)
-    : JSON.parse(document.getElementById('site-data').textContent)
-
-  kirbyStore.setSite(site)
-}
+const hasPage = id => pages.has(id)
 
 /**
  * Hook for handling Kirby API data retrieval and its location
@@ -107,6 +105,7 @@ const initSite = async () => {
 export const useKirbyApi = () => ({
   apiLocation,
   fetcher,
-  getPage,
-  initSite
+  pages,
+  hasPage,
+  getPage
 })

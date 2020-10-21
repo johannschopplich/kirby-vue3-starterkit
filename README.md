@@ -21,7 +21,6 @@
 - 🔍 SEO-friendly ([server-side generated](site/snippets/meta.php) meta tags)
 - 🚝 [Offline-first](#caching--offline-capability-with-service-worker): Page data caching & offline redirection
 - 💫 [Stale-while-revalidate](#stale-while-revalidate) page data
-- 🗃️ Centralized state management without Vuex
 - 🤝 Shared [`.env`](.env.example) file for frontend & backend
 - 🚀 Modern Kirby folder setup
 
@@ -95,9 +94,6 @@ kirby-vue3-starterkit/
 |   |   |   |
 |   |   |   |   # Handles the router's scroll behaviour
 |   |   |   └── scrollBehaviour.js
-|   |   |
-|   |   |   # Minimal store to cache page data fetched via api
-|   |   ├── store/
 |   |   |
 |   |   |   # Vue.js views corresponding to Kirby templates
 |   |   |   # Routes are being automatically resolved
@@ -194,7 +190,7 @@ kirby-vue3-starterkit/
 
 ## Caching & Offline Capability With Service Worker
 
-Even without a service worker installed, the frontend will store pages between indiviual routes/views ([in-memory store](frontend/src/store/kirbyStore.js)). When you reload the tab, the data for each page is freshly fetched from the API once again.
+Even without a service worker installed, the frontend will store pages between indiviual routes/views. When you reload the tab, the data for each page is freshly fetched from the API once again.
 
 For offline capability of your Vue app, you can choose to activate the included [service worker](frontend/src/serviceWorker.js).
 
@@ -296,7 +292,6 @@ Now your project is hopefully up 'n' running!
 ## Credits
 
 - Big thanks to Jakub Medvecký Heretik for his inspirational work on [kirby-vue-starterkit](https://github.com/jmheretik/kirby-vue-starterkit).
-- Mario Brendl for his [article on a Vue 3 based store w/o Vuex](https://medium.com/@mario.brendel1990/vue-3-the-new-store-a7569d4a546f).
 
 ## License
 

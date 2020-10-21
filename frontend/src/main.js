@@ -2,12 +2,11 @@ import './main.css'
 
 import { createApp } from 'vue'
 import { initRouter } from './router'
-import { useKirbyApi } from './hooks/useKirbyApi'
+import { initSite } from './hooks/useSite'
 import { useServiceWorker } from './hooks/useServiceWorker'
 import KirbyTextDirective from './plugins/KirbyTextDirective'
 import App from './App.vue'
 
-const { initSite } = useKirbyApi()
 const { initSw } = useServiceWorker()
 
 ;(async () => {
