@@ -18,7 +18,8 @@ use KirbyExtended\SpaAdapter;
 </head>
 <body>
 
-  <div id="app" data-site="<?= htmlspecialchars(SpaAdapter::useSite(), ENT_QUOTES) ?>"></div>
+  <div id="app"></div>
+  <script id="site-data" type="application/json"><?= SpaAdapter::useSite() ?></script>
   <script type="module" src="<?= SpaAdapter::pathToAsset('index.*.js') ?>"></script>
 
 </body>

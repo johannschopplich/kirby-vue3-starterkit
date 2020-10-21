@@ -94,7 +94,7 @@ const getPage = async (
 const initSite = async () => {
   const site = __DEV__
     ? await fetcher(`${apiLocation}/__site.json`)
-    : JSON.parse(document.getElementById('app').dataset.site)
+    : JSON.parse(document.getElementById('site-data').textContent)
 
   kirbyStore.setSite(site)
 }
