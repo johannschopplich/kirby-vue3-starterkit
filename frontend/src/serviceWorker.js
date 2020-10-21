@@ -11,10 +11,15 @@ const CACHE_KEYS = {
   IMAGES: 'images'
 }
 
-const EXCLUDED_URLS = [
-  '/media/plugins/',
+const ALLOWED_HOSTS = [
+  self.location.host
+]
+
+const EXCLUDED_PATH_PREFIXES = [
+  `/${KIRBY_API_SLUG}/`,
   '/panel/',
-  `/${KIRBY_API_SLUG}/`
+  '/media/panel/',
+  '/media/plugins/'
 ]
 
 const PRECACHE_URLS = [
@@ -23,10 +28,6 @@ const PRECACHE_URLS = [
   `/${CONTENT_API_SLUG}/home.json`,
   `/${CONTENT_API_SLUG}/error.json`,
   `/${CONTENT_API_SLUG}/offline.json`
-]
-
-const ALLOWED_HOSTS = [
-  self.location.host
 ]
 
 /**
@@ -101,7 +102,7 @@ self.addEventListener('fetch', event => {
 
   if (request.method !== 'GET') return
   if (!ALLOWED_HOSTS.find(host => url.host === host)) return
-  if (EXCLUDED_URLS.some(page => request.url.includes(page))) return
+  if (EXCLUDED_PATH_PREFIXES.some(path => url.pathname.startsWith(path))) return
 
   const isHTML = destination.startsWith('text/html')
   const isImage = destination.startsWith('image')
