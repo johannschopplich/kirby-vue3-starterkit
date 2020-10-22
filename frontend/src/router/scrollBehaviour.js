@@ -13,7 +13,7 @@ export function scrollBehavior (to, from, savedPosition) {
   // Returning the `savedPosition` (if available) will result in a native-like
   // behavior when navigating with back/forward buttons
   if (savedPosition) {
-    return savedPosition
+    return { ...savedPosition, behavior }
   }
 
   // Scroll to anchor by returning the selector
@@ -28,5 +28,5 @@ export function scrollBehavior (to, from, savedPosition) {
   }
 
   // Always scroll to top
-  return { left: 0, top: 0 }
+  return { left: 0, top: 0, behavior }
 }
