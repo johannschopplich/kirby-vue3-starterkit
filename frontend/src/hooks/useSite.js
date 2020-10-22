@@ -26,4 +26,4 @@ export const initSite = async () => {
  *
  * @returns {object} Readonly `site` state
  */
-export const useSite = () => readonly(site)
+export default () => readonly(site)
