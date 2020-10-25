@@ -1,5 +1,5 @@
-const phpServer = require('php-server')
 require('dotenv').config()
+const phpServer = require('php-server')
 
 ;(async () => {
   const server = await phpServer({

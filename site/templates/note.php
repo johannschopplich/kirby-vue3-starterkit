@@ -8,4 +8,4 @@ $data = [
   'text' => $page->text()->kt()->value()
 ];
 
-echo \Kirby\Data\Data::encode($data, 'json');
+echo \Kirby\Data\Json::encode($data);

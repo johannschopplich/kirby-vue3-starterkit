@@ -13,4 +13,4 @@ $data = [
   ])->data())
 ];
 
-echo \Kirby\Data\Data::encode($data, 'json');
+echo \Kirby\Data\Json::encode($data);
