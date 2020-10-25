@@ -14,8 +14,8 @@ return [
     [
         'pattern' => $apiLocation . '(:all).json',
         'action'  => function ($pageId) {
-            // Return the global `site` object, used singly in development environment
             if ($pageId === '__site') {
+                // Return the global `site` object, used singly in development environment
                 $data = SpaAdapter::useSite();
             } else {
                 // Prerender the page to prevent Kirby from using the error page's

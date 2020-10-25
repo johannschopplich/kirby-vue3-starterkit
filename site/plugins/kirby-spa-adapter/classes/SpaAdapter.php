@@ -30,7 +30,14 @@ class SpaAdapter {
     public static string $site;
 
     /**
-     * Get and cache the `$assetsDir`
+     * List of active languages
+     *
+     * @var array
+     */
+    public static array $languages;
+
+    /**
+     * Get and cache `$assetsDir`
      *
      * @return string
      */
@@ -39,7 +46,7 @@ class SpaAdapter {
     }
 
     /**
-     * Get and cache the `$apiLocation`
+     * Get and cache `$apiLocation`
      *
      * @return string
      */
@@ -48,13 +55,29 @@ class SpaAdapter {
     }
 
     /**
-     * Get and cache the `$site`
+     * Get and cache `$site`
      *
-     * @return array
+     * @return string
      */
     public static function useSite(): string {
         $site = require kirby()->root('config') . '/spa-site.php';
         return static::$site ??= Data::encode($site, 'json');
+    }
+
+    /**
+     * Get and cache `$languages`
+     *
+     * @return array
+     */
+    public static function useLanguages(): array {
+        $data = kirby()->languages()->map(fn($language) => [
+            'code' => $language->code(),
+            'name' => $language->name(),
+            'prefix' => $language->path(),
+            'isDefault' => $language->isDefault()
+        ])->data();
+
+        return static::$languages ??= array_values($data);
     }
 
     /**
