@@ -6,7 +6,7 @@ load([
     'KirbyExtended\\SpaAdapter' => 'classes/SpaAdapter.php'
 ], __DIR__);
 
-$flush = function () {
+$flushCache = function () {
     kirby()->cache('kirby-extended.spa-adapter')->flush();
 };
 
@@ -15,9 +15,8 @@ Kirby::plugin('kirby-extended/spa-adapter', [
         'cache' => true
     ],
     'hooks' => [
-        'page.*:after' => $flush,
-        'site.*:after' => $flush,
-        // (1)
+        'page.*:after' => $flushCache,
+        'site.*:after' => $flushCache,
         // Explicitly register catch-all routes for SPA only when Kirby and all
         // plugins have been loaded to ensure no other routes are overwritten
         'system.loadPlugins:after' => function () {
@@ -25,8 +24,5 @@ Kirby::plugin('kirby-extended/spa-adapter', [
                 'routes' => require __DIR__ . '/routes.php'
             ], kirby()->plugin('kirby-extended/spa-adapter'));
         }
-    ],
-    // (2)
-    // The following line will NOT work and overwrite custom routes
-    // 'routes' => require __DIR__ . '/routes.php'
+    ]
 ]);

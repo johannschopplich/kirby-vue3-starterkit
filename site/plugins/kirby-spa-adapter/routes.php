@@ -1,6 +1,7 @@
 <?php
 
 use Kirby\Cms\Url;
+use Kirby\Http\Response;
 use Kirby\Toolkit\Tpl;
 use KirbyExtended\SpaAdapter;
 
@@ -13,16 +14,16 @@ return [
     [
         'pattern' => $apiLocation . '(:all).json',
         'action'  => function ($pageId) {
-            kirby()->response()->json();
-
             // Return the global `site` object, used singly in development environment
             if ($pageId === '__site') {
-                return SpaAdapter::useSite();
+                $data = SpaAdapter::useSite();
+            } else {
+                // Prerender the page to prevent Kirby from using the error page's
+                // HTTP status code, otherwise the service worker fails installing
+                $data = (page($pageId) ?? site()->errorPage())->render();
             }
 
-            // Prerender the page to prevent Kirby from using the error page's
-            // HTTP status code, otherwise the service worker fails installing
-            return (page($pageId) ?? site()->errorPage())->render();
+            return Response::json($data);
         }
     ],
 
