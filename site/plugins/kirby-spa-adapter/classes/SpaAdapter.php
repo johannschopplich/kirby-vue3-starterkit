@@ -29,13 +29,6 @@ class SpaAdapter {
     public static array $site;
 
     /**
-     * List of active languages
-     *
-     * @var array
-     */
-    public static array $languages;
-
-    /**
      * Get and cache `$assetsDir`
      *
      * @return string
@@ -60,22 +53,6 @@ class SpaAdapter {
      */
     public static function useSite(): array {
         return static::$site ??= require kirby()->root('config') . '/spa-site.php';
-    }
-
-    /**
-     * Get and cache `$languages`
-     *
-     * @return array
-     */
-    public static function useLanguages(): array {
-        $data = kirby()->languages()->map(fn($language) => [
-            'code' => $language->code(),
-            'name' => $language->name(),
-            'prefix' => $language->path(),
-            'isDefault' => $language->isDefault()
-        ])->data();
-
-        return static::$languages ??= array_values($data);
     }
 
     /**
