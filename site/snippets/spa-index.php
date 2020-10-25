@@ -1,5 +1,6 @@
 <?php
 
+use Kirby\Data\Json;
 use KirbyExtended\SpaAdapter;
 
 ?>
@@ -19,7 +20,7 @@ use KirbyExtended\SpaAdapter;
 <body>
 
   <div id="app"></div>
-  <script id="site-data" type="application/json"><?= SpaAdapter::useSite() ?></script>
+  <script id="site-data" type="application/json"><?= Json::encode(SpaAdapter::useSite()) ?></script>
   <script type="module" src="<?= SpaAdapter::pathToAsset('index.*.js') ?>"></script>
 
 </body>

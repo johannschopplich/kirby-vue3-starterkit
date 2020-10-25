@@ -4,7 +4,6 @@ namespace KirbyExtended;
 
 use InvalidArgumentException;
 use Kirby\Cms\Url;
-use Kirby\Data\Data;
 use Kirby\Exception\Exception;
 
 class SpaAdapter {
@@ -25,9 +24,9 @@ class SpaAdapter {
     /**
      * Global `site` data for the index template
      *
-     * @var string
+     * @var array
      */
-    public static string $site;
+    public static array $site;
 
     /**
      * List of active languages
@@ -57,11 +56,10 @@ class SpaAdapter {
     /**
      * Get and cache `$site`
      *
-     * @return string
+     * @return array
      */
-    public static function useSite(): string {
-        $site = require kirby()->root('config') . '/spa-site.php';
-        return static::$site ??= Data::encode($site, 'json');
+    public static function useSite(): array {
+        return static::$site ??= require kirby()->root('config') . '/spa-site.php';
     }
 
     /**
