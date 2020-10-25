@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { scrollBehavior } from './scrollBehaviour'
-import { useSite } from '../hooks'
+import { useSite, useLanguages } from '../hooks'
 import { capitalize } from '../helpers'
 
 /**
@@ -10,17 +10,19 @@ import { capitalize } from '../helpers'
  */
 export const initRouter = () => {
   const site = useSite()
+  const { currentCode } = useLanguages()
+  const base = currentCode ? `/${currentCode}/` : ''
   const routes = []
 
   for (const page of site.children) {
     routes.push({
-      path: `/${page.id}`,
+      path: `/${page.uri}`,
       component: () => import(`../views/${capitalize(page.template)}.vue`).catch(() => import('../views/Default.vue'))
     })
 
     if (page.hasChildren) {
       routes.push({
-        path: `/${page.id}/:id`,
+        path: `/${page.uri}/:id`,
         component: () => import(`../views/${capitalize(page.childTemplate)}.vue`).catch(() => import('../views/Default.vue'))
       })
     }
@@ -34,7 +36,7 @@ export const initRouter = () => {
   routes.push({ path: '/:catchAll(.*)', component: () => import('../views/Default.vue') })
 
   return createRouter({
-    history: createWebHistory(),
+    history: createWebHistory(base),
     routes,
     scrollBehavior
   })

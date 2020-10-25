@@ -1,4 +1,5 @@
 import { reactive, toRaw } from 'vue'
+import { useLanguages } from './'
 
 /**
  * Location of the Kirby API backend
@@ -51,8 +52,10 @@ const getPage = async (
 ) => {
   let page
   const __DEV__ = import.meta.env.DEV
+  const { currentCode } = useLanguages()
+  const langPath = currentCode ? `/${currentCode}` : ''
   const isCached = pages.has(id)
-  const targetUrl = `${apiLocation}/${id}.json`
+  const targetUrl = `${apiLocation}${langPath}/${id}.json`
 
   // Use cached page if present in the store, except when revalidating
   if (!revalidate && isCached) {

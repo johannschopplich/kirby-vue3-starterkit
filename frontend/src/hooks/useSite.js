@@ -4,7 +4,7 @@ import { useKirbyApi } from './'
 const { apiLocation, fetcher } = useKirbyApi()
 
 /**
- * Reactive object for theglobal `site` data
+ * Reactive object for the global `site` data
  *
  * @constant {object}
  */

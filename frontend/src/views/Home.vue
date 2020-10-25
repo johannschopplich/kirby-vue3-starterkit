@@ -2,8 +2,8 @@
   <Intro>{{ page.title }}</Intro>
 
   <ul v-if="photography.isReady" class="grid">
-    <li v-for="album in photography.children" :key="album.id">
-      <router-link :to="`/${album.id}`">
+    <li v-for="album in photography.children" :key="album.uri">
+      <router-link :to="`/${album.uri}`">
         <figure>
           <img :src="album.cover.urlHome" :alt="album.cover.alt">
 
