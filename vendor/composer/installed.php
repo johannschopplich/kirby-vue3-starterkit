@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '3425298ce5874a35fd54473bc614208447e3ba66',
+    'reference' => '26ee55449102e02ac33706712ee6ba337b90cebc',
     'name' => '__root__',
   ),
   'versions' => 
@@ -18,7 +18,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '3425298ce5874a35fd54473bc614208447e3ba66',
+      'reference' => '26ee55449102e02ac33706712ee6ba337b90cebc',
     ),
     'claviska/simpleimage' => 
     array (
