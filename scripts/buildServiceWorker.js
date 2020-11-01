@@ -1,42 +1,10 @@
 require('dotenv').config()
-const { resolve } = require('path')
-const { readdir, readFile, writeFile } = require('fs/promises')
-const { minify: _minify } = require('terser')
+const { readFileSync, writeFileSync } = require('fs')
+const { minify } = require('terser')
 
-const assetsDir = 'public/assets'
-const assetFiles = []
+const swManifest = JSON.parse(readFileSync(`public/${process.env.VITE_ASSETS_DIR}/manifest.json`))
 const swSrcPath = 'frontend/src/serviceWorker.js'
 const swDistPath = 'public/service-worker.js'
-
-/**
- * Extract basename from path and add to asset files array
- *
- * @param {object} absolutePath Path to asset file
- */
-function addAsset (absolutePath) {
-  // Extract path relative to installable service worker
-  const path = absolutePath.split('/public')[1]
-
-  // Add asset to files to precache array
-  assetFiles.push(path)
-}
-
-/**
- * Get list of pathnames in a specific directory
- *
- * @param {string} dir Directory to list
- */
-async function * getFiles (dir) {
-  const dirents = await readdir(dir, { withFileTypes: true })
-  for (const dirent of dirents) {
-    const res = resolve(dir, dirent.name)
-    if (dirent.isDirectory()) {
-      yield * getFiles(res)
-    } else {
-      yield res
-    }
-  }
-}
 
 /**
  * Generates a random string like `af51-7184-69cd`
@@ -48,36 +16,19 @@ function random () {
   return `${segment()}-${segment()}-${segment()}`
 }
 
-/**
- * Minifies ES6+ code with Terser
- *
- * @param {string} input Script to minify
- * @returns {string} Minified code
- */
-async function minify (input) {
-  try {
-    const { code } = await _minify(input)
-    return code
-  } catch (error) {
-    throw new Error(error)
-  }
-}
-
 ;(async () => {
-  for await (const file of getFiles(assetsDir)) {
-    addAsset(file)
-  }
+  const assetFiles = Object.values(swManifest).map(i => `/${process.env.VITE_ASSETS_DIR}/${i}`)
 
   const bundle = `
     self.__PRECACHE_MANIFEST = [${assetFiles.map(i => `'${i}'`).join(',')}]
     const VERSION = '${random()}'
     const KIRBY_API_SLUG = '${process.env.KIRBY_API_SLUG || 'api'}'
     const CONTENT_API_SLUG = '${process.env.CONTENT_API_SLUG}'
-    ${await readFile(swSrcPath)}
+    ${readFileSync(swSrcPath)}
   `
 
-  const minified = await minify(bundle)
-  await writeFile(swDistPath, minified)
+  const { code } = await minify(bundle)
+  writeFileSync(swDistPath, code)
 
   console.log('\x1b[32m%s\x1b[0m', `Created service worker with ${assetFiles.length} additional assets to precache.`)
 })()
