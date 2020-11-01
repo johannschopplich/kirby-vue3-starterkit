@@ -31,7 +31,7 @@ export const initRouter = () => {
   routes.push({ path: '/home', redirect: '/' })
 
   // Catch-all fallback
-  routes.push({ path: '/:catchAll(.*)', component: () => import('../views/Default.vue') })
+  routes.push({ path: '/:pathMatch(.*)', component: () => import('../views/Default.vue') })
 
   return createRouter({
     history: createWebHistory(),
