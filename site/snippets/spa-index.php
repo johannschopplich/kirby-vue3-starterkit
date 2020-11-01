@@ -14,14 +14,14 @@ use KirbyExtended\SpaAdapter;
 
   <?= SpaAdapter::jsonPreloadLink($page->id()) ?>
   <?= SpaAdapter::modulePreloadLink($page->intendedTemplate()->name()) ?>
-  <link rel="stylesheet" href="<?= SpaAdapter::pathToAsset('style.*.css') ?>">
+  <link rel="stylesheet" href="<?= SpaAdapter::pathToAsset('style.css') ?>">
 
 </head>
 <body>
 
   <div id="app"></div>
   <script id="site-data" type="application/json"><?= Json::encode(SpaAdapter::useSite()) ?></script>
-  <script type="module" src="<?= SpaAdapter::pathToAsset('index.*.js') ?>"></script>
+  <script type="module" src="<?= SpaAdapter::pathToAsset('index.js') ?>"></script>
 
 </body>
 </html>

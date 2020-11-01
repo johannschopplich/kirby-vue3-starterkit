@@ -7,6 +7,7 @@ module.exports = {
   root: 'frontend',
   assetsDir: process.env.VITE_ASSETS_DIR,
   emitIndex: false,
+  emitManifest: true,
   esbuildTarget: 'es2018',
 
   env: {
