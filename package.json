@@ -27,6 +27,6 @@
     "eslint-plugin-standard": "^4.0.2",
     "eslint-plugin-vue": "^7.1.0",
     "php-server": "^0.2.1",
-    "vite": "^1.0.0-rc.8"
+    "vite": "^1.0.0-rc.9"
   }
 }

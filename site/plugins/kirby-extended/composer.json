@@ -22,7 +22,6 @@
     "php": ">=7.4.0",
     "getkirby/composer-installer": "^1.1",
     "phpoption/phpoption": "^1.7",
-    "spatie/schema-org": "^2.14",
     "vlucas/phpdotenv": "^5.0"
   },
   "require-dev": {

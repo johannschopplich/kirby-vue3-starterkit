@@ -4,7 +4,6 @@ use Kirby\Cms\Page;
 use KirbyExtended\Env;
 use KirbyExtended\HigherOrderTapProxy;
 use KirbyExtended\MetaTagsAdapter;
-use Spatie\SchemaOrg\Schema;
 
 if (!function_exists('env')) {
     /**
@@ -50,19 +49,6 @@ if (!function_exists('value')) {
     function value($value)
     {
         return $value instanceof Closure ? $value() : $value;
-    }
-}
-
-if (!function_exists('schema')) {
-    /**
-     * Fluent builder for Schema.org types and ld+json generator
-     *
-     * @param string $type
-     * @return mixed
-     */
-    function schema(string $type)
-    {
-        return Schema::{$type}();
     }
 }
 

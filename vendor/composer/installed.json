@@ -276,24 +276,23 @@
         },
         {
             "name": "johannschopplich/kirby-extended",
-            "version": "v1.0.12",
-            "version_normalized": "1.0.12.0",
+            "version": "v1.1.0",
+            "version_normalized": "1.1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/johannschopplich/kirby-extended.git",
-                "reference": "a0eb111339b9c2bbacc39ca9352aac7f57b4e838"
+                "reference": "4ad146ff29e79b80a184ed3aa43bac6d8037b68f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/johannschopplich/kirby-extended/zipball/a0eb111339b9c2bbacc39ca9352aac7f57b4e838",
-                "reference": "a0eb111339b9c2bbacc39ca9352aac7f57b4e838",
+                "url": "https://api.github.com/repos/johannschopplich/kirby-extended/zipball/4ad146ff29e79b80a184ed3aa43bac6d8037b68f",
+                "reference": "4ad146ff29e79b80a184ed3aa43bac6d8037b68f",
                 "shasum": ""
             },
             "require": {
                 "getkirby/composer-installer": "^1.1",
                 "php": ">=7.4.0",
                 "phpoption/phpoption": "^1.7",
-                "spatie/schema-org": "^2.14",
                 "vlucas/phpdotenv": "^5.0"
             },
             "require-dev": {
@@ -301,7 +300,7 @@
                 "phpstan/phpstan": "^0.12",
                 "phpunit/phpunit": "^9.0"
             },
-            "time": "2020-09-18T09:22:23+00:00",
+            "time": "2020-11-02T17:07:53+00:00",
             "type": "kirby-plugin",
             "extra": {
                 "kirby-cms-path": false
@@ -335,6 +334,10 @@
                 "meta-tags",
                 "seo"
             ],
+            "support": {
+                "issues": "https://github.com/johannschopplich/kirby-extended/issues",
+                "source": "https://github.com/johannschopplich/kirby-extended/tree/v1.1.0"
+            },
             "install-path": "../../site/plugins/kirby-extended"
         },
         {
@@ -833,77 +836,6 @@
                 "psr-3"
             ],
             "install-path": "../psr/log"
-        },
-        {
-            "name": "spatie/schema-org",
-            "version": "2.16.0",
-            "version_normalized": "2.16.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/spatie/schema-org.git",
-                "reference": "31f1fd54584d98b50026ecb17fe7067384ec209a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/spatie/schema-org/zipball/31f1fd54584d98b50026ecb17fe7067384ec209a",
-                "reference": "31f1fd54584d98b50026ecb17fe7067384ec209a",
-                "shasum": ""
-            },
-            "require": {
-                "ext-json": "*",
-                "php": "^7.3"
-            },
-            "require-dev": {
-                "graham-campbell/analyzer": "^2.3",
-                "league/flysystem": "^1.0",
-                "phpunit/phpunit": "^8.0",
-                "symfony/console": "^3.2",
-                "tightenco/collect": "^7.25",
-                "twig/twig": "^1.28"
-            },
-            "time": "2020-08-27T16:55:28+00:00",
-            "type": "library",
-            "installation-source": "dist",
-            "autoload": {
-                "psr-4": {
-                    "Spatie\\SchemaOrg\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Sebastian De Deyne",
-                    "email": "sebastian@spatie.be",
-                    "homepage": "https://spatie.be",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Tom Witkowski",
-                    "email": "dev.gummibeer@gmail.com",
-                    "homepage": "https://gummibeer.de",
-                    "role": "Developer"
-                }
-            ],
-            "description": "A fluent builder Schema.org types and ld+json generator",
-            "homepage": "https://github.com/spatie/schema-org",
-            "keywords": [
-                "schema-org",
-                "spatie"
-            ],
-            "funding": [
-                {
-                    "url": "https://spatie.be/open-source/support-us",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/spatie",
-                    "type": "github"
-                }
-            ],
-            "install-path": "../spatie/schema-org"
         },
         {
             "name": "symfony/polyfill-ctype",
