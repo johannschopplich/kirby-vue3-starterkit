@@ -12,7 +12,7 @@ use KirbyExtended\SpaAdapter;
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <?php snippet('meta', compact('page', 'site')) ?>
 
-  <?= SpaAdapter::jsonPreloadLink($page->id()) ?>
+  <?= SpaAdapter::jsonPreloadLink($page->uri()) ?>
   <?= SpaAdapter::modulePreloadLink($page->intendedTemplate()->name()) ?>
   <link rel="stylesheet" href="<?= SpaAdapter::pathToAsset('style.css') ?>">
 
