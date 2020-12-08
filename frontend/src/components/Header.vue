@@ -7,9 +7,9 @@
     <nav id="menu" class="menu">
       <router-link
         v-for="page in site.children.filter(page => page.isListed)"
-        :key="page.id"
-        :to="`/${page.id}`"
-        :class="{ 'router-link-active': route.path.startsWith(`/${page.id}/`) }"
+        :key="page.uri"
+        :to="`/${page.uri}`"
+        :class="{ 'router-link-active': route.path.startsWith(`/${page.uri}/`) }"
       >
         {{ page.title }}
       </router-link>
@@ -17,12 +17,17 @@
   </header>
 </template>
 
-<script setup>
+<script>
 import { useRoute } from 'vue-router'
 import { useSite } from '../hooks'
 
-export const site = useSite()
-export const route = useRoute()
+export default {
+  setup () {
+    const site = useSite()
+    const route = useRoute()
+    return { site, route }
+  }
+}
 </script>
 
 <style>

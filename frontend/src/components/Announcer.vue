@@ -6,10 +6,16 @@
   />
 </template>
 
-<script setup>
+<script>
 import { useAnnouncer } from '../hooks'
 
-export const { announcer } = useAnnouncer()
+export default {
+  setup () {
+    const { announcer } = useAnnouncer()
+    return { announcer }
+  }
+}
+
 </script>
 
 <style>

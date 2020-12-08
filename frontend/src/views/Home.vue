@@ -2,8 +2,8 @@
   <Intro>{{ page.title }}</Intro>
 
   <ul v-if="photography.isReady" class="grid">
-    <li v-for="album in photography.children" :key="album.id">
-      <router-link :to="`/${album.id}`">
+    <li v-for="album in photography.children" :key="album.uri">
+      <router-link :to="`/${album.uri}`">
         <figure>
           <img :src="album.cover.urlHome" :alt="album.cover.alt">
 
@@ -21,23 +21,31 @@
   </div>
 </template>
 
-<script setup>
+<script>
 import { usePage } from '../hooks'
+import Intro from '../components/Intro.vue'
 
-const page = usePage()
-const photography = usePage('photography')
+export default {
+  components: {
+    Intro
+  },
 
-// Example of `isReadyPromise()` page method
-;(async () => {
-  await photography.isReadyPromise()
-  // Do something with the reactive page object
-  console.log('Photography page data has been loaded.')
-})()
+  setup () {
+    const page = usePage()
+    const photography = usePage('photography')
 
-export { default as Intro } from '../components/Intro.vue'
-export {
-  page,
-  photography
+    // Example of `isReadyPromise()` page method
+    ;(async () => {
+      await photography.isReadyPromise()
+      // Do something with the reactive page object
+      console.log('Photography page data has been loaded.')
+    })()
+
+    return {
+      page,
+      photography
+    }
+  }
 }
 </script>
 

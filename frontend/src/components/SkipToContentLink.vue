@@ -9,31 +9,35 @@
   </a>
 </template>
 
-<script setup>
+<script>
 import { ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 
-const skipLink = ref(null)
-const route = useRoute()
+export default {
+  setup () {
+    const skipLink = ref(null)
+    const route = useRoute()
 
-watch(route, () => {
-  skipLink.value.focus()
-})
+    watch(route, () => {
+      skipLink.value.focus()
+    })
 
-const focusElement = id => {
-  const element = document.querySelector(id)
-  if (!id || !element) return
-  element.scrollIntoView()
-  element.focus()
-}
+    const focusElement = id => {
+      const element = document.querySelector(id)
+      if (!id || !element) return
+      element.scrollIntoView()
+      element.focus()
+    }
 
-const handleFocusElement = ({ target }) => {
-  focusElement(target.hash)
-}
+    const handleFocusElement = ({ target }) => {
+      focusElement(target.hash)
+    }
 
-export {
-  skipLink,
-  handleFocusElement
+    return {
+      skipLink,
+      handleFocusElement
+    }
+  }
 }
 </script>
 

@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import { scrollBehavior } from './scrollBehaviour'
 import { useSite } from '../hooks'
 import { capitalize } from '../helpers'
+import Default from '../views/Default.vue'
 
 /**
  * Creates the Vue Router instance
@@ -10,28 +11,25 @@ import { capitalize } from '../helpers'
  */
 export const initRouter = () => {
   const site = useSite()
-  const routes = []
-
-  for (const page of site.children) {
-    routes.push({
-      path: `/${page.id}`,
-      component: () => import(`../views/${capitalize(page.template)}.vue`).catch(() => import('../views/Default.vue'))
-    })
-
-    if (page.hasChildren) {
-      routes.push({
-        path: `/${page.id}/:id`,
-        component: () => import(`../views/${capitalize(page.childTemplate)}.vue`).catch(() => import('../views/Default.vue'))
-      })
-    }
-  }
+  const routes = [
+    ...site.children.map(page => ({
+      path: `/${page.uri}`,
+      component: () => import(`../views/${capitalize(page.template)}.vue`).catch(() => Default)
+    })),
+    ...site.children
+      .filter(page => page.childTemplate)
+      .map(page => ({
+        path: `/${page.uri}/:id`,
+        component: () => import(`../views/${capitalize(page.childTemplate)}.vue`).catch(() => Default)
+      }))
+  ]
 
   // Redirect `/home` to `/`
   routes.find(route => route.path === '/home').path = '/'
   routes.push({ path: '/home', redirect: '/' })
 
   // Catch-all fallback
-  routes.push({ path: '/:pathMatch(.*)', component: () => import('../views/Default.vue') })
+  routes.push({ path: '/:pathMatch(.*)*', component: Default })
 
   return createRouter({
     history: createWebHistory(),

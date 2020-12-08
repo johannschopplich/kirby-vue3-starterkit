@@ -9,11 +9,21 @@
   />
 </template>
 
-<script setup>
+<script>
 import { usePage } from '../hooks'
+import Intro from '../components/Intro.vue'
 
-export { default as Intro } from '../components/Intro.vue'
-export const page = usePage()
+export default {
+  components: {
+    Intro
+  },
+
+  setup () {
+    return {
+      page: usePage()
+    }
+  }
+}
 </script>
 
 <style scoped>
