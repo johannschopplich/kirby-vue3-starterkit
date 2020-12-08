@@ -1,7 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { scrollBehavior } from './scrollBehaviour'
-import { useSite, useLanguages } from '../hooks'
+import { useSite } from '../hooks'
 import { capitalize } from '../helpers'
+import Default from '../views/Default.vue'
 
 /**
  * Creates the Vue Router instance
@@ -10,33 +11,28 @@ import { capitalize } from '../helpers'
  */
 export const initRouter = () => {
   const site = useSite()
-  const { currentCode } = useLanguages()
-  const base = currentCode ? `/${currentCode}/` : ''
-  const routes = []
-
-  for (const page of site.children) {
-    routes.push({
+  const routes = [
+    ...site.children.map(page => ({
       path: `/${page.uri}`,
-      component: () => import(`../views/${capitalize(page.template)}.vue`).catch(() => import('../views/Default.vue'))
-    })
-
-    if (page.hasChildren) {
-      routes.push({
+      component: () => import(`../views/${capitalize(page.template)}.vue`).catch(() => Default)
+    })),
+    ...site.children
+      .filter(page => page.childTemplate)
+      .map(page => ({
         path: `/${page.uri}/:id`,
-        component: () => import(`../views/${capitalize(page.childTemplate)}.vue`).catch(() => import('../views/Default.vue'))
-      })
-    }
-  }
+        component: () => import(`../views/${capitalize(page.childTemplate)}.vue`).catch(() => Default)
+      }))
+  ]
 
   // Redirect `/home` to `/`
   routes.find(route => route.path === '/home').path = '/'
   routes.push({ path: '/home', redirect: '/' })
 
   // Catch-all fallback
-  routes.push({ path: '/:catchAll(.*)', component: () => import('../views/Default.vue') })
+  routes.push({ path: '/:pathMatch(.*)*', component: Default })
 
   return createRouter({
-    history: createWebHistory(base),
+    history: createWebHistory(),
     routes,
     scrollBehavior
   })

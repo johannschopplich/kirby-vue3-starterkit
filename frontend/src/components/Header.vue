@@ -17,12 +17,17 @@
   </header>
 </template>
 
-<script setup>
+<script>
 import { useRoute } from 'vue-router'
 import { useSite } from '../hooks'
 
-export const site = useSite()
-export const route = useRoute()
+export default {
+  setup () {
+    const site = useSite()
+    const route = useRoute()
+    return { site, route }
+  }
+}
 </script>
 
 <style>

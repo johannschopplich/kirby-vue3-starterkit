@@ -2,13 +2,13 @@
  * Mitt: Tiny functional event emitter / pubsub
  *
  * @name mitt
- * @param {Map} [all] Optional Map of event names to registered handler functions
+ * @param {Array} [all] Optional array of event names to registered handler functions
  * @returns {Function} The function's instance
  */
 export default class Mitt {
-  constructor (all = new Map()) {
+  constructor (all = []) {
     // A Map of event names to registered handler functions.
-    this.all = all
+    this.all = new Map(all)
   }
 
   /**

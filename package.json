@@ -2,32 +2,31 @@
   "name": "kirby-vue3-starterkit",
   "version": "1.6.0",
   "scripts": {
-    "kirby:serve": "node scripts/serveKirby.js",
+    "kirby:serve": "env-cmd --use-shell \"php -S \\$KIRBY_SERVER_HOSTNAME:\\$KIRBY_SERVER_PORT -t public server.php\"",
     "kirby:flush-cache": "find storage/cache -maxdepth 1 -mindepth 1 -type d -exec rm -rf '{}' \\;",
     "assets:copy": "rm -rf public/assets && cp -r frontend/dist/assets public/assets",
     "sw:build": "node scripts/buildServiceWorker.js",
-    "dev": "vite",
+    "dev": "concurrently \"npm run kirby:serve\" \"vite\"",
     "build": "vite build && npm run assets:copy && npm run sw:build && npm run kirby:flush-cache",
-    "start": "concurrently \"npm run kirby:serve\" \"npm run dev\"",
     "lint": "eslint \"frontend/src/**/*.{js,vue}\""
   },
   "dependencies": {
-    "vue": "^3.0.2",
-    "vue-router": "^4.0.0-rc.1"
+    "vue": "^3.0.4",
+    "vue-router": "^4.0.1"
   },
   "devDependencies": {
-    "@vue/compiler-sfc": "^3.0.2",
+    "@vue/compiler-sfc": "^3.0.4",
     "concurrently": "^5.3.0",
     "dotenv": "^8.2.0",
-    "eslint": "^7.12.0",
-    "eslint-config-standard": "^15.0.0",
+    "env-cmd": "^10.1.0",
+    "eslint": "^7.15.0",
+    "eslint-config-standard": "^16.0.2",
     "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-jsdoc": "^30.7.3",
+    "eslint-plugin-jsdoc": "^30.7.8",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-standard": "^4.0.2",
-    "eslint-plugin-vue": "^7.1.0",
-    "php-server": "^0.2.1",
-    "vite": "^1.0.0-rc.6"
+    "eslint-plugin-standard": "^4.1.0",
+    "eslint-plugin-vue": "^7.2.0",
+    "vite": "^1.0.0-rc.13"
   }
 }

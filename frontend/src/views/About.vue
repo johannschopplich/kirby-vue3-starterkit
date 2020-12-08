@@ -26,7 +26,7 @@
         <h2>On the web</h2>
         <div class="text">
           <ul>
-            <li v-for="social in page.social" :key="social.id">
+            <li v-for="social in page.social" :key="social.uri">
               <a :href="social.url">{{ social.platform }}</a>
             </li>
           </ul>
@@ -38,11 +38,16 @@
   </div>
 </template>
 
-<script setup>
+<script>
 import { usePage } from '../hooks'
 
-export { default as Intro } from '../components/Intro.vue'
-export const page = usePage()
+export default {
+  setup () {
+    return {
+      page: usePage()
+    }
+  }
+}
 </script>
 
 <style>

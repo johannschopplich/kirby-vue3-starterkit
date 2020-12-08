@@ -21,23 +21,31 @@
   </div>
 </template>
 
-<script setup>
+<script>
 import { usePage } from '../hooks'
+import Intro from '../components/Intro.vue'
 
-const page = usePage()
-const photography = usePage('photography')
+export default {
+  components: {
+    Intro
+  },
 
-// Example of `isReadyPromise()` page method
-;(async () => {
-  await photography.isReadyPromise()
-  // Do something with the reactive page object
-  console.log('Photography page data has been loaded.')
-})()
+  setup () {
+    const page = usePage()
+    const photography = usePage('photography')
 
-export { default as Intro } from '../components/Intro.vue'
-export {
-  page,
-  photography
+    // Example of `isReadyPromise()` page method
+    ;(async () => {
+      await photography.isReadyPromise()
+      // Do something with the reactive page object
+      console.log('Photography page data has been loaded.')
+    })()
+
+    return {
+      page,
+      photography
+    }
+  }
 }
 </script>
 

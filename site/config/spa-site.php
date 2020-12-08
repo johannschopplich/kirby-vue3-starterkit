@@ -6,10 +6,9 @@ return [
     'children' => array_values(site()->children()->published()->map(fn($child) => [
         'uri' => $child->uri(),
         'title' => $child->content()->title()->value(),
-        'template' => $child->intendedTemplate()->name(),
         'isListed' => $child->isListed(),
-        'hasChildren' => $child->hasChildren(),
-        'childTemplate' => $child->hasChildren() ? $child->children()->published()->first()->intendedTemplate()->name() : null
+        'template' => $child->intendedTemplate()->name(),
+        'childTemplate' => $child->hasChildren() ? $child->children()->first()->intendedTemplate()->name() : null
     ])->data()),
     // (2)
     // The following data is required for multi-language setups:

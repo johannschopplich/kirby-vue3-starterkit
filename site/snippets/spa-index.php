@@ -12,16 +12,16 @@ use KirbyExtended\SpaAdapter;
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <?php snippet('meta', compact('page', 'site')) ?>
 
-  <?= SpaAdapter::jsonPreloadLink($page->id()) ?>
+  <?= SpaAdapter::jsonPreloadLink($page->uri()) ?>
   <?= SpaAdapter::modulePreloadLink($page->intendedTemplate()->name()) ?>
-  <link rel="stylesheet" href="<?= SpaAdapter::pathToAsset('style.*.css') ?>">
+  <link rel="stylesheet" href="<?= SpaAdapter::pathToAsset('style.css') ?>">
 
 </head>
 <body>
 
   <div id="app"></div>
   <script id="site-data" type="application/json"><?= Json::encode(SpaAdapter::useSite()) ?></script>
-  <script type="module" src="<?= SpaAdapter::pathToAsset('index.*.js') ?>"></script>
+  <script type="module" src="<?= SpaAdapter::pathToAsset('index.js') ?>"></script>
 
 </body>
 </html>

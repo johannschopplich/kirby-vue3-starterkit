@@ -24,12 +24,6 @@ A HTML meta tags for Kirby. Supports [Open Graph](http://ogp.me), [Twitter Cards
 
 [👉 Full documentation](docs/meta-tags-adapter.md)
 
-## Schema.org
-
-A fluent builder for all Schema.org types and their properties and JSON-LD generator.
-
-[👉 Full documentation](docs/schema-adapter.md)
-
 ## Requirements
 
 - Kirby 3

@@ -234,8 +234,8 @@ npm install
 ### Serve Backend & Frontend for Development
 
 ```bash
-# Runs `npm run kirby:serve` and `npm run dev` in parallel
-npm run start
+# Runs `npm run kirby:serve` and `vite` in parallel
+npm run dev
 ```
 
 Out of the box the backend is automatically served while developing. `npm run kirby:serve` spawns the PHP built-in web server by Node. You can also serve the backend by a web server of your choice. If done so, please specify hostname and port in your `.env` if they differ from `localhost`and `8080` respectively so that the decoupled frontend can call the Kirby API for JSON content in development.
@@ -247,8 +247,6 @@ Build the frontend assets (CSS & JS files) to `public/assets`:
 ```bash
 npm run build
 ```
-
-**Note**: If you wish to target older browsers, run `npm run build:compat` which transpiles to `es2017`. For even older browsers, you can change the target in the `package.json`'s npm script.
 
 ### Configuration
 

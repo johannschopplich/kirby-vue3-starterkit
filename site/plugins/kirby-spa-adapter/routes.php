@@ -54,7 +54,7 @@ return [
             $renderedPage = Tpl::load(kirby()->root('snippets') . '/spa-index.php', compact('page', 'site'));
 
             if ($cachingActive && !$page->isErrorPage()) {
-                $cacheBucket->set($page->id(), $renderedPage);
+                $cacheBucket->set($page->uri(), $renderedPage);
             }
 
             return $renderedPage;
