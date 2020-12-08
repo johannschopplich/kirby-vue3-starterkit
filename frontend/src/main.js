@@ -11,7 +11,7 @@ const { initSw } = useServiceWorker()
 ;(async () => {
   // Router relies on children tree of `site` object
   await initSite()
-  // Only actived in multi-language setups
+  // Required for multi-language setups
   initLanguages()
 
   const router = initRouter()

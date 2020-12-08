@@ -52,10 +52,9 @@ const getPage = async (
 ) => {
   let page
   const __DEV__ = import.meta.env.DEV
-  const { currentCode } = useLanguages()
-  const langPath = currentCode ? `/${currentCode}` : ''
+  const { languageCode } = useLanguages()
   const isCached = pages.has(id)
-  const targetUrl = `${apiLocation}${langPath}/${id}.json`
+  const targetUrl = `${apiLocation}/${languageCode ? `${languageCode}/` : ''}${id}.json`
 
   // Use cached page if present in the store, except when revalidating
   if (!revalidate && isCached) {

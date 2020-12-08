@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { scrollBehavior } from './scrollBehaviour'
-import { useSite } from '../hooks'
+import { useSite, useLanguages } from '../hooks'
 import { capitalize } from '../helpers'
 import Default from '../views/Default.vue'
 
@@ -11,6 +11,9 @@ import Default from '../views/Default.vue'
  */
 export const initRouter = () => {
   const site = useSite()
+  const { currentCode } = useLanguages()
+  const base = currentCode ? `/${currentCode}/` : ''
+
   const routes = [
     ...site.children.map(page => ({
       path: `/${page.uri}`,
@@ -32,7 +35,7 @@ export const initRouter = () => {
   routes.push({ path: '/:pathMatch(.*)*', component: Default })
 
   return createRouter({
-    history: createWebHistory(),
+    history: createWebHistory(base),
     routes,
     scrollBehavior
   })

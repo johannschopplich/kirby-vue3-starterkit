@@ -5,23 +5,26 @@ import { useSite } from './'
  *
  * @constant {(string|null)}
  */
-let currentLang = null
+let languageCode = null
 
 /**
  * Initialize language code in multi-language setup
  */
 export const initLanguages = () => {
+  const __DEV__ = import.meta.env.DEV
   const site = useSite()
   if (!site.languages?.length) return
 
-  if (import.meta.env.DEV) {
+  if (__DEV__) {
+    const location = window.location.href
     document.documentElement.lang =
-      site.languages.find(language => window.location.href.includes(`/${language.code}`))?.code ??
-      site.languages.find(language => language.isDefault)?.code ??
+      site.languages.find(lang => location.endsWith(`/${lang.code}`) || location.includes(`/${lang.code}/`))?.code ??
+      site.languages.find(lang => lang.isDefault)?.code ??
       'en'
   }
 
-  currentLang = document.documentElement.lang
+  languageCode = document.documentElement.lang
+  if (__DEV__) console.log('[useLanguages] Current language code', languageCode)
 }
 
 /**
@@ -30,5 +33,5 @@ export const initLanguages = () => {
  * @returns {object} Object language-related data
  */
 export default () => ({
-  currentLang
+  languageCode
 })

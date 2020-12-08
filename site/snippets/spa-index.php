@@ -5,7 +5,7 @@ use KirbyExtended\SpaAdapter;
 
 ?>
 <!DOCTYPE html>
-<html lang="<?= kirby()->languages()->isNotEmpty() ? kirby()->language()->code() : 'en' ?>">
+<html lang="<?= kirby()->languageCode() ?? 'en' ?>">
 <head>
 
   <meta charset="utf-8">
