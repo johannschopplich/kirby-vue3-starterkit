@@ -1,13 +1,11 @@
 <?php
 
-$language = kirby()->languageCode();
-
 return [
     // (1)
     // The following data is mandatory for the frontend router to initialize:
     'children' => array_values(site()->children()->published()->map(fn($child) => [
         'uri' => $child->uri(),
-        'title' => $child->content($language)->title()->value(),
+        'title' => $child->content(kirby()->languageCode())->title()->value(),
         'isListed' => $child->isListed(),
         'template' => $child->intendedTemplate()->name(),
         'childTemplate' => $child->hasChildren() ? $child->children()->first()->intendedTemplate()->name() : null
