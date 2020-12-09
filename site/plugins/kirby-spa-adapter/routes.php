@@ -12,11 +12,9 @@ return [
      * Return the global `site` object, used singly in development environment
      */
     [
-        'pattern' => [
-            "{$apiLocation}__site.json",
-            "{$apiLocation}(:all)/__site.json"
-        ],
-        'action'  => function () {
+        'pattern' => "{$apiLocation}__site.json",
+        'language' => '*',
+        'action' => function () {
             $data = SpaAdapter::useSite();
             return Response::json($data);
         }
@@ -27,22 +25,17 @@ return [
      */
     [
         'pattern' => "{$apiLocation}(:all).json",
-        'action'  => function ($pageId) {
-            if (kirby()->multilang()) {
-                $this->next();
-            }
-
+        'language' => '*',
+        'action' => function ($language, $pageId) {
             // Prerender the page to prevent Kirby from using the error page's
             // HTTP status code, otherwise the service worker fails installing
-            $data = (page($pageId) ?? site()->errorPage())->render();
-            return Response::json($data);
-        }
-    ],
-    [
-        'pattern' => "{$apiLocation}(:any)/(:all).json",
-        'action'  => function ($lang, $pageId) {
             $page = page($pageId) ?? site()->errorPage();
-            $data = site()->visit($page, $lang)->render();
+
+            if (kirby()->multilang()) {
+                $page = site()->visit($page, $language);
+            }
+
+            $data = $page->render();
             return Response::json($data);
         }
     ],
@@ -52,20 +45,14 @@ return [
      */
     [
         'pattern' => '(:all)',
-        'action'  => function ($pageId) {
-            // Extract language in multi-language setup
-            if (kirby()->multilang()) {
-                $match = preg_split('/\//', $pageId, 2);
-                if (count($match) === 1) $match[] = null;
-                [$lang, $pageId] = $match;
-            }
-
+        'language' => '*',
+        'action' => function ($language, $pageId) {
             $site = site();
             $cachingActive = env('KIRBY_CACHE', false) === true && kirby()->user() === null;
 
             if ($cachingActive) {
                 $cacheBucket = kirby()->cache('kirby-extended.spa-adapter');
-                $pageProxy = $cacheBucket->get($pageId ?? $site->homePageId());
+                $pageProxy = $cacheBucket->get($language . '/' . $pageId ?? $site->homePageId());
 
                 if ($pageProxy !== null) {
                     return $pageProxy;
@@ -80,13 +67,13 @@ return [
 
             // Get translated content
             if (kirby()->multilang()) {
-                $page = site()->visit($page, $lang);
+                $page = site()->visit($page, $language);
             }
 
             $renderedPage = Tpl::load(kirby()->root('snippets') . '/spa-index.php', compact('page', 'site'));
 
             if ($cachingActive && !$page->isErrorPage()) {
-                $cacheBucket->set($page->uri(), $renderedPage);
+                $cacheBucket->set($language . '/' . $page->uri(), $renderedPage);
             }
 
             return $renderedPage;
