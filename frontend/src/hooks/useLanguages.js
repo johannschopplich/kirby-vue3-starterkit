@@ -1,5 +1,7 @@
 import { useSite } from './'
 
+let isInitialized = false
+
 /**
  * Current language code in multi-language setup
  *
@@ -10,14 +12,15 @@ let languageCode = null
 /**
  * Initialize language code in multi-language setup
  */
-export const initLanguages = () => {
+const initLanguages = () => {
   const __DEV__ = import.meta.env.DEV
   const site = useSite()
   if (!site.languages?.length) return
 
   if (__DEV__) {
+    const url = window.location.href
     document.documentElement.lang =
-      site.languages.find(lang => navigator.language.startsWith(lang.code))?.code ??
+      site.languages.find(({ code }) => url.endsWith(`/${code}`) || url.includes(`/${code}/`))?.code ??
       site.languages.find(lang => lang.isDefault)?.code ??
       'en'
   }
@@ -31,6 +34,13 @@ export const initLanguages = () => {
  *
  * @returns {object} Object language-related data
  */
-export default () => ({
-  languageCode
-})
+export default () => {
+  if (!isInitialized) {
+    initLanguages()
+    isInitialized = true
+  }
+
+  return {
+    languageCode
+  }
+}
