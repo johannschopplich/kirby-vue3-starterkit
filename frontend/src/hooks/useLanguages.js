@@ -16,15 +16,14 @@ export const initLanguages = () => {
   if (!site.languages?.length) return
 
   if (__DEV__) {
-    const location = window.location.href
     document.documentElement.lang =
-      site.languages.find(lang => location.endsWith(`/${lang.code}`) || location.includes(`/${lang.code}/`))?.code ??
+      site.languages.find(lang => navigator.language.startsWith(lang.code))?.code ??
       site.languages.find(lang => lang.isDefault)?.code ??
       'en'
   }
 
   languageCode = document.documentElement.lang
-  if (__DEV__) console.log('[useLanguages] Current language code', languageCode)
+  if (__DEV__) console.log('[useLanguages] Current language code:', languageCode)
 }
 
 /**

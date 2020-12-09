@@ -9,20 +9,37 @@ $apiLocation = Url::path(env('CONTENT_API_SLUG', ''), false, true);
 
 return [
     /**
+     * Return the global `site` object, used singly in development environment
+     */
+    [
+        'pattern' => "{$apiLocation}__site.json",
+        'action'  => function () {
+            $data = SpaAdapter::useSite();
+            return Response::json($data);
+        }
+    ],
+
+    /**
      * Respond with JSON-encoded page data for any given URL ending with `.json`
      */
     [
-        'pattern' => $apiLocation . '(:all).json',
+        'pattern' => "{$apiLocation}(:all).json",
         'action'  => function ($pageId) {
-            if ($pageId === '__site') {
-                // Return the global `site` object, used singly in development environment
-                $data = SpaAdapter::useSite();
-            } else {
-                // Prerender the page to prevent Kirby from using the error page's
-                // HTTP status code, otherwise the service worker fails installing
-                $data = (page($pageId) ?? site()->errorPage())->render();
+            if (kirby()->multilang()) {
+                $this->next();
             }
 
+            // Prerender the page to prevent Kirby from using the error page's
+            // HTTP status code, otherwise the service worker fails installing
+            $data = (page($pageId) ?? site()->errorPage())->render();
+            return Response::json($data);
+        }
+    ],
+    [
+        'pattern' => "{$apiLocation}(:any)/(:all).json",
+        'action'  => function ($lang, $pageId) {
+            $page = page($pageId) ?? site()->errorPage();
+            $data = site()->visit($page, $lang)->render();
             return Response::json($data);
         }
     ],
