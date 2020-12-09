@@ -40,8 +40,13 @@
 
 <script>
 import { usePage } from '../hooks'
+import Intro from '../components/Intro.vue'
 
 export default {
+  components: {
+    Intro
+  },
+
   setup () {
     return {
       page: usePage()
