@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '50781bdd3b475208e75a6c5ac62be72d72e8bfef',
+    'reference' => '7d5133e01ec969ecb019a2d8d5ec928ca0f76e0f',
     'name' => '__root__',
   ),
   'versions' => 
@@ -18,7 +18,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '50781bdd3b475208e75a6c5ac62be72d72e8bfef',
+      'reference' => '7d5133e01ec969ecb019a2d8d5ec928ca0f76e0f',
     ),
     'claviska/simpleimage' => 
     array (
@@ -40,12 +40,12 @@
     ),
     'getkirby/cms' => 
     array (
-      'pretty_version' => '3.4.4',
-      'version' => '3.4.4.0',
+      'pretty_version' => '3.4.5',
+      'version' => '3.4.5.0',
       'aliases' => 
       array (
       ),
-      'reference' => '6112f1cb8ebf9c36e8a9f97ae08acc910ddbc792',
+      'reference' => 'db8f371b13036861c9cc5ba3e85e27f73fce5e09',
     ),
     'getkirby/composer-installer' => 
     array (
@@ -67,12 +67,12 @@
     ),
     'johannschopplich/kirby-extended' => 
     array (
-      'pretty_version' => 'v1.1.0',
-      'version' => '1.1.0.0',
+      'pretty_version' => 'v1.1.1',
+      'version' => '1.1.1.0',
       'aliases' => 
       array (
       ),
-      'reference' => '4ad146ff29e79b80a184ed3aa43bac6d8037b68f',
+      'reference' => 'b22b810dee3873320de86d8fc1cb7a625b279c21',
     ),
     'kirbyzone/sitemapper' => 
     array (

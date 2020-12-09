@@ -44,7 +44,7 @@ Head over to the [Example](#example) for usage in `config.php`.
 
 | Option | Default | Description |
 | --- | --- | --- |
-| `kirby-extended.env.path` | `kirby()->roots()->base()` | Path to where your default environment file is located.
+| `kirby-extended.env.path` | `kirby()->root('base')` | Path to where your default environment file is located.
 | `kirby-extended.env.filename` | `.env` | Default environment filename to load.
 
 ## Example

@@ -139,7 +139,7 @@ class MetaTags
         }
 
         $json = json_encode($schema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
-        $script = "<script type=\"application/ld+json\">\n" . $json . "\n</script>";
+        $script = "<script type=\"application/ld+json\">\n{$json}\n</script>";
 
         // Fix schema indentation
         $this->tags['json-ld'][] = implode(
@@ -284,7 +284,9 @@ class MetaTags
             }
         }
 
-        return count($html) > 0 ? ' ' . implode(' ', $html) : '';
+        return count($html) > 0
+            ? ' ' . implode(' ', $html)
+            : '';
     }
 
     /**

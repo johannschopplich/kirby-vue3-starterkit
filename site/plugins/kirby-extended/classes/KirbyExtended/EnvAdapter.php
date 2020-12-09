@@ -23,7 +23,7 @@ class EnvAdapter
     public static function load(?string $path = null, ?string $filename = null): ?array
     {
         if ($path === null) {
-            $path = option('kirby-extended.env.path', kirby()->roots()->base());
+            $path = option('kirby-extended.env.path', kirby()->root('base'));
         }
 
         if ($filename === null) {

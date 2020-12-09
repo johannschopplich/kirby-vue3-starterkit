@@ -8,7 +8,7 @@ use KirbyExtended\EnvAdapter;
 
 Kirby::plugin('johannschopplich/kirby-extended', [
     'pageMethods' => [
-        'env' => function ($value, $default = '') {
+        'env' => function ($value, $default = null) {
             if (!EnvAdapter::isLoaded()) {
                 EnvAdapter::load();
             }
@@ -17,11 +17,6 @@ Kirby::plugin('johannschopplich/kirby-extended', [
         },
         'metaTags' => function ($groups = null) {
             return metaTags($this)->render($groups);
-        }
-    ],
-    'fieldMethods' => [
-        'ecco' => function (Field $field, string $a, string $b = ''): string {
-            return $field->bool() ? $a : $b;
         }
     ]
 ]);
