@@ -12,7 +12,10 @@ return [
      * Return the global `site` object, used singly in development environment
      */
     [
-        'pattern' => "{$apiLocation}__site.json",
+        'pattern' => [
+            "{$apiLocation}__site.json",
+            "{$apiLocation}(:all)/__site.json"
+        ],
         'action'  => function () {
             $data = SpaAdapter::useSite();
             return Response::json($data);
@@ -50,6 +53,13 @@ return [
     [
         'pattern' => '(:all)',
         'action'  => function ($pageId) {
+            // Extract language in multi-language setup
+            if (kirby()->multilang()) {
+                $match = preg_split('/\//', $pageId, 2);
+                if (count($match) === 1) $match[] = null;
+                [$lang, $pageId] = $match;
+            }
+
             $site = site();
             $cachingActive = env('KIRBY_CACHE', false) === true && kirby()->user() === null;
 
@@ -66,6 +76,11 @@ return [
                 $page = $site->homePage();
             } else {
                 $page = page($pageId) ?? $site->errorPage();
+            }
+
+            // Get translated content
+            if (kirby()->multilang()) {
+                $page = site()->visit($page, $lang);
             }
 
             $renderedPage = Tpl::load(kirby()->root('snippets') . '/spa-index.php', compact('page', 'site'));

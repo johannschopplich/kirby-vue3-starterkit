@@ -18,9 +18,9 @@ const initLanguages = () => {
   if (!site.languages?.length) return
 
   if (__DEV__) {
-    const url = window.location.href
+    const path = window.location.pathname
     document.documentElement.lang =
-      site.languages.find(({ code }) => url.endsWith(`/${code}`) || url.includes(`/${code}/`))?.code ??
+      site.languages.find(({ code }) => path === `/${code}` || path.startsWith(`/${code}/`))?.code ??
       site.languages.find(lang => lang.isDefault)?.code ??
       'en'
   }

@@ -1,11 +1,22 @@
 <?php
 
+use Kirby\Http\Url;
+use Kirby\Toolkit\Str;
+
+$languageCode = kirby()->languageCode();
+
+// Parse language code from URL in development environment
+$path = Url::current();
+if (Str::endsWith($path, '__site.json')) {
+    $languageCode = basename(dirname($path));
+}
+
 return [
     // (1)
     // The following data is mandatory for the frontend router to initialize:
     'children' => array_values(site()->children()->published()->map(fn($child) => [
         'uri' => $child->uri(),
-        'title' => $child->content(kirby()->languageCode())->title()->value(),
+        'title' => $child->content($languageCode)->title()->value(),
         'isListed' => $child->isListed(),
         'template' => $child->intendedTemplate()->name(),
         'childTemplate' => $child->hasChildren() ? $child->children()->first()->intendedTemplate()->name() : null
