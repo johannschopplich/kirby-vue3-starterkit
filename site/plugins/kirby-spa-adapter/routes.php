@@ -27,15 +27,16 @@ return [
         'pattern' => "{$apiLocation}(:all).json",
         'language' => '*',
         'action' => function ($language, $pageId) {
-            // Prerender the page to prevent Kirby from using the error page's
-            // HTTP status code, otherwise the service worker fails installing
             $page = page($pageId) ?? site()->errorPage();
-
+            // Get translated content
             if (kirby()->multilang()) {
                 $page = site()->visit($page, $language);
             }
 
+            // Prerender the page to prevent Kirby from using the error page's
+            // HTTP status code, otherwise the service worker fails installing
             $data = $page->render();
+
             return Response::json($data);
         }
     ],
