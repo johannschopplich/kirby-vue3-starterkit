@@ -16,7 +16,7 @@ module.exports = {
   },
 
   proxy: {
-    [`${apiLocation}/*.json`]: {
+    '/*.json': {
       target: kirbyUrl,
       changeOrigin: true
     }
