@@ -28,6 +28,7 @@ return [
         'language' => '*',
         'action' => function ($language, $pageId) {
             $page = page($pageId) ?? site()->errorPage();
+
             // Get translated content
             if (kirby()->multilang()) {
                 $page = site()->visit($page, $language);
@@ -53,7 +54,7 @@ return [
 
             if ($cachingActive) {
                 $cacheBucket = kirby()->cache('kirby-extended.spa-adapter');
-                $pageProxy = $cacheBucket->get($language . '/' . $pageId ?? $site->homePageId());
+                $pageProxy = $cacheBucket->get("{$language}-" . ($pageId ?? $site->homePageId()));
 
                 if ($pageProxy !== null) {
                     return $pageProxy;
@@ -74,7 +75,7 @@ return [
             $renderedPage = Tpl::load(kirby()->root('snippets') . '/spa-index.php', compact('page', 'site'));
 
             if ($cachingActive && !$page->isErrorPage()) {
-                $cacheBucket->set($language . '/' . $page->uri(), $renderedPage);
+                $cacheBucket->set("{$language}-" . $page->uri(), $renderedPage);
             }
 
             return $renderedPage;
