@@ -26,10 +26,16 @@ return [
     [
         'pattern' => "{$apiLocation}(:all).json",
         'language' => '*',
-        'action' => function ($language, $pageId) {
+        'action' => function (...$args) {
+            if (kirby()->multilang()) {
+                [$language, $pageId] = $args;
+            } else {
+                [$pageId] = $args;
+            }
+
             $page = page($pageId) ?? site()->errorPage();
 
-            // Get translated content
+            // Get page object for specified language
             if (kirby()->multilang()) {
                 $page = site()->visit($page, $language);
             }
@@ -48,13 +54,21 @@ return [
     [
         'pattern' => '(:all)',
         'language' => '*',
-        'action' => function ($language, $pageId) {
-            $site = site();
-            $cachingActive = env('KIRBY_CACHE', false) === true && kirby()->user() === null;
+        'action' => function (...$args) {
+            if (kirby()->multilang()) {
+                [$language, $pageId] = $args;
+            } else {
+                [$pageId] = $args;
+            }
 
-            if ($cachingActive) {
+            $site = site();
+            $enableCache = env('KIRBY_CACHE', false) === true && kirby()->user() === null;
+
+            if ($enableCache) {
+                $cachePrefix = isset($language) ? "{$language}/" : '';
+
                 $cacheBucket = kirby()->cache('kirby-extended.spa-adapter');
-                $pageProxy = $cacheBucket->get("{$language}-" . ($pageId ?? $site->homePageId()));
+                $pageProxy = $cacheBucket->get($cachePrefix . ($pageId ?? $site->homePageId()));
 
                 if ($pageProxy !== null) {
                     return $pageProxy;
@@ -67,15 +81,15 @@ return [
                 $page = page($pageId) ?? $site->errorPage();
             }
 
-            // Get translated content
+            // Get page object for specified language
             if (kirby()->multilang()) {
                 $page = site()->visit($page, $language);
             }
 
             $renderedPage = Tpl::load(kirby()->root('snippets') . '/spa-index.php', compact('page', 'site'));
 
-            if ($cachingActive && !$page->isErrorPage()) {
-                $cacheBucket->set("{$language}-" . $page->uri(), $renderedPage);
+            if ($enableCache && !$page->isErrorPage()) {
+                $cacheBucket->set($cachePrefix . $page->uri(), $renderedPage);
             }
 
             return $renderedPage;
