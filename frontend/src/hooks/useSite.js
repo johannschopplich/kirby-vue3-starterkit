@@ -14,8 +14,11 @@ const site = reactive({})
  * Initialize global `site` object and save it to the store
  */
 export const initSite = async () => {
+  // Parse language from path in development environment (if present)
+  const language = window.location.pathname.split('/')[1]
+
   const data = import.meta.env.DEV
-    ? await fetcher(`${apiLocation}/__site.json`)
+    ? await fetcher(`${language ? `/${language}` : ''}${apiLocation}/__site.json`)
     : JSON.parse(document.getElementById('site-data').textContent)
 
   Object.assign(site, data)
