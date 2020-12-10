@@ -15,7 +15,8 @@ const site = reactive({})
  */
 export const initSite = async () => {
   // Parse language from path in development environment (if present)
-  const language = window.location.pathname.split('/')[1]
+  let language = window.location.pathname.split('/')[1] ?? ''
+  if (language.length !== 2) language = null
 
   const data = import.meta.env.DEV
     ? await fetcher(`${language ? `/${language}` : ''}${apiLocation}/__site.json`)
