@@ -34,9 +34,9 @@ return [
         'pattern' => '(:all)',
         'action'  => function ($pageId) {
             $site = site();
-            $cachingActive = env('KIRBY_CACHE', false) === true && kirby()->user() === null;
+            $enableCache = env('KIRBY_CACHE', false) === true && kirby()->user() === null;
 
-            if ($cachingActive) {
+            if ($enableCache) {
                 $cacheBucket = kirby()->cache('kirby-extended.spa-adapter');
                 $pageProxy = $cacheBucket->get($pageId ?? $site->homePageId());
 
@@ -53,7 +53,7 @@ return [
 
             $renderedPage = Tpl::load(kirby()->root('snippets') . '/spa-index.php', compact('page', 'site'));
 
-            if ($cachingActive && !$page->isErrorPage()) {
+            if ($enableCache && !$page->isErrorPage()) {
                 $cacheBucket->set($page->uri(), $renderedPage);
             }
 
