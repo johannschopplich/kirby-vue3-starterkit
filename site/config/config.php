@@ -19,8 +19,6 @@ return [
         'slug' => env('KIRBY_API_SLUG', 'api')
     ],
 
-    'routes' => require __DIR__ . '/routes.php',
-
     'cache' => [
         'pages' => [
             'active' => env('KIRBY_CACHE', false),
@@ -30,10 +28,6 @@ return [
                 return isset($options['cache']) ? !$options['cache'] : false;
             }
         ]
-    ],
-
-    'cre8ivclick.sitemapper' => [
-        'title' => 'Sitemap'
     ]
 
 ];

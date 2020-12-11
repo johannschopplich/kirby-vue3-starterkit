@@ -347,42 +347,6 @@
             "install-path": "../../site/plugins/kirby-extended"
         },
         {
-            "name": "kirbyzone/sitemapper",
-            "version": "1.2",
-            "version_normalized": "1.2.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://gitlab.com/kirbyzone/sitemapper.git",
-                "reference": "de48a9ace7f7ab6366c0245cc43f30954cacd296"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/kirbyzone%2Fsitemapper/repository/archive.zip?sha=de48a9ace7f7ab6366c0245cc43f30954cacd296",
-                "reference": "de48a9ace7f7ab6366c0245cc43f30954cacd296",
-                "shasum": ""
-            },
-            "require": {
-                "getkirby/composer-installer": "^1.1"
-            },
-            "time": "2019-12-11T16:53:40+00:00",
-            "type": "kirby-plugin",
-            "installation-source": "dist",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Cre8iv Click",
-                    "email": "hello@cre8iv.click",
-                    "homepage": "https://cre8iv.click"
-                }
-            ],
-            "description": "Cre8iv Click's Automatic Sitemap Generator Plugin for Kirby",
-            "homepage": "https://gitlab.com/cre8ivclick/sitemapper",
-            "install-path": "../../site/plugins/sitemapper"
-        },
-        {
             "name": "laminas/laminas-escaper",
             "version": "2.6.1",
             "version_normalized": "2.6.1.0",

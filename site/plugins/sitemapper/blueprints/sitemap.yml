@@ -1,6 +1,0 @@
-type: toggle
-label: Sitemap
-text:
-  - omit from sitemap
-  - include in sitemap
-default: true

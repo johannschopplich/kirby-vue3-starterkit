@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '7d5133e01ec969ecb019a2d8d5ec928ca0f76e0f',
+    'reference' => '0caa43f2c0ba74d1542fbe4b611df1b74b052185',
     'name' => '__root__',
   ),
   'versions' => 
@@ -18,7 +18,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '7d5133e01ec969ecb019a2d8d5ec928ca0f76e0f',
+      'reference' => '0caa43f2c0ba74d1542fbe4b611df1b74b052185',
     ),
     'claviska/simpleimage' => 
     array (
@@ -73,15 +73,6 @@
       array (
       ),
       'reference' => 'b22b810dee3873320de86d8fc1cb7a625b279c21',
-    ),
-    'kirbyzone/sitemapper' => 
-    array (
-      'pretty_version' => '1.2',
-      'version' => '1.2.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => 'de48a9ace7f7ab6366c0245cc43f30954cacd296',
     ),
     'laminas/laminas-escaper' => 
     array (
