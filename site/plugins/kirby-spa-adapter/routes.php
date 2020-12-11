@@ -66,7 +66,6 @@ return [
 
             if ($enableCache) {
                 $cachePrefix = isset($language) ? "{$language}/" : '';
-
                 $cacheBucket = kirby()->cache('kirby-extended.spa-adapter');
                 $pageProxy = $cacheBucket->get($cachePrefix . ($pageId ?? $site->homePageId()));
 

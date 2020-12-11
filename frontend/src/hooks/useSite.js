@@ -11,7 +11,7 @@ const { apiLocation, fetcher } = useKirbyApi()
 const site = reactive({})
 
 /**
- * Initialize global `site` object and save it to the store
+ * Initialize global `site` object and store it
  */
 export const initSite = async () => {
   const __DEV__ = import.meta.env.DEV
