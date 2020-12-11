@@ -17,8 +17,9 @@
 
 - 🖖 Vue.js 3 powered
 - ⚡️ [Vite](https://github.com/vitejs/vite) instead of Vue.js CLI
-- ♿ Accessible routing
 - 🔍 SEO-friendly ([server-side generated](site/snippets/meta.php) meta tags)
+- 🌐 [Multi-language support](#multi-language)
+- ♿ Accessible routing
 - 🚝 [Offline-first](#caching--offline-capability-with-service-worker): Page data caching & offline redirection
 - 💫 [Stale-while-revalidate](#stale-while-revalidate) page data
 - 🤝 Shared [`.env`](.env.example) file for frontend & backend
@@ -67,6 +68,9 @@ kirby-vue3-starterkit/
 |   |   |   |
 |   |   |   |   # Hook to announce any useful information for screen readers
 |   |   |   ├── useAnnouncer.js
+|   |   |   |
+|   |   |   |   # Hook providing information about the current language
+|   |   |   ├── useLanguages.js
 |   |   |   |
 |   |   |   |   # Hook for retrieving pages from the content API
 |   |   |   ├── useKirbyApi.js
@@ -257,9 +261,25 @@ All development and production related configurations for both backend and front
 #### Content API Slug
 
 To change the API slug to fetch JSON-encoded page data from, set
-- `CONTENT_API_SLUG` to a value of your liking (defaults to `content`).
+- `CONTENT_API_SLUG` to a value of your liking (defaults to `spa`).
 
 > You can't use Kirby's internal API slug (defaults to `api`). If you insist on using `api` for *your* content endpoint, you can rename Kirby's by adding a `KIRBY_API_SLUG` key and set it to something else than `api`.
+
+#### Multi-Language
+
+Multiple languages are supported. [A comprehensive introduction about multi-language setups may be found on the Kirby website.](https://getkirby.com/docs/guide/languages/introduction)
+
+To enable language handling, you don't have to edit the [`config.php`](site/config/config.php) manually. Just set
+- `KIRBY_MULTILANG` to `true`.
+- `KIRBY_MULTILANG_DETECT` to `true` (optional but recommended).
+
+Then, visit the panel and add new languages by your liking. The Panel **automatically renames all existing content** and file meta data files and includes the language extension.
+
+Language data is provided by the global `site` object, which can be accessed via the `useSite()` hook.
+
+ℹ️ **Current limitations**:
+- Custom language paths aren't supported as of right now, the language code defined will be used as a base.
+- Automatic language detection only works in production environment. In development the fallback language is always the default language.
 
 #### Service Worker
 
