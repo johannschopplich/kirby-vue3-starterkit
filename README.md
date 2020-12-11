@@ -2,28 +2,28 @@
   <img src="./public/img/favicon.svg" alt="Logo of Kirby + Vue.js 3 Starterkit" width="114" height="114">
 </p>
 
-<h3 align="center">Kirby + Vue.js 3 Starterkit</h3>
+<h3 align="center">Kirby + Vue Starterkit</h3>
 
 <p align="center">
-  SPA with Vue.js 3 and Kirby. Uses Vite as web dev build tool.<br>
+  SPA with Vue 3 and Kirby: SEO-friendly, automatic routing, mulit-lang-ready and more! .<br>
   <a href="https://kirby-vue3-starterkit.jhnn.dev"><strong>Explore the starterkit live »</strong></a>
 </p>
 
 <br>
 
-## Kirby + Vue.js 3 Starterkit
+## Kirby + Vue 3 Starterkit
 
 ### Key Features
 
-- 🖖 Vue.js 3 powered
-- ⚡️ [Vite](https://github.com/vitejs/vite) instead of Vue.js CLI
-- 🔍 SEO-friendly ([server-side generated](site/snippets/meta.php) meta tags)
+- 🛣 Automatic routing
+- 🔍 SEO-friendly: [server-side generated](site/snippets/meta.php) meta tags
 - 🌐 [Multi-language support](#multi-language)
-- ♿ Accessible routing
-- 🚝 [Offline-first](#caching--offline-capability-with-service-worker): Page data caching & offline redirection
+- ♿ Accessible frontend routing
+- 🚝 [Offline-first](#caching--offline-capability-with-service-worker)
 - 💫 [Stale-while-revalidate](#stale-while-revalidate) page data
-- 🤝 Shared [`.env`](.env.example) file for frontend & backend
-- 🚀 Modern Kirby folder setup
+- ⚡️ [Vite](https://github.com/vitejs/vite) instead of Vue CLI
+- 🤝 Shared [`.env`](.env.example) for frontend & backend
+- 🚀 Modern folder structure
 
 ### Introduction
 
