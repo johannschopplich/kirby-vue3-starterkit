@@ -7,6 +7,9 @@ return [
 
     'debug' => env('KIRBY_DEBUG', false),
 
+    'languages' => env('KIRBY_MULTILANG', false),
+    'languages.detect' => env('KIRBY_MULTILANG_DETECT', false),
+
     'panel' => [
         'install' => env('KIRBY_PANEL_INSTALL', false),
         'slug' => env('KIRBY_PANEL_SLUG', 'panel')

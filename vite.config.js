@@ -12,11 +12,13 @@ module.exports = {
 
   env: {
     VITE_BACKEND_URL: kirbyUrl,
-    VITE_BACKEND_API_LOCATION: apiLocation
+    VITE_BACKEND_API_LOCATION: apiLocation,
+    VITE_MULTILANG: process.env.KIRBY_MULTILANG,
+    VITE_MULTILANG_DETECT: process.env.KIRBY_MULTILANG_DETECT
   },
 
   proxy: {
-    [`${apiLocation}/*.json`]: {
+    '/*.json': {
       target: kirbyUrl,
       changeOrigin: true
     }
