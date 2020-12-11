@@ -252,20 +252,34 @@ Build the frontend assets (CSS & JS files) to `public/assets`:
 npm run build
 ```
 
-### Configuration
+### Deployment
+
+1. Deploy the repository on your server.
+2. Duplicate [`.env.example`](.env.example) as `.env`.
+3. Install npm dependencies and build frontend assets: `npm i && npm run build`.
+4. Change variables in your `.env`:
+   - `KIRBY_CACHE` to `true` (recommended)
+5. Point your web server to the `public` folder.
+6. Some hosting environments require to uncomment `RewriteBase /` in [`.htaccess`](public/.htaccess) to make site links work.
+
+Now your project is hopefully up 'n' running!
+
+## Configuration
 
 All development and production related configurations for both backend and frontend code are located in your `.env` file:
 - `KIRBY_SERVER_HOSTNAME` and `KIRBY_SERVER_PORT` specify the address where you wish the Kirby backend to be served from. It is used by the frontend to fetch content data as JSON.
 - Keys starting with `VITE_` are available in your code following the `import.meta.env.VITE_CUSTOM_VARIABLE` syntax.
 
-#### Content API Slug
+For example setting `KIRBY_CACHE` to `true` is useful in development environment.
+
+### Content API Slug
 
 To change the API slug to fetch JSON-encoded page data from, set
-- `CONTENT_API_SLUG` to a value of your liking (defaults to `spa`).
+- `CONTENT_API_SLUG` to a value of your liking (defaults to `spa`). It can even be left empty to omit a slug altogether!
 
-> You can't use Kirby's internal API slug (defaults to `api`). If you insist on using `api` for *your* content endpoint, you can rename Kirby's by adding a `KIRBY_API_SLUG` key and set it to something else than `api`.
+> You can't use Kirby's internal API slug (defaults to `api`). If you insist on using `api` for *your* content endpoint, you can rename Kirby's by adding a `KIRBY_API_SLUG` key and set it to something other than `api`.
 
-#### Multi-Language
+### Multi-Language
 
 Multiple languages are supported. A comprehensive introduction about [multi-language setups](https://getkirby.com/docs/guide/languages/introduction) may be found on the Kirby website.
 
@@ -281,31 +295,17 @@ Language data is provided by the global `site` object, which can be accessed via
 - Custom language paths aren't supported as of right now, the language code defined will be used as a base in the frontend.
 - Automatic language detection only works in production environment. In development the fallback language is always the default language.
 
-#### Service Worker
+### Service Worker
 
 To enable the **service worker** which precaches essential assets and page API calls for offline capability, set:
 - `VITE_ENABLE_SW` to `true`
 
 > ⚠️ Don't change the `CONTENT_API_SLUG` once you deployed your app publicly and thus a service worker is installed on clients. Otherwise fetch requests will fail and a blank page will show until the new service worker is activated, which then is only possible by closing the tab/PWA.
 
-#### Stale-While-Revalidate
+### Stale-While-Revalidate
 
 To keep page data fresh with **stale-while-revalidate**, set:
 - `VITE_ENABLE_SWR` to `true`
-
-### Deployment
-
-1. Deploy whole repository on your server.
-2. Duplicate [`.env.example`](.env.example) as `.env`.
-3. Install npm dependencies and build frontend assets: `npm i && npm run build`.
-4. Change variables in your `.env`:
-   - `KIRBY_DEBUG` to `false`
-   - `KIRBY_CACHE` to `true` (recommended)
-   - `VITE_ENABLE_SW` to `true` (recommended)
-5. Point your web server to the `public` folder.
-6. Some hosting environments require to uncomment `RewriteBase /` in [`.htaccess`](public/.htaccess) to make site links work.
-
-Now your project is hopefully up 'n' running!
 
 ## Credits
 
