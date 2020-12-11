@@ -267,7 +267,7 @@ To change the API slug to fetch JSON-encoded page data from, set
 
 #### Multi-Language
 
-Multiple languages are supported. [A comprehensive introduction about multi-language setups may be found on the Kirby website.](https://getkirby.com/docs/guide/languages/introduction)
+Multiple languages are supported. A comprehensive introduction about [multi-language setups](https://getkirby.com/docs/guide/languages/introduction) may be found on the Kirby website.
 
 To enable language handling, you don't have to edit the [`config.php`](site/config/config.php) manually. Just set
 - `KIRBY_MULTILANG` to `true`.
@@ -278,7 +278,7 @@ Then, visit the panel and add new languages by your liking. The Panel **automati
 Language data is provided by the global `site` object, which can be accessed via the `useSite()` hook.
 
 ℹ️ **Current limitations**:
-- Custom language paths aren't supported as of right now, the language code defined will be used as a base.
+- Custom language paths aren't supported as of right now, the language code defined will be used as a base in the frontend.
 - Automatic language detection only works in production environment. In development the fallback language is always the default language.
 
 #### Service Worker
