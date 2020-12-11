@@ -41,7 +41,8 @@ class SpaAdapter {
      *
      * @return string
      */
-    public static function useAssetsDir(): string {
+    public static function useAssetsDir(): string
+    {
         return static::$assetsDir ??= Url::path(env('VITE_ASSETS_DIR'), true);
     }
 
@@ -50,7 +51,8 @@ class SpaAdapter {
      *
      * @return string
      */
-    public static function useApiLocation(): string {
+    public static function useApiLocation(): string
+    {
         return static::$apiLocation ??= Url::path(env('CONTENT_API_SLUG'), true);
     }
 
@@ -59,7 +61,8 @@ class SpaAdapter {
      *
      * @return array
      */
-    public static function useSite(): array {
+    public static function useSite(): array
+    {
         return static::$site ??= require kirby()->root('config') . '/spa-site.php';
     }
 
@@ -69,18 +72,20 @@ class SpaAdapter {
      * @return array
      * @throws Exception
      */
-    public static function useManifest(): array {
+    public static function useManifest(): array
+    {
         if (static::$manifest !== null) {
             return static::$manifest;
         }
 
         $manifestPath = kirby()->root() . static::useAssetsDir() . '/manifest.json';
         if (!F::exists($manifestPath)) {
-            throw new Exception('No build asset manifest.json found. You have to build the app first: `npm run build`.');
+            throw new Exception('Build asset manifest.json not found. You have to build the app first: `npm run build`.');
         }
 
         $deserializedManifest = F::read($manifestPath);
-        return static::$manifest ??= Json::decode($deserializedManifest);
+        static::$manifest = Json::decode($deserializedManifest);
+        return static::$manifest;
     }
 
     /**
@@ -90,7 +95,8 @@ class SpaAdapter {
      * @return string
      * @throws Exception
      */
-    public static function pathToAsset (string $filename): string {
+    public static function pathToAsset (string $filename): string
+    {
         $hashedFilename = static::useManifest()[$filename] ?? null;
         if ($hashedFilename === null) {
             throw new Exception("No hashed build asset found for {$filename}. Make sure it's bundled by Vite.");
@@ -105,8 +111,10 @@ class SpaAdapter {
      * @param string $name Page id
      * @return string
      */
-    public static function jsonPreloadLink (string $name): string {
-        return '<link rel="preload" href="' . static::useApiLocation() . '/' . $name . '.json" as="fetch" crossorigin>';
+    public static function jsonPreloadLink (string $name): string
+    {
+        $base = kirby()->multilang() ? '/' . kirby()->languageCode() : '';
+        return '<link rel="preload" href="' . $base . static::useApiLocation() . '/' . $name . '.json" as="fetch" crossorigin>';
     }
 
     /**
@@ -115,7 +123,8 @@ class SpaAdapter {
      * @param string $name Page template name or other module name
      * @return string|void
      */
-    public static function modulePreloadLink (string $pattern) {
+    public static function modulePreloadLink (string $pattern)
+    {
         $hashedFilename = static::useManifest()[ucfirst($pattern) . '.js'] ?? null;
         if ($hashedFilename) {
             return '<link rel="modulepreload" href="' . static::useAssetsDir() . '/' . $hashedFilename . '">';
