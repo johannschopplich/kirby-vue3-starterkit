@@ -1,4 +1,3 @@
-import { reactive, toRaw } from 'vue'
 import { useLanguages } from './'
 
 /**
@@ -9,11 +8,11 @@ import { useLanguages } from './'
 const apiLocation = import.meta.env.VITE_BACKEND_API_LOCATION
 
 /**
- * Reactive map to store pages in
+ * Map to store pages in
  *
  * @constant {object}
  */
-const pages = reactive(new Map())
+const pages = new Map()
 
 /**
  * Fetcher function to request JSON data from the server
@@ -62,8 +61,7 @@ const getPage = async (
       console.log(`[getPage] Pulling ${id} page data from cache.`)
     }
 
-    // Doesn't work in Safari without returning the original object
-    return toRaw(pages.get(id))
+    return pages.get(id)
   }
 
   // Otherwise retrieve page data for the first time
