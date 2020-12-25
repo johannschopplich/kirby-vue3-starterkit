@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'blocks'      => 'Kirby\Form\Field\BlocksField',
     'checkboxes'  => __DIR__ . '/fields/checkboxes.php',
     'date'        => __DIR__ . '/fields/date.php',
     'email'       => __DIR__ . '/fields/email.php',
@@ -9,7 +10,9 @@ return [
     'headline'    => __DIR__ . '/fields/headline.php',
     'hidden'      => __DIR__ . '/fields/hidden.php',
     'info'        => __DIR__ . '/fields/info.php',
+    'layout'      => 'Kirby\Form\Field\LayoutField',
     'line'        => __DIR__ . '/fields/line.php',
+    'list'        => __DIR__ . '/fields/list.php',
     'multiselect' => __DIR__ . '/fields/multiselect.php',
     'number'      => __DIR__ . '/fields/number.php',
     'pages'       => __DIR__ . '/fields/pages.php',
@@ -24,5 +27,6 @@ return [
     'time'        => __DIR__ . '/fields/time.php',
     'toggle'      => __DIR__ . '/fields/toggle.php',
     'url'         => __DIR__ . '/fields/url.php',
-    'users'       => __DIR__ . '/fields/users.php'
+    'users'       => __DIR__ . '/fields/users.php',
+    'writer'      => __DIR__ . '/fields/writer.php'
 ];

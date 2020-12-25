@@ -1,7 +1,5 @@
 .DS_Store
 /.env
-/composer.lock
-/package-lock.json
 node_modules/
 
 # Frontend
@@ -17,6 +15,8 @@ node_modules/
 !/storage/accounts/.gitkeep
 /storage/cache/*
 !/storage/cache/.gitkeep
+/storage/logs/*
+!/storage/logs/.gitkeep
 /storage/sessions/*
 !/storage/sessions/.gitkeep
 /site/config/.license

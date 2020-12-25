@@ -126,7 +126,7 @@ return [
 
             // sort
             if ($this->sortBy) {
-                $pages = $pages->sortBy(...$pages::sortArgs($this->sortBy));
+                $pages = $pages->sort(...$pages::sortArgs($this->sortBy));
             }
 
             // flip
@@ -165,7 +165,9 @@ return [
                     'status'      => $item->status(),
                     'permissions' => [
                         'sort'         => $permissions->can('sort'),
-                        'changeStatus' => $permissions->can('changeStatus')
+                        'changeSlug'   => $permissions->can('changeSlug'),
+                        'changeStatus' => $permissions->can('changeStatus'),
+                        'changeTitle'  => $permissions->can('changeTitle')
                     ]
                 ];
             }

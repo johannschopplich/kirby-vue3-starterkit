@@ -72,7 +72,7 @@ return [
                     'template' => $this->template
                 ]);
 
-                return $file->blueprint()->accept()['mime'] ?? '*';
+                return $file->blueprint()->acceptMime();
             }
 
             return null;
@@ -84,12 +84,12 @@ return [
             $files = $this->parent->files()->template($this->template);
 
             // filter out all protected files
-            $files = $files->filterBy('isReadable', true);
+            $files = $files->filter('isReadable', true);
 
             if ($this->sortBy) {
-                $files = $files->sortBy(...$files::sortArgs($this->sortBy));
-            } elseif ($this->sortable === true) {
-                $files = $files->sortBy('sort', 'asc', 'filename', 'asc');
+                $files = $files->sort(...$files::sortArgs($this->sortBy));
+            } else {
+                $files = $files->sort('sort', 'asc', 'filename', 'asc');
             }
 
             // flip
@@ -206,13 +206,15 @@ return [
                 $multiple = true;
             }
 
+            $template = $this->template === 'default' ? null : $this->template;
+
             return [
                 'accept'     => $this->accept,
                 'multiple'   => $multiple,
                 'max'        => $max,
                 'api'        => $this->parent->apiUrl(true) . '/files',
                 'attributes' => array_filter([
-                    'template' => $this->template
+                    'template' => $template
                 ])
             ];
         }

@@ -4,10 +4,12 @@ namespace Kirby\Cms;
 
 use Kirby\Data\Data;
 use Kirby\Exception\InvalidArgumentException;
+use Kirby\Exception\LogicException;
 use Kirby\Exception\NotFoundException;
 use Kirby\Exception\PermissionException;
 use Kirby\Http\Idn;
 use Kirby\Http\Request\Auth\BasicAuth;
+use Kirby\Toolkit\A;
 use Kirby\Toolkit\F;
 use Throwable;
 
@@ -22,6 +24,14 @@ use Throwable;
  */
 class Auth
 {
+    /**
+     * Available auth challenge classes
+     * from the core and plugins
+     *
+     * @var array
+     */
+    public static $challenges = [];
+
     protected $impersonate;
     protected $kirby;
     protected $user = false;
@@ -34,6 +44,105 @@ class Auth
     public function __construct(App $kirby)
     {
         $this->kirby = $kirby;
+    }
+
+    /**
+     * Creates an authentication challenge
+     * (one-time auth code)
+     *
+     * @param string $email
+     * @param bool $long If `true`, a long session will be created
+     * @param string $mode Either 'login' or 'password-reset'
+     * @return string|null Name of the challenge that was created;
+     *                     `null` if the user does not exist or no
+     *                     challenge was available for the user
+     *
+     * @throws \Kirby\Exception\LogicException If there is no suitable authentication challenge (only in debug mode)
+     * @throws \Kirby\Exception\NotFoundException If the user does not exist (only in debug mode)
+     * @throws \Kirby\Exception\PermissionException If the rate limit is exceeded
+     */
+    public function createChallenge(string $email, bool $long = false, string $mode = 'login'): ?string
+    {
+        // ensure that email addresses with IDN domains are in Unicode format
+        $email = Idn::decodeEmail($email);
+
+        if ($this->isBlocked($email) === true) {
+            $this->kirby->trigger('user.login:failed', compact('email'));
+
+            if ($this->kirby->option('debug') === true) {
+                $message = 'Rate limit exceeded';
+            } else {
+                // avoid leaking security-relevant information
+                $message = ['key' => 'access.login'];
+            }
+
+            throw new PermissionException($message);
+        }
+
+        // rate-limit the number of challenges for DoS/DDoS protection
+        $this->track($email, false);
+
+        $session = $this->kirby->session([
+            'createMode' => 'cookie',
+            'long'       => $long === true
+        ]);
+
+        $challenge = null;
+        if ($user = $this->kirby->users()->find($email)) {
+            $timeout = $this->kirby->option('auth.challenge.timeout', 10 * 60);
+
+            $challenges = $this->kirby->option('auth.challenges', ['email']);
+            foreach (A::wrap($challenges) as $name) {
+                $class = static::$challenges[$name] ?? null;
+                if (
+                    $class &&
+                    class_exists($class) === true &&
+                    is_subclass_of($class, 'Kirby\Cms\Auth\Challenge') === true &&
+                    $class::isAvailable($user, $mode) === true
+                ) {
+                    $challenge = $name;
+                    $code = $class::create($user, compact('mode', 'timeout'));
+
+                    $session->set('kirby.challenge.type', $challenge);
+
+                    if ($code !== null) {
+                        $session->set('kirby.challenge.code', password_hash($code, PASSWORD_DEFAULT));
+                        $session->set('kirby.challenge.timeout', time() + $timeout);
+                    }
+
+                    break;
+                }
+            }
+
+            // if no suitable challenge was found, `$challenge === null` at this point;
+            // only leak this in debug mode, otherwise `null` is returned below
+            if ($challenge === null && $this->kirby->option('debug') === true) {
+                throw new LogicException('Could not find a suitable authentication challenge');
+            }
+        } else {
+            $this->kirby->trigger('user.login:failed', compact('email'));
+
+            // only leak the non-existing user in debug mode
+            if ($this->kirby->option('debug') === true) {
+                throw new NotFoundException([
+                    'key'  => 'user.notFound',
+                    'data' => [
+                        'name' => $email
+                    ]
+                ]);
+            }
+        }
+
+        // always set the email, even if the challenge won't be
+        // created to avoid leaking whether the user exists
+        $session->set('kirby.challenge.email', $email);
+
+        // sleep for a random amount of milliseconds
+        // to make automated attacks harder and to
+        // avoid leaking whether the user exists
+        usleep(random_int(1000, 300000));
+
+        return $challenge;
     }
 
     /**
@@ -71,6 +180,19 @@ class Auth
     {
         if ($this->kirby->option('api.basicAuth', false) !== true) {
             throw new PermissionException('Basic authentication is not activated');
+        }
+
+        // if logging in with password is disabled, basic auth cannot be possible either
+        $loginMethods = $this->kirby->system()->loginMethods();
+        if (isset($loginMethods['password']) !== true) {
+            throw new PermissionException('Login with password is not enabled');
+        }
+
+        // if any login method requires 2FA, basic auth without 2FA would be a weakness
+        foreach ($loginMethods as $method) {
+            if (isset($method['2fa']) === true && $method['2fa'] === true) {
+                throw new PermissionException('Basic authentication cannot be used with 2FA');
+            }
         }
 
         $request = $this->kirby->request();
@@ -118,7 +240,7 @@ class Auth
             $session = $this->kirby->session(['detect' => true]);
         }
 
-        $id = $session->data()->get('user.id');
+        $id = $session->data()->get('kirby.userId');
 
         if (is_string($id) !== true) {
             return null;
@@ -135,9 +257,12 @@ class Auth
     }
 
     /**
-     * Become any existing user
+     * Become any existing user or disable the current user
      *
-     * @param string|null $who User ID or email address
+     * @param string|null $who User ID or email address,
+     *                         `null` to use the actual user again,
+     *                         `'kirby'` for a virtual admin user or
+     *                         `'nobody'` to disable the actual user
      * @return \Kirby\Cms\User|null
      * @throws \Kirby\Exception\NotFoundException if the given user cannot be found
      */
@@ -151,6 +276,12 @@ class Auth
                     'email' => 'kirby@getkirby.com',
                     'id'    => 'kirby',
                     'role'  => 'admin',
+                ]);
+            case 'nobody':
+                return $this->impersonate = new User([
+                    'email' => 'nobody@getkirby.com',
+                    'id'    => 'nobody',
+                    'role'  => 'nobody',
                 ]);
             default:
                 if ($user = $this->kirby->users()->find($who)) {
@@ -232,6 +363,25 @@ class Auth
     }
 
     /**
+     * Login a user by email, password and auth challenge
+     *
+     * @param string $email
+     * @param string $password
+     * @param bool $long
+     * @return string|null Name of the challenge that was created;
+     *                     `null` if no challenge was available for the user
+     *
+     * @throws \Kirby\Exception\PermissionException If the rate limit was exceeded or if any other error occured with debug mode off
+     * @throws \Kirby\Exception\NotFoundException If the email was invalid
+     * @throws \Kirby\Exception\InvalidArgumentException If the password is not valid (via `$user->login()`)
+     */
+    public function login2fa(string $email, string $password, bool $long = false)
+    {
+        $this->validatePassword($email, $password);
+        return $this->createChallenge($email, $long, '2fa');
+    }
+
+    /**
      * Sets a user object as the current user in the cache
      * @internal
      *
@@ -271,7 +421,7 @@ class Auth
                 $message = 'Rate limit exceeded';
             } else {
                 // avoid leaking security-relevant information
-                $message = 'Invalid email or password';
+                $message = ['key' => 'access.login'];
             }
 
             throw new PermissionException($message);
@@ -304,7 +454,7 @@ class Auth
             if ($this->kirby->option('debug') === true) {
                 throw $e;
             } else {
-                throw new PermissionException('Invalid email or password');
+                throw new PermissionException(['key' => 'access.login']);
             }
         }
     }
@@ -377,6 +527,13 @@ class Auth
         if ($user = $this->user()) {
             $user->logout();
         }
+
+        // clear the pending challenge
+        $session = $this->kirby->session();
+        $session->remove('kirby.challenge.code');
+        $session->remove('kirby.challenge.email');
+        $session->remove('kirby.challenge.timeout');
+        $session->remove('kirby.challenge.type');
     }
 
     /**
@@ -394,12 +551,15 @@ class Auth
     /**
      * Tracks a login
      *
-     * @param string $email
+     * @param string|null $email
+     * @param bool $triggerHook If `false`, no user.login:failed hook is triggered
      * @return bool
      */
-    public function track(string $email): bool
+    public function track(?string $email, bool $triggerHook = true): bool
     {
-        $this->kirby->trigger('user.login:failed', compact('email'));
+        if ($triggerHook === true) {
+            $this->kirby->trigger('user.login:failed', compact('email'));
+        }
 
         $ip   = $this->ipHash();
         $log  = $this->log();
@@ -417,7 +577,7 @@ class Auth
             ];
         }
 
-        if ($this->kirby->users()->find($email)) {
+        if ($email !== null && $this->kirby->users()->find($email)) {
             if (isset($log['by-email'][$email]) === true) {
                 $log['by-email'][$email] = [
                     'time'   => $time,
@@ -462,7 +622,7 @@ class Auth
      * @param \Kirby\Session\Session|array|null $session
      * @param bool $allowImpersonation If set to false, only the actually
      *                                 logged in user will be returned
-     * @return \Kirby\Cms\User
+     * @return \Kirby\Cms\User|null
      *
      * @throws \Throwable If an authentication error occured
      */
@@ -497,6 +657,91 @@ class Auth
             $this->userException = $e;
 
             throw $e;
+        }
+    }
+
+    /**
+     * Verifies an authentication code that was
+     * requested with the `createChallenge()` method;
+     * if successful, the user is automatically logged in
+     *
+     * @param string $code User-provided auth code to verify
+     * @return \Kirby\Cms\User User object of the logged-in user
+     *
+     * @throws \Kirby\Exception\PermissionException If the rate limit was exceeded, the challenge timed out, the code
+     *                                              is incorrect or if any other error occured with debug mode off
+     * @throws \Kirby\Exception\NotFoundException If the user from the challenge doesn't exist
+     * @throws \Kirby\Exception\InvalidArgumentException If no authentication challenge is active
+     * @throws \Kirby\Exception\LogicException If the authentication challenge is invalid
+     */
+    public function verifyChallenge(string $code)
+    {
+        try {
+            $session = $this->kirby->session();
+
+            // first check if we have an active challenge at all
+            $email     = $session->get('kirby.challenge.email');
+            $challenge = $session->get('kirby.challenge.type');
+            if (is_string($email) !== true || is_string($challenge) !== true) {
+                throw new InvalidArgumentException('No authentication challenge is active');
+            }
+
+            $user = $this->kirby->users()->find($email);
+            if ($user === null) {
+                throw new NotFoundException([
+                    'key'  => 'user.notFound',
+                    'data' => [
+                        'name' => $email
+                    ]
+                ]);
+            }
+
+            // rate-limiting
+            if ($this->isBlocked($email) === true) {
+                $this->kirby->trigger('user.login:failed', compact('email'));
+                throw new PermissionException('Rate limit exceeded');
+            }
+
+            // time-limiting
+            $timeout = $session->get('kirby.challenge.timeout');
+            if ($timeout !== null && time() > $timeout) {
+                throw new PermissionException('Authentication challenge timeout');
+            }
+
+            if (
+                isset(static::$challenges[$challenge]) === true &&
+                class_exists(static::$challenges[$challenge]) === true &&
+                is_subclass_of(static::$challenges[$challenge], 'Kirby\Cms\Auth\Challenge') === true
+            ) {
+                $class = static::$challenges[$challenge];
+                if ($class::verify($user, $code) === true) {
+                    $this->logout();
+                    $user->loginPasswordless();
+
+                    return $user;
+                } else {
+                    throw new PermissionException(['key' => 'access.code']);
+                }
+            }
+            
+            throw new LogicException('Invalid authentication challenge: ' . $challenge);
+        } catch (Throwable $e) {
+            if ($e->getMessage() !== 'Rate limit exceeded') {
+                $this->track($email);
+            }
+
+            // sleep for a random amount of milliseconds
+            // to make automated attacks harder and to
+            // avoid leaking whether the user exists
+            usleep(random_int(1000, 2000000));
+
+            // keep throwing the original error in debug mode,
+            // otherwise hide it to avoid leaking security-relevant information
+            if ($this->kirby->option('debug') === true) {
+                throw $e;
+            } else {
+                throw new PermissionException(['key' => 'access.code']);
+            }
         }
     }
 }

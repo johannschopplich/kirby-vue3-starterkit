@@ -1,9 +1,11 @@
 <?php
 
 use Kirby\Cms\App;
+use Kirby\Cms\Blocks;
 use Kirby\Cms\Field;
 use Kirby\Cms\Files;
 use Kirby\Cms\Html;
+use Kirby\Cms\Layouts;
 use Kirby\Cms\Structure;
 use Kirby\Cms\Url;
 use Kirby\Data\Data;
@@ -53,6 +55,41 @@ return function (App $app) {
         },
 
         // converters
+        /**
+         * Converts a yaml or json field to a Blocks object
+         *
+         * @param \Kirby\Cms\Field $field
+         * @return \Kirby\Cms\Blocks
+         */
+        'toBlocks' => function (Field $field) {
+            try {
+                $blocks = Blocks::factory(Blocks::parse($field->value()), [
+                    'parent' => $field->parent(),
+                ]);
+
+                return $blocks->filter('isHidden', false);
+            } catch (Throwable $e) {
+                if ($field->parent() === null) {
+                    $message = 'Invalid blocks data for "' . $field->key() . '" field';
+                } else {
+                    $message = 'Invalid blocks data for "' . $field->key() . '" field on parent "' . $field->parent()->title() . '"';
+                }
+
+                throw new InvalidArgumentException($message);
+            }
+        },
+
+        /**
+         * Converts the field value into a proper boolean
+         *
+         * @param \Kirby\Cms\Field $field
+         * @param bool $default Default value if the field is empty
+         * @return bool
+         */
+        'toBool' => function (Field $field, $default = false): bool {
+            $value = $field->isEmpty() ? $default : $field->value;
+            return filter_var($value, FILTER_VALIDATE_BOOLEAN);
+        },
 
         /**
          * Parses the field value with the given method
@@ -69,18 +106,6 @@ return function (App $app) {
                 default:
                     return $field->split($method);
             }
-        },
-
-        /**
-         * Converts the field value into a proper boolean
-         *
-         * @param \Kirby\Cms\Field $field
-         * @param bool $default Default value if the field is empty
-         * @return bool
-         */
-        'toBool' => function (Field $field, $default = false): bool {
-            $value = $field->isEmpty() ? $default : $field->value;
-            return filter_var($value, FILTER_VALIDATE_BOOLEAN);
         },
 
         /**
@@ -157,6 +182,19 @@ return function (App $app) {
         'toInt' => function (Field $field, int $default = 0) {
             $value = $field->isEmpty() ? $default : $field->value;
             return (int)$value;
+        },
+
+        /**
+         * Parse layouts and turn them into
+         * Layout objects
+         *
+         * @param \Kirby\Cms\Field $field
+         * @return \Kirby\Cms\Layouts
+         */
+        'toLayouts' => function (Field $field) {
+            return Layouts::factory(Data::decode($field->value, 'json'), [
+                'parent' => $field->parent()
+            ]);
         },
 
         /**

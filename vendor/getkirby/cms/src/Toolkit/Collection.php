@@ -237,54 +237,52 @@ class Collection extends Iterator implements Countable
     }
 
     /**
-     * Filters elements by a custom
-     * filter function or an array of filters
-     *
-     * @param array|\Closure $filter
-     * @return self
-     * @throws \Exception if $filter is neither a closure nor an array
-     */
-    public function filter($filter)
-    {
-        if (is_callable($filter) === true) {
-            $collection = clone $this;
-            $collection->data = array_filter($this->data, $filter);
-
-            return $collection;
-        } elseif (is_array($filter) === true) {
-            $collection = $this;
-
-            foreach ($filter as $arguments) {
-                $collection = $collection->filterBy(...$arguments);
-            }
-
-            return $collection;
-        }
-
-        throw new Exception('The filter method needs either an array of filterBy rules or a closure function to be passed as parameter.');
-    }
-
-    /**
      * Filters elements by one of the
-     * predefined filter methods.
+     * predefined filter methods, by a
+     * custom filter function or an array of filters
      *
-     * @param string $field
+     * @param string|array|\Closure $field
      * @param array ...$args
      * @return \Kirby\Toolkit\Collection
      */
-    public function filterBy(string $field, ...$args)
+    public function filter($field, ...$args)
     {
         $operator = '==';
         $test     = $args[0] ?? null;
         $split    = $args[1] ?? false;
 
-        if (is_string($test) === true && isset(static::$filters[$test]) === true) {
+        // filter by custom filter function
+        if (is_callable($field) === true) {
+            $collection = clone $this;
+            $collection->data = array_filter($this->data, $field);
+
+            return $collection;
+        }
+
+        // array of filters
+        if (is_array($field) === true) {
+            $collection = $this;
+
+            foreach ($field as $filter) {
+                $collection = $collection->filter(...$filter);
+            }
+
+            return $collection;
+        }
+
+        if (
+            is_string($test) === true &&
+            isset(static::$filters[$test]) === true
+        ) {
             $operator = $test;
             $test     = $args[1] ?? null;
             $split    = $args[2] ?? false;
         }
 
-        if (is_object($test) === true && method_exists($test, '__toString') === true) {
+        if (
+            is_object($test) === true &&
+            method_exists($test, '__toString') === true
+        ) {
             $test = (string)$test;
         }
 
@@ -321,11 +319,18 @@ class Collection extends Iterator implements Countable
     }
 
     /**
-     * @param string $validator
-     * @param mixed $values
-     * @param mixed $test
-     * @return bool
+     * Alias for `Kirby\Toolkit\Collection::filter`
+     *
+     * @param string|Closure $field
+     * @param array ...$args
+     * @return self
      */
+    public function filterBy(...$args)
+    {
+        return $this->filter(...$args);
+    }
+
+
     protected function filterMatchesAny($validator, $values, $test): bool
     {
         foreach ($values as $value) {
@@ -472,7 +477,7 @@ class Collection extends Iterator implements Countable
      * Extracts an attribute value from the given element
      * in the collection. This is useful if elements in the collection
      * might be objects, arrays or anything else and you need to
-     * get the value independently from that. We use it for filterBy.
+     * get the value independently from that. We use it for `filter`.
      *
      * @param array|object $item
      * @param string $attribute
@@ -516,69 +521,77 @@ class Collection extends Iterator implements Countable
     }
 
     /**
-     * Groups the elements by a given callback
+     * Groups the elements by a given field or callback function
      *
-     * @param \Closure $callback
-     * @return \Kirby\Toolkit\Collection A new collection with an element for each group and a sub collection in each group
-     * @throws \Exception
+     * @param string|Closure $field
+     * @param bool $i
+     * @return \Kirby\Toolkit\Collection A new collection with an element for each group and a subcollection in each group
+     * @throws \Exception if $field is not a string nor a callback function
      */
-    public function group(Closure $callback)
+    public function group($field, bool $i = true)
     {
-        $groups = [];
 
-        foreach ($this->data as $key => $item) {
+        // group by field name
+        if (is_string($field) === true) {
+            return $this->group(function ($item) use ($field, $i) {
+                $value = $this->getAttribute($item, $field);
 
-            // get the value to group by
-            $value = $callback($item);
+                // ignore upper/lowercase for group names
+                return $i === true ? Str::lower($value) : $value;
+            });
+        }
 
-            // make sure that there's always a proper value to group by
-            if (!$value) {
-                throw new Exception('Invalid grouping value for key: ' . $key);
-            }
+        // group via callback function
+        if (is_callable($field) === true) {
+            $groups = [];
 
-            // make sure we have a proper key for each group
-            if (is_array($value) === true) {
-                throw new Exception('You cannot group by arrays or objects');
-            } elseif (is_object($value) === true) {
-                if (method_exists($value, '__toString') === false) {
+            foreach ($this->data as $key => $item) {
+
+                // get the value to group by
+                $value = $field($item);
+
+                // make sure that there's always a proper value to group by
+                if (!$value) {
+                    throw new Exception('Invalid grouping value for key: ' . $key);
+                }
+
+                // make sure we have a proper key for each group
+                if (is_array($value) === true) {
                     throw new Exception('You cannot group by arrays or objects');
+                } elseif (is_object($value) === true) {
+                    if (method_exists($value, '__toString') === false) {
+                        throw new Exception('You cannot group by arrays or objects');
+                    } else {
+                        $value = (string)$value;
+                    }
+                }
+
+                if (isset($groups[$value]) === false) {
+                    // create a new entry for the group if it does not exist yet
+                    $groups[$value] = new static([$key => $item]);
                 } else {
-                    $value = (string)$value;
+                    // add the element to an existing group
+                    $groups[$value]->set($key, $item);
                 }
             }
 
-            if (isset($groups[$value]) === false) {
-                // create a new entry for the group if it does not exist yet
-                $groups[$value] = new static([$key => $item]);
-            } else {
-                // add the element to an existing group
-                $groups[$value]->set($key, $item);
-            }
+            return new Collection($groups);
         }
 
-        return new Collection($groups);
+        throw new Exception('Can only group by string values or by providing a callback function');
     }
 
     /**
-     * Groups the elements by a given field
+     * Alias for `Kirby\Toolkit\Collection::group`
      *
-     * @param string $field
+     * @param string|Closure $field
      * @param bool $i
      * @return \Kirby\Toolkit\Collection A new collection with an element for each group and a sub collection in each group
      * @throws \Exception
      */
-    public function groupBy($field, bool $i = true)
+    public function groupBy(...$args)
     {
-        if (is_string($field) === false) {
-            throw new Exception('Cannot group by non-string values. Did you mean to call group()?');
-        }
-
-        return $this->group(function ($item) use ($field, $i) {
-            $value = $this->getAttribute($item, $field);
-
-            // ignore upper/lowercase for group names
-            return $i === true ? Str::lower($value) : $value;
-        });
+        return $this->group(...$args);
     }
 
     /**
@@ -799,7 +812,7 @@ class Collection extends Iterator implements Countable
     }
 
     /**
-     * Runs a combination of filterBy, sortBy, not
+     * Runs a combination of filter, sort, not,
      * offset, limit and paginate on the collection.
      * Any part of the query is optional.
      *
@@ -814,10 +827,17 @@ class Collection extends Iterator implements Countable
             $result = $result->not(...$arguments['not']);
         }
 
-        if (isset($arguments['filterBy']) === true) {
-            foreach ($arguments['filterBy'] as $filter) {
-                if (isset($filter['field']) === true && isset($filter['value']) === true) {
-                    $result = $result->filterBy($filter['field'], $filter['operator'] ?? '==', $filter['value']);
+        if ($filters = $arguments['filterBy'] ?? $arguments['filter'] ?? null) {
+            foreach ($filters as $filter) {
+                if (
+                    isset($filter['field']) === true &&
+                    isset($filter['value']) === true
+                ) {
+                    $result = $result->filter(
+                        $filter['field'],
+                        $filter['operator'] ?? '==',
+                        $filter['value']
+                    );
                 }
             }
         }
@@ -830,18 +850,18 @@ class Collection extends Iterator implements Countable
             $result = $result->limit($arguments['limit']);
         }
 
-        if (isset($arguments['sortBy']) === true) {
-            if (is_array($arguments['sortBy'])) {
-                $sort = explode(' ', implode(' ', $arguments['sortBy']));
+        if ($sort = $arguments['sortBy'] ?? $arguments['sort'] ?? null) {
+            if (is_array($sort)) {
+                $sort = explode(' ', implode(' ', $sort));
             } else {
-                // if there are commas in the sortBy argument, removes it
-                if (Str::contains($arguments['sortBy'], ',') === true) {
-                    $arguments['sortBy'] = Str::replace($arguments['sortBy'], ',', '');
+                // if there are commas in the sort argument, removes it
+                if (Str::contains($sort, ',') === true) {
+                    $sort = Str::replace($sort, ',', '');
                 }
 
-                $sort = explode(' ', $arguments['sortBy']);
+                $sort = explode(' ', $sort);
             }
-            $result = $result->sortBy(...$sort);
+            $result = $result->sort(...$sort);
         }
 
         if (isset($arguments['paginate']) === true) {
@@ -924,17 +944,17 @@ class Collection extends Iterator implements Countable
     /**
      * Get sort arguments from a string
      *
-     * @param string $sortBy
+     * @param string $sort
      * @return array
      */
-    public static function sortArgs(string $sortBy): array
+    public static function sortArgs(string $sort): array
     {
         // if there are commas in the sortBy argument, removes it
-        if (Str::contains($sortBy, ',') === true) {
-            $sortBy = Str::replace($sortBy, ',', '');
+        if (Str::contains($sort, ',') === true) {
+            $sort = Str::replace($sort, ',', '');
         }
 
-        $sortArgs = Str::split($sortBy, ' ');
+        $sortArgs = Str::split($sort, ' ');
 
         // fill in PHP constants
         array_walk($sortArgs, function (string &$value) {
@@ -954,7 +974,7 @@ class Collection extends Iterator implements Countable
      * @param int $method The sort flag, SORT_REGULAR, SORT_NUMERIC etc.
      * @return \Kirby\Toolkit\Collection
      */
-    public function sortBy()
+    public function sort()
     {
         // there is no need to sort empty collections
         if (empty($this->data) === true) {
@@ -1060,6 +1080,19 @@ class Collection extends Iterator implements Countable
         // $array has been overwritten by array_multisort
         $collection->data = $array;
         return $collection;
+    }
+
+    /**
+     * Alias for `Kirby\Toolkit\Collection::sort`
+     *
+     * @param string|callable $field Field name or value callback to sort by
+     * @param string $direction asc or desc
+     * @param int $method The sort flag, SORT_REGULAR, SORT_NUMERIC etc.
+     * @return Collection
+     */
+    public function sortBy(...$args)
+    {
+        return $this->sort(...$args);
     }
 
     /**

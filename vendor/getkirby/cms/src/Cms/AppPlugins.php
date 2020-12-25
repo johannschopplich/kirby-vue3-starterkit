@@ -48,6 +48,7 @@ trait AppPlugins
 
         // other plugin types
         'api' => [],
+        'authChallenges' => [],
         'blueprints' => [],
         'cacheTypes' => [],
         'collections' => [],
@@ -123,6 +124,17 @@ trait AppPlugins
         } else {
             return $this->extensions['api'];
         }
+    }
+
+    /**
+     * Registers additional authentication challenges
+     *
+     * @param array $challenges
+     * @return array
+     */
+    protected function extendAuthChallenges(array $challenges): array
+    {
+        return $this->extensions['authChallenges'] = Auth::$challenges = array_merge(Auth::$challenges, $challenges);
     }
 
     /**
@@ -618,6 +630,7 @@ trait AppPlugins
         // load static extensions only once
         if (static::$systemExtensions === null) {
             // Form Field Mixins
+            FormField::$mixins['datetime']   = include $root . '/config/fields/mixins/datetime.php';
             FormField::$mixins['filepicker'] = include $root . '/config/fields/mixins/filepicker.php';
             FormField::$mixins['min']        = include $root . '/config/fields/mixins/min.php';
             FormField::$mixins['options']    = include $root . '/config/fields/mixins/options.php';
@@ -675,9 +688,16 @@ trait AppPlugins
                 'blueprints'   => include $root . '/config/blueprints.php',
                 'fields'       => include $root . '/config/fields.php',
                 'fieldMethods' => include $root . '/config/methods.php',
-                'tags'         => include $root . '/config/tags.php'
+                'snippets'     => include $root . '/config/snippets.php',
+                'tags'         => include $root . '/config/tags.php',
+                'templates'    => include $root . '/config/templates.php'
             ];
         }
+
+        // default auth challenges
+        $this->extendAuthChallenges([
+            'email' => 'Kirby\Cms\Auth\EmailChallenge'
+        ]);
 
         // default cache types
         $this->extendCacheTypes([
@@ -691,7 +711,9 @@ trait AppPlugins
         $this->extendBlueprints(static::$systemExtensions['blueprints']);
         $this->extendFields(static::$systemExtensions['fields']);
         $this->extendFieldMethods((static::$systemExtensions['fieldMethods'])($this));
+        $this->extendSnippets(static::$systemExtensions['snippets']);
         $this->extendTags(static::$systemExtensions['tags']);
+        $this->extendTemplates(static::$systemExtensions['templates']);
     }
 
     /**

@@ -4,9 +4,9 @@ namespace Kirby\Cms;
 
 use Kirby\Data\Data;
 use Kirby\Exception\Exception;
-use Kirby\Exception\InvalidArgumentException;
 use Kirby\Exception\PermissionException;
 use Kirby\Toolkit\F;
+use Kirby\Toolkit\Locale;
 use Kirby\Toolkit\Str;
 use Throwable;
 
@@ -329,6 +329,28 @@ class Language extends Model
     }
 
     /**
+     * Loads the language rules for provided locale code
+     *
+     * @param string $code
+     */
+    public static function loadRules(string $code)
+    {
+        $kirby = kirby();
+        $code  = Str::contains($code, '.') ? Str::before($code, '.') : $code;
+        $file  = $kirby->root('i18n:rules') . '/' . $code . '.json';
+
+        if (F::exists($file) === false) {
+            $file = $kirby->root('i18n:rules') . '/' . Str::before($code, '_') . '.json';
+        }
+
+        try {
+            return Data::read($file);
+        } catch (\Exception $e) {
+            return [];
+        }
+    }
+
+    /**
      * Returns the PHP locale setting array
      *
      * @param int $category If passed, returns the locale for the specified category (e.g. LC_ALL) as string
@@ -341,45 +363,6 @@ class Language extends Model
         } else {
             return $this->locale;
         }
-    }
-
-    /**
-     * Returns the locale array but with the locale
-     * constants replaced with their string representations
-     *
-     * @return array
-     */
-    protected function localeExport(): array
-    {
-        // list of all possible constant names
-        $constantNames = [
-            'LC_ALL', 'LC_COLLATE', 'LC_CTYPE', 'LC_MONETARY',
-            'LC_NUMERIC', 'LC_TIME', 'LC_MESSAGES'
-        ];
-
-        // build an associative array with the locales
-        // that are actually supported on this system
-        $constants = [];
-        foreach ($constantNames as $name) {
-            if (defined($name) === true) {
-                $constants[constant($name)] = $name;
-            }
-        }
-
-        // replace the keys in the locale data array with the locale names
-        $return = [];
-        foreach ($this->locale() as $key => $value) {
-            if (isset($constants[$key]) === true) {
-                // the key is a valid constant,
-                // replace it with its string representation
-                $return[$constants[$key]] = $value;
-            } else {
-                // not found, keep it as-is
-                $return[$key] = $value;
-            }
-        }
-
-        return $return;
     }
 
     /**
@@ -454,19 +437,7 @@ class Language extends Model
     public function rules(): array
     {
         $code = $this->locale(LC_CTYPE);
-        $code = Str::contains($code, '.') ? Str::before($code, '.') : $code;
-        $file = $this->kirby()->root('i18n:rules') . '/' . $code . '.json';
-
-        if (F::exists($file) === false) {
-            $file = $this->kirby()->root('i18n:rules') . '/' . Str::before($code, '_') . '.json';
-        }
-
-        try {
-            $data = Data::read($file);
-        } catch (\Exception $e) {
-            $data = [];
-        }
-
+        $data = static::loadRules($code);
         return array_merge($data, $this->slugs());
     }
 
@@ -488,7 +459,7 @@ class Language extends Model
             'code'         => $this->code(),
             'default'      => $this->isDefault(),
             'direction'    => $this->direction(),
-            'locale'       => $this->localeExport(),
+            'locale'       => Locale::export($this->locale()),
             'name'         => $this->name(),
             'translations' => $this->translations(),
             'url'          => $this->url,
@@ -539,24 +510,10 @@ class Language extends Model
      */
     protected function setLocale($locale = null)
     {
-        if (is_array($locale)) {
-            // replace string constant keys with the constant values
-            $convertedLocale = [];
-            foreach ($locale as $key => $value) {
-                if (is_string($key) === true && Str::startsWith($key, 'LC_') === true) {
-                    $key = constant($key);
-                }
-
-                $convertedLocale[$key] = $value;
-            }
-
-            $this->locale = $convertedLocale;
-        } elseif (is_string($locale)) {
-            $this->locale = [LC_ALL => $locale];
-        } elseif ($locale === null) {
+        if ($locale === null) {
             $this->locale = [LC_ALL => $this->code];
         } else {
-            throw new InvalidArgumentException('Locale must be string or array');
+            $this->locale = Locale::normalize($locale);
         }
 
         return $this;

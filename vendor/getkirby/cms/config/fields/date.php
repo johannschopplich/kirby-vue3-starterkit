@@ -1,21 +1,39 @@
 <?php
 
 use Kirby\Exception\Exception;
+use Kirby\Form\Field;
+use Kirby\Toolkit\I18n;
+use Kirby\Toolkit\Str;
 
 return [
+    'mixins' => ['datetime'],
     'props' => [
+        /**
+         * Unset inherited props
+         */
+        'placeholder' => null,
+
+        /**
+         * Activate/deactivate the dropdown calendar
+         */
+        'calendar' => function (bool $calendar = true) {
+            return $calendar;
+        },
+
+
         /**
          * Default date when a new page/file/user gets created
          */
-        'default' => function ($default = null) {
+        'default' => function (string $default = null) {
             return $default;
         },
 
         /**
-         * Defines a custom format that is used when the field is saved
+         * Custom format (dayjs tokens: `DD`, `MM`, `YYYY`) that is
+         * used to display the field in the Panel
          */
-        'format' => function (string $format = null) {
-            return $format;
+        'display' => function ($display = 'YYYY-MM-DD') {
+            return I18n::translate($display, $display);
         },
 
         /**
@@ -24,22 +42,48 @@ return [
         'icon' => function (string $icon = 'calendar') {
             return $icon;
         },
+
         /**
-         * Youngest date, which can be selected/saved
+         * Latest date, which can be selected/saved (Y-m-d)
          */
         'max' => function (string $max = null) {
-            return $this->toDate($max);
+            return $this->toDatetime($max);
         },
         /**
-         * Oldest date, which can be selected/saved
+         * Earliest date, which can be selected/saved (Y-m-d)
          */
         'min' => function (string $min = null) {
-            return $this->toDate($min);
+            return $this->toDatetime($min);
         },
+
         /**
-         * The placeholder is not available
+         * Round to the nearest: sub-options for `unit` (day) and `size` (1)
          */
-        'placeholder' => null,
+        'step' => function ($step = null) {
+            $default = [
+                'size' => 1,
+                'unit' => 'day'
+            ];
+
+            if ($step === null) {
+                return $default;
+            }
+
+            if (is_array($step) === true) {
+                $step = array_merge($default, $step);
+                $step['unit'] = strtolower($step['unit']);
+                return $step;
+            }
+
+            if (is_int($step) === true) {
+                return array_merge($default, ['size' => $step]);
+            }
+
+            if (is_string($step) === true) {
+                return array_merge($default, ['unit' => strtolower($step)]);
+            }
+        },
+
         /**
          * Pass `true` or an array of time field options to show the time selector.
          */
@@ -55,30 +99,37 @@ return [
     ],
     'computed' => [
         'default' => function () {
-            return $this->toDate($this->default);
+            return $this->toDatetime($this->default);
         },
-        'format' => function () {
-            return $this->props['format'] ?? ($this->time() === false ? 'Y-m-d' : 'Y-m-d H:i');
+        'display' => function () {
+            if ($this->display) {
+                return Str::upper($this->display);
+            }
         },
-        'value' => function () {
-            return $this->toDate($this->value);
-        },
-    ],
-    'methods' => [
-        'toDate' => function ($value) {
-            if ($timestamp = timestamp($value, $this->time['step'] ?? 5)) {
-                return date('Y-m-d H:i:s', $timestamp);
+        'time' => function () {
+            if ($this->time === false) {
+                return false;
             }
 
-            return null;
-        }
+            $props = is_array($this->time) ? $this->time : [];
+            $props['model'] = $this->model();
+            $field = new Field('time', $props);
+            return $field->toArray();
+        },
+        'step' => function () {
+            if ($this->time === false) {
+                return $this->step;
+            }
+
+            return $this->time['step'];
+        },
+        'value' => function () {
+            return $this->toDatetime($this->value);
+        },
     ],
     'save' => function ($value) {
-        if ($value !== null && $date = strtotime($value)) {
-            return date($this->format(), $date);
-        }
-
-        return '';
+        $format = $this->time === false ? 'Y-m-d' : 'Y-m-d H:i:s';
+        return $this->toContent($value, $format);
     },
     'validations' => [
         'date',
@@ -86,7 +137,7 @@ return [
             $min    = $this->min ? strtotime($this->min) : null;
             $max    = $this->max ? strtotime($this->max) : null;
             $value  = strtotime($this->value());
-            $format = 'd.m.Y';
+            $format = $this->time === false ? 'd.m.Y' : 'd.m.Y H:i';
             $errors = [];
 
             if ($value && $min && $value < $min) {

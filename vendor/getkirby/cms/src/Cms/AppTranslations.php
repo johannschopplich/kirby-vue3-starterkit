@@ -2,10 +2,9 @@
 
 namespace Kirby\Cms;
 
-use Exception;
 use Kirby\Data\Data;
-use Kirby\Toolkit\F;
 use Kirby\Toolkit\I18n;
+use Kirby\Toolkit\Locale;
 use Kirby\Toolkit\Str;
 
 /**
@@ -36,11 +35,11 @@ trait AppTranslations
             }
 
             // inject translations from the current language
-            if ($this->multilang() === true && $language = $this->languages()->find($locale)) {
+            if (
+                $this->multilang() === true &&
+                $language = $this->languages()->find($locale)
+            ) {
                 $data = array_merge($data, $language->translations());
-
-                // Add language slug rules to Str class
-                Str::$language = $language->rules();
             }
 
 
@@ -65,25 +64,12 @@ trait AppTranslations
 
         I18n::$translations = [];
 
-        // checks custom language definition for slugs
-        if ($slugsOption = $this->option('slugs')) {
-            // checks setting in two different ways
+        // add slug rules based on config option
+        if ($slugs = $this->option('slugs')) {
+            // two ways that the option can be defined:
             // "slugs" => "de" or "slugs" => ["language" => "de"]
-            $slugsLanguage = is_string($slugsOption) === true ? $slugsOption : ($slugsOption['language'] ?? null);
-
-            // load custom slugs language if it's defined
-            if ($slugsLanguage !== null) {
-                $file = $this->root('i18n:rules') . '/' . $slugsLanguage . '.json';
-
-                if (F::exists($file) === true) {
-                    try {
-                        $data = Data::read($file);
-                    } catch (Exception $e) {
-                        $data = [];
-                    }
-
-                    Str::$language = $data;
-                }
+            if ($slugs = $slugs['language'] ?? $slugs ?? null) {
+                Str::$language = Language::loadRules($slugs);
             }
         }
     }
@@ -99,7 +85,7 @@ trait AppTranslations
     public function setCurrentLanguage(string $languageCode = null)
     {
         if ($this->multilang() === false) {
-            $this->setLocale($this->option('locale', 'en_US.utf-8'));
+            Locale::set($this->option('locale', 'en_US.utf-8'));
             return $this->language = null;
         }
 
@@ -110,8 +96,11 @@ trait AppTranslations
         }
 
         if ($this->language) {
-            $this->setLocale($this->language->locale());
+            Locale::set($this->language->locale());
         }
+
+        // add language slug rules to Str class
+        Str::$language = $this->language->rules();
 
         return $this->language;
     }
@@ -131,18 +120,13 @@ trait AppTranslations
     /**
      * Set locale settings
      *
-     * @internal
+     * @deprecated 3.5.0 Use \Kirby\Toolkit\Locale::set() instead
+     *
      * @param string|array $locale
      */
     public function setLocale($locale): void
     {
-        if (is_array($locale) === true) {
-            foreach ($locale as $key => $value) {
-                setlocale($key, $value);
-            }
-        } else {
-            setlocale(LC_ALL, $locale);
-        }
+        Locale::set($locale);
     }
 
     /**

@@ -249,6 +249,26 @@ class Field extends Component
     }
 
     /**
+     * Creates a new field instance
+     *
+     * @param string $type
+     * @param array $attrs
+     * @param Fields|null $formFields
+     * @return static
+     */
+    public static function factory(string $type, array $attrs = [], ?Fields $formFields = null)
+    {
+        $field = static::$types[$type] ?? null;
+
+        if (is_string($field) && class_exists($field) === true) {
+            $attrs['siblings'] = $formFields;
+            return new $field($attrs);
+        }
+
+        return new static($type, $attrs, $formFields);
+    }
+
+    /**
      * Parent collection with all fields of the current form
      *
      * @return \Kirby\Form\Fields|null
@@ -404,8 +424,6 @@ class Field extends Component
 
         unset($array['model']);
 
-        $array['errors']    = $this->errors();
-        $array['invalid']   = $this->isInvalid();
         $array['saveable']  = $this->save();
         $array['signature'] = md5(json_encode($array));
 
