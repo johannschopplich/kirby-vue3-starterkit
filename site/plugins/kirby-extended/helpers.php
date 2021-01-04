@@ -1,9 +1,7 @@
 <?php
 
-use Kirby\Cms\Page;
 use KirbyExtended\Env;
 use KirbyExtended\HigherOrderTapProxy;
-use KirbyExtended\MetaTagsAdapter;
 
 if (!function_exists('env')) {
     /**
@@ -49,18 +47,5 @@ if (!function_exists('value')) {
     function value($value)
     {
         return $value instanceof Closure ? $value() : $value;
-    }
-}
-
-if (!function_exists('metaTags')) {
-    /**
-     * Generate meta tags for a given Kirby page
-     *
-     * @param \Kirby\Cms\Page $page
-     * @return \KirbyExtended\MetaTagsAdapter
-     */
-    function metaTags(Page $page): MetaTagsAdapter
-    {
-        return MetaTagsAdapter::instance($page);
     }
 }

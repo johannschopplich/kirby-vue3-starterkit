@@ -2,46 +2,40 @@
 
 namespace KirbyExtended;
 
-use Dotenv\Repository\Adapter\PutenvAdapter;
+use Dotenv\Dotenv;
 use Dotenv\Repository\RepositoryBuilder;
-use PhpOption\Option;
+use Dotenv\Repository\RepositoryInterface;
 
 class Env
 {
-    /**
-     * Indicates if the putenv adapter is enabled
-     *
-     * @var bool
-     */
-    protected static bool $putenv = false;
+    protected static ?RepositoryInterface $repository = null;
+    protected static bool $loaded = false;
 
     /**
-     * The environment repository instance
+     * Load the environment file from a given directory
      *
-     * @var \Dotenv\Repository\RepositoryInterface|null
+     * @param string|null $path
+     * @param string $filename
+     * @return array<string,string|null>
      */
-    protected static $repository;
-
-    /**
-     * Enable the putenv adapter
-     *
-     * @return void
-     */
-    public static function enablePutenv(): void
+    public static function load(?string $path = null, string $filename = '.env'): ?array
     {
-        static::$putenv = true;
-        static::$repository = null;
+        $path = $path ?? option('kirby-extended.env.path', kirby()->root('base'));
+        $filename = option('kirby-extended.env.filename', $filename);
+        $repository = static::getRepository();
+
+        static::$loaded = true;
+        return Dotenv::create($repository, $path, $filename)->load();
     }
 
     /**
-     * Disable the putenv adapter
+     * Get the state of `Dotenv` initialization
      *
-     * @return void
+     * @return bool
      */
-    public static function disablePutenv(): void
+    public static function isLoaded(): bool
     {
-        static::$putenv = false;
-        static::$repository = null;
+        return static::$loaded;
     }
 
     /**
@@ -53,11 +47,6 @@ class Env
     {
         if (static::$repository === null) {
             $builder = RepositoryBuilder::createWithDefaultAdapters();
-
-            if (static::$putenv) {
-                $builder = $builder->addAdapter(PutenvAdapter::class);
-            }
-
             static::$repository = $builder->immutable()->make();
         }
 
@@ -71,33 +60,33 @@ class Env
      * @param mixed $default
      * @return mixed
      */
-    public static function get($key, $default = null)
+    public static function get(string $key, $default = null)
     {
-        return Option::fromValue(static::getRepository()->get($key))
-            ->map(function ($value) {
-                switch (strtolower($value)) {
-                    case 'true':
-                    case '(true)':
-                        return true;
-                    case 'false':
-                    case '(false)':
-                        return false;
-                    case 'empty':
-                    case '(empty)':
-                        return '';
-                    case 'null':
-                    case '(null)':
-                        return;
-                }
+        $value = static::getRepository()->get($key);
 
-                if (preg_match('/\A([\'"])(.*)\1\z/', $value, $matches)) {
-                    return $matches[2];
-                }
+        if ($value === null) {
+            return value($default);
+        }
 
-                return $value;
-            })
-            ->getOrCall(function () use ($default) {
-                return value($default);
-            });
+        switch (strtolower($value)) {
+            case 'true':
+            case '(true)':
+                return true;
+            case 'false':
+            case '(false)':
+                return false;
+            case 'empty':
+            case '(empty)':
+                return '';
+            case 'null':
+            case '(null)':
+                return;
+        }
+
+        if (preg_match('/\A([\'"])(.*)\1\z/', $value, $matches)) {
+            return $matches[2];
+        }
+
+        return $value;
     }
 }

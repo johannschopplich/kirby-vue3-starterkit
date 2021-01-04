@@ -1,7 +1,7 @@
 <?php
 
 $base = dirname(__DIR__, 2);
-\KirbyExtended\EnvAdapter::load($base);
+\KirbyExtended\Env::load($base);
 
 return [
 

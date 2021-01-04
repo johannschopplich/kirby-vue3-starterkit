@@ -1,0 +1,33 @@
+{
+  "name": "voku/html-min",
+  "description": "HTML Compressor and Minifier",
+  "keywords": [
+    "html",
+    "compress",
+    "compression",
+    "Compressor",
+    "minifier"
+  ],
+  "type": "library",
+  "homepage": "https://github.com/voku/HtmlMin",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Lars Moelleken",
+      "homepage": "http://www.moelleken.org/"
+    }
+  ],
+  "require": {
+    "php": ">=7.0.0",
+    "voku/simple_html_dom": "~4.7.23",
+    "ext-dom": "*"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~6.0 || ~7.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "voku\\": "src/voku/"
+    }
+  }
+}

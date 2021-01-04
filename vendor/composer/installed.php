@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '5fb2459409289e9bc69e6a34ee58d64a9951ce57',
+    'reference' => 'cac6aa1c7388c5614ebf6a27f9bd7c9dddd402fe',
     'name' => '__root__',
   ),
   'versions' => 
@@ -18,7 +18,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '5fb2459409289e9bc69e6a34ee58d64a9951ce57',
+      'reference' => 'cac6aa1c7388c5614ebf6a27f9bd7c9dddd402fe',
     ),
     'claviska/simpleimage' => 
     array (
@@ -49,12 +49,12 @@
     ),
     'getkirby/composer-installer' => 
     array (
-      'pretty_version' => '1.2.0',
-      'version' => '1.2.0.0',
+      'pretty_version' => '1.2.1',
+      'version' => '1.2.1.0',
       'aliases' => 
       array (
       ),
-      'reference' => '240a8b2c275d61b66601feb58222b7d34bc6cf1e',
+      'reference' => 'c98ece30bfba45be7ce457e1102d1b169d922f3d',
     ),
     'graham-campbell/result-type' => 
     array (
@@ -67,12 +67,12 @@
     ),
     'johannschopplich/kirby-extended' => 
     array (
-      'pretty_version' => 'v1.1.2',
-      'version' => '1.1.2.0',
+      'pretty_version' => 'v2.5.1',
+      'version' => '2.5.1.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'dfe49430a65963c285e21830b6f6f4d7d92586b3',
+      'reference' => 'b7e264590fd20af290330480d5f301eceb5f5c4b',
     ),
     'laminas/laminas-escaper' => 
     array (
@@ -153,6 +153,15 @@
       ),
       'reference' => '0f73288fd15629204f9d42b7055f72dacbe811fc',
     ),
+    'symfony/css-selector' => 
+    array (
+      'pretty_version' => 'v5.2.1',
+      'version' => '5.2.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'f789e7ead4c79e04ca9a6d6162fc629c89bd8054',
+    ),
     'symfony/polyfill-ctype' => 
     array (
       'pretty_version' => 'v1.20.0',
@@ -197,6 +206,24 @@
       array (
       ),
       'reference' => 'fba64139db67123c7a57072e5f8d3db10d160b66',
+    ),
+    'voku/html-min' => 
+    array (
+      'pretty_version' => '4.4.8',
+      'version' => '4.4.8.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '4f700584abd70b308b7d06b8e4cfcc31711faaf9',
+    ),
+    'voku/simple_html_dom' => 
+    array (
+      'pretty_version' => '4.7.28',
+      'version' => '4.7.28.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '78d5894c7f0facfb4fb6369af15b1a87baea958c',
     ),
     'zendframework/zend-escaper' => 
     array (
