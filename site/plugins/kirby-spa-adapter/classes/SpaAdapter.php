@@ -97,12 +97,12 @@ class SpaAdapter {
      */
     public static function pathToAsset (string $filename): string
     {
-        $match = static::useManifest()[$filename] ?? null;
-        if ($match === null) {
+        $hashedFilename = static::useManifest()[$filename] ?? null;
+        if ($hashedFilename === null) {
             throw new Exception("No hashed build asset found for {$filename}. Make sure it's bundled by Vite.");
         }
 
-        return static::useAssetsDir() . '/' . $match['file'];
+        return static::useAssetsDir() . '/' . $hashedFilename;
     }
 
     /**
@@ -125,11 +125,9 @@ class SpaAdapter {
      */
     public static function modulePreloadLink (string $pattern)
     {
-        $modulePath = kirby()->root() . static::useAssetsDir() . '/' . ucfirst($pattern) . '.*.js';
-        $match = glob($modulePath);
-        if (!empty($match)) {
-            $filename = pathinfo($match[0], PATHINFO_BASENAME);
-            return '<link rel="modulepreload" href="' . static::useAssetsDir() . '/' . $filename . '">';
+        $hashedFilename = static::useManifest()[ucfirst($pattern) . '.js'] ?? null;
+        if ($hashedFilename !== null) {
+            return '<link rel="modulepreload" href="' . static::useAssetsDir() . '/' . $hashedFilename['file'] . '">';
         }
     }
 }
