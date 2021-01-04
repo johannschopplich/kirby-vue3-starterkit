@@ -126,8 +126,8 @@ class SpaAdapter {
     public static function modulePreloadLink (string $pattern)
     {
         $hashedFilename = static::useManifest()[ucfirst($pattern) . '.js'] ?? null;
-        if ($hashedFilename) {
-            return '<link rel="modulepreload" href="' . static::useAssetsDir() . '/' . $hashedFilename . '">';
+        if ($hashedFilename !== null) {
+            return '<link rel="modulepreload" href="' . static::useAssetsDir() . '/' . $hashedFilename['file'] . '">';
         }
     }
 }
