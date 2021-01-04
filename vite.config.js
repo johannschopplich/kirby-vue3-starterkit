@@ -1,19 +1,14 @@
-import 'dotenv/config.js'
-import vue from '@vitejs/plugin-vue'
+require('dotenv').config()
 
 const kirbyUrl = `http://${process.env.KIRBY_SERVER_HOSTNAME}:${process.env.KIRBY_SERVER_PORT}`
 const apiLocation = `/${process.env.CONTENT_API_SLUG}`
 
-export default {
+module.exports = {
   root: 'frontend',
-  build: {
-    assetsDir: process.env.VITE_ASSETS_DIR,
-    manifest: true,
-    target: 'es2018'
-  },
-  plugins: [
-    vue()
-  ],
+  assetsDir: process.env.VITE_ASSETS_DIR,
+  emitIndex: false,
+  emitManifest: true,
+  esbuildTarget: 'es2018',
 
   env: {
     VITE_BACKEND_URL: kirbyUrl,
