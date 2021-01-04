@@ -102,7 +102,7 @@ class SpaAdapter {
             throw new Exception("No hashed build asset found for {$filename}. Make sure it's bundled by Vite.");
         }
 
-        return '/' . $match['file'];
+        return static::useAssetsDir() . '/' . $match['file'];
     }
 
     /**

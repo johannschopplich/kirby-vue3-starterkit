@@ -4,9 +4,6 @@ import vue from '@vitejs/plugin-vue'
 const kirbyUrl = `http://${process.env.KIRBY_SERVER_HOSTNAME}:${process.env.KIRBY_SERVER_PORT}`
 const apiLocation = `/${process.env.CONTENT_API_SLUG}`
 
-/**
- * type {import('vite').UserConfig}
- */
 export default {
   root: 'frontend',
   build: {
@@ -18,12 +15,17 @@ export default {
     vue()
   ],
 
-  server: {
-    proxy: {
-      [`*${apiLocation}/*.json`]: {
-        target: kirbyUrl,
-        changeOrigin: true
-      }
+  env: {
+    VITE_BACKEND_URL: kirbyUrl,
+    VITE_BACKEND_API_LOCATION: apiLocation,
+    VITE_MULTILANG: process.env.KIRBY_MULTILANG,
+    VITE_MULTILANG_DETECT: process.env.KIRBY_MULTILANG_DETECT
+  },
+
+  proxy: {
+    [`*${apiLocation}/*.json`]: {
+      target: kirbyUrl,
+      changeOrigin: true
     }
   }
 }

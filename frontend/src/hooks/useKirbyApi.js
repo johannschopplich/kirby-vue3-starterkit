@@ -5,7 +5,7 @@ import { useLanguages } from './'
  *
  * @constant {string}
  */
-const apiLocation = '/' + import.meta.env.VITE_BACKEND_API_LOCATION
+const apiLocation = import.meta.env.VITE_BACKEND_API_LOCATION
 
 /**
  * Map to store pages in
