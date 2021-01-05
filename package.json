@@ -1,6 +1,6 @@
 {
   "name": "kirby-vue3-starterkit",
-  "version": "1.6.0",
+  "version": "2.0.0",
   "scripts": {
     "kirby:serve": "env-cmd --use-shell \"php -S \\$KIRBY_SERVER_HOSTNAME:\\$KIRBY_SERVER_PORT -t public server.php\"",
     "kirby:flush-cache": "find storage/cache -maxdepth 1 -mindepth 1 -type d -exec rm -rf '{}' \\;",
@@ -29,6 +29,6 @@
     "eslint-plugin-standard": "^4.1.0",
     "eslint-plugin-vue": "^7.4.1",
     "terser": "^5.5.1",
-    "vite": "^2.0.0-beta.5"
+    "vite": "^2.0.0-beta.7"
   }
 }
