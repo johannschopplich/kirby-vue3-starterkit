@@ -40,13 +40,13 @@ Echoing `$meta->social()` uses sensible defaults, which of course can be extende
 #### Generic meta
 
 | Key | Default |
-| --- | --- | --- | --- |
+| --- | --- |
 | `description` | `description` key if set |
 
 #### Open Graph meta
 
 | Key | Default |
-| --- | --- | --- | --- |
+| --- | --- |
 | `site_name` | `$site->title()->value()` |
 | `url` | `$page->url()` |
 | `type` | `website` |
@@ -60,7 +60,7 @@ Each meta name will be prefixed with `og:` in the rendered HTML automatically.
 #### Twitter meta
 
 | Key | Default |
-| --- | --- | --- | --- |
+| --- | --- |
 | `url` | `$page->url()` |
 | `card` | `summary_large_image` or `summary` if no thumbnail image is present |
 | `title` | `$page->customTitle()->or($page->title())->value()` |

@@ -6,7 +6,7 @@ This package extends Kirby's base capabilities. It's built mostly upon existing 
 
 - ⚡️ [Use environment variables from `.env` files](docs/env.md)
 - 🗂 [Auto-generate meta tags](docs/meta.md)
-- 🧭 [Provide Sitemaps with multilang support](docs/sitemap.md)
+- 🧭 [Provide sitemaps with multilang support](docs/sitemap.md)
 - 🔀 [Redirect routes easily](docs/redirects.md)
 - 🗜 [Minify HTML templates](docs/html-minify.md)
 

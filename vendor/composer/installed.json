@@ -311,17 +311,17 @@
         },
         {
             "name": "johannschopplich/kirby-extended",
-            "version": "v2.5.3",
-            "version_normalized": "2.5.3.0",
+            "version": "v2.5.4",
+            "version_normalized": "2.5.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/johannschopplich/kirby-extended.git",
-                "reference": "91817d9164b6e4cf7094bcf3d9c77b7cde05c183"
+                "reference": "d47d421509eab81dc68015e258b3da25b5c3136a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/johannschopplich/kirby-extended/zipball/91817d9164b6e4cf7094bcf3d9c77b7cde05c183",
-                "reference": "91817d9164b6e4cf7094bcf3d9c77b7cde05c183",
+                "url": "https://api.github.com/repos/johannschopplich/kirby-extended/zipball/d47d421509eab81dc68015e258b3da25b5c3136a",
+                "reference": "d47d421509eab81dc68015e258b3da25b5c3136a",
                 "shasum": ""
             },
             "require": {
@@ -333,7 +333,7 @@
             "require-dev": {
                 "getkirby/cms": "^3.0"
             },
-            "time": "2021-01-05T12:41:27+00:00",
+            "time": "2021-01-05T15:48:43+00:00",
             "type": "kirby-plugin",
             "extra": {
                 "kirby-cms-path": false
@@ -369,7 +369,7 @@
             ],
             "support": {
                 "issues": "https://github.com/johannschopplich/kirby-extended/issues",
-                "source": "https://github.com/johannschopplich/kirby-extended/tree/v2.5.3"
+                "source": "https://github.com/johannschopplich/kirby-extended/tree/v2.5.4"
             },
             "install-path": "../../site/plugins/kirby-extended"
         },

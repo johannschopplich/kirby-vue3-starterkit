@@ -37,7 +37,7 @@ class PageMeta {
         return $this->get($name);
     }
 
-    public function get(string $key, bool $fallback = true): Field
+    public function get(string $key, bool $siteFallback = true): Field
     {
         $key = strtolower($key);
 
@@ -62,18 +62,17 @@ class PageMeta {
             return $field;
         }
 
-        if ($fallback) {
-            $siteContent = site()->content();
-
-            if ($siteContent->get($key)->exists()) {
-                return $siteContent->get($key);
+        if ($siteFallback) {
+            $field = site()->content()->get($key);
+            if ($field->exists() && $field->isNotEmpty()) {
+                return $field;
             }
         }
 
         return new Field($this->page, $key, null);
     }
 
-    public function getFile(string $key, bool $fallback = true): ?File
+    public function getFile(string $key, bool $siteFallback = true): ?File
     {
         $key = strtolower($key);
 
@@ -102,8 +101,11 @@ class PageMeta {
             return $file;
         }
 
-        if ($fallback) {
-            return site()->content()->get($key)->toFile();
+        if ($siteFallback) {
+            $field = site()->content()->get($key);
+            if ($field->exists() && ($file = $field->toFile())) {
+                return $file;
+            }
         }
 
         return null;
