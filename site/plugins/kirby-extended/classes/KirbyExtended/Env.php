@@ -8,7 +8,7 @@ use Dotenv\Repository\RepositoryInterface;
 
 class Env
 {
-    protected static ?RepositoryInterface $repository = null;
+    protected static RepositoryInterface $repository;
     protected static bool $loaded = false;
 
     /**
@@ -45,7 +45,7 @@ class Env
      */
     public static function getRepository()
     {
-        if (static::$repository === null) {
+        if (!isset(static::$repository)) {
             $builder = RepositoryBuilder::createWithDefaultAdapters();
             static::$repository = $builder->immutable()->make();
         }
