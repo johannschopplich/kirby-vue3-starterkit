@@ -8,9 +8,9 @@ use Kirby\Exception\Exception;
 use Kirby\Toolkit\F;
 
 class SpaAdapter {
-    public static string $apiLocation;
-    public static array $site;
-    public static array $manifest;
+    protected static string $apiLocation;
+    protected static array $site;
+    protected static array $manifest;
 
     /**
      * Get path to content api
