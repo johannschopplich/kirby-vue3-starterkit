@@ -2,17 +2,19 @@ import 'dotenv/config.js'
 import vue from '@vitejs/plugin-vue'
 
 const kirbyUrl = `http://${process.env.KIRBY_SERVER_HOSTNAME}:${process.env.KIRBY_SERVER_PORT}`
-const apiLocation = `/${process.env.CONTENT_API_SLUG}`
+const proxyPath = '/viteproxy'
 
-/**
- * type {import('vite').UserConfig}
- */
-export default {
+export default ({ command, mode }) => ({
   root: 'frontend',
   build: {
-    assetsDir: process.env.VITE_ASSETS_DIR,
+    assetsDir: process.env.ASSETS_DIR,
     manifest: true,
     target: 'es2018'
+  },
+  define: {
+    VITE_BACKEND_URL: kirbyUrl,
+    VITE_BACKEND_API_PATH: `${command === 'serve' ? proxyPath : ''}/${process.env.CONTENT_API_SLUG}`,
+    VITE_MULTILANG: process.env.KIRBY_MULTILANG
   },
   plugins: [
     vue()
@@ -20,10 +22,11 @@ export default {
 
   server: {
     proxy: {
-      [`*${apiLocation}/*.json`]: {
+      [proxyPath]: {
         target: kirbyUrl,
-        changeOrigin: true
+        changeOrigin: true,
+        rewrite: path => path.replace(proxyPath, '')
       }
     }
   }
-}
+})

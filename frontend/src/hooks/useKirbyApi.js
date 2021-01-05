@@ -1,3 +1,4 @@
+/* global VITE_BACKEND_API_PATH */
 import { useLanguages } from './'
 
 /**
@@ -5,7 +6,7 @@ import { useLanguages } from './'
  *
  * @constant {string}
  */
-const apiLocation = '/' + import.meta.env.VITE_BACKEND_API_LOCATION
+const apiLocation = VITE_BACKEND_API_PATH
 
 /**
  * Map to store pages in

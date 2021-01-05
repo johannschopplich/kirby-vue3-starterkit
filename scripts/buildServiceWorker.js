@@ -12,7 +12,7 @@ function random () {
   return `${segment()}-${segment()}-${segment()}`
 }
 
-const assetsDir = process.env.VITE_ASSETS_DIR
+const assetsDir = process.env.ASSETS_DIR
 const swManifest = JSON.parse(readFileSync(`public/${assetsDir}/manifest.json`))
 const swSrcPath = 'frontend/src/serviceWorker.js'
 const swDistPath = 'public/service-worker.js'
