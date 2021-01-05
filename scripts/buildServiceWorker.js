@@ -12,12 +12,11 @@ function random () {
   return `${segment()}-${segment()}-${segment()}`
 }
 
-const assetsDir = process.env.ASSETS_DIR
-const swManifest = JSON.parse(readFileSync(`public/${assetsDir}/manifest.json`))
+const swManifest = JSON.parse(readFileSync('public/assets/manifest.json'))
 const swSrcPath = 'frontend/src/serviceWorker.js'
 const swDistPath = 'public/service-worker.js'
 
-const assets = Object.values(swManifest).map(i => `/${assetsDir}/${i.file}`)
+const assets = Object.values(swManifest).map(i => `/assets/${i.file}`)
 const bundle = `
   self.__PRECACHE_MANIFEST = [${assets.map(i => `'${i}'`).join(',')}]
   const VERSION = '${random()}'

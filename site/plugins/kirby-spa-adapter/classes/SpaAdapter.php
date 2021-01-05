@@ -8,46 +8,12 @@ use Kirby\Exception\Exception;
 use Kirby\Toolkit\F;
 
 class SpaAdapter {
-    /**
-     * Relative path to assets dir
-     *
-     * @var string
-     */
-    public static string $assetsDir;
-
-    /**
-     * API location for content
-     *
-     * @var string
-     */
     public static string $apiLocation;
-
-    /**
-     * Global `site` data for the index template
-     *
-     * @var array
-     */
     public static array $site;
-
-    /**
-     * Vite manifest to render links with hashed filenames
-     *
-     * @var array
-     */
     public static array $manifest;
 
     /**
-     * Get and cache `$assetsDir`
-     *
-     * @return string
-     */
-    public static function useAssetsDir(): string
-    {
-        return static::$assetsDir ??= Url::path(env('ASSETS_DIR'));
-    }
-
-    /**
-     * Get and cache `$apiLocation`
+     * Get path to content api
      *
      * @return string
      */
@@ -57,7 +23,7 @@ class SpaAdapter {
     }
 
     /**
-     * Get and cache `$site`
+     * Get site data for the index template
      *
      * @return array
      */
@@ -67,7 +33,7 @@ class SpaAdapter {
     }
 
     /**
-     * Get and cache `$manifest`
+     * Get Vite manifest to render links with hashed filenames
      *
      * @return array
      * @throws Exception
@@ -78,7 +44,7 @@ class SpaAdapter {
             return static::$manifest;
         }
 
-        $manifestPath = kirby()->root() . '/' . static::useAssetsDir() . '/manifest.json';
+        $manifestPath = kirby()->root() . '/assets/manifest.json';
         if (!F::exists($manifestPath)) {
             throw new Exception('Build asset manifest.json not found. You have to build the app first: `npm run build`.');
         }
@@ -125,12 +91,12 @@ class SpaAdapter {
      */
     public static function modulePreloadLink (string $pattern)
     {
-        $modulePath = kirby()->root() . '/' . static::useAssetsDir() . '/' . ucfirst($pattern) . '.*.js';
+        $modulePath = kirby()->root() . '/assets/' . ucfirst($pattern) . '.*.js';
         $match = glob($modulePath);
 
         if (!empty($match)) {
             $filename = pathinfo($match[0], PATHINFO_BASENAME);
-            return '<link rel="modulepreload" href="' . '/' . static::useAssetsDir() . '/' . $filename . '">';
+            return '<link rel="modulepreload" href="' . '/assets/' . $filename . '">';
         }
     }
 }

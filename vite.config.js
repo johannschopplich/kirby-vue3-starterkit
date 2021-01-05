@@ -7,7 +7,7 @@ const proxyPath = '/viteproxy'
 export default ({ command, mode }) => ({
   root: 'frontend',
   build: {
-    assetsDir: process.env.ASSETS_DIR,
+    assetsDir: 'assets',
     manifest: true,
     target: 'es2018'
   },
