@@ -14,7 +14,7 @@ use KirbyExtended\SpaAdapter;
 
   <?= SpaAdapter::jsonPreloadLink($page->uri()) ?>
   <?= SpaAdapter::modulePreloadLink($page->intendedTemplate()->name()) ?>
-  <link rel="stylesheet" href="<?= SpaAdapter::pathToAsset('index.css') ?>">
+  <link rel="stylesheet" href="<?= SpaAdapter::pathToAsset('style.css') ?>">
 
 </head>
 <body>

@@ -1,5 +1,4 @@
-import 'dotenv/config.js'
-import vue from '@vitejs/plugin-vue'
+require('dotenv').config()
 
 const kirbyUrl = `http://${process.env.KIRBY_SERVER_HOSTNAME}:${process.env.KIRBY_SERVER_PORT}`
 const proxyPath = '/viteproxy'
