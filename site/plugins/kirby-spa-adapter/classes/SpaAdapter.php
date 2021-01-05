@@ -43,7 +43,7 @@ class SpaAdapter {
      */
     public static function useAssetsDir(): string
     {
-        return static::$assetsDir ??= Url::path(env('VITE_ASSETS_DIR'), true);
+        return static::$assetsDir ??= Url::path(env('ASSETS_DIR'), true);
     }
 
     /**

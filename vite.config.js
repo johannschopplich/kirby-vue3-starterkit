@@ -1,26 +1,31 @@
 require('dotenv').config()
 
 const kirbyUrl = `http://${process.env.KIRBY_SERVER_HOSTNAME}:${process.env.KIRBY_SERVER_PORT}`
-const apiLocation = `/${process.env.CONTENT_API_SLUG}`
+const proxyPath = '/viteproxy'
 
-module.exports = {
+export default ({ command, mode }) => ({
   root: 'frontend',
-  assetsDir: process.env.VITE_ASSETS_DIR,
-  emitIndex: false,
-  emitManifest: true,
-  esbuildTarget: 'es2018',
-
-  env: {
-    VITE_BACKEND_URL: kirbyUrl,
-    VITE_BACKEND_API_LOCATION: apiLocation,
-    VITE_MULTILANG: process.env.KIRBY_MULTILANG,
-    VITE_MULTILANG_DETECT: process.env.KIRBY_MULTILANG_DETECT
+  build: {
+    assetsDir: process.env.ASSETS_DIR,
+    manifest: true,
+    target: 'es2018'
   },
+  define: {
+    VITE_BACKEND_URL: kirbyUrl,
+    VITE_BACKEND_API_PATH: `${command === 'serve' ? proxyPath : ''}/${process.env.CONTENT_API_SLUG}`,
+    VITE_MULTILANG: process.env.KIRBY_MULTILANG
+  },
+  plugins: [
+    vue()
+  ],
 
-  proxy: {
-    [`*${apiLocation}/*.json`]: {
-      target: kirbyUrl,
-      changeOrigin: true
+  server: {
+    proxy: {
+      [proxyPath]: {
+        target: kirbyUrl,
+        changeOrigin: true,
+        rewrite: path => path.replace(proxyPath, '')
+      }
     }
   }
-}
+})
