@@ -32,9 +32,9 @@ class SpaAdapter {
     /**
      * Vite manifest to render links with hashed filenames
      *
-     * @var array|null
+     * @var array
      */
-    public static ?array $manifest = null;
+    public static array $manifest;
 
     /**
      * Get and cache `$assetsDir`
@@ -43,7 +43,7 @@ class SpaAdapter {
      */
     public static function useAssetsDir(): string
     {
-        return static::$assetsDir ??= Url::path(env('ASSETS_DIR'), true);
+        return static::$assetsDir ??= Url::path(env('ASSETS_DIR'));
     }
 
     /**
@@ -74,11 +74,11 @@ class SpaAdapter {
      */
     public static function useManifest(): array
     {
-        if (static::$manifest !== null) {
+        if (isset(static::$manifest)) {
             return static::$manifest;
         }
 
-        $manifestPath = kirby()->root() . static::useAssetsDir() . '/manifest.json';
+        $manifestPath = kirby()->root() . '/' . static::useAssetsDir() . '/manifest.json';
         if (!F::exists($manifestPath)) {
             throw new Exception('Build asset manifest.json not found. You have to build the app first: `npm run build`.');
         }
@@ -125,12 +125,12 @@ class SpaAdapter {
      */
     public static function modulePreloadLink (string $pattern)
     {
-        $modulePath = kirby()->root() . static::useAssetsDir() . '/' . ucfirst($pattern) . '.*.js';
+        $modulePath = kirby()->root() . '/' . static::useAssetsDir() . '/' . ucfirst($pattern) . '.*.js';
         $match = glob($modulePath);
 
         if (!empty($match)) {
             $filename = pathinfo($match[0], PATHINFO_BASENAME);
-            return '<link rel="modulepreload" href="' . static::useAssetsDir() . '/' . $filename . '">';
+            return '<link rel="modulepreload" href="' . '/' . static::useAssetsDir() . '/' . $filename . '">';
         }
     }
 }
