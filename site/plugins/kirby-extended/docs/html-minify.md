@@ -10,8 +10,8 @@ Minifying HTML templates is disabled by default. To enable it, set `kirby-extend
 
 | Option | Default | Values | Description |
 | --- | --- | --- | --- |
-| `kirby-extended.html-minify.enable` | `false` | boolean | Enable or disable HTML minification.
-| `kirby-extended.html-minify.options` | `[]` | array | Options to pass to HtmlMin.
+| `kirby-extended.html-minify.enable` | `false` | boolean | Enable or disable HTML minification. |
+| `kirby-extended.html-minify.options` | `[]` | array | Options to pass to HtmlMin. |
 
 Head over to HtmlMin for a [list of all available options](https://github.com/voku/HtmlMin#options).
 

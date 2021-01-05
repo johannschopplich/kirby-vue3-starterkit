@@ -4,20 +4,20 @@ Handles the generation of meta tags for search engines, social networks, browser
 
 ## How it works
 
-1. The plugin looks for metadata defaults, set in Kirby's global configuration.
+1. The plugin looks for meta data defaults, set in Kirby's global configuration.
 2. If the defaults don't contain the specific key, it looks in the pagel model if it provides a `metadata()` method that returns an array or metadata fields.
 3. If the page model doesn't contain the specific key, it will look for a field from a pages content file (e.g. `article.txt`) by the corrsponding key. 
-4. If that also fails, it will fall back to default metadata, as stored in the `site.txt` file at the top-level of the content directory.
+4. If that also fails, it will fall back to default metadata, as stored in either the `site.txt` file at the top-level of the content directory or the plugin internal's.
 
 That way, every page will always be able to serve default values, even if the specific page or its model does not contain information like e.g. a thumbnail or a dedicated description.
 
 ## Usage
 
-It's recommended to render the metadata in your `header.php` snippet. You can define the order they will be echoed.
+Initialize the `meta()` class for the current page. Then echo the data you wish to render in a order of your choice in your `header.php` snippet.
 
 ```php
 <?php $meta = $page->meta() ?>
-// Canonical link and robots meta tag if configured
+// Canonical link (always) and robots (if configured)
 <?= $meta->robots() ?>
 // Schema markup
 <?= $meta->jsonld() ?>
@@ -25,11 +25,58 @@ It's recommended to render the metadata in your `header.php` snippet. You can de
 <?= $meta->social() ?>
 ```
 
+## Defaults
+
+### Robots
+
+The canonical link should be present on every page. Therefore it's recommended to always include at least `$meta->robots()`. A robots tag will only be generated if you have defined content for it (see [configuration](#configuration)).
+
+> A canonical tag is a way of telling search engines that a specific URL represents the master copy of a page. Using the canonical tag prevents problems caused by identical or "duplicate" content appearing on multiple URLs like paginated pages. Practically speaking, the canonical tag tells search engines which version of a URL you want to appear in search results.
+
+### Social
+
+Echoing `$meta->social()` uses sensible defaults, which of course can be extended and overwritten (see [configuration](#configuration)). Without any further configuration the plugin will generate the following meta tags:
+
+#### Generic meta
+
+| Key | Default |
+| --- | --- | --- | --- |
+| `description` | `description` key if set |
+
+#### Open Graph meta
+
+| Key | Default |
+| --- | --- | --- | --- |
+| `site_name` | `$site->title()->value()` |
+| `url` | `$page->url()` |
+| `type` | `website` |
+| `title` | `$page->customTitle()->or($page->title())->value()` |
+| `description` | `description` key if set |
+| `image` | `thumbnail` key if image exists |
+| `image:alt` | `alt` field of thumbnail image if it exists |
+
+Each meta name will be prefixed with `og:` in the rendered HTML automatically.
+
+#### Twitter meta
+
+| Key | Default |
+| --- | --- | --- | --- |
+| `url` | `$page->url()` |
+| `card` | `summary_large_image` or `summary` if no thumbnail image is present |
+| `title` | `$page->customTitle()->or($page->title())->value()` |
+| `description` | `description` key if set |
+| `image` | `thumbnail` key if image exists |
+| `image:alt` | `alt` field of thumbnail image if it exists |
+
+Each meta name will be prefixed with `twitter:` in the rendered HTML automatically.
+
 ## Configuration
 
 ### Default tags
 
-The `kirby-extended.meta.defaults` option key may be populated by default metadata. It will be used as the base by the plugin. You can overwrite defaults with the `metadata()` method of page models per template.
+The `kirby-extended.meta.defaults` option key may be populated by default metadata. It will be used as the base.
+
+Custom configurations like default tags will be merged with the plugin internal defaults (as listed above). Thus you can extend and overwrite it to your needs.
 
 ```php
 // config.php
@@ -37,11 +84,15 @@ return [
     'kirby-extended.meta' => [
         'defaults' => return function ($kirby, $page, $site) {
             $description = $page->description()->or($site->description())->value();
+
+            // Available keys
             return [
-                // Available keys
                 'robots' => 'nofollow',
                 'description' => $description,
-                'opengraph' => [],
+                'opengraph' => [
+                    // Custom site name overwriting the internal one
+                    'site_name' => $site->opengraphtitle()->value()
+                ],
                 'twitter' => [],
                 'jsonld' => [
                     'WebSite' => [
@@ -58,7 +109,7 @@ return [
 
 ### Page models for template-specific meta data
 
-You might not want to adapt meta data for specific templates.
+You might not want to adapt meta data for specific templates. To do so, overwrite defaults with the `metadata()` method of page models per template.
 
 The following example adds a `metadata()` method to all article templates, that takes care of generating useful metadata, if an article issue is shared in a social network and also provides an automatically generated description for search engines. All keys returned by the `metadata()` method must be lowercase. Any array item can be a value of a closure, that will be called on the `$page` object, so you can use `$this` within the closure to refer to the current page.
 
@@ -76,7 +127,7 @@ class ArticlePage extends \Kirby\Cms\Page
             'opengraph' => [
                 'type' => 'article'
                 // Open Graph object types can be defined in an array
-                // with `type:` as prefix
+                // with `namespace:` as prefix
                 'namespace:article' => [
                     'author' => 'Kirby',
                     'published_time' => $this->published()->toDate('Y-m-d')
@@ -93,7 +144,7 @@ class ArticlePage extends \Kirby\Cms\Page
 }
 ```
 
-### Available field keys
+### Blueprint field keys
 
 **Customtitle:** By default, the metadata plugin will use the page's `title` field. You can override this by defining an `customtitle` field for a specific page. The `customtitle` will then be used for OpenGraph and Twitter metadata instead of the page title.
 
@@ -111,7 +162,7 @@ class ArticlePage extends \Kirby\Cms\Page
 
 | Option | Default | Values | Description |
 | --- | --- | --- | --- |
-| `kirby-extended.meta.defaults` | `[]` | array or function | You can use `$kirby`, `$site` and `$page` (fixed order) within the closure arguments to refer to the given object.
+| `kirby-extended.meta.defaults` | `[]` | array or function | You can use `$kirby`, `$site` and `$page` (fixed order) within the closure arguments to refer to the given object. |
 
 ## Credits
 

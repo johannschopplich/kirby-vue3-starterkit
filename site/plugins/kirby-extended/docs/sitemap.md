@@ -24,10 +24,10 @@ options:
 
 | Option | Default | Values | Description |
 | --- | --- | --- | --- |
-| `kirby-extended.sitemap.enable` | `[]` | array | List of template names to include in the generated sitemap.
-| `kirby-extended.sitemap.templatesInclude` | `[]` | array | List of template names to include in the generated sitemap.
-| `kirby-extended.sitemap.pagesInclude` | `[]` | array | List of page ids to include.
-| `kirby-extended.sitemap.pagesExclude` | `[]` | array | List of page ids to exclude.
+| `kirby-extended.sitemap.enable` | `[]` | array | List of template names to include in the generated sitemap. |
+| `kirby-extended.sitemap.templatesInclude` | `[]` | array | List of template names to include in the generated sitemap. |
+| `kirby-extended.sitemap.pagesInclude` | `[]` | array | List of page ids to include. |
+| `kirby-extended.sitemap.pagesExclude` | `[]` | array | List of page ids to exclude. |
 
 ## Example
 

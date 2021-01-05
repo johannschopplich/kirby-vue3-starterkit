@@ -31,7 +31,7 @@ THe first argument `path` is required. The second one (`filename`) is optional a
 
 | Option | Default | Values | Description |
 | --- | --- | --- | --- |
-| `kirby-extended.env.filename` | `.env` | string | Default environment filename to load.
+| `kirby-extended.env.filename` | `.env` | string | Default environment filename to load. |
 
 ## Example
 

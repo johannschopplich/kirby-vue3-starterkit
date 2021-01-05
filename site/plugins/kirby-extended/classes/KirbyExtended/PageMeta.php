@@ -58,7 +58,7 @@ class PageMeta {
         }
 
         $field = $this->page->content()->get($key);
-        if ($field->exists()) {
+        if ($field->exists() && $field->isNotEmpty()) {
             return $field;
         }
 

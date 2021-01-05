@@ -12,7 +12,7 @@ Instead of a target string, a callback function returning that string may also b
 
 | Option | Default | Values | Description |
 | --- | --- | --- | --- |
-| `kirby-extended.redirects` | `false` | array | List of redirects.
+| `kirby-extended.redirects` | `false` | array | List of redirects. |
 
 ## Example
 

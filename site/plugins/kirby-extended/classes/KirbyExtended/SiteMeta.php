@@ -5,6 +5,7 @@ namespace KirbyExtended;
 use Kirby\Cms\Responder;
 use Kirby\Http\Response;
 use Kirby\Http\Router;
+use Kirby\Toolkit\Str;
 use Kirby\Toolkit\Xml;
 
 class SiteMeta
@@ -64,7 +65,11 @@ class SiteMeta
                 if (kirby()->multilang()) {
                     foreach (kirby()->languages() as $lang) {
                         $code = $lang->code();
-                        $sitemap[] = '  <xhtml:link rel="alternate" hreflang="' . $code . '" href="' . $item->url($code) . '" />';
+                        $locale = $lang->locale(LC_ALL) ?? $code;
+                        $locale = pathinfo($locale, PATHINFO_FILENAME);
+                        $locale = Str::slug($locale);
+
+                        $sitemap[] = '  <xhtml:link rel="alternate" hreflang="' . $locale . '" href="' . $item->url($code) . '" />';
                     }
                     $sitemap[] = '  <xhtml:link rel="alternate" hreflang="x-default" href="' . $item->url() . '" />';
                 }
