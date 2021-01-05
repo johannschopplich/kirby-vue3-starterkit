@@ -1,5 +1,4 @@
-/* global VITE_BACKEND_API_PATH */
-const origin = import.meta.env.DEV ? VITE_BACKEND_API_PATH : window.location.origin
+const origin = import.meta.env.DEV ? window.vite.backendApiPath : window.location.origin
 const EVENT_TYPE = 'click'
 let router
 

@@ -12,9 +12,9 @@ export default ({ command, mode }) => ({
     target: 'es2018'
   },
   define: {
-    VITE_BACKEND_URL: kirbyUrl,
-    VITE_BACKEND_API_PATH: `${command === 'serve' ? proxyPath : ''}/${process.env.CONTENT_API_SLUG}`,
-    VITE_MULTILANG: process.env.KIRBY_MULTILANG
+    'window.vite.backendUrl': kirbyUrl,
+    'window.vite.backendApiPath': `${command === 'serve' ? proxyPath : ''}/${process.env.CONTENT_API_SLUG}`,
+    'window.vite.multilang': process.env.KIRBY_MULTILANG === 'true'
   },
   plugins: [
     vue()

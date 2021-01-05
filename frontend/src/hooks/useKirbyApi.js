@@ -1,4 +1,3 @@
-/* global VITE_BACKEND_API_PATH */
 import { useLanguages } from './'
 
 /**
@@ -6,7 +5,7 @@ import { useLanguages } from './'
  *
  * @constant {string}
  */
-const apiLocation = VITE_BACKEND_API_PATH
+const apiLocation = window.vite.backendApiPath
 
 /**
  * Map to store pages in
