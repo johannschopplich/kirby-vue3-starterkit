@@ -3,7 +3,7 @@
 use Kirby\Cms\App as Kirby;
 
 load([
-    'KirbyExtended\\SpaAdapter' => 'classes/SpaAdapter.php'
+    'KirbyExtended\\SpaAdapter' => 'classes/KirbyExtended/SpaAdapter.php'
 ], __DIR__);
 
 $flushCache = function () {

@@ -7,7 +7,8 @@ use Kirby\Data\Json;
 use Kirby\Exception\Exception;
 use Kirby\Toolkit\F;
 
-class SpaAdapter {
+class SpaAdapter
+{
     protected static string $apiLocation;
     protected static array $site;
     protected static array $manifest;
