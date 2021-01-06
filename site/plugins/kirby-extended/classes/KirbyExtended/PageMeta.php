@@ -8,7 +8,8 @@ use Kirby\Cms\Page;
 use Kirby\Toolkit\A;
 use Kirby\Toolkit\Html;
 
-class PageMeta {
+class PageMeta
+{
     protected Page $page;
     protected array $metadata = [];
 
@@ -30,7 +31,7 @@ class PageMeta {
         $name = strtolower($name);
         $prefix = 'hasown';
 
-        if (strpos($name, $prefix) === 0) {
+        if (str_starts_with($name, $prefix)) {
             return $this->get(substr($name, strlen($prefix)), false)->isNotEmpty();
         }
 
@@ -171,51 +172,41 @@ class PageMeta {
     public function social(): string
     {
         $html = [];
-        $meta = [];
+        $meta = $this->get('meta', false)->value() ?? [];
+        $opengraph = $this->get('opengraph', false)->value() ?? [];
+        $twitter = $this->get('twitter', false)->value() ?? [];
         $site = site();
 
-        $customOpengraph = $this->get('opengraph', false)->value() ?? [];
-        $customTwitter = $this->get('twitter', false)->value() ?? [];
-
         // Basic OpenGraph and Twitter tags
-        $opengraph = [
-            'site_name' => $site->title()->value(),
-            'url'       => $this->page->url(),
-            'type'      => 'website',
-            'title'     => $this->page->customTitle()->or($this->page->title())->value()
-        ];
-        $twitter = [
-            'url'       => $this->page->url(),
-            'card'      => 'summary_large_image',
-            'title'     => $this->page->customTitle()->or($this->page->title())->value()
-        ];
+        $opengraph['site_name'] ??= $site->title()->value();
+        $opengraph['url'] ??= $this->page->url();
+        $opengraph['type'] ??= 'website';
+        $opengraph['title'] ??= $this->page->customTitle()->or($this->page->title())->value();
+
+        $twitter['url'] ??= $this->page->url();
+        $twitter['card'] ??= 'summary_large_image';
+        $twitter['title'] ??= $this->page->customTitle()->or($this->page->title())->value();
 
         // Meta, OpenGraph and Twitter description
         $description = $this->get('description');
         if ($description->isNotEmpty()) {
-            $meta['description'] = $description->value();
-            $opengraph['description'] = $description->value();
-            $twitter['description'] = $description->value();
+            $meta['description'] ??= $description->value();
+            $opengraph['description'] ??= $description->value();
+            $twitter['description'] ??= $description->value();
         }
 
         // OpenGraph and Twitter image
         if ($thumbnail = $this->getFile('thumbnail')) {
-            $opengraph['image'] = $thumbnail->url();
-            $twitter['image'] = $thumbnail->url();
+            $opengraph['image'] ??= $thumbnail->url();
+            $twitter['image'] ??= $thumbnail->url();
 
             if ($thumbnail->alt()->isNotEmpty()) {
-                $opengraph['image:alt'] = $thumbnail->alt()->value();
-                $twitter['image:alt'] = $thumbnail->alt()->value();
+                $opengraph['image:alt'] ??= $thumbnail->alt()->value();
+                $twitter['image:alt'] ??= $thumbnail->alt()->value();
             }
-        } else {
-            if ($twitter['card'] === 'summary_large_image') {
-                $twitter['card'] = 'summary';
-            }
+        } elseif (!isset($twitter['image']) && $twitter['card'] === 'summary_large_image') {
+            $twitter['card'] = 'summary';
         }
-
-        // Merge custom tags
-        $opengraph = A::merge($opengraph, $customOpengraph);
-        $twitter = A::merge($twitter, $customTwitter);
 
         // Generate meta tags
         foreach ($meta as $name => $content) {
@@ -228,7 +219,7 @@ class PageMeta {
         // Generate OpenGraph tags
         foreach ($opengraph as $prop => $content) {
             if (is_array($content)) {
-                if (strpos($prop, 'namespace:') === 0) {
+                if (str_starts_with($prop, 'namespace:')) {
                     $prop = str_replace('namespace:', '', $prop);
                 }
 

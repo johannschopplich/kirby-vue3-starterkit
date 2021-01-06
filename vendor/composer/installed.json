@@ -311,29 +311,30 @@
         },
         {
             "name": "johannschopplich/kirby-extended",
-            "version": "v2.5.5",
-            "version_normalized": "2.5.5.0",
+            "version": "v2.5.6",
+            "version_normalized": "2.5.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/johannschopplich/kirby-extended.git",
-                "reference": "5ef0b0c5e5f5964e7d74d6d25eedf4942e5c9847"
+                "reference": "5774c8954b49ab26db9eebc02561a2b42fe29617"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/johannschopplich/kirby-extended/zipball/5ef0b0c5e5f5964e7d74d6d25eedf4942e5c9847",
-                "reference": "5ef0b0c5e5f5964e7d74d6d25eedf4942e5c9847",
+                "url": "https://api.github.com/repos/johannschopplich/kirby-extended/zipball/5774c8954b49ab26db9eebc02561a2b42fe29617",
+                "reference": "5774c8954b49ab26db9eebc02561a2b42fe29617",
                 "shasum": ""
             },
             "require": {
                 "getkirby/composer-installer": "^1.2",
                 "php": ">=7.4.0",
+                "symfony/polyfill-php80": "^1.20",
                 "vlucas/phpdotenv": "^5.0",
                 "voku/html-min": "^4.4"
             },
             "require-dev": {
                 "getkirby/cms": "^3.0"
             },
-            "time": "2021-01-05T19:41:12+00:00",
+            "time": "2021-01-06T11:06:21+00:00",
             "type": "kirby-plugin",
             "extra": {
                 "kirby-cms-path": false
@@ -369,7 +370,7 @@
             ],
             "support": {
                 "issues": "https://github.com/johannschopplich/kirby-extended/issues",
-                "source": "https://github.com/johannschopplich/kirby-extended/tree/v2.5.5"
+                "source": "https://github.com/johannschopplich/kirby-extended/tree/v2.5.6"
             },
             "install-path": "../../site/plugins/kirby-extended"
         },

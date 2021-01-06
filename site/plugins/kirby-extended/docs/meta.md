@@ -4,6 +4,8 @@ Handles the generation of meta tags for search engines, social networks, browser
 
 ## How it works
 
+In a nutshell: plugin internal defaults ➡️ option defaults ➡️ page model ➡️ page field ➡️ site field
+
 1. The plugin looks for meta data defaults, set in Kirby's global configuration.
 2. If the defaults don't contain the specific key, it looks in the pagel model if it provides a `metadata()` method that returns an array or metadata fields.
 3. If the page model doesn't contain the specific key, it will look for a field from a pages content file (e.g. `article.txt`) by the corrsponding key. 
@@ -43,6 +45,8 @@ Echoing `$meta->social()` uses sensible defaults, which of course can be extende
 | --- | --- |
 | `description` | `description` key if set |
 
+The `description` key will be used for the meta tag, OpenGraph description as well as Twitter description. One key to rule them all.
+
 #### Open Graph meta
 
 | Key | Default |
@@ -52,8 +56,8 @@ Echoing `$meta->social()` uses sensible defaults, which of course can be extende
 | `type` | `website` |
 | `title` | `$page->customTitle()->or($page->title())->value()` |
 | `description` | `description` key if set |
-| `image` | `thumbnail` key if image exists |
-| `image:alt` | `alt` field of thumbnail image if it exists |
+| `image` | `thumbnail` key value or thumbnail field and its image exists |
+| `image:alt` | `alt` field of thumbnail if it exists |
 
 Each meta name will be prefixed with `og:` in the rendered HTML automatically.
 
@@ -65,8 +69,8 @@ Each meta name will be prefixed with `og:` in the rendered HTML automatically.
 | `card` | `summary_large_image` or `summary` if no thumbnail image is present |
 | `title` | `$page->customTitle()->or($page->title())->value()` |
 | `description` | `description` key if set |
-| `image` | `thumbnail` key if image exists |
-| `image:alt` | `alt` field of thumbnail image if it exists |
+| `image` | `thumbnail` key value or thumbnail field and its image exists |
+| `image:alt` | `alt` field of thumbnail if it exists |
 
 Each meta name will be prefixed with `twitter:` in the rendered HTML automatically.
 
@@ -74,9 +78,14 @@ Each meta name will be prefixed with `twitter:` in the rendered HTML automatical
 
 ### Default tags
 
-The `kirby-extended.meta.defaults` option key may be populated by default metadata. It will be used as the base.
+The `kirby-extended.meta.defaults` option key may be populated by default metadata. It will be used as the base. Available array keys are:
+- `robots` (string)
+- `description` (string)
+- `opengraph` (array)
+- `twitter` (array)
+- `jsonld` (array)
 
-Custom configurations like default tags will be merged with the plugin internal defaults (as listed above). Thus you can extend and overwrite it to your needs.
+Custom configurations like default tags will be merged with the plugin internal defaults (as listed above). Thus you can extend them to your needs and overwrite as you wish.
 
 ```php
 // config.php
@@ -88,6 +97,7 @@ return [
             // Available keys
             return [
                 'robots' => 'nofollow',
+                 // Used for meta, OpenGraph and Twitter
                 'description' => $description,
                 'opengraph' => [
                     // Custom site name overwriting the internal one
