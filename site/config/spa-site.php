@@ -6,7 +6,7 @@ return [
     'children' => array_values(
         site()
             ->children()
-            ->filter(fn($child) => $child->isHomePage() || $child->isListed())
+            ->published()
             ->map(fn($child) => [
                 'uri' => $child->uri(),
                 'title' => $child->title()->value(),
