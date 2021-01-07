@@ -28,7 +28,7 @@ export const initRouter = () => {
   ]
 
   // Redirect `/home` to `/`
-  routes.find(route => route.path === '/home').path = '/'
+  routes.find(({ path }) => path === '/home').path = '/'
   routes.push({ path: '/home', redirect: '/' })
 
   // Catch-all fallback
