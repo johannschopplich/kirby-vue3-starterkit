@@ -29,7 +29,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => 'fdbfec66ba3a4060d155279453171e711bd9a5cb',
+    'reference' => 'edccffebec592d5496ada7116b75015c4e077ea6',
     'name' => '__root__',
   ),
   'versions' => 
@@ -41,7 +41,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => 'fdbfec66ba3a4060d155279453171e711bd9a5cb',
+      'reference' => 'edccffebec592d5496ada7116b75015c4e077ea6',
     ),
     'claviska/simpleimage' => 
     array (
@@ -90,12 +90,12 @@ private static $installed = array (
     ),
     'johannschopplich/kirby-extended' => 
     array (
-      'pretty_version' => 'v2.5.6',
-      'version' => '2.5.6.0',
+      'pretty_version' => 'v2.5.7',
+      'version' => '2.5.7.0',
       'aliases' => 
       array (
       ),
-      'reference' => '5774c8954b49ab26db9eebc02561a2b42fe29617',
+      'reference' => '24d80fa3ff1e479613f3b0924dfd7b33e6c5b879',
     ),
     'laminas/laminas-escaper' => 
     array (
@@ -187,30 +187,30 @@ private static $installed = array (
     ),
     'symfony/polyfill-ctype' => 
     array (
-      'pretty_version' => 'v1.20.0',
-      'version' => '1.20.0.0',
+      'pretty_version' => 'v1.22.0',
+      'version' => '1.22.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'f4ba089a5b6366e453971d3aad5fe8e897b37f41',
+      'reference' => 'c6c942b1ac76c82448322025e084cadc56048b4e',
     ),
     'symfony/polyfill-mbstring' => 
     array (
-      'pretty_version' => 'v1.20.0',
-      'version' => '1.20.0.0',
+      'pretty_version' => 'v1.22.0',
+      'version' => '1.22.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '39d483bdf39be819deabf04ec872eb0b2410b531',
+      'reference' => 'f377a3dd1fde44d37b9831d68dc8dea3ffd28e13',
     ),
     'symfony/polyfill-php80' => 
     array (
-      'pretty_version' => 'v1.20.0',
-      'version' => '1.20.0.0',
+      'pretty_version' => 'v1.22.0',
+      'version' => '1.22.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'e70aa8b064c5b72d3df2abd5ab1e90464ad009de',
+      'reference' => 'dc3063ba22c2a1fd2f45ed856374d79114998f91',
     ),
     'true/punycode' => 
     array (
