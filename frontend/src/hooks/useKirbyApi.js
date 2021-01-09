@@ -5,7 +5,9 @@ import { useLanguages } from './'
  *
  * @constant {string}
  */
-const apiLocation = window.vite.backendApiPath
+const apiLocation =
+  (import.meta.env.DEV ? import.meta.env.VITE_PROXY_PATH : '') +
+  `/${import.meta.env.VITE_BACKEND_API_SLUG}`
 
 /**
  * Map to store pages in
