@@ -13,8 +13,7 @@ export default ({ command, mode }) => ({
   root: 'frontend',
   build: {
     assetsDir: 'assets',
-    manifest: true,
-    target: 'es2018'
+    manifest: true
   },
   plugins: [
     vue()
