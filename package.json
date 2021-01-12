@@ -5,14 +5,14 @@
     "kirby:serve": "env-cmd --use-shell \"php -S \\$KIRBY_SERVER_HOSTNAME:\\$KIRBY_SERVER_PORT -t public server.php\"",
     "kirby:flush-cache": "find storage/cache -maxdepth 1 -mindepth 1 -type d -exec rm -rf '{}' \\;",
     "assets:copy": "rm -rf public/assets && cp -r frontend/dist/assets public/assets && cp frontend/dist/manifest.json public/assets/manifest.json",
-    "sw:build": "node scripts/buildServiceWorker.js",
+    "assets:sw": "node scripts/buildServiceWorker.js",
     "dev": "concurrently \"npm run kirby:serve\" \"vite\"",
-    "build": "vite build && npm run assets:copy && npm run sw:build && npm run kirby:flush-cache",
+    "build": "vite build && npm run assets:copy && npm run assets:sw && npm run kirby:flush-cache",
     "lint": "eslint \"frontend/src/**/*.{js,vue}\""
   },
   "dependencies": {
     "vue": "^3.0.5",
-    "vue-router": "^4.0.2"
+    "vue-router": "^4.0.3"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^1.0.5",
@@ -23,12 +23,12 @@
     "eslint": "^7.17.0",
     "eslint-config-standard": "^16.0.2",
     "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-jsdoc": "^30.7.13",
+    "eslint-plugin-jsdoc": "^31.0.3",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.1.0",
     "eslint-plugin-vue": "^7.4.1",
     "terser": "^5.5.1",
-    "vite": "^2.0.0-beta.19"
+    "vite": "^2.0.0-beta.23"
   }
 }
