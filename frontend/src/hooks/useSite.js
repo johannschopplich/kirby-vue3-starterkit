@@ -20,8 +20,7 @@ export const initSite = async () => {
   // Parse language from path for multi-language setups
   // in development environment
   if (__DEV__ && import.meta.env.VITE_MULTILANG === 'true') {
-    const lang = window.location.pathname.split('/')[1]
-    if (lang) languageCode = lang
+    languageCode = window.location.pathname.split('/')[1] || ''
   }
 
   const data = __DEV__

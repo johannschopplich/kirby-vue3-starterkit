@@ -1,32 +1,6 @@
 import { useLanguages } from './'
 
 /**
- * Generate a URL to the Kirby API backend
- * for a specific file
- *
- * @param {string} path Path to the file desired
- * @param {string} [languageCode] Language code in multi-lang setups
- * @returns {string} Final URL
- */
-const apiUrl = (path, languageCode = '') => {
-  // Use custom `viteproxy` path as base
-  let result = import.meta.env.DEV ? import.meta.env.VITE_PROXY_PATH : ''
-
-  // Add language path in multi-language setup
-  if (languageCode) {
-    result += `/${languageCode}`
-  }
-
-  // Add the actual api location
-  result += `/${import.meta.env.VITE_BACKEND_API_SLUG}`
-
-  // Add the object to fetch
-  result += `/${path}`
-
-  return result
-}
-
-/**
  * Map to store pages in
  *
  * @constant {object}
@@ -52,6 +26,36 @@ const fetcher = async url => {
   }
 
   return await response.json()
+}
+
+/**
+ * Generate a URL to the Kirby API backend
+ * for a specific file
+ *
+ * @param {string} path Path to the file desired
+ * @param {string} [languageCode] Language code in multi-lang setups
+ * @returns {string} Final URL
+ */
+const apiUrl = (path, languageCode = '') => {
+  let result = ''
+
+  // Use custom `viteproxy` path as base in development environment
+  if (import.meta.env.DEV) {
+    result += import.meta.env.VITE_PROXY_PATH
+  }
+
+  // Add language path in multi-language setup
+  if (languageCode) {
+    result += `/${languageCode}`
+  }
+
+  // Add the actual api location
+  result += `/${import.meta.env.VITE_BACKEND_API_SLUG}`
+
+  // Add the actial file to fetch
+  result += `/${path}`
+
+  return result
 }
 
 /**

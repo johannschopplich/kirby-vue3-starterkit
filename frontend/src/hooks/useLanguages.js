@@ -26,7 +26,10 @@ const initLanguages = () => {
   }
 
   languageCode = document.documentElement.lang
-  if (__DEV__) console.log('[useLanguages] Current language code:', languageCode)
+
+  if (__DEV__) {
+    console.log('[useLanguages] Current language code:', languageCode)
+  }
 }
 
 /**
