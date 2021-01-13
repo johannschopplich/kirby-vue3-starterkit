@@ -1,7 +1,7 @@
 import { reactive, readonly } from 'vue'
 import { useKirbyApi } from './'
 
-const { apiLocation, fetcher } = useKirbyApi()
+const { apiUrl, fetcher } = useKirbyApi()
 
 /**
  * Reactive object for the global `site` data
@@ -15,17 +15,17 @@ const site = reactive({})
  */
 export const initSite = async () => {
   const __DEV__ = import.meta.env.DEV
-  let base = ''
+  let languageCode = ''
 
   // Parse language from path for multi-language setups
   // in development environment
   if (__DEV__ && import.meta.env.VITE_MULTILANG === 'true') {
     const lang = window.location.pathname.split('/')[1]
-    if (lang) base = `/${lang}`
+    if (lang) languageCode = lang
   }
 
   const data = __DEV__
-    ? await fetcher(`${base}${apiLocation}/__site.json`)
+    ? await fetcher(apiUrl('__site.json', languageCode))
     : JSON.parse(document.getElementById('site-data').textContent)
 
   Object.assign(site, data)

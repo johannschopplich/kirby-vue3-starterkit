@@ -1,13 +1,30 @@
 import { useLanguages } from './'
 
 /**
- * Location of the Kirby API backend
+ * Generate the URL to the Kirby API backend
+ * for a specific object
  *
- * @constant {string}
+ * @param {string} path The object
+ * @param {string} [languageCode] The language code
+ * @returns {string} The final URL
  */
-const apiLocation =
-  (import.meta.env.DEV ? import.meta.env.VITE_PROXY_PATH : '') +
-  `/${import.meta.env.VITE_BACKEND_API_SLUG}`
+const apiUrl = (path, languageCode = '') => {
+  // Use custom `viteproxy` path as base
+  let result = import.meta.env.DEV ? import.meta.env.VITE_PROXY_PATH : ''
+
+  // Add language path in multi-language setup
+  if (languageCode) {
+    result += `/${languageCode}`
+  }
+
+  // Add the actual api location
+  result += `/${import.meta.env.VITE_BACKEND_API_SLUG}`
+
+  // Add the object to fetch
+  result += `/${path}`
+
+  return result
+}
 
 /**
  * Map to store pages in
@@ -19,7 +36,7 @@ const pages = new Map()
 /**
  * Fetcher function to request JSON data from the server
  *
- * @param {string} url Url to fetch data from
+ * @param {string} url URL to fetch data from
  * @returns {object} Extracted JSON body content from the response
  */
 const fetcher = async url => {
@@ -55,7 +72,7 @@ const getPage = async (
   const __DEV__ = import.meta.env.DEV
   const isCached = pages.has(id)
   const { languageCode } = useLanguages()
-  const targetUrl = (languageCode ? `/${languageCode}` : '') + `${apiLocation}/${id}.json`
+  const targetUrl = apiUrl(`${id}.json`, languageCode)
 
   // Use cached page if present in the store, except when revalidating
   if (!revalidate && isCached) {
@@ -106,7 +123,7 @@ const hasPage = id => pages.has(id)
  * @returns {object} Object containing API-related methods
  */
 export default () => ({
-  apiLocation,
+  apiUrl,
   fetcher,
   pages,
   hasPage,
