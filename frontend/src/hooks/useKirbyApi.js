@@ -1,12 +1,12 @@
 import { useLanguages } from './'
 
 /**
- * Generate the URL to the Kirby API backend
- * for a specific object
+ * Generate a URL to the Kirby API backend
+ * for a specific file
  *
- * @param {string} path The object
- * @param {string} [languageCode] The language code
- * @returns {string} The final URL
+ * @param {string} path Path to the file desired
+ * @param {string} [languageCode] Language code in multi-lang setups
+ * @returns {string} Final URL
  */
 const apiUrl = (path, languageCode = '') => {
   // Use custom `viteproxy` path as base
