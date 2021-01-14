@@ -21,7 +21,7 @@ export default ({ command, mode }) => ({
 
   server: {
     proxy: {
-      [proxyPath]: {
+      [`^${proxyPath}/.*`]: {
         target: kirbyUrl,
         changeOrigin: true,
         rewrite: path => path.replace(new RegExp(`^${proxyPath}`), '')

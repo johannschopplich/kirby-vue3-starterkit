@@ -29,20 +29,15 @@ const fetcher = async url => {
 }
 
 /**
- * Generate a URL to the Kirby API backend
- * for a specific file
+ * Generate the api location for a specific file and language
  *
  * @param {string} path Path to the file desired
  * @param {string} [languageCode] Language code in multi-lang setups
  * @returns {string} Final URL
  */
-const apiUrl = (path, languageCode = '') => {
-  let result = ''
-
+const apiUri = (path, languageCode) => {
   // Use custom `viteproxy` path as base in development environment
-  if (import.meta.env.DEV) {
-    result += import.meta.env.VITE_PROXY_PATH
-  }
+  let result = import.meta.env.DEV ? import.meta.env.VITE_PROXY_PATH : ''
 
   // Add language path in multi-language setup
   if (languageCode) {
@@ -76,7 +71,7 @@ const getPage = async (
   const __DEV__ = import.meta.env.DEV
   const isCached = pages.has(id)
   const { languageCode } = useLanguages()
-  const targetUrl = apiUrl(`${id}.json`, languageCode)
+  const targetUrl = apiUri(`${id}.json`, languageCode)
 
   // Use cached page if present in the store, except when revalidating
   if (!revalidate && isCached) {
@@ -127,7 +122,7 @@ const hasPage = id => pages.has(id)
  * @returns {object} Object containing API-related methods
  */
 export default () => ({
-  apiUrl,
+  apiUri,
   fetcher,
   pages,
   hasPage,

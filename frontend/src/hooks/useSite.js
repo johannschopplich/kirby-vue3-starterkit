@@ -1,7 +1,7 @@
 import { reactive, readonly } from 'vue'
 import { useKirbyApi } from './'
 
-const { apiUrl, fetcher } = useKirbyApi()
+const { apiUri, fetcher } = useKirbyApi()
 
 /**
  * Reactive object for the global `site` data
@@ -24,7 +24,7 @@ export const initSite = async () => {
   }
 
   const data = __DEV__
-    ? await fetcher(apiUrl('__site.json', languageCode))
+    ? await fetcher(apiUri('__site.json', languageCode))
     : JSON.parse(document.getElementById('site-data').textContent)
 
   Object.assign(site, data)
