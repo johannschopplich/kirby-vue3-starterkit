@@ -1,10 +1,10 @@
 <template>
   <a
-    v-for="lang in site.languages.filter(language => language.code !== currentCode)"
-    :key="lang.code"
-    :href="`/${lang.code}/${route.path}`"
+    v-for="language in languages"
+    :key="language.code"
+    :href="`/${language.code}/${route.path}`"
   >
-    {{ lang.name }}
+    {{ language.name }}
   </a>
 </template>
 
@@ -17,11 +17,11 @@ export default {
     const site = useSite()
     const route = useRoute()
     const { languageCode: currentCode } = useLanguages()
+    const languages = site.languages.filter(({ code }) => code !== currentCode)
 
     return {
-      site,
       route,
-      currentCode
+      languages
     }
   }
 }
