@@ -2,7 +2,7 @@
   <a
     v-for="language in languages"
     :key="language.code"
-    :href="`/${language.code}/${route.path}`"
+    :href="`/${language.code}${route.path}`"
   >
     {{ language.name }}
   </a>
