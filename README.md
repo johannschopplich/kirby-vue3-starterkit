@@ -5,7 +5,7 @@
 <h3 align="center">Kirby + Vue Starterkit</h3>
 
 <p align="center">
-  SPA with Vue 3 and Kirby: SEO-friendly, automatic routing, mulit-lang-ready and more! .<br>
+  SPA with Vue 3 and Kirby: SEO-friendly, automatic routing, mulit-lang-ready and more!<br>
   <a href="https://kirby-vue3-starterkit.jhnn.dev"><strong>Explore the starterkit live »</strong></a>
 </p>
 
@@ -104,6 +104,7 @@ kirby-vue3-starterkit/
 |   |   ├── views/
 |   |   |
 |   |   ├── App.vue
+|   |   ├── main.css
 |   |   ├── main.js
 |   |   └── serviceWorker.js
 |   |
@@ -126,10 +127,7 @@ kirby-vue3-starterkit/
 ├── scripts/
 |   |
 |   |   # Service worker generator
-|   ├── buildServiceWorker.js
-|   |
-|   |   # Starts a PHP server for Kirby, run by `npm run kirby:serve` from root
-|   └── serveKirby.js
+|   └── buildServiceWorker.js
 |
 |   # Kirby's core folder containing templates, blueprints, snippets etc. for Kirby
 ├── site/
@@ -139,13 +137,12 @@ kirby-vue3-starterkit/
 |   |   |   # General Kirby configuration settings and configuration settings for plugins
 |   |   ├── config.php
 |   |   |
-|   |   |   # Place custom routes for your project in here
-|   |   ├── routes.php
-|   |   |
 |   |   |   # Builds a JSON-encoded `site` object for the frontend
 |   |   |   # Used by Vue Router to populate routes, but can be extended by commonly used data
 |   |   └── spa-site.php
 |   |
+|   |   # Only used in multi-language setups
+|   ├── languages/
 |   ├── models/
 |   ├── plugins/spa-adapter/
 |   |   |
@@ -159,7 +156,7 @@ kirby-vue3-starterkit/
 |   |   |
 |   |   |   # Index page used in production environment – almost identical to `frontend/index.html`
 |   |   |   # Handles build asset paths, inlines the `site` object, includes SEO meta tags, etc.
-|   |   └── index.php
+|   |   └── spa-index.php
 |   |
 |   |   # Templates for JSON content representations fetched by frontend
 |   └── templates/
@@ -169,6 +166,7 @@ kirby-vue3-starterkit/
 |   ├── accounts/
 |   ├── cache/
 |   ├── content/
+|   ├── logs/
 |   └── sessions/
 |
 |   # Kirby CMS and other PHP dependencies (handled by Composer)
