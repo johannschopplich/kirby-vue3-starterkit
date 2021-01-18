@@ -197,8 +197,8 @@ class PageMeta
 
         // OpenGraph and Twitter image
         if ($thumbnail = $this->getFile('thumbnail')) {
-            $opengraph['image'] ??= $thumbnail->url();
-            $twitter['image'] ??= $thumbnail->url();
+            $opengraph['image'] ??= $thumbnail->resize(1200)->url();
+            $twitter['image'] ??= $thumbnail->resize(1200)->url();
 
             if ($thumbnail->alt()->isNotEmpty()) {
                 $opengraph['image:alt'] ??= $thumbnail->alt()->value();

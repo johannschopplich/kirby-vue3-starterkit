@@ -4,7 +4,6 @@ namespace KirbyExtended;
 
 use Kirby\Cms\Responder;
 use Kirby\Http\Response;
-use Kirby\Http\Router;
 use Kirby\Toolkit\Str;
 use Kirby\Toolkit\Xml;
 
@@ -84,42 +83,5 @@ class SiteMeta
         }
 
         return new Response($sitemap, 'application/xml');
-    }
-
-    public static function redirects($route, $path, $method, $result, $final) {
-        // Redirect only if route didn't match anything and is final route
-        if (!$final) return;
-        if (!empty($result)) return;
-
-        // Load redirects definitions
-        $redirects = option('kirby-extended.redirects', []);
-        if (empty($redirects)) return;
-
-        // Make sure current path shall be redirected
-        if (!in_array($path, array_keys($redirects))) return;
-
-        // Turn into routes array
-        $routes = array_map(function($from, $to) {
-            return [
-                'pattern' => $from,
-                'action'  => function (...$parameters) use ($to) {
-                    // Resolve callback
-                    if (is_callable($to)) {
-                        $to = $to(...$parameters);
-                    }
-
-                    // Fill placeholders
-                    foreach ($parameters as $i => $parameter) {
-                        $to = str_replace('$' . ($i + 1), $parameter, $to);
-                    }
-
-                    return go($to);
-                }
-            ];
-        }, array_keys($redirects), $redirects);
-
-        // Run router on redirects routes
-        $router = new Router($routes);
-        return $router->call($path, $method);
     }
 }

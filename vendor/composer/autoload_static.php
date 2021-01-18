@@ -207,6 +207,7 @@ class ComposerStaticInit1cbc4f918cf4254b9395feafd54ef06e
         'KirbyExtended\\HigherOrderTapProxy' => __DIR__ . '/../..' . '/site/plugins/kirby-extended/classes/KirbyExtended/HigherOrderTapProxy.php',
         'KirbyExtended\\HtmlMinTemplate' => __DIR__ . '/../..' . '/site/plugins/kirby-extended/classes/KirbyExtended/HtmlMinTemplate.php',
         'KirbyExtended\\PageMeta' => __DIR__ . '/../..' . '/site/plugins/kirby-extended/classes/KirbyExtended/PageMeta.php',
+        'KirbyExtended\\Redirects' => __DIR__ . '/../..' . '/site/plugins/kirby-extended/classes/KirbyExtended/Redirects.php',
         'KirbyExtended\\SiteMeta' => __DIR__ . '/../..' . '/site/plugins/kirby-extended/classes/KirbyExtended/SiteMeta.php',
         'Kirby\\Api\\Api' => __DIR__ . '/..' . '/getkirby/cms/src/Api/Api.php',
         'Kirby\\Api\\Collection' => __DIR__ . '/..' . '/getkirby/cms/src/Api/Collection.php',

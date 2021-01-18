@@ -7,12 +7,15 @@ use Kirby\Cms\Template;
 use KirbyExtended\Env;
 use KirbyExtended\HtmlMinTemplate;
 use KirbyExtended\PageMeta;
+use KirbyExtended\Redirects;
 use KirbyExtended\SiteMeta;
 
 Kirby::plugin('johannschopplich/kirby-extended', [
     'hooks' => [
         'route:after' => function ($route, $path, $method, $result, $final) {
-            SiteMeta::redirects(...func_get_args());
+            if ($final && empty($result)) {
+                Redirects::go($path, $method);
+            }
         }
     ],
     'routes' => [
