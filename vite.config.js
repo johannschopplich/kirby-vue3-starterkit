@@ -9,7 +9,7 @@ process.env.VITE_BACKEND_API_SLUG = process.env.CONTENT_API_SLUG
 process.env.VITE_PROXY_PATH = proxyPath
 process.env.VITE_MULTILANG = process.env.KIRBY_MULTILANG
 
-export default ({ command, mode }) => ({
+export default {
   root: 'frontend',
   build: {
     assetsDir: 'assets',
@@ -28,4 +28,4 @@ export default ({ command, mode }) => ({
       }
     }
   }
-})
+}
