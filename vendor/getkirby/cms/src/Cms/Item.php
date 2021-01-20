@@ -34,6 +34,11 @@ class Item
     protected $params;
 
     /**
+     * @var \Kirby\Cms\Page|\Kirby\Cms\Site|\Kirby\Cms\File|\Kirby\Cms\User
+     */
+    protected $parent;
+
+    /**
      * @var \Kirby\Cms\Items
      */
     protected $siblings;
@@ -98,7 +103,7 @@ class Item
     /**
      * Returns the parent model
      *
-     * @return \Kirby\Cms\Page | \Kirby\Cms\Site | \Kirby\Cms\File | \Kirby\Cms\User
+     * @return \Kirby\Cms\Page|\Kirby\Cms\Site|\Kirby\Cms\File|\Kirby\Cms\User
      */
     public function parent()
     {
@@ -109,7 +114,8 @@ class Item
      * Returns the sibling collection
      * This is required by the HasSiblings trait
      *
-     * @return \Kirby\Editor\Blocks
+     * @return \Kirby\Cms\Items
+     * @psalm-return self::ITEMS_CLASS
      */
     protected function siblingsCollection()
     {

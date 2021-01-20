@@ -11,8 +11,11 @@ return [
         'ascii' => function () {
             return Str::$ascii;
         },
+        'authStatus' => function () {
+            return $this->kirby()->auth()->status()->toArray();
+        },
         'defaultLanguage' => function () {
-            return $this->kirby()->option('panel.language', 'en');
+            return $this->kirby()->panelLanguage();
         },
         'isOk' => function (System $system) {
             return $system->isOk();
@@ -35,20 +38,16 @@ return [
         'license' => function (System $system) {
             return $system->license();
         },
+        'locales' => function () {
+            $locales = [];
+            $translations = $this->kirby()->translations();
+            foreach ($translations as $translation) {
+                $locales[$translation->code()] = $translation->locale();
+            }
+            return $locales;
+        },
         'loginMethods' => function (System $system) {
             return array_keys($system->loginMethods());
-        },
-        'pendingChallenge' => function () {
-            if ($this->session()->get('kirby.challenge.email') === null) {
-                return null;
-            }
-
-            // fake the email challenge if no challenge was created
-            // to avoid leaking whether the user exists
-            return $this->session()->get('kirby.challenge.type', 'email');
-        },
-        'pendingEmail' => function () {
-            return $this->session()->get('kirby.challenge.email');
         },
         'requirements' => function (System $system) {
             return $system->toArray();
@@ -70,7 +69,7 @@ return [
             if ($user = $this->user()) {
                 $translationCode = $user->language();
             } else {
-                $translationCode = $this->kirby()->option('panel.language', 'en');
+                $translationCode = $this->kirby()->panelLanguage();
             }
 
             if ($translation = $this->kirby()->translation($translationCode)) {
@@ -98,12 +97,11 @@ return [
     'type'   => 'Kirby\Cms\System',
     'views'  => [
         'login' => [
+            'authStatus',
             'isOk',
             'isInstallable',
             'isInstalled',
             'loginMethods',
-            'pendingChallenge',
-            'pendingEmail',
             'title',
             'translation'
         ],
@@ -124,6 +122,7 @@ return [
             'kirbytext',
             'languages',
             'license',
+            'locales',
             'multilang',
             'requirements',
             'site',

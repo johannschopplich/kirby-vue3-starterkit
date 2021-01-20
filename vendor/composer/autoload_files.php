@@ -12,5 +12,6 @@ return array(
     '04c6c5c2f7095ccf6c481d3e53e1776f' => $vendorDir . '/mustangostang/spyc/Spyc.php',
     '320cde22f66dd4f5d3fd621d3e88b98f' => $vendorDir . '/symfony/polyfill-ctype/bootstrap.php',
     'f864ae44e8154e5ff6f4eec32f46d37f' => $vendorDir . '/getkirby/cms/config/setup.php',
+    '87988fc7b1c1f093da22a1a3de972f3a' => $vendorDir . '/getkirby/cms/config/helpers.php',
     '7f15a39b34659ec7c61fd4bc2f79c539' => $baseDir . '/site/plugins/kirby-extended/helpers.php',
 );

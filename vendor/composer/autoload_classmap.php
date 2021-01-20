@@ -79,6 +79,7 @@ return array(
     'Kirby\\Cms\\Auth' => $vendorDir . '/getkirby/cms/src/Cms/Auth.php',
     'Kirby\\Cms\\Auth\\Challenge' => $vendorDir . '/getkirby/cms/src/Cms/Auth/Challenge.php',
     'Kirby\\Cms\\Auth\\EmailChallenge' => $vendorDir . '/getkirby/cms/src/Cms/Auth/EmailChallenge.php',
+    'Kirby\\Cms\\Auth\\Status' => $vendorDir . '/getkirby/cms/src/Cms/Auth/Status.php',
     'Kirby\\Cms\\Block' => $vendorDir . '/getkirby/cms/src/Cms/Block.php',
     'Kirby\\Cms\\BlockConverter' => $vendorDir . '/getkirby/cms/src/Cms/BlockConverter.php',
     'Kirby\\Cms\\Blocks' => $vendorDir . '/getkirby/cms/src/Cms/Blocks.php',

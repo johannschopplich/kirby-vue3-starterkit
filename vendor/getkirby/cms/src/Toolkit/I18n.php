@@ -38,35 +38,51 @@ class I18n
     public static $translations = [];
 
     /**
-     * The fallback locale
+     * The fallback locale or a
+     * list of fallback locales
      *
-     * @var string
+     * @var string|array
      */
-    public static $fallback = 'en';
+    public static $fallback = ['en'];
 
     /**
      * Cache of `NumberFormatter` objects by locale
      *
      * @var array
      */
-    protected static $decimalNumberFormatters = [];
+    protected static $decimalsFormatters = [];
 
     /**
-     * Returns the fallback code
+     * Returns the first fallback locale
+     *
+     * @deprecated 3.5.1 Use \Kirby\Toolkit\I18n::fallbacks() instead
      *
      * @return string
      */
     public static function fallback(): string
     {
-        if (is_string(static::$fallback) === true) {
-            return static::$fallback;
+        return static::fallbacks()[0];
+    }
+
+    /**
+     * Returns the list of fallback locales
+     *
+     * @return array
+     */
+    public static function fallbacks(): array
+    {
+        if (
+            is_array(static::$fallback) === true ||
+            is_string(static::$fallback) === true
+        ) {
+            return A::wrap(static::$fallback);
         }
 
         if (is_callable(static::$fallback) === true) {
-            return static::$fallback = (static::$fallback)();
+            return static::$fallback = A::wrap((static::$fallback)());
         }
 
-        return static::$fallback = 'en';
+        return static::$fallback = ['en'];
     }
 
     /**
@@ -154,8 +170,15 @@ class I18n
             return $fallback;
         }
 
-        if ($locale !== static::fallback()) {
-            return static::translation(static::fallback())[$key] ?? null;
+        foreach (static::fallbacks() as $fallback) {
+            // skip locales we have already tried
+            if ($locale === $fallback) {
+                continue;
+            }
+
+            if ($translation = static::translation($fallback)[$key] ?? null) {
+                return $translation;
+            }
         }
 
         return null;
@@ -166,12 +189,12 @@ class I18n
      * placeholders in the text
      *
      * @param string $key
-     * @param string $fallback
-     * @param array $replace
-     * @param string $locale
+     * @param string|array|null $fallback
+     * @param array|null $replace
+     * @param string|null $locale
      * @return string
      */
-    public static function template(string $key, $fallback = null, array $replace = null, string $locale = null)
+    public static function template(string $key, $fallback = null, ?array $replace = null, ?string $locale = null): string
     {
         if (is_array($fallback) === true) {
             $replace  = $fallback;
@@ -223,15 +246,15 @@ class I18n
      */
     protected static function decimalNumberFormatter(string $locale): ?NumberFormatter
     {
-        if (isset(static::$decimalNumberFormatters[$locale])) {
-            return static::$decimalNumberFormatters[$locale];
+        if (isset(static::$decimalsFormatters[$locale])) {
+            return static::$decimalsFormatters[$locale];
         }
 
         if (extension_loaded('intl') !== true || class_exists('NumberFormatter') !== true) {
-            return null;
+            return null; // @codeCoverageIgnore
         }
 
-        return static::$decimalNumberFormatters[$locale] = new NumberFormatter($locale, NumberFormatter::DECIMAL);
+        return static::$decimalsFormatters[$locale] = new NumberFormatter($locale, NumberFormatter::DECIMAL);
     }
 
     /**

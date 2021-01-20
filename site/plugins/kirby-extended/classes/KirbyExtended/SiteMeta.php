@@ -53,7 +53,7 @@ class SiteMeta
 
                 $sitemap[] = '<url>';
                 $sitemap[] = '  <loc>' . Xml::encode($item->url()) . '</loc>';
-                $sitemap[] = '  <mod>' . $item->modified('Y-m-d', 'date') . '</mod>';
+                $sitemap[] = '  <lastmod>' . $item->modified('Y-m-d', 'date') . '</lastmod>';
                 $sitemap[] = '  <priority>' . number_format($meta->priority(), 1, '.', '') . '</priority>';
 
                 $changefreq = $meta->changefreq();

@@ -13,6 +13,7 @@ class ComposerStaticInit1cbc4f918cf4254b9395feafd54ef06e
         '04c6c5c2f7095ccf6c481d3e53e1776f' => __DIR__ . '/..' . '/mustangostang/spyc/Spyc.php',
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
         'f864ae44e8154e5ff6f4eec32f46d37f' => __DIR__ . '/..' . '/getkirby/cms/config/setup.php',
+        '87988fc7b1c1f093da22a1a3de972f3a' => __DIR__ . '/..' . '/getkirby/cms/config/helpers.php',
         '7f15a39b34659ec7c61fd4bc2f79c539' => __DIR__ . '/../..' . '/site/plugins/kirby-extended/helpers.php',
     );
 
@@ -118,8 +119,8 @@ class ComposerStaticInit1cbc4f918cf4254b9395feafd54ef06e
         ),
         'Kirby\\' => 
         array (
-            0 => __DIR__ . '/..' . '/getkirby/cms/src',
-            1 => __DIR__ . '/..' . '/getkirby/composer-installer/src',
+            0 => __DIR__ . '/..' . '/getkirby/composer-installer/src',
+            1 => __DIR__ . '/..' . '/getkirby/cms/src',
         ),
         'KirbyExtended\\' => 
         array (
@@ -230,6 +231,7 @@ class ComposerStaticInit1cbc4f918cf4254b9395feafd54ef06e
         'Kirby\\Cms\\Auth' => __DIR__ . '/..' . '/getkirby/cms/src/Cms/Auth.php',
         'Kirby\\Cms\\Auth\\Challenge' => __DIR__ . '/..' . '/getkirby/cms/src/Cms/Auth/Challenge.php',
         'Kirby\\Cms\\Auth\\EmailChallenge' => __DIR__ . '/..' . '/getkirby/cms/src/Cms/Auth/EmailChallenge.php',
+        'Kirby\\Cms\\Auth\\Status' => __DIR__ . '/..' . '/getkirby/cms/src/Cms/Auth/Status.php',
         'Kirby\\Cms\\Block' => __DIR__ . '/..' . '/getkirby/cms/src/Cms/Block.php',
         'Kirby\\Cms\\BlockConverter' => __DIR__ . '/..' . '/getkirby/cms/src/Cms/BlockConverter.php',
         'Kirby\\Cms\\Blocks' => __DIR__ . '/..' . '/getkirby/cms/src/Cms/Blocks.php',

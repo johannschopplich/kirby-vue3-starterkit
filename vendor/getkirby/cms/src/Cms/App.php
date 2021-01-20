@@ -852,7 +852,7 @@ class App
      */
     public function markdown(string $text = null, bool $inline = false): string
     {
-        return $this->component('markdown')($this, $text, $this->options['markdown'] ?? [], $inline);
+        return ($this->component('markdown'))($this, $text, $this->options['markdown'] ?? [], $inline);
     }
 
     /**
@@ -1101,6 +1101,7 @@ class App
         if ($page) {
             try {
                 $response = $this->response();
+                $output   = $page->render([], $extension);
 
                 // attach a MIME type based on the representation
                 // only if no custom MIME type was set
@@ -1108,7 +1109,7 @@ class App
                     $response->type($extension);
                 }
 
-                return $response->body($page->render([], $extension));
+                return $response->body($output);
             } catch (NotFoundException $e) {
                 return null;
             }
@@ -1373,7 +1374,7 @@ class App
             }
         }
 
-        return $this->component('smartypants')($this, $text, $options);
+        return ($this->component('smartypants'))($this, $text, $options);
     }
 
     /**
@@ -1387,7 +1388,7 @@ class App
      */
     public function snippet($name, array $data = []): ?string
     {
-        return $this->component('snippet')($this, $name, array_merge($this->data, $data));
+        return ($this->component('snippet'))($this, $name, array_merge($this->data, $data));
     }
 
     /**
@@ -1412,7 +1413,7 @@ class App
      */
     public function template(string $name, string $type = 'html', string $defaultType = 'html')
     {
-        return $this->component('template')($this, $name, $type, $defaultType);
+        return ($this->component('template'))($this, $name, $type, $defaultType);
     }
 
     /**
@@ -1425,7 +1426,7 @@ class App
      */
     public function thumb(string $src, string $dst, array $options = []): string
     {
-        return $this->component('thumb')($this, $src, $dst, $options);
+        return ($this->component('thumb'))($this, $src, $dst, $options);
     }
 
     /**
