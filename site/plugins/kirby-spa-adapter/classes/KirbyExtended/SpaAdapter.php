@@ -56,20 +56,26 @@ class SpaAdapter
     }
 
     /**
-     * Returns the filename for a build asset, e.g. `style.d4814c7a.css`
+     * Creates a script tag for the main JavaScript module
      *
-     * @param string $filename Asset filename to get its hashed filename for
      * @return string
-     * @throws Exception
      */
-    public static function pathToAsset (string $filename): string
+    public static function js(): string
     {
-        $match = static::useManifest()[$filename] ?? null;
-        if ($match === null) {
-            throw new Exception("No hashed build asset found for {$filename}. Make sure it's bundled by Vite.");
-        }
+        $path = static::useManifest()['index.html']['file'];
+        return js($path, ['type' => 'module']);
+    }
 
-        return '/' . $match['file'];
+
+    /**
+     * Creates a link tag for the main CSS stylesheet
+     *
+     * @return string
+     */
+    public static function css(): string
+    {
+        $path = static::useManifest()['index.html']['css'][0];
+        return css($path);
     }
 
     /**
@@ -78,7 +84,7 @@ class SpaAdapter
      * @param string $name Page id
      * @return string
      */
-    public static function jsonPreloadLink (string $name): string
+    public static function jsonPreloadLink(string $name): string
     {
         $base = kirby()->multilang() ? '/' . kirby()->languageCode() : '';
         return '<link rel="preload" href="' . $base . static::useApiLocation() . '/' . $name . '.json" as="fetch" crossorigin>';
@@ -90,14 +96,16 @@ class SpaAdapter
      * @param string $name Page template name or other module name
      * @return string|void
      */
-    public static function modulePreloadLink (string $pattern)
+    public static function modulePreloadLink(string $name)
     {
-        $modulePath = kirby()->root() . '/assets/' . ucfirst($pattern) . '.*.js';
-        $match = glob($modulePath);
+        $match = array_filter(
+            static::useManifest(),
+            fn($i) => str_ends_with($i, ucfirst($name) . '.vue'),
+            ARRAY_FILTER_USE_KEY
+        );
 
         if (!empty($match)) {
-            $filename = pathinfo($match[0], PATHINFO_BASENAME);
-            return '<link rel="modulepreload" href="' . '/assets/' . $filename . '">';
+            return '<link rel="modulepreload" href="/' . array_values($match)[0]['file'] . '">';
         }
     }
 }
