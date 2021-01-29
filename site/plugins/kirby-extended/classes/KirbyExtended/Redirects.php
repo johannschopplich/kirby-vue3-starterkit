@@ -12,9 +12,6 @@ class Redirects
         $redirects = option('kirby-extended.redirects', []);
         if (empty($redirects)) return;
 
-        // Make sure current path shall be redirected
-        if (!in_array($path, array_keys($redirects))) return;
-
         // Turn into routes array
         $routes = array_map(function($from, $to) {
             return [

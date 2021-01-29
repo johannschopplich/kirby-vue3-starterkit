@@ -497,16 +497,16 @@
         },
         {
             "name": "vlucas/phpdotenv",
-            "version": "v5.2.0",
+            "version": "v5.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/vlucas/phpdotenv.git",
-                "reference": "fba64139db67123c7a57072e5f8d3db10d160b66"
+                "reference": "b3eac5c7ac896e52deab4a99068e3f4ab12d9e56"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/fba64139db67123c7a57072e5f8d3db10d160b66",
-                "reference": "fba64139db67123c7a57072e5f8d3db10d160b66",
+                "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/b3eac5c7ac896e52deab4a99068e3f4ab12d9e56",
+                "reference": "b3eac5c7ac896e52deab4a99068e3f4ab12d9e56",
                 "shasum": ""
             },
             "require": {
@@ -521,7 +521,7 @@
             "require-dev": {
                 "bamarni/composer-bin-plugin": "^1.4.1",
                 "ext-filter": "*",
-                "phpunit/phpunit": "^7.5.20 || ^8.5.2 || ^9.0"
+                "phpunit/phpunit": "^7.5.20 || ^8.5.14 || ^9.5.1"
             },
             "suggest": {
                 "ext-filter": "Required to use the boolean validator."
@@ -529,7 +529,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "5.2-dev"
+                    "dev-master": "5.3-dev"
                 }
             },
             "autoload": {
@@ -561,7 +561,7 @@
             ],
             "support": {
                 "issues": "https://github.com/vlucas/phpdotenv/issues",
-                "source": "https://github.com/vlucas/phpdotenv/tree/v5.2.0"
+                "source": "https://github.com/vlucas/phpdotenv/tree/v5.3.0"
             },
             "funding": [
                 {
@@ -573,7 +573,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-09-14T15:57:31+00:00"
+            "time": "2021-01-20T15:23:13+00:00"
         },
         {
             "name": "voku/html-min",
@@ -841,16 +841,16 @@
         },
         {
             "name": "getkirby/cms",
-            "version": "3.5.0",
+            "version": "3.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/getkirby/kirby.git",
-                "reference": "0d2751af7cb478df14f30fac47fe9a2cd3b38114"
+                "reference": "551e2f427eaf18e471df1c304552ab3de35e37c6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/getkirby/kirby/zipball/0d2751af7cb478df14f30fac47fe9a2cd3b38114",
-                "reference": "0d2751af7cb478df14f30fac47fe9a2cd3b38114",
+                "url": "https://api.github.com/repos/getkirby/kirby/zipball/551e2f427eaf18e471df1c304552ab3de35e37c6",
+                "reference": "551e2f427eaf18e471df1c304552ab3de35e37c6",
                 "shasum": ""
             },
             "require": {
@@ -868,15 +868,16 @@
             },
             "type": "kirby-cms",
             "autoload": {
-                "files": [
-                    "config/setup.php"
-                ],
+                "psr-4": {
+                    "Kirby\\": "src/"
+                },
                 "classmap": [
                     "dependencies/"
                 ],
-                "psr-4": {
-                    "Kirby\\": "src/"
-                }
+                "files": [
+                    "config/setup.php",
+                    "config/helpers.php"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -908,7 +909,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2020-12-15T08:09:43+00:00"
+            "time": "2021-01-19T11:05:44+00:00"
         },
         {
             "name": "laminas/laminas-escaper",

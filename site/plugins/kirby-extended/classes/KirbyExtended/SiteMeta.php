@@ -26,8 +26,9 @@ class SiteMeta
         $sitemap = [];
         $cache   = kirby()->cache('pages');
         $cacheId = 'sitemap.xml';
+        $sitemap = $cache->get($cacheId);
 
-        if (!$sitemap = $cache->get($cacheId)) {
+        if ($sitemap === null) {
             $sitemap[] = '<?xml version="1.0" encoding="UTF-8"?>';
             $sitemap[] = '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">';
 

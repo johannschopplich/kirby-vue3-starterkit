@@ -18,7 +18,7 @@ class PageMeta
 
         $defaults = option('kirby-extended.meta.defaults', []);
         if (!empty($defaults)) {
-            $this->metadata = is_callable($defaults) ? $defaults(kirby(), site(), $page) : $defaults;
+            $this->metadata = is_callable($defaults) ? $defaults(kirby(), site(), $this->page) : $defaults;
         }
 
         if (method_exists($this->page, 'metadata')) {
