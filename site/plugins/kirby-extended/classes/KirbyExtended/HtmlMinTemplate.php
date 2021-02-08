@@ -12,11 +12,11 @@ class HtmlMinTemplate extends Template
     {
         $html = Tpl::load($this->file(), $data);
 
-        if (option('debug', false) === true) {
+        if (option('debug', false)) {
             return $html;
         }
 
-        if (option('kirby-extended.html-minify.enable', false) === false) {
+        if (!option('kirby-extended.html-minify.enable', false)) {
             return $html;
         }
 

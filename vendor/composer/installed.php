@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '4dc920caa4855e392d2795ecd7426e43b031aec9',
+    'reference' => '18dc10f2594da8d6fe746d4b03e3bb7e8872447c',
     'name' => '__root__',
   ),
   'versions' => 
@@ -18,7 +18,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '4dc920caa4855e392d2795ecd7426e43b031aec9',
+      'reference' => '18dc10f2594da8d6fe746d4b03e3bb7e8872447c',
     ),
     'claviska/simpleimage' => 
     array (
@@ -67,12 +67,12 @@
     ),
     'johannschopplich/kirby-extended' => 
     array (
-      'pretty_version' => 'v2.7.3',
-      'version' => '2.7.3.0',
+      'pretty_version' => 'v2.7.6',
+      'version' => '2.7.6.0',
       'aliases' => 
       array (
       ),
-      'reference' => '02b32d175568be60cf28fa06588394dc33e0183e',
+      'reference' => 'a1f9a0d6c4e9c02dc12c9ff8fd70d4a88965278f',
     ),
     'laminas/laminas-escaper' => 
     array (
@@ -155,8 +155,8 @@
     ),
     'symfony/css-selector' => 
     array (
-      'pretty_version' => 'v5.2.2',
-      'version' => '5.2.2.0',
+      'pretty_version' => 'v5.2.3',
+      'version' => '5.2.3.0',
       'aliases' => 
       array (
       ),

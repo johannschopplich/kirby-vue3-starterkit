@@ -141,7 +141,9 @@ class PageMeta
 
                 $schema = array_reverse($schema, true);
                 $html[] = '<script type="application/ld+json">';
-                $html[] = json_encode($schema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
+                $html[] = (option('debug', false) || !option('kirby-extended.html-minify.enable', false))
+                    ? json_encode($schema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT)
+                    : json_encode($schema, JSON_UNESCAPED_SLASHES);
                 $html[] = '</script>';
             }
         }
