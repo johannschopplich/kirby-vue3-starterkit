@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '18dc10f2594da8d6fe746d4b03e3bb7e8872447c',
+    'reference' => '5ed82b1abdfffd118c1d4ffb997ffdf8cf427bcd',
     'name' => '__root__',
   ),
   'versions' => 
@@ -18,7 +18,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '18dc10f2594da8d6fe746d4b03e3bb7e8872447c',
+      'reference' => '5ed82b1abdfffd118c1d4ffb997ffdf8cf427bcd',
     ),
     'claviska/simpleimage' => 
     array (
@@ -40,12 +40,12 @@
     ),
     'getkirby/cms' => 
     array (
-      'pretty_version' => '3.5.1',
-      'version' => '3.5.1.0',
+      'pretty_version' => '3.5.3',
+      'version' => '3.5.3.0',
       'aliases' => 
       array (
       ),
-      'reference' => '551e2f427eaf18e471df1c304552ab3de35e37c6',
+      'reference' => '317f494ee5166f36e32f9acf286f69786de30512',
     ),
     'getkirby/composer-installer' => 
     array (

@@ -2,9 +2,7 @@
 
 require dirname(__DIR__) . '/vendor/autoload.php';
 
-use Kirby\Cms\App as Kirby;
-
-$kirby = new Kirby([
+$kirby = new \Kirby\Cms\App([
     'roots' => [
         'index'    => __DIR__,
         'base'     => $base = dirname(__DIR__),

@@ -188,6 +188,11 @@ trait AppTranslations
         // get injected translation data from plugins etc.
         $inject = $this->extensions['translations'][$locale] ?? [];
 
+        // inject current language translations
+        if ($language = $this->language($locale)) {
+            $inject = array_merge($inject, $language->translations());
+        }
+
         // load from disk instead
         return Translation::load($locale, $this->root('i18n:translations') . '/' . $locale . '.json', $inject);
     }
@@ -203,6 +208,26 @@ trait AppTranslations
             return $this->translations;
         }
 
-        return Translations::load($this->root('i18n:translations'), $this->extensions['translations'] ?? []);
+        $translations = $this->extensions['translations'] ?? [];
+
+        // injects languages translations
+        if ($languages = $this->languages()) {
+            foreach ($languages as $language) {
+                $languageCode         = $language->code();
+                $languageTranslations = $language->translations();
+
+                // merges language translations with extensions translations
+                if (empty($languageTranslations) === false) {
+                    $translations[$languageCode] = array_merge(
+                        $translations[$languageCode] ?? [],
+                        $languageTranslations
+                    );
+                }
+            }
+        }
+
+        $this->translations = Translations::load($this->root('i18n:translations'), $translations);
+
+        return $this->translations;
     }
 }
