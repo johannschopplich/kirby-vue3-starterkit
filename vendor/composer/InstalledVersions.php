@@ -30,7 +30,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => 'ff71c83f1e0c1ef458e8bc647ef849b350d2ad6f',
+    'reference' => 'd27b40568ca59ed1796b4b79386dd2890b65ffc7',
     'name' => '__root__',
   ),
   'versions' => 
@@ -42,7 +42,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => 'ff71c83f1e0c1ef458e8bc647ef849b350d2ad6f',
+      'reference' => 'd27b40568ca59ed1796b4b79386dd2890b65ffc7',
     ),
     'claviska/simpleimage' => 
     array (
@@ -64,12 +64,12 @@ private static $installed = array (
     ),
     'getkirby/cms' => 
     array (
-      'pretty_version' => '3.5.3',
-      'version' => '3.5.3.0',
+      'pretty_version' => '3.5.3.1',
+      'version' => '3.5.3.1',
       'aliases' => 
       array (
       ),
-      'reference' => '317f494ee5166f36e32f9acf286f69786de30512',
+      'reference' => '38afb2d650f3764d23d732b23ae8f04ab9ffba69',
     ),
     'getkirby/composer-installer' => 
     array (

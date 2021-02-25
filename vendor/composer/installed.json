@@ -122,17 +122,17 @@
         },
         {
             "name": "getkirby/cms",
-            "version": "3.5.3",
-            "version_normalized": "3.5.3.0",
+            "version": "3.5.3.1",
+            "version_normalized": "3.5.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/getkirby/kirby.git",
-                "reference": "317f494ee5166f36e32f9acf286f69786de30512"
+                "reference": "38afb2d650f3764d23d732b23ae8f04ab9ffba69"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/getkirby/kirby/zipball/317f494ee5166f36e32f9acf286f69786de30512",
-                "reference": "317f494ee5166f36e32f9acf286f69786de30512",
+                "url": "https://api.github.com/repos/getkirby/kirby/zipball/38afb2d650f3764d23d732b23ae8f04ab9ffba69",
+                "reference": "38afb2d650f3764d23d732b23ae8f04ab9ffba69",
                 "shasum": ""
             },
             "require": {
@@ -148,7 +148,7 @@
                 "phpmailer/phpmailer": "6.2.0",
                 "true/punycode": "2.1.1"
             },
-            "time": "2021-02-11T10:38:27+00:00",
+            "time": "2021-02-24T16:10:44+00:00",
             "type": "kirby-cms",
             "installation-source": "dist",
             "autoload": {
