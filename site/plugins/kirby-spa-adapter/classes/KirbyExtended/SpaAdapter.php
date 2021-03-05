@@ -3,7 +3,7 @@
 namespace KirbyExtended;
 
 use Kirby\Cms\Url;
-use Kirby\Data\Json;
+use Kirby\Data\Data;
 use Kirby\Exception\Exception;
 use Kirby\Toolkit\F;
 
@@ -45,14 +45,13 @@ class SpaAdapter
             return static::$manifest;
         }
 
-        $manifestPath = kirby()->root() . '/assets/manifest.json';
-        if (!F::exists($manifestPath)) {
-            throw new Exception('Build asset manifest.json not found. You have to build the app first: `npm run build`.');
+        $manifestFile = kirby()->root('index') . '/assets/manifest.json';
+
+        if (!F::exists($manifestFile)) {
+            throw new Exception('The `manifest.json` does not exist. Build your app first: `npm run build`.');
         }
 
-        $deserializedManifest = F::read($manifestPath);
-        static::$manifest = Json::decode($deserializedManifest);
-        return static::$manifest;
+        return static::$manifest = Data::read($manifestFile);
     }
 
     /**
@@ -65,7 +64,6 @@ class SpaAdapter
         $path = static::useManifest()['index.html']['file'];
         return js($path, ['type' => 'module']);
     }
-
 
     /**
      * Creates a link tag for the main CSS stylesheet
