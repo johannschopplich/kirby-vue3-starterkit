@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => 'd27b40568ca59ed1796b4b79386dd2890b65ffc7',
+    'reference' => '4fc30fe2620989f1fcd9694eab14bd1a08896794',
     'name' => '__root__',
   ),
   'versions' => 
@@ -18,7 +18,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => 'd27b40568ca59ed1796b4b79386dd2890b65ffc7',
+      'reference' => '4fc30fe2620989f1fcd9694eab14bd1a08896794',
     ),
     'claviska/simpleimage' => 
     array (
@@ -85,12 +85,12 @@
     ),
     'laminas/laminas-zendframework-bridge' => 
     array (
-      'pretty_version' => '1.1.1',
-      'version' => '1.1.1.0',
+      'pretty_version' => '1.2.0',
+      'version' => '1.2.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '6ede70583e101030bcace4dcddd648f760ddf642',
+      'reference' => '6cccbddfcfc742eb02158d6137ca5687d92cee32',
     ),
     'league/color-extractor' => 
     array (
@@ -155,8 +155,8 @@
     ),
     'symfony/css-selector' => 
     array (
-      'pretty_version' => 'v5.2.3',
-      'version' => '5.2.3.0',
+      'pretty_version' => 'v5.2.4',
+      'version' => '5.2.4.0',
       'aliases' => 
       array (
       ),
