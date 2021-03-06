@@ -15,8 +15,8 @@ $flushCache = function () {
     'hooks' => [
         'page.*:after' => $flushCache,
         'site.*:after' => $flushCache,
-        // Explicitly register catch-all routes for SPA only when Kirby and all
-        // plugins have been loaded to ensure no other routes are overwritten
+        // Explicitly register catch-all routes only when Kirby and all plugins
+        // have been loaded to ensure no other routes are overwritten
         'system.loadPlugins:after' => function () {
             kirby()->extend([
                 'routes' => require __DIR__ . '/routes.php'

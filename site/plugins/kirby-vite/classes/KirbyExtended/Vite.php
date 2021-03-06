@@ -73,7 +73,7 @@ class Vite
      */
     public function css(): string
     {
-        $path = 'dist/' .static::useManifest()['index.html']['css'][0];
+        $path = 'dist/' . static::useManifest()['index.html']['css'][0];
         return css($path);
     }
 
