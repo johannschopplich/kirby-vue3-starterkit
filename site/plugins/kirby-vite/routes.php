@@ -3,7 +3,7 @@
 use Kirby\Cms\Url;
 use Kirby\Http\Response;
 use Kirby\Toolkit\Tpl;
-use KirbyExtended\SpaAdapter;
+use KirbyExtended\Vite;
 
 $apiLocation = Url::path(env('CONTENT_API_SLUG', ''), false, true);
 
@@ -15,7 +15,7 @@ return [
         'pattern' => "{$apiLocation}__site.json",
         'language' => '*',
         'action' => function () {
-            $data = SpaAdapter::useSite();
+            $data = Vite::useSite();
             return Response::json($data);
         }
     ],
@@ -66,7 +66,7 @@ return [
 
             if ($enableCache) {
                 $cachePrefix = isset($language) ? "{$language}/" : '';
-                $cacheBucket = kirby()->cache('kirby-extended.spa-adapter');
+                $cacheBucket = kirby()->cache('kirby-extended.vite');
                 $pageProxy = $cacheBucket->get($cachePrefix . ($pageId ?? $site->homePageId()));
 
                 if ($pageProxy !== null) {

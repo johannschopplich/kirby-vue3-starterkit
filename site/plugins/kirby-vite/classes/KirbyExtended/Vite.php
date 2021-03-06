@@ -2,19 +2,20 @@
 
 namespace KirbyExtended;
 
+use Exception;
 use Kirby\Cms\Url;
 use Kirby\Data\Data;
-use Kirby\Exception\Exception;
 use Kirby\Toolkit\F;
 
-class SpaAdapter
+class Vite
 {
+    protected static \KirbyExtended\Vite $instance;
     protected static string $apiLocation;
     protected static array $site;
     protected static array $manifest;
 
     /**
-     * Get path to content api
+     * Gets the content api path
      *
      * @return string
      */
@@ -24,7 +25,7 @@ class SpaAdapter
     }
 
     /**
-     * Get site data for the index template
+     * Gets the site data
      *
      * @return array
      */
@@ -34,7 +35,7 @@ class SpaAdapter
     }
 
     /**
-     * Get Vite manifest to render links with hashed filenames
+     * Read and parse manifest file created by Vite
      *
      * @return array
      * @throws Exception
@@ -45,10 +46,10 @@ class SpaAdapter
             return static::$manifest;
         }
 
-        $manifestFile = kirby()->root('index') . '/assets/manifest.json';
+        $manifestFile = kirby()->root() . '/dist/manifest.json';
 
         if (!F::exists($manifestFile)) {
-            throw new Exception('The `manifest.json` does not exist. Build your app first: `npm run build`.');
+            throw new Exception('The `manifest.json` does not exist. Run `npm run build`.');
         }
 
         return static::$manifest = Data::read($manifestFile);
@@ -59,9 +60,9 @@ class SpaAdapter
      *
      * @return string
      */
-    public static function js(): string
+    public function js(): string
     {
-        $path = static::useManifest()['index.html']['file'];
+        $path = 'dist/' . static::useManifest()['index.html']['file'];
         return js($path, ['type' => 'module']);
     }
 
@@ -70,9 +71,9 @@ class SpaAdapter
      *
      * @return string
      */
-    public static function css(): string
+    public function css(): string
     {
-        $path = static::useManifest()['index.html']['css'][0];
+        $path = 'dist/' .static::useManifest()['index.html']['css'][0];
         return css($path);
     }
 
@@ -82,7 +83,7 @@ class SpaAdapter
      * @param string $name Page id
      * @return string
      */
-    public static function jsonPreloadLink(string $name): string
+    public function jsonPreloadLink(string $name): string
     {
         $base = kirby()->multilang() ? '/' . kirby()->languageCode() : '';
         return '<link rel="preload" href="' . $base . static::useApiLocation() . '/' . $name . '.json" as="fetch" crossorigin>';
@@ -94,7 +95,7 @@ class SpaAdapter
      * @param string $name Page template name or other module name
      * @return string|void
      */
-    public static function modulePreloadLink(string $name)
+    public function modulePreloadLink(string $name)
     {
         $match = array_filter(
             static::useManifest(),
@@ -103,7 +104,17 @@ class SpaAdapter
         );
 
         if (!empty($match)) {
-            return '<link rel="modulepreload" href="/' . array_values($match)[0]['file'] . '">';
+            return '<link rel="modulepreload" href="/dist/' . array_values($match)[0]['file'] . '">';
         }
+    }
+
+    /**
+     * Gets the instance via lazy initialization
+     *
+     * @return \KirbyExtended\Vite
+     */
+    public static function getInstance(): \KirbyExtended\Vite
+    {
+        return static::$instance ??= new static;
     }
 }

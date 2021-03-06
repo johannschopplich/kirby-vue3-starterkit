@@ -1,16 +1,14 @@
 <?php
 
-use Kirby\Cms\App as Kirby;
-
 load([
-    'KirbyExtended\\SpaAdapter' => 'classes/KirbyExtended/SpaAdapter.php'
+    'KirbyExtended\\Vite' => 'classes/KirbyExtended/Vite.php'
 ], __DIR__);
 
 $flushCache = function () {
-    kirby()->cache('kirby-extended.spa-adapter')->flush();
+    kirby()->cache('kirby-extended.vite')->flush();
 };
 
-Kirby::plugin('kirby-extended/spa-adapter', [
+\Kirby\Cms\App::plugin('kirby-extended/vite', [
     'options' => [
         'cache' => true
     ],
@@ -22,7 +20,17 @@ Kirby::plugin('kirby-extended/spa-adapter', [
         'system.loadPlugins:after' => function () {
             kirby()->extend([
                 'routes' => require __DIR__ . '/routes.php'
-            ], kirby()->plugin('kirby-extended/spa-adapter'));
+            ], kirby()->plugin('kirby-extended/vite'));
         }
     ]
 ]);
+
+/**
+ * Returns the Vite instance
+ *
+ * @return \KirbyExtended\Vite
+ */
+function vite()
+{
+    return \KirbyExtended\Vite::getInstance();
+}

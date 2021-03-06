@@ -1,4 +1,5 @@
 import 'dotenv/config.js'
+import { resolve } from 'path'
 import vue from '@vitejs/plugin-vue'
 
 const kirbyUrl = `http://${process.env.KIRBY_SERVER_HOSTNAME}:${process.env.KIRBY_SERVER_PORT}`
@@ -9,12 +10,16 @@ process.env.VITE_BACKEND_API_SLUG = process.env.CONTENT_API_SLUG
 process.env.VITE_PROXY_PATH = proxyPath
 process.env.VITE_MULTILANG = process.env.KIRBY_MULTILANG
 
-export default {
+export default ({ command, mode }) => ({
   root: 'frontend',
+  base: mode === 'development' ? '/' : '/dist/',
+
   build: {
-    assetsDir: 'assets',
+    outDir: resolve(process.cwd(), 'public/dist'),
+    emptyOutDir: true,
     manifest: true
   },
+
   plugins: [
     vue()
   ],
@@ -28,4 +33,4 @@ export default {
       }
     }
   }
-}
+})

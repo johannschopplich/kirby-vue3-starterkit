@@ -1,9 +1,3 @@
-<?php
-
-use Kirby\Data\Json;
-use KirbyExtended\SpaAdapter;
-
-?>
 <!DOCTYPE html>
 <html lang="<?= kirby()->languageCode() ?? 'en' ?>">
 <head>
@@ -12,16 +6,16 @@ use KirbyExtended\SpaAdapter;
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <?php snippet('meta', compact('page', 'site')) ?>
 
-  <?= SpaAdapter::jsonPreloadLink($page->uri()) ?>
-  <?= SpaAdapter::modulePreloadLink($page->intendedTemplate()->name()) ?>
-  <?= SpaAdapter::css() ?>
+  <?= vite()->jsonPreloadLink($page->uri()) ?>
+  <?= vite()->modulePreloadLink($page->intendedTemplate()->name()) ?>
+  <?= vite()->css() ?>
 
 </head>
 <body>
 
   <div id="app"></div>
-  <script id="site-data" type="application/json"><?= Json::encode(SpaAdapter::useSite()) ?></script>
-  <?= SpaAdapter::js() ?>
+  <script id="site-data" type="application/json"><?= json_encode(vite()->useSite(), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?></script>
+  <?= vite()->js() ?>
 
 </body>
 </html>

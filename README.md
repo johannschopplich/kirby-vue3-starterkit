@@ -144,9 +144,9 @@ kirby-vue3-starterkit/
 |   |   # Only used in multi-language setups
 |   ├── languages/
 |   ├── models/
-|   ├── plugins/spa-adapter/
+|   ├── plugins/vite/
 |   |   |
-|   |   |   # Core of the SPA integration plugin, mainly registeres routes
+|   |   |   # Core of the Vite integration plugin, mainly registeres routes
 |   |   ├── index.php
 |   |   |
 |   |   |   # Routes to handle `.json` requests and serving the `index.php` snippet

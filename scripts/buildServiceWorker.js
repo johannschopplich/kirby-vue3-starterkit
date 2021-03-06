@@ -12,11 +12,11 @@ function random () {
   return `${segment()}-${segment()}-${segment()}`
 }
 
-const swManifest = JSON.parse(readFileSync('public/assets/manifest.json'))
+const swManifest = JSON.parse(readFileSync('public/dist/manifest.json'))
 const swSrcPath = 'frontend/src/serviceWorker.js'
 const swDistPath = 'public/service-worker.js'
 
-const assets = Object.values(swManifest).map(i => `/assets/${i.file}`)
+const assets = Object.values(swManifest).map(i => `/dist/${i.file}`)
 const bundle = `
   self.__PRECACHE_MANIFEST = [${assets.map(i => `'${i}'`).join(',')}]
   const VERSION = '${random()}'
