@@ -94,14 +94,12 @@ kirby-vue3-starterkit/
 |   |   |   # Routes to handle `.json` requests and serving the `index.php` snippet
 |   |   └── routes.php
 |   |
-|   ├── snippets/
-|   |   |
-|   |   |   # Index page used in production environment – almost identical to `frontend/index.html`
-|   |   |   # Handles build asset paths, inlines the `site` object, includes SEO meta tags, etc.
-|   |   └── spa-index.php
-|   |
 |   |   # Templates for JSON content representations fetched by frontend
+|   |   # Also index page as main entry point for web application
 |   └── templates/
+|       |
+|       |   # Handles build asset paths, inlines the `site` object, includes SEO meta tags, etc.
+|       └── _spa-index.php
 |
 |   # Includes all frontend-related sources
 ├── src/

@@ -72,7 +72,7 @@ return [
                 $page = site()->visit($page, $language);
             }
 
-            $renderedPage = Tpl::load(kirby()->root('snippets') . '/spa-index.php', compact('page', 'site'));
+            $renderedPage = Tpl::load(kirby()->root('templates') . '/_spa-index.php', compact('page', 'site'));
 
             if ($enableCache && !$page->isErrorPage()) {
                 $cacheBucket->set($cachePrefix . $page->uri(), $renderedPage);
