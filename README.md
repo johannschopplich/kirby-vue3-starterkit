@@ -151,12 +151,12 @@ kirby-vue3-starterkit/
 |   |
 |   |   # Vue.js views corresponding to Kirby templates
 |   |   # Routes are being automatically resolved
-|   ├── views/
-|   |   |
-|   |   ├── App.vue
-|   |   ├── index.css
-|   |   ├── index.js
-|   |   └── serviceWorker.js
+|   └── views/
+|       |
+|       ├── App.vue
+|       ├── index.css
+|       ├── index.js
+|       └── serviceWorker.js
 |
 |   # Contains everything content and user data related (contents not tracked by Git)
 ├── storage/
