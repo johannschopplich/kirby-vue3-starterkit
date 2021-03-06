@@ -336,7 +336,8 @@ To keep page data fresh with **stale-while-revalidate**, set:
 
 ## Credits
 
-- Big thanks to Jakub Medvecký Heretik for his inspirational work on [kirby-vue-starterkit](https://github.com/jmheretik/kirby-vue-starterkit).
+- Huge thanks to Jakub Medvecký Heretik for his inspirational work on [kirby-vue-starterkit](https://github.com/jmheretik/kirby-vue-starterkit).
+- Huge thanks also to arnoson for his Vite backend integration strategy — [kirby-vite](https://github.com/arnoson/kirby-vite).
 
 ## License
 
