@@ -1,4 +1,6 @@
-import './main.css'
+import 'vite/dynamic-import-polyfill'
+
+import './index.css'
 
 import { createApp } from 'vue'
 import { initRouter } from './router'

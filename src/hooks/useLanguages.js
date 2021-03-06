@@ -13,21 +13,12 @@ let languageCode = null
  * Initialize language code in multi-language setup
  */
 const initLanguages = () => {
-  const __DEV__ = import.meta.env.DEV
   const site = useSite()
   if (!site.languages?.length) return
 
-  if (__DEV__) {
-    const path = window.location.pathname
-    document.documentElement.lang =
-      site.languages.find(({ code }) => path === `/${code}` || path.startsWith(`/${code}/`))?.code ??
-      site.languages.find(lang => lang.isDefault)?.code ??
-      'en'
-  }
-
   languageCode = document.documentElement.lang
 
-  if (__DEV__) {
+  if (import.meta.env.DEV) {
     console.log('[useLanguages] Current language code:', languageCode)
   }
 }

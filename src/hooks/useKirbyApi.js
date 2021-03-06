@@ -36,8 +36,7 @@ const fetcher = async url => {
  * @returns {string} Final URL
  */
 const apiUri = (path, languageCode) => {
-  // Use custom `viteproxy` path as base in development environment
-  let result = import.meta.env.DEV ? import.meta.env.VITE_PROXY_PATH : ''
+  let result = ''
 
   // Add language path in multi-language setup
   if (languageCode) {

@@ -1,12 +1,11 @@
 {
   "name": "kirby-vue3-starterkit",
-  "version": "2.0.1",
+  "version": "3.0.0",
   "scripts": {
-    "kirby:serve": "env-cmd --use-shell \"php -S \\$KIRBY_SERVER_HOSTNAME:\\$KIRBY_SERVER_PORT -t public server.php\"",
-    "kirby:flush-cache": "find storage/cache -maxdepth 1 -mindepth 1 -type d -exec rm -rf '{}' \\;",
+    "kirby": "env-cmd --use-shell \"php -S \\$KIRBY_SERVER_HOSTNAME:\\$KIRBY_SERVER_PORT -t public server.php\"",
     "assets:sw": "node scripts/buildServiceWorker.js",
-    "dev": "concurrently \"npm run kirby:serve\" \"vite\"",
-    "build": "vite build && npm run assets:sw && npm run kirby:flush-cache",
+    "dev": "touch src/.lock && concurrently \"npm:kirby\" \"vite\"",
+    "build": "rm -f src/.lock && vite build && npm run assets:sw",
     "lint": "eslint \"frontend/src/**/*.{js,vue}\""
   },
   "dependencies": {

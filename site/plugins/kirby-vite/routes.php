@@ -3,23 +3,10 @@
 use Kirby\Cms\Url;
 use Kirby\Http\Response;
 use Kirby\Toolkit\Tpl;
-use KirbyExtended\Vite;
 
 $apiLocation = Url::path(env('CONTENT_API_SLUG', ''), false, true);
 
 return [
-    /**
-     * Return the global `site` object, used singly in development environment
-     */
-    [
-        'pattern' => "{$apiLocation}__site.json",
-        'language' => '*',
-        'action' => function () {
-            $data = Vite::useSite();
-            return Response::json($data);
-        }
-    ],
-
     /**
      * Respond with JSON-encoded page data for any given URL ending with `.json`
      */
