@@ -11,8 +11,8 @@ import Default from '../views/Default.vue'
  */
 export const initRouter = () => {
   const site = useSite()
-  const { languageCode } = useLanguages()
-  const base = languageCode ? `/${languageCode}/` : ''
+  const { isMultilang, languageCode } = useLanguages()
+  const base = isMultilang ? `/${languageCode}/` : ''
 
   const routes = [
     ...site.children.map(page => ({

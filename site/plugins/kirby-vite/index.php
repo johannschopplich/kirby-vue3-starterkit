@@ -10,7 +10,10 @@ $flushCache = function () {
 
 \Kirby\Cms\App::plugin('kirby-extended/vite', [
     'options' => [
-        'cache' => true
+        'cache' => true,
+        'entry' => 'index.js',
+        'outDir' => 'dist',
+        'devServer' => 'http://localhost:3000'
     ],
     'hooks' => [
         'page.*:after' => $flushCache,

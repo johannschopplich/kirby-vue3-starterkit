@@ -3,6 +3,7 @@
 node_modules/
 
 # Frontend
+/public/assets
 /public/dist/
 /public/service-worker.js
 

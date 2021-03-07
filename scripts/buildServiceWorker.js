@@ -13,7 +13,7 @@ function random () {
 }
 
 const swManifest = JSON.parse(readFileSync('public/dist/manifest.json'))
-const swSrcPath = 'frontend/src/serviceWorker.js'
+const swSrcPath = 'src/serviceWorker.js'
 const swDistPath = 'public/service-worker.js'
 
 const assets = Object.values(swManifest).map(i => `/dist/${i.file}`)

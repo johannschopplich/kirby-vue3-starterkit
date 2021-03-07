@@ -4,7 +4,7 @@ $title = $page->customTitle()->or($page->title() . ' – ' . $site->title());
 $description = $page->description()->or($site->description());
 $thumbnail = (function () use ($page, $site) {
   $file = $page->thumbnail()->toFile() ?? $site->thumbnail()->toFile();
-  return $file ? $file->resize(1280)->url() : '/img/android-chrome-512x512.png';
+  return $file ? $file->resize(1200)->url() : '/img/android-chrome-512x512.png';
 })();
 
 ?>
