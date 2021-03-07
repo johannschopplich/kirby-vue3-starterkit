@@ -1,3 +1,4 @@
+<?php /** @var \Kirby\Cms\Page $page */ ?>
 <!DOCTYPE html>
 <html lang="<?= kirby()->languageCode() ?? 'en' ?>">
 <head>

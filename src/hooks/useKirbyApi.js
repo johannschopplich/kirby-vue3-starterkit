@@ -32,14 +32,14 @@ const fetcher = async url => {
  * Generate the api location for a specific file and language
  *
  * @param {string} path Path to the file desired
- * @param {string} [languageCode] Language code in multi-lang setups
  * @returns {string} Final URL
  */
-const apiUri = (path, languageCode) => {
+const apiUri = path => {
+  const { isMultilang, languageCode } = useLanguages()
   let result = ''
 
   // Add language path in multi-language setup
-  if (languageCode) {
+  if (isMultilang) {
     result += `/${languageCode}`
   }
 
@@ -69,8 +69,7 @@ const getPage = async (
   let page
   const __DEV__ = import.meta.env.DEV
   const isCached = pages.has(id)
-  const { languageCode } = useLanguages()
-  const targetUrl = apiUri(`${id}.json`, languageCode)
+  const targetUrl = apiUri(`${id}.json`)
 
   // Use cached page if present in the store, except when revalidating
   if (!revalidate && isCached) {

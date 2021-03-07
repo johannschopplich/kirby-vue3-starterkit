@@ -1,26 +1,19 @@
-import { useSite } from './'
-
-let isInitialized = false
-
 /**
- * Current language code in multi-language setup
+ * Indicates a multi-language setup
  *
- * @constant {(string|null)}
+ * @constant {boolean}
  */
-let languageCode = null
+const isMultilang = import.meta.env.VITE_MULTILANG === 'true'
 
 /**
- * Initialize language code in multi-language setup
+ * Current language code
+ *
+ * @constant {string}
  */
-const initLanguages = () => {
-  const site = useSite()
-  if (!site.languages?.length) return
+const languageCode = document.documentElement.lang
 
-  languageCode = document.documentElement.lang
-
-  if (import.meta.env.DEV) {
-    console.log('[useLanguages] Current language code:', languageCode)
-  }
+if (import.meta.env.DEV && isMultilang) {
+  console.log('[useLanguages] Current language code:', languageCode)
 }
 
 /**
@@ -28,13 +21,7 @@ const initLanguages = () => {
  *
  * @returns {object} Object language-related data
  */
-export default () => {
-  if (!isInitialized) {
-    initLanguages()
-    isInitialized = true
-  }
-
-  return {
-    languageCode
-  }
-}
+export default () => ({
+  isMultilang,
+  languageCode
+})
