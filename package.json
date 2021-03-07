@@ -6,7 +6,7 @@
     "assets:sw": "node scripts/buildServiceWorker.js",
     "dev": "touch src/.lock && concurrently \"npm:kirby\" \"vite\"",
     "build": "rm -f src/.lock && vite build && npm run assets:sw",
-    "lint": "eslint \"frontend/src/**/*.{js,vue}\""
+    "lint": "eslint \"src/**/*.{js,vue}\""
   },
   "dependencies": {
     "vue": "^3.0.7",

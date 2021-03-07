@@ -80,7 +80,7 @@ kirby-vue3-starterkit/
 |   |   |
 |   |   |   # Builds a JSON-encoded `site` object for the frontend
 |   |   |   # Used by Vue Router to populate routes, but can be extended by commonly used data
-|   |   └── spa-site.php
+|   |   └── app-site.php
 |   |
 |   |   # Only used in multi-language setups
 |   ├── languages/
@@ -99,7 +99,7 @@ kirby-vue3-starterkit/
 |   └── templates/
 |       |
 |       |   # Handles build asset paths, inlines the `site` object, includes SEO meta tags, etc.
-|       └── _spa-index.php
+|       └── _app-index.php
 |
 |   # Includes all frontend-related sources
 ├── src/
@@ -189,7 +189,7 @@ kirby-vue3-starterkit/
 
 Even without a service worker installed, the frontend will store pages between indiviual routes/views. When you reload the tab, the data for each page is freshly fetched from the API once again.
 
-For offline capability of your Vue app, you can choose to activate the included [service worker](frontend/src/serviceWorker.js).
+For offline capability of your Vue app, you can choose to activate the included [service worker](src/serviceWorker.js).
 
 A visual explanation of both methods can be found in the following flow chart:
 
@@ -201,7 +201,7 @@ Each JSON request will be freshly fetched from the network and saved to the cach
 
 ## Stale-While-Revalidate
 
-The stale-while-revalidate mechanism for the [`usePage`](frontend/src/hooks/usePage.js) hook allows you to respond as quickly as possible with cached page data if available, falling back to the network request if it's not cached. The network request is then used to update the cached page data – which directly affects the view after lazily assigning changes (if any), thanks to Vue's reactivity.
+The stale-while-revalidate mechanism for the [`usePage`](src/hooks/usePage.js) hook allows you to respond as quickly as possible with cached page data if available, falling back to the network request if it's not cached. The network request is then used to update the cached page data – which directly affects the view after lazily assigning changes (if any), thanks to Vue's reactivity.
 
 ## Prerequisites
 
