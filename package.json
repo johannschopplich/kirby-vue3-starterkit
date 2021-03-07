@@ -1,6 +1,6 @@
 {
   "name": "kirby-vue3-starterkit",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "scripts": {
     "kirby": "env-cmd --use-shell \"php -S \\$KIRBY_SERVER_HOSTNAME:\\$KIRBY_SERVER_PORT -t public server.php\"",
     "assets:sw": "node scripts/buildServiceWorker.js",
