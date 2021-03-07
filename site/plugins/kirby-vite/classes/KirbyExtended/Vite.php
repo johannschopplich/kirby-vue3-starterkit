@@ -43,7 +43,7 @@ class Vite
      */
     public function useSite(): array
     {
-        return static::$site ??= require kirby()->root('config') . '/spa-site.php';
+        return static::$site ??= require kirby()->root('config') . '/app-site.php';
     }
 
     /**
