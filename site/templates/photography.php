@@ -3,7 +3,7 @@
 $data = [
   'title' => $page->title()->value(),
   'metaTitle' => $page->customTitle()->or($page->title() . ' – ' . $site->title())->value(),
-  'children' => array_values($page->children()->listed()->map(fn($album) => [
+  'children' => $page->children()->listed()->map(fn($album) => [
     'uri' => $album->uri(),
     'title' => $album->title()->value(),
     'cover' => $album->cover() === null ? null : [
@@ -11,7 +11,7 @@ $data = [
       'urlHome' => $album->cover()->resize(1024, 1024)->url(),
       'alt' => $album->cover()->alt()->value()
     ]
-  ])->data())
+  ])->values()
 ];
 
 echo \Kirby\Data\Json::encode($data);

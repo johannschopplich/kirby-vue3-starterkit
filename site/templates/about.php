@@ -7,10 +7,10 @@ $data = [
   'phone' => $page->phone()->value(),
   'address' => $page->address()->kt()->value(),
   'text' => $page->text()->kt()->value(),
-  'social' => array_values($page->social()->toStructure()->map(fn($social) => [
+  'social' => $page->social()->toStructure()->map(fn($social) => [
     'url' => $social->url()->value(),
     'platform' => $social->platform()->value()
-  ])->data())
+  ])->values()
 ];
 
 echo \Kirby\Data\Json::encode($data);
