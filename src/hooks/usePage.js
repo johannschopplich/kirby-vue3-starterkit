@@ -25,7 +25,7 @@ const toPageId = path => {
  * Hook for the page data of a given page id or the current route path
  *
  * @param {string} [path] Optional path or page id to retrieve
- * @returns {object} Reactive page object
+ * @returns {reactive} Reactive page object
  */
 export default path => {
   const router = useRouter()

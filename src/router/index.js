@@ -7,7 +7,7 @@ import Default from '../views/Default.vue'
 /**
  * Creates the Vue Router instance
  *
- * @returns {object} Created router instance for the Vue app
+ * @returns {import('vue-router').Router} Router instance for the Vue app
  */
 export const initRouter = () => {
   const site = useSite()

@@ -26,5 +26,10 @@
     }],
     "vue/no-v-html": "off",
     "quote-props": ["error", "consistent-as-needed"]
+  },
+  "settings": {
+    "jsdoc": {
+      "mode": "typescript"
+    }
   }
 }

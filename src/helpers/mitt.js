@@ -2,7 +2,7 @@
  * Mitt: Tiny functional event emitter / pubsub
  *
  * @name mitt
- * @param {Array} [all] Optional array of event names to registered handler functions
+ * @param {Array} [all=[]] Optional array of event names to registered handler functions
  * @returns {Function} The function's instance
  */
 export default class Mitt {
