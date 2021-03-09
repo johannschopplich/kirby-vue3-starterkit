@@ -108,9 +108,6 @@ kirby-vue3-starterkit/
 |   |   # (Vue.js components correspond to Kirby snippets)
 |   ├── components/
 |   |
-|   |   # Commonly used helpers
-|   ├── helpers/
-|   |
 |   |   # Hooks for common actions
 |   ├── hooks/
 |   |   |

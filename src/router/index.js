@@ -1,8 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { scrollBehavior } from './scrollBehaviour'
 import { useSite, useLanguages } from '../hooks'
-import { capitalize } from '../helpers'
 import Default from '../views/Default.vue'
+
+const capitalize = ([first, ...rest]) => first.toUpperCase() + rest.join('')
 
 /**
  * Creates the Vue Router instance
