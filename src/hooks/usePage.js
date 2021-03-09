@@ -10,18 +10,6 @@ import { useAnnouncer, useKirbyApi } from './'
 const enableSWR = import.meta.env.VITE_ENABLE_SWR === 'true'
 
 /**
- * Transform a path to a Kirby-compatible page id
- *
- * @param {string} path Path to parse and transform
- * @returns {string} Corresponding page id
- */
-const toPageId = path => {
-  if (path.startsWith('/')) path = path.slice(1)
-  if (path.endsWith('/')) path = path.slice(0, -1)
-  return path || 'home'
-}
-
-/**
  * Hook for the page data of a given page id or the current route path
  *
  * @param {string} [path] Optional path or page id to retrieve
@@ -32,7 +20,12 @@ export default path => {
   const { path: currentPath } = useRoute()
   const { hasPage, getPage } = useKirbyApi()
   const { setAnnouncer } = useAnnouncer()
-  const id = toPageId(path || currentPath)
+
+  // Get page id and trim leading or trailing slashes
+  let id = (path || currentPath).replace(/^\/|\/$/g, '')
+
+  // Fall back to homepage if id is empty
+  if (!id) id = 'home'
 
   // Setup page waiter promise
   let resolve
