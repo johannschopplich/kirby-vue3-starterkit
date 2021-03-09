@@ -14,17 +14,20 @@ return [
         'pattern' => "{$apiLocation}(:all).json",
         'language' => '*',
         'action' => function (...$args) {
-            if (kirby()->multilang()) {
+            $site = site();
+            $isMultilang = kirby()->multilang();
+
+            if ($isMultilang) {
                 [$language, $pageId] = $args;
             } else {
                 [$pageId] = $args;
             }
 
-            $page = page($pageId) ?? site()->errorPage();
+            $page = page($pageId) ?? $site->errorPage();
 
             // Get page object for specified language
-            if (kirby()->multilang()) {
-                $page = site()->visit($page, $language);
+            if ($isMultilang) {
+                $page = $site->visit($page, $language);
             }
 
             // Prerender the page to prevent Kirby from using the error page's
@@ -42,39 +45,41 @@ return [
         'pattern' => '(:all)',
         'language' => '*',
         'action' => function (...$args) {
-            if (kirby()->multilang()) {
+            $kirby = kirby();
+            $site = $kirby->site();
+            $isMultilang = $kirby->multilang();
+
+            if ($isMultilang) {
                 [$language, $pageId] = $args;
             } else {
                 [$pageId] = $args;
             }
 
-            $site = site();
-            $enableCache = env('KIRBY_CACHE', false) === true && kirby()->user() === null;
+            // Fall back to homepage id
+            $pageId ??= $site->homePageId();
 
-            if ($enableCache) {
-                $cachePrefix = isset($language) ? "{$language}/" : '';
-                $cacheBucket = kirby()->cache('kirby-extended.vite');
-                $pageProxy = $cacheBucket->get($cachePrefix . ($pageId ?? $site->homePageId()));
+            $cacheActive = env('KIRBY_CACHE', false) === true && $kirby->user() === null;
+            $cacheBucket = $kirby->cache('kirby-extended.vite');
+            $cachePrefix = $isMultilang ? "{$language}/" : '';
+
+            if ($cacheActive) {
+                $pageProxy = $cacheBucket->get($cachePrefix . $pageId);
 
                 if ($pageProxy !== null) {
                     return $pageProxy;
                 }
             }
 
-            if (empty($pageId)) {
-                $page = $site->homePage();
-            } else {
-                $page = page($pageId) ?? $site->errorPage();
-            }
+            $page = page($pageId) ?? $site->errorPage();
 
             // Get page object for specified language
-            if (kirby()->multilang()) {
-                $page = site()->visit($page, $language);
+            if ($isMultilang) {
+                $page = $site->visit($page, $language);
             }
 
-            $renderedPage = Tpl::load(kirby()->root('templates') . '/_app-index.php', compact('page', 'site'));
+            $renderedPage = Tpl::load($kirby->root('templates') . '/_app-index.php', compact('page', 'site'));
 
-            if ($enableCache && !$page->isErrorPage()) {
+            if ($cacheActive && !$page->isErrorPage()) {
                 $cacheBucket->set($cachePrefix . $page->uri(), $renderedPage);
             }
 
