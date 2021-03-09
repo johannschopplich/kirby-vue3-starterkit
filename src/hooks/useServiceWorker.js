@@ -32,8 +32,8 @@ const documentLoaded = new Promise(resolve => {
 /**
  * Register a service worker
  *
- * @param {string} [swUrl] Absolute URL for the worker to register
- * @param {object} [hooks] Object of hooks for registration events
+ * @param {string} [swUrl="/service-worker.js"] Absolute URL for the worker to register
+ * @param {object} [hooks={}] Object of hooks for registration events
  */
 const register = async (swUrl = '/service-worker.js', hooks = {}) => {
   const { registrationOptions = {} } = hooks

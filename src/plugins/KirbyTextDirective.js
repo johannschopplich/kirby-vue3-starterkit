@@ -1,5 +1,4 @@
 const origin = window.location.origin
-const EVENT_TYPE = 'click'
 let router
 
 /**
@@ -30,11 +29,11 @@ export default {
     app.directive('kirbytext', {
       mounted (el, binding) {
         router = binding.instance.$router
-        el.addEventListener(EVENT_TYPE, navigate)
+        el.addEventListener('click', navigate)
       },
 
       beforeUnmount (el) {
-        el.removeEventListener(EVENT_TYPE, navigate)
+        el.removeEventListener('click', navigate)
       }
     })
   }

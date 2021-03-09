@@ -9,7 +9,6 @@ import KirbyTextDirective from './plugins/KirbyTextDirective'
 import App from './App.vue'
 
 const { initSw } = useServiceWorker()
-
 const router = initRouter()
 const app = createApp(App)
 

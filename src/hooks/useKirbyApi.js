@@ -3,7 +3,7 @@ import { useLanguages } from './'
 /**
  * Map to store pages in
  *
- * @constant {object}
+ * @constant {Map}
  */
 const pages = new Map()
 
@@ -57,7 +57,7 @@ const apiUri = path => {
  *
  * @param {string} id Page id to retrieve
  * @param {object} [options] Optional options
- * @param {boolean} options.revalidate Skip cache look-up and fetch page freshly
+ * @param {boolean} [options.revalidate=false] Skip cache look-up and fetch page freshly
  * @returns {(object|boolean)} The page's data or `false` if fetch request failed
  */
 const getPage = async (
