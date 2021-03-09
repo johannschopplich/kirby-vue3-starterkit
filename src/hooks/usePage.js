@@ -36,7 +36,7 @@ export default path => {
 
   // Setup page waiter promise
   let resolve
-  let promise = new Promise(r => { resolve = r }) // eslint-disable-line promise/param-names
+  const promise = new Promise(r => { resolve = r }) // eslint-disable-line promise/param-names
 
   // Setup reactive page object
   const page = reactive({
@@ -80,11 +80,7 @@ export default path => {
 
     page.__status = 'resolved'
     page.isReady = true
-
-    // Flush page waiter
-    resolve && resolve()
-    resolve = undefined
-    promise = undefined
+    resolve()
 
     // Further actions only if the hook was called for the current route
     if (!path) {
