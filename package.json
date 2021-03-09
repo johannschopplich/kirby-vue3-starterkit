@@ -4,8 +4,8 @@
   "scripts": {
     "kirby": "env-cmd --use-shell \"php -S \\$KIRBY_SERVER_HOSTNAME:\\$KIRBY_SERVER_PORT -t public server.php\"",
     "assets:sw": "node scripts/buildServiceWorker.js",
-    "dev": "touch src/.lock && concurrently \"npm:kirby\" \"vite\"",
-    "build": "rm -f src/.lock && vite build && npm run assets:sw",
+    "dev": "shx touch src/.lock && concurrently \"npm:kirby\" \"vite\"",
+    "build": "shx rm -f src/.lock && vite build && npm run assets:sw",
     "lint": "eslint \"src/**/*.{js,vue}\""
   },
   "dependencies": {
@@ -26,6 +26,7 @@
     "eslint-plugin-promise": "^4.3.1",
     "eslint-plugin-standard": "^4.1.0",
     "eslint-plugin-vue": "^7.7.0",
+    "shx": "^0.3.3",
     "terser": "^5.6.0",
     "vite": "^2.0.5"
   }
