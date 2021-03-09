@@ -56,7 +56,9 @@ return [
             }
 
             // Fall back to homepage id
-            $pageId ??= $site->homePageId();
+            if (empty($pageId)) {
+                $pageId = $site->homePageId();
+            }
 
             $cacheActive = env('KIRBY_CACHE', false) === true && $kirby->user() === null;
             $cacheBucket = $kirby->cache('kirby-extended.vite');
