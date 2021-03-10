@@ -15,6 +15,7 @@ export const initRouter = () => {
   const { isMultilang, languageCode } = useLanguages()
   const base = isMultilang ? `/${languageCode}/` : ''
 
+  /** @type {import('vue-router').RouteRecordRaw[]} */
   const routes = [
     ...site.children.map(page => ({
       path: `/${page.uri}`,
@@ -35,6 +36,7 @@ export const initRouter = () => {
   // Catch-all fallback
   routes.push({ path: '/:pathMatch(.*)*', component: Default })
 
+  /** @type {import('vue-router').Router} */
   return createRouter({
     history: createWebHistory(base),
     routes,

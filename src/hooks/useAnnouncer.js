@@ -13,7 +13,7 @@ const announcer = reactive({
  * Announce any useful information for screen readers
  *
  * @param {string} message Content to announce
- * @param {string} politeness Degree of importance
+ * @param {string} [politeness] Degree of importance
  */
 const setAnnouncer = (message, politeness = defaultOptions.politeness) => {
   resetAnnouncer()

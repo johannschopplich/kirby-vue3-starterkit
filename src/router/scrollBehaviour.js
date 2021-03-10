@@ -1,10 +1,7 @@
 /**
  * Handles the scroll behavior on route navigation
  *
- * @param {object} to Route object of next page
- * @param {object} from Route object of previous page
- * @param {object} savedPosition Used by popstate navigations
- * @returns {(object|boolean)} Scroll position or `false`
+ * @type {import('vue-router').RouterScrollBehavior}
  */
 export function scrollBehavior (to, from, savedPosition) {
   // Use predefined scroll behavior if defined, defaults to no scroll behavior
@@ -21,12 +18,6 @@ export function scrollBehavior (to, from, savedPosition) {
     return { el: decodeURI(to.hash), behavior }
   }
 
-  // Check if any matched route config has meta that discourages scrolling to top
-  if (to.matched.some(m => m.meta.scrollToTop === false)) {
-    // Leave scroll as it is
-    return false
-  }
-
   // Always scroll to top
-  return { left: 0, top: 0, behavior }
+  return { top: 0, behavior }
 }

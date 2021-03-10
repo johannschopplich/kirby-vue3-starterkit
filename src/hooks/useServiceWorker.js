@@ -1,13 +1,6 @@
 import { ref } from 'vue'
 
 /**
- * Will be `true` in development environment
- *
- * @see https://github.com/vitejs/vite/blob/master/CHANGELOG.md#breaking-changes-3
- */
-const __DEV__ = import.meta.env.DEV
-
-/**
  * Reactive boolean indicating if a service worker update is available
  */
 const hasNewWorker = ref(false)
@@ -123,23 +116,23 @@ const initSw = async () => {
 
       // registrationOptions: { scope: './' },
       ready (registration) {
-        if (__DEV__) console.log('Service worker is active.')
+        if (import.meta.env.DEV) console.log('Service worker is active.')
       },
       registered (registration) {
-        if (__DEV__) console.log('Service worker has been registered.')
+        if (import.meta.env.DEV) console.log('Service worker has been registered.')
       },
       cached (registration) {
-        if (__DEV__) console.log('Content has been cached for offline use.')
+        if (import.meta.env.DEV) console.log('Content has been cached for offline use.')
       },
       updatefound (registration) {
-        if (__DEV__) console.log('New content is downloading.')
+        if (import.meta.env.DEV) console.log('New content is downloading.')
       },
       updated (registration) {
-        if (__DEV__) console.log('New content is available; please refresh.')
+        if (import.meta.env.DEV) console.log('New content is available; please refresh.')
         hasNewWorker.value = true
       },
       offline () {
-        if (__DEV__) console.log('No internet connection found. App is running in offline mode.')
+        if (import.meta.env.DEV) console.log('No internet connection found. App is running in offline mode.')
       },
       error (error) {
         console.error('Error during service worker registration:', error)
