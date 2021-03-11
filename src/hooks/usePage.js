@@ -66,7 +66,7 @@ export default path => {
 
     page.__status = 'resolved'
     page.isReady = true
-    resolve()
+    resolve && resolve()
 
     // Further actions only if the hook was called for the current route
     if (!path) {
