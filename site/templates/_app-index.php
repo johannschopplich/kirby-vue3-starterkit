@@ -18,7 +18,7 @@
 
   <div id="app"></div>
   <script id="site-data" type="application/json">
-    <?= json_encode(vite()->useSite(), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?>
+    <?= \Kirby\Data\Json::encode($data) ?>
   </script>
 
   <?= vite()->js() ?>
