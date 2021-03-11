@@ -107,7 +107,7 @@ self.addEventListener('fetch', event => {
 
   const isHTML = destination.startsWith('text/html')
   const isImage = destination.startsWith('image')
-  const isAsset = url.pathname.startsWith('/assets/')
+  const isAsset = /^\/(assets|dist)\//.test(url.pathname)
   const isJSON = url.pathname.endsWith('.json')
 
   // Cache-first strategy for static assets and images,
