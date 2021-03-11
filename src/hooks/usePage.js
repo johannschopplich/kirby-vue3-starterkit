@@ -3,13 +3,6 @@ import { useRouter, useRoute } from 'vue-router'
 import { useAnnouncer, useKirbyApi } from './'
 
 /**
- * Indicates if stale-while-revalidation is enabled
- *
- * @constant {boolean}
- */
-const enableSWR = import.meta.env.VITE_ENABLE_SWR === 'true'
-
-/**
  * Hook for the page data of a given page id or the current route path
  *
  * @param {string} [path] Optional path or page id to retrieve
@@ -85,7 +78,11 @@ export default path => {
     }
 
     // Revalidate the stale asset asynchronously
-    if (enableSWR && isCached && navigator.onLine) {
+    if (
+      import.meta.env.VITE_ENABLE_SWR === 'true' &&
+      isCached &&
+      navigator.onLine
+    ) {
       const newData = await getPage(id, { revalidate: true })
 
       if (JSON.stringify(newData) !== JSON.stringify(data)) {

@@ -1,4 +1,4 @@
-const origin = window.location.origin
+const origin = import.meta.env.DEV ? import.meta.env.VITE_BACKEND_URL : window.location.origin
 let router
 
 /**
