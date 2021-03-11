@@ -39,8 +39,8 @@
 </template>
 
 <script>
-import { usePage } from '../hooks'
-import Intro from '../components/Intro.vue'
+import { usePage } from '~/hooks'
+import Intro from '~/components/Intro.vue'
 
 export default {
   components: {

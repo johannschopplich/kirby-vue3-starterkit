@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { usePage } from '../hooks'
+import { usePage } from '~/hooks'
 
 export default {
   setup () {

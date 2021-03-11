@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { useSite } from '../hooks'
+import { useSite } from '~/hooks'
 
 export default {
   setup () {

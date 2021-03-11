@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { scrollBehavior } from './scrollBehaviour'
-import { useSite, useLanguages } from '../hooks'
-import Default from '../views/Default.vue'
+import { useSite, useLanguages } from '~/hooks'
+import Default from '~/views/Default.vue'
 
 const capitalize = ([first, ...rest]) => first.toUpperCase() + rest.join('')
 

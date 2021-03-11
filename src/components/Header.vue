@@ -19,7 +19,7 @@
 
 <script>
 import { useRoute } from 'vue-router'
-import { useSite } from '../hooks'
+import { useSite } from '~/hooks'
 
 export default {
   setup () {

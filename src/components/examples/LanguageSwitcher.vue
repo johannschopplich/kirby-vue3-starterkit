@@ -10,7 +10,7 @@
 
 <script>
 import { useRoute } from 'vue-router'
-import { useSite, useLanguages } from '../hooks'
+import { useSite, useLanguages } from '~/hooks'
 
 export default {
   setup () {

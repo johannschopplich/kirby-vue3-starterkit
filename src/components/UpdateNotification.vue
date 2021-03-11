@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { useServiceWorker } from '../hooks'
+import { useServiceWorker } from '~/hooks'
 
 export default {
   setup () {

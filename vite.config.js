@@ -1,6 +1,6 @@
 import 'dotenv/config.js'
-import { resolve } from 'path'
-import vue from '@vitejs/plugin-vue'
+import path from 'path'
+import Vue from '@vitejs/plugin-vue'
 
 process.env.VITE_BACKEND_URL = `http://${process.env.KIRBY_SERVER_HOSTNAME}:${process.env.KIRBY_SERVER_PORT}`
 process.env.VITE_BACKEND_API_SLUG = process.env.CONTENT_API_SLUG
@@ -11,7 +11,7 @@ export default ({ command, mode }) => ({
   base: mode === 'development' ? '/' : '/dist/',
 
   build: {
-    outDir: resolve(process.cwd(), 'public/dist'),
+    outDir: path.resolve(process.cwd(), 'public/dist'),
     emptyOutDir: true,
     manifest: true,
     target: 'es2018',
@@ -20,8 +20,14 @@ export default ({ command, mode }) => ({
     }
   },
 
+  resolve: {
+    alias: {
+      '~/': `${path.resolve(process.cwd(), 'src')}/`
+    }
+  },
+
   plugins: [
-    vue()
+    Vue()
   ],
 
   server: {
