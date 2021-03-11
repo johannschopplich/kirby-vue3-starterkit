@@ -3,12 +3,12 @@ import { useLanguages } from './'
 /**
  * Map to store pages in
  *
- * @constant {Map}
+ * @type {Map}
  */
 const pages = new Map()
 
 /**
- * Fetcher function to request JSON data from the server
+ * Fetch wrapper to request JSON data
  *
  * @param {string} url URL to fetch data from
  * @returns {object} Extracted JSON body content from the response
@@ -29,7 +29,7 @@ const fetcher = async url => {
 }
 
 /**
- * Generate the api location for a specific file and language
+ * Build the API URL for a specific file and language
  *
  * @param {string} path Path to the file desired
  * @returns {string} Final URL
@@ -43,22 +43,22 @@ const apiUri = path => {
     result += `/${languageCode}`
   }
 
-  // Add the actual api location
+  // Add the API path
   result += `/${import.meta.env.VITE_BACKEND_API_SLUG}`
 
-  // Add the actial file to fetch
+  // Add the file to fetch
   result += `/${path}`
 
   return result
 }
 
 /**
- * Retrieve a page data by id from either store or network
+ * Retrieve a page data by id from either store or backend API
  *
  * @param {string} id Page id to retrieve
  * @param {object} [options] Optional options
  * @param {boolean} [options.revalidate=false] Skip cache look-up and fetch page freshly
- * @returns {(object|boolean)} The page's data or `false` if fetch request failed
+ * @returns {object|boolean} The page's data or `false` if fetch request failed
  */
 const getPage = async (
   id,
@@ -67,13 +67,12 @@ const getPage = async (
   } = {}
 ) => {
   let page
-  const __DEV__ = import.meta.env.DEV
   const isCached = pages.has(id)
   const targetUrl = apiUri(`${id}.json`)
 
   // Use cached page if present in the store, except when revalidating
   if (!revalidate && isCached) {
-    if (__DEV__) {
+    if (import.meta.env.DEV) {
       console.log(`[getPage] Pulling ${id} page data from cache.`)
     }
 
@@ -81,7 +80,7 @@ const getPage = async (
   }
 
   // Otherwise retrieve page data for the first time
-  if (__DEV__) {
+  if (import.meta.env.DEV) {
     console.log(`[getPage] ${revalidate ? `Revalidating ${id} page data.` : `Fetching ${targetUrl}…`}`)
   }
 
@@ -92,13 +91,11 @@ const getPage = async (
     return false
   }
 
-  if (!revalidate) {
-    if (__DEV__) {
-      console.log(`[getPage] Fetched ${id} page data:`, page)
-    }
+  if (import.meta.env.DEV && !revalidate) {
+    console.log(`[getPage] Fetched ${id} page data:`, page)
   }
 
-  // Add page data to the store
+  // Add page data to the store, respectively overwrite it
   if (!isCached || revalidate) {
     pages.set(id, page)
   }
@@ -115,7 +112,7 @@ const getPage = async (
 const hasPage = id => pages.has(id)
 
 /**
- * Hook for handling Kirby API data retrieval and its location
+ * Hook for handling Kirby API data
  *
  * @returns {object} Object containing API-related methods
  */

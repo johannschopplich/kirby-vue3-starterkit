@@ -39,6 +39,7 @@ export default {
       await photography.isReadyPromise()
       // Do something with the reactive page object
       console.log('Photography page data has been loaded.')
+      console.log(photography.title)
     })()
 
     return {
