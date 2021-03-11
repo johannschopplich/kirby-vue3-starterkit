@@ -28,5 +28,12 @@ export default ({ command, mode }) => ({
     cors: true,
     port: 3000,
     strictPort: true
+  },
+
+  optimizeDeps: {
+    include: [
+      'vue',
+      'vue-router'
+    ]
   }
 })
