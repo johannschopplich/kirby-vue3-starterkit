@@ -1,8 +1,8 @@
 <p align="center">
-  <img src="./public/img/favicon.svg" alt="Logo of Kirby + Vue.js 3 Starterkit" width="114" height="114">
+  <img src="./public/img/favicon.svg" alt="Logo of Kirby + Vue.js Starterkit" width="114" height="114">
 </p>
 
-<h3 align="center">Kirby + Vue Starterkit</h3>
+<h3 align="center">Kirby + Vue.js Starterkit</h3>
 
 <p align="center">
   SPA with Vue 3 and Kirby: SEO-friendly, automatic routing, mulit-lang-ready and more!<br>
@@ -11,7 +11,7 @@
 
 <br>
 
-## Kirby + Vue 3 Starterkit
+## Kirby + Vue.js Starterkit
 
 ### Key Features
 
@@ -29,7 +29,7 @@
 
 > [Or jump right to the setup](#setup).
 
-This project is a starting point for [Vue.js v3](https://github.com/vuejs/vue-next) as the frontend UI library and [Kirby](https://getkirby.com) as headless CMS. The content is provided as JSON through Kirby and fetched by the frontend.
+This project is a starting point for [Vue.js 3](https://github.com/vuejs/vue-next) as the frontend UI library and [Kirby](https://getkirby.com) as headless CMS. The content is provided as JSON through Kirby and fetched by the frontend.
 
 It's a simple, zero-setup, almost identical port of the [Kirby 3 starterkit](https://github.com/getkirby/starterkit) frontend (snippets, templates and their corresponding JS/CSS) to Vue.js single file components. By "almost" meaning that some features have been added like meta tags generation, environment variables support, accessible routing etc.
 
