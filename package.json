@@ -3,14 +3,13 @@
   "version": "3.1.0",
   "scripts": {
     "kirby": "env-cmd --use-shell \"php -S \\$KIRBY_SERVER_HOSTNAME:\\$KIRBY_SERVER_PORT -t public server.php\"",
-    "assets:sw": "node scripts/buildServiceWorker.js",
     "dev": "shx touch src/.lock && concurrently \"npm:kirby\" \"vite\"",
-    "build": "shx rm -f src/.lock && vite build && npm run assets:sw",
+    "build": "shx rm -f src/.lock && vite build && node scripts/buildServiceWorker.js",
     "lint": "eslint \"src/**/*.{js,vue}\""
   },
   "dependencies": {
     "vue": "^3.0.7",
-    "vue-router": "^4.0.4"
+    "vue-router": "^4.0.5"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^1.1.5",
