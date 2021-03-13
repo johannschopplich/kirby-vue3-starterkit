@@ -1,4 +1,4 @@
-import { reactive } from 'vue'
+import { reactive, readonly } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useAnnouncer, useKirbyApi } from './'
 
@@ -93,5 +93,5 @@ export default path => {
     }
   })()
 
-  return page
+  return readonly(page)
 }
