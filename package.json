@@ -1,6 +1,6 @@
 {
   "name": "kirby-vue3-starterkit",
-  "version": "3.0.1",
+  "version": "3.1.0",
   "scripts": {
     "kirby": "env-cmd --use-shell \"php -S \\$KIRBY_SERVER_HOSTNAME:\\$KIRBY_SERVER_PORT -t public server.php\"",
     "assets:sw": "node scripts/buildServiceWorker.js",
@@ -18,7 +18,7 @@
     "concurrently": "^6.0.0",
     "dotenv": "^8.2.0",
     "env-cmd": "^10.1.0",
-    "eslint": "^7.21.0",
+    "eslint": "^7.22.0",
     "eslint-config-standard": "^16.0.2",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-jsdoc": "^32.2.0",

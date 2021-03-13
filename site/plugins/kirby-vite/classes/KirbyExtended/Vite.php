@@ -3,8 +3,8 @@
 namespace KirbyExtended;
 
 use Exception;
-use Kirby\Cms\Url;
 use Kirby\Data\Data;
+use Kirby\Http\Url;
 use Kirby\Toolkit\F;
 
 class Vite
