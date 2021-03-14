@@ -23,7 +23,7 @@ const documentLoaded = new Promise(resolve => {
 })
 
 /**
- * Register a service worker
+ * Registers a service worker
  *
  * @param {string} [swUrl="/service-worker.js"] Absolute URL for the worker to register
  * @param {object} [hooks={}] Object of hooks for registration events
@@ -84,7 +84,7 @@ const register = async (swUrl = '/service-worker.js', hooks = {}) => {
 }
 
 /**
- * Unregister existing service workers
+ * Unregisters existing service workers
  */
 const unregister = async () => {
   const registration = await navigator.serviceWorker.ready
@@ -92,7 +92,7 @@ const unregister = async () => {
 }
 
 /**
- * Activate the new service worker (like after an update notification)
+ * Activates the new service worker (like after an update notification)
  */
 const activateNewWorker = () => {
   if (!newWorker) return
@@ -100,7 +100,7 @@ const activateNewWorker = () => {
 }
 
 /**
- * Handle the service worker registration process
+ * Handles the service worker registration process
  */
 const initSw = async () => {
   if (!('serviceWorker' in navigator)) return
@@ -158,9 +158,9 @@ const initSw = async () => {
 }
 
 /**
- * Hook for handling service worker registrations and updates
+ * Returns methods for handling service worker registrations and updates
  *
- * @returns {object} Object containing service worker-related methods
+ * @returns {object} Service worker related methods
  */
 export default () => ({
   register,

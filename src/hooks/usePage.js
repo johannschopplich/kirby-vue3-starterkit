@@ -3,10 +3,10 @@ import { useRouter, useRoute } from 'vue-router'
 import { useAnnouncer, useKirbyApi } from './'
 
 /**
- * Hook for the page data of a given page id or the current route path
+ * Returns page data by id or the current route path
  *
- * @param {string} [path] Optional path or page id to retrieve
- * @returns {reactive} Reactive page object
+ * @param {string} [path] The ptional page id (path) to retrieve
+ * @returns {reactive} The readonly reactive page object
  */
 export default path => {
   const router = useRouter()

@@ -17,9 +17,9 @@ if (import.meta.env.DEV && isMultilang) {
 }
 
 /**
- * Hook for handling languages
+ * Returns methods for multi-language setups
  *
- * @returns {object} Object language-related data
+ * @returns {object} Language related methods
  */
 export default () => ({
   isMultilang,

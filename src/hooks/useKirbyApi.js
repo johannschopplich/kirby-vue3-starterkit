@@ -1,38 +1,28 @@
 import { useLanguages } from './'
 
-/**
- * Map to store pages in
- *
- * @type {Map}
- */
-const pages = new Map()
+const cache = new Map()
 
 /**
  * Fetch wrapper to request JSON data
  *
- * @param {string} url URL to fetch data from
- * @returns {object} Extracted JSON body content from the response
+ * @param {string} url The URL to fetch data from
+ * @returns {object} The JSON content from the response
  */
 const fetcher = async url => {
   const response = await fetch(url)
 
   if (!response.ok) {
-    throw new Error(`The requested URL ${url} failed with response error "${response.statusText}".`)
-  }
-
-  const contentType = response.headers.get('Content-Type')
-  if (!contentType || !contentType.includes('application/json')) {
-    throw new TypeError('The response is not a valid JSON response.')
+    throw new Error(`Request ${url} failed with "${response.statusText}".`)
   }
 
   return await response.json()
 }
 
 /**
- * Build the API URL for a specific file and language
+ * Builds an API URL for a specific file and language
  *
- * @param {string} path Path to the file desired
- * @returns {string} Final URL
+ * @param {string} path The path to the file desired
+ * @returns {string} The final URL
  */
 const apiUri = path => {
   const { isMultilang, languageCode } = useLanguages()
@@ -53,9 +43,9 @@ const apiUri = path => {
 }
 
 /**
- * Retrieve a page data by id from either store or backend API
+ * Retrieves page data by id from either network or store
  *
- * @param {string} id Page id to retrieve
+ * @param {string} id The page to retrieve
  * @param {object} [options] Optional options
  * @param {boolean} [options.revalidate=false] Skip cache look-up and fetch page freshly
  * @returns {object|boolean} The page's data or `false` if fetch request failed
@@ -67,7 +57,7 @@ const getPage = async (
   } = {}
 ) => {
   let page
-  const isCached = pages.has(id)
+  const isCached = cache.has(id)
   const targetUrl = apiUri(`${id}.json`)
 
   // Use cached page if present in the store, except when revalidating
@@ -76,7 +66,7 @@ const getPage = async (
       console.log(`[getPage] Pulling ${id} page data from cache.`)
     }
 
-    return pages.get(id)
+    return cache.get(id)
   }
 
   // Otherwise retrieve page data for the first time
@@ -97,29 +87,29 @@ const getPage = async (
 
   // Add page data to the store, respectively overwrite it
   if (!isCached || revalidate) {
-    pages.set(id, page)
+    cache.set(id, page)
   }
 
   return page
 }
 
 /**
- * Check if a page has been cached
+ * Checks if a page has been cached already
  *
- * @param {string} id Id of page to look up
+ * @param {string} id The page id to look up
  * @returns {boolean} `true` if the page exists
  */
-const hasPage = id => pages.has(id)
+const hasPage = id => cache.has(id)
 
 /**
- * Hook for handling Kirby API data
+ * Returns methods for communication with the backend API
  *
- * @returns {object} Object containing API-related methods
+ * @returns {object} API related methods
  */
 export default () => ({
   apiUri,
   fetcher,
-  pages,
+  cache,
   hasPage,
   getPage
 })
