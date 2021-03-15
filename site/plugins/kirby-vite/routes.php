@@ -8,7 +8,7 @@ $apiLocation = Url::path(env('CONTENT_API_SLUG', ''), false, true);
 
 return [
     /**
-     * Respond with JSON-encoded page data for any given URL ending with `.json`
+     * Return JSON-encoded page data for API requests
      */
     [
         'pattern' => "{$apiLocation}(:all).json",
@@ -39,7 +39,7 @@ return [
     ],
 
     /**
-     * Serve the index snippet to all non-JSON templates
+     * Serve the index template on every route
      */
     [
         'pattern' => '(:all)',
@@ -64,12 +64,8 @@ return [
             $cacheBucket = $kirby->cache('kirby-extended.vite');
             $cachePrefix = $isMultilang ? "{$language}/" : '';
 
-            if ($cacheActive) {
-                $pageProxy = $cacheBucket->get($cachePrefix . $pageId);
-
-                if ($pageProxy !== null) {
-                    return $pageProxy;
-                }
+            if ($cacheActive && $cacheBucket->exists($cachePrefix . $pageId)) {
+                return $cacheBucket->get($cachePrefix . $pageId);
             }
 
             $page = page($pageId) ?? $site->errorPage();
@@ -79,7 +75,7 @@ return [
                 $page = $site->visit($page, $language);
             }
 
-            $renderedPage = Tpl::load($kirby->root('templates') . '/_app-index.php', compact('page', 'site'));
+            $renderedPage = Tpl::load($kirby->root('templates') . '/_app-index.php', compact('kirby', 'site', 'page'));
 
             if ($cacheActive && !$page->isErrorPage()) {
                 $cacheBucket->set($cachePrefix . $page->uri(), $renderedPage);

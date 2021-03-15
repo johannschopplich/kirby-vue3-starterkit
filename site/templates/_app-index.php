@@ -1,6 +1,6 @@
 <?php /** @var \Kirby\Cms\Page $page */ ?>
 <!DOCTYPE html>
-<html lang="<?= kirby()->languageCode() ?? 'en' ?>">
+<html lang="<?= $kirby->languageCode() ?? 'en' ?>">
 <head>
 
   <meta charset="utf-8">
