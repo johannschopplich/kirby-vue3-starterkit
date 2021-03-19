@@ -6,6 +6,7 @@ use Exception;
 use Kirby\Data\Data;
 use Kirby\Http\Url;
 use Kirby\Toolkit\F;
+use Kirby\Toolkit\Html;
 
 class Vite
 {
@@ -186,7 +187,14 @@ class Vite
     public function preloadJson(string $name): string
     {
         $base = kirby()->multilang() ? '/' . kirby()->languageCode() : '';
-        return '<link rel="preload" href="' . $base . $this->useApiLocation() . '/' . $name . '.json" as="fetch" crossorigin>';
+
+        return Html::tag('link', '', [
+            'rel' => 'preload',
+            'href' => $base . $this->useApiLocation() . '/' . $name . '.json',
+            'as' => 'fetch',
+            'type' => 'application/json',
+            'crossorigin' => 'anonymous'
+        ]);
     }
 
     /**
@@ -204,7 +212,10 @@ class Vite
         );
 
         if (!empty($match)) {
-            return '<link rel="modulepreload" href="/' . option('kirby-extended.vite.outDir', 'dist') . '/' . array_values($match)[0]['file'] . '">';
+            Html::tag('link', '', [
+                'rel' => 'modulepreload',
+                'href' => '/' . option('kirby-extended.vite.outDir', 'dist') . '/' . array_values($match)[0]['file']
+            ]);
         }
     }
 
