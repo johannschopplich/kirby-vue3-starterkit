@@ -1,6 +1,6 @@
 require('dotenv').config()
 const { readFileSync, writeFileSync } = require('fs')
-const { minify } = require('terser')
+const { transformSync } = require('esbuild')
 
 /**
  * Generates a random string like `af51-7184-69cd`
@@ -25,7 +25,6 @@ const bundle = `
   ${readFileSync(swSrcPath)}
 `
 
-minify(bundle).then(({ code }) => {
-  writeFileSync(swDistPath, code)
-  console.log('\x1b[32m%s\x1b[0m', `Created service worker with ${assets.length} additional assets to precache.`)
-})
+const { code } = transformSync(bundle, { minify: true })
+writeFileSync(swDistPath, code)
+console.log('\x1b[32m%s\x1b[0m', `Created service worker with ${assets.length} additional assets to precache.`)
