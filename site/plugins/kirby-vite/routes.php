@@ -61,7 +61,7 @@ return [
             }
 
             $cacheActive = env('KIRBY_CACHE', false) === true && $kirby->user() === null;
-            $cacheBucket = $kirby->cache('kirby-extended.vite');
+            $cacheBucket = $kirby->cache('pages');
             $cachePrefix = $isMultilang ? "{$language}/" : '';
 
             if ($cacheActive && $cacheBucket->exists($cachePrefix . $pageId)) {
