@@ -14,8 +14,8 @@ export default path => {
   const { hasPage, getPage } = useKirbyApi()
   const { setAnnouncer } = useAnnouncer()
 
-  // Get page id and trim leading or trailing slashes
-  let id = (path || currentPath).replace(/^\/|\/$/g, '')
+  // Build page id and trim leading or trailing slashes
+  let id = (path ?? currentPath).replace(/^\/|\/$/g, '')
 
   // Fall back to homepage if id is empty
   if (!id) id = 'home'
@@ -44,14 +44,13 @@ export default path => {
 
     // Check data origin when the hook is used on the current route
     if (!path) {
-      // Redirect to error page if data returned equals error content,
-      // except on error page itself
+      // Redirect to error page if data returned *is* the error page
       if (data.__isErrorPage && currentPath !== '/error') {
         router.replace({ path: '/error' })
         return
       }
 
-      // Redirect to offline page if page hasn't been cached either in-memory or
+      // Redirect to offline page if page hasn't been cached either in-store or
       // by the service worker and the offline fallback JSON was returned
       // Note: data for `home` and `offline` pages are always available since they
       // are precached by the service worker
