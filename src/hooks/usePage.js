@@ -79,7 +79,7 @@ export default path => {
 
     // Revalidate the stale asset asynchronously
     if (
-      import.meta.env.VITE_ENABLE_SWR === 'true' &&
+      import.meta.env.VITE_STALE_WHILE_REVALIDATE === 'true' &&
       isCached &&
       navigator.onLine
     ) {

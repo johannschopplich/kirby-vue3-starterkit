@@ -2,7 +2,7 @@
   "name": "kirby-vue3-starterkit",
   "version": "3.1.1",
   "scripts": {
-    "kirby": "env-cmd --use-shell \"php -S \\$KIRBY_SERVER_HOSTNAME:\\$KIRBY_SERVER_PORT -t public server.php\"",
+    "kirby": "env-cmd --use-shell \"php -S \\$KIRBY_DEV_HOSTNAME:\\$KIRBY_DEV_PORT -t public server.php\"",
     "dev": "shx touch src/.lock && concurrently \"npm:kirby\" \"vite\"",
     "build": "shx rm -f src/.lock && vite build && node scripts/buildServiceWorker.js",
     "lint": "eslint \"src/**/*.{js,vue}\""
@@ -20,13 +20,13 @@
     "eslint": "^7.22.0",
     "eslint-config-standard": "^16.0.2",
     "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-jsdoc": "^32.2.0",
+    "eslint-plugin-jsdoc": "^32.3.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.3.1",
     "eslint-plugin-standard": "^4.1.0",
     "eslint-plugin-vue": "^7.7.0",
     "shx": "^0.3.3",
-    "terser": "^5.6.0",
-    "vite": "^2.0.5"
+    "terser": "^5.6.1",
+    "vite": "^2.1.2"
   }
 }

@@ -105,7 +105,7 @@ const activateNewWorker = () => {
 const initSw = async () => {
   if (!('serviceWorker' in navigator)) return
 
-  const enableWorker = import.meta.env.VITE_ENABLE_SW === 'true'
+  const enableWorker = import.meta.env.VITE_SERVICE_WORKER === 'true'
   const hasExistingWorker = !!navigator.serviceWorker.controller
 
   if (enableWorker) {

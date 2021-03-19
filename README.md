@@ -288,7 +288,7 @@ Now your project is hopefully up 'n' running!
 ## Configuration
 
 All development and production related configurations for both backend and frontend code are located in your `.env` file:
-- `KIRBY_SERVER_HOSTNAME` and `KIRBY_SERVER_PORT` specify the address where you wish the Kirby backend to be served from. It is used by the frontend to fetch content data as JSON.
+- `KIRBY_DEV_HOSTNAME` and `KIRBY_DEV_PORT` specify the address where you wish the Kirby backend to be served from. It is used by the frontend to fetch content data as JSON.
 - Keys starting with `VITE_` are available in your code following the `import.meta.env.VITE_CUSTOM_VARIABLE` syntax.
 
 For example setting `KIRBY_CACHE` to `true` is useful in production environment.
@@ -319,14 +319,14 @@ Language data is provided by the global `site` object, which can be accessed via
 ### Service Worker
 
 To enable the **service worker** which precaches essential assets and page API calls for offline capability, set:
-- `VITE_ENABLE_SW` to `true`
+- `VITE_SERVICE_WORKER` to `true`
 
 > ⚠️ Don't change the `CONTENT_API_SLUG` once you deployed your app publicly and thus a service worker is installed on clients. Otherwise fetch requests will fail and a blank page will show until the new service worker is activated, which then is only possible by closing the tab/PWA.
 
 ### Stale-While-Revalidate
 
 To keep page data fresh with **stale-while-revalidate**, set:
-- `VITE_ENABLE_SWR` to `true`
+- `VITE_STALE_WHILE_REVALIDATE` to `true`
 
 ## Credits
 

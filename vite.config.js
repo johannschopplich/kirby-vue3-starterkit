@@ -2,7 +2,7 @@ import 'dotenv/config.js'
 import path from 'path'
 import Vue from '@vitejs/plugin-vue'
 
-process.env.VITE_BACKEND_URL = `http://${process.env.KIRBY_SERVER_HOSTNAME}:${process.env.KIRBY_SERVER_PORT}`
+process.env.VITE_BACKEND_URL = `http://${process.env.KIRBY_DEV_HOSTNAME}:${process.env.KIRBY_DEV_PORT}`
 process.env.VITE_BACKEND_API_SLUG = process.env.CONTENT_API_SLUG
 process.env.VITE_MULTILANG = process.env.KIRBY_MULTILANG
 
