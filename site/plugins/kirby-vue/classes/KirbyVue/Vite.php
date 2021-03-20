@@ -1,6 +1,6 @@
 <?php
 
-namespace KirbyExtended;
+namespace KirbyVue;
 
 use Exception;
 use Kirby\Data\Data;
@@ -10,7 +10,7 @@ use Kirby\Toolkit\Html;
 
 class Vite
 {
-    protected static \KirbyExtended\Vite $instance;
+    protected static \KirbyVue\Vite $instance;
     protected static string $apiLocation;
     protected static array $site;
     protected static array $manifest;
@@ -59,7 +59,7 @@ class Vite
             return static::$manifest;
         }
 
-        $manifestFile = kirby()->root('index') . '/' . option('kirby-extended.vite.outDir', 'dist') . '/manifest.json';
+        $manifestFile = kirby()->root('index') . '/' . option('johannschopplich.kirby-vue.outDir', 'dist') . '/manifest.json';
 
         if (!F::exists($manifestFile)) {
             if (option('debug')) {
@@ -111,7 +111,7 @@ class Vite
      */
     protected function assetDev(string $file): string
     {
-        return option('kirby-extended.vite.devServer', 'http://localhost:3000') . "/$file";
+        return option('johannschopplich.kirby-vue.devServer', 'http://localhost:3000') . "/$file";
     }
 
     /**
@@ -122,7 +122,7 @@ class Vite
      */
     protected function assetProd(string $file): string
     {
-        return kirby()->url('index') . '/' . option('kirby-extended.vite.outDir', 'dist') . "/$file";
+        return kirby()->url('index') . '/' . option('johannschopplich.kirby-vue.outDir', 'dist') . "/$file";
     }
 
     /**
@@ -147,7 +147,7 @@ class Vite
      */
     public function css(string $entry = null, array $options = []): ?string
     {
-        $entry ??= option('kirby-extended.vite.entry', 'index.js');
+        $entry ??= option('johannschopplich.kirby-vue.entry', 'index.js');
 
         return !$this->isDev()
             ? css(
@@ -167,7 +167,7 @@ class Vite
      */
     public function js(string $entry = null, array $options = []): ?string
     {
-        $entry ??= option('kirby-extended.vite.entry', 'index.js');
+        $entry ??= option('johannschopplich.kirby-vue.entry', 'index.js');
 
         $file = $this->isDev()
             ? $this->assetDev($entry)
@@ -214,7 +214,7 @@ class Vite
         if (!empty($match)) {
             Html::tag('link', '', [
                 'rel' => 'modulepreload',
-                'href' => '/' . option('kirby-extended.vite.outDir', 'dist') . '/' . array_values($match)[0]['file']
+                'href' => '/' . option('johannschopplich.kirby-vue.outDir', 'dist') . '/' . array_values($match)[0]['file']
             ]);
         }
     }
@@ -222,9 +222,9 @@ class Vite
     /**
      * Gets the instance via lazy initialization
      *
-     * @return \KirbyExtended\Vite
+     * @return \KirbyVue\Vite
      */
-    public static function getInstance(): \KirbyExtended\Vite
+    public static function getInstance(): static
     {
         return static::$instance ??= new static;
     }
