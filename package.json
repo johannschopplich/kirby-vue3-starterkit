@@ -8,24 +8,24 @@
     "lint": "eslint \"src/**/*.{js,vue}\""
   },
   "dependencies": {
-    "vue": "^3.0.7",
-    "vue-router": "^4.0.5"
+    "vue": "^3.0.11",
+    "vue-router": "^4.0.6"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^1.1.5",
-    "@vue/compiler-sfc": "^3.0.7",
-    "concurrently": "^6.0.0",
+    "@vitejs/plugin-vue": "^1.2.1",
+    "@vue/compiler-sfc": "^3.0.11",
+    "concurrently": "^6.0.2",
     "dotenv": "^8.2.0",
     "env-cmd": "^10.1.0",
-    "eslint": "^7.22.0",
+    "eslint": "^7.24.0",
     "eslint-config-standard": "^16.0.2",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-jsdoc": "^32.3.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.3.1",
     "eslint-plugin-standard": "^4.1.0",
-    "eslint-plugin-vue": "^7.7.0",
+    "eslint-plugin-vue": "^7.9.0",
     "shx": "^0.3.3",
-    "vite": "^2.1.2"
+    "vite": "^2.2.1"
   }
 }

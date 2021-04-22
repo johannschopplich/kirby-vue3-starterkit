@@ -1,24 +1,24 @@
 <?php return array (
   'root' => 
   array (
-    'pretty_version' => 'dev-master',
-    'version' => 'dev-master',
+    'pretty_version' => 'dev-main',
+    'version' => 'dev-main',
     'aliases' => 
     array (
     ),
-    'reference' => '4fc30fe2620989f1fcd9694eab14bd1a08896794',
+    'reference' => '26b5c2d1f1e8fd59ca5140cf3ab2e72bbdcbbb16',
     'name' => '__root__',
   ),
   'versions' => 
   array (
     '__root__' => 
     array (
-      'pretty_version' => 'dev-master',
-      'version' => 'dev-master',
+      'pretty_version' => 'dev-main',
+      'version' => 'dev-main',
       'aliases' => 
       array (
       ),
-      'reference' => '4fc30fe2620989f1fcd9694eab14bd1a08896794',
+      'reference' => '26b5c2d1f1e8fd59ca5140cf3ab2e72bbdcbbb16',
     ),
     'claviska/simpleimage' => 
     array (
@@ -67,12 +67,12 @@
     ),
     'johannschopplich/kirby-extended' => 
     array (
-      'pretty_version' => 'v2.7.6',
-      'version' => '2.7.6.0',
+      'pretty_version' => 'v2.9.0',
+      'version' => '2.9.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'a1f9a0d6c4e9c02dc12c9ff8fd70d4a88965278f',
+      'reference' => '2d6406a2f274f4b6f71abc190208c55b61c7e677',
     ),
     'laminas/laminas-escaper' => 
     array (
@@ -153,15 +153,6 @@
       ),
       'reference' => '0f73288fd15629204f9d42b7055f72dacbe811fc',
     ),
-    'symfony/css-selector' => 
-    array (
-      'pretty_version' => 'v5.2.4',
-      'version' => '5.2.4.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => 'f65f217b3314504a1ec99c2d6ef69016bb13490f',
-    ),
     'symfony/polyfill-ctype' => 
     array (
       'pretty_version' => 'v1.22.1',
@@ -206,24 +197,6 @@
       array (
       ),
       'reference' => 'b3eac5c7ac896e52deab4a99068e3f4ab12d9e56',
-    ),
-    'voku/html-min' => 
-    array (
-      'pretty_version' => '4.4.8',
-      'version' => '4.4.8.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '4f700584abd70b308b7d06b8e4cfcc31711faaf9',
-    ),
-    'voku/simple_html_dom' => 
-    array (
-      'pretty_version' => '4.7.28',
-      'version' => '4.7.28.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '78d5894c7f0facfb4fb6369af15b1a87baea958c',
     ),
     'zendframework/zend-escaper' => 
     array (

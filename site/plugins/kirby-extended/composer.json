@@ -22,8 +22,7 @@
     "php": ">=7.4.0",
     "getkirby/composer-installer": "^1.2",
     "symfony/polyfill-php80": "^1.20",
-    "vlucas/phpdotenv": "^5.0",
-    "voku/html-min": "^4.4"
+    "vlucas/phpdotenv": "^5.0"
   },
   "require-dev": {
     "getkirby/cms": "^3.0"

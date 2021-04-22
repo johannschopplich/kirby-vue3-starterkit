@@ -8,16 +8,16 @@ Enable the sitemap route for your Kirby instance by setting `kirby-extended.site
 
 ### Add templates or pages
 
-You have to opt-in page templates and/or page ids which should be included in the final sitemap. Head over to the [options](#options) for a list of available keys.
+All templates (and thus pages) are included in the final sitemap by default. You can opt-out templates and pages – head over to the [options](#options) to find out how.
 
 ### Control template visibility with blueprint options
 
-You can enable or disable templates on a blueprint-level as well. The `sitemap` option defines a template's visibility in the sitemap. It yields back to `false` by default.
+You can disable templates on a blueprint-level as well. The `sitemap` option defines a template's visibility in the sitemap. It yields to `true` by default.
 
 ```yaml
 title: Article
 options:
-  sitemap: true
+  sitemap: false
 ```
 
 ## Options
@@ -25,9 +25,8 @@ options:
 | Option | Default | Values | Description |
 | --- | --- | --- | --- |
 | `kirby-extended.sitemap.enable` | `[]` | array | List of template names to include in the generated sitemap. |
-| `kirby-extended.sitemap.templatesInclude` | `[]` | array | List of template names to include in the generated sitemap. |
-| `kirby-extended.sitemap.pagesInclude` | `[]` | array | List of page ids to include. |
-| `kirby-extended.sitemap.pagesExclude` | `[]` | array | List of page ids to exclude. |
+| `kirby-extended.sitemap.exclude.templates` | `[]` | array | List of template names to exclude from the generated sitemap. |
+| `kirby-extended.sitemap.exclude.pages` | `[]` | array | List of page ids to exclude. |
 
 ## Example
 
@@ -36,11 +35,11 @@ options:
 return [
     'kirby-extended.sitemap' => [
         'enable' => true,
-        'templatesInclude' => [
-            'article',
-            'default',
-            'home',
-            'photography'
+        'exclude' => [
+            'templates' => [
+                'archive',
+                'internal'
+            ]
         ]
     ]
 ];

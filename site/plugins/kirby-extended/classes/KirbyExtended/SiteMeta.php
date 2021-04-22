@@ -32,23 +32,23 @@ class SiteMeta
             $sitemap[] = '<?xml version="1.0" encoding="UTF-8"?>';
             $sitemap[] = '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">';
 
-            $allowTemplates = option('kirby-extended.sitemap.templatesInclude', []);
-            $allowPages     = option('kirby-extended.sitemap.pagesInclude', []);
-            $ignorePages    = option('kirby-extended.sitemap.pagesExclude', []);
-            $ignorePattern  = '/^(?:' . implode('|', $ignorePages) . ')$/i';
+            $excludeTemplates = option('kirby-extended.sitemap.exclude.templates', []);
+            $excludePages     = option('kirby-extended.sitemap.exclude.pages', []);
+            $excludePattern   = '/^(?:' . implode('|', $excludePages) . ')$/i';
 
             foreach (site()->index() as $item) {
-                if (
-                    !in_array($item->intendedTemplate()->name(), $allowTemplates) &&
-                    !in_array($item->id(), $allowPages)
-                ) {
+                if (in_array($item->intendedTemplate()->name(), $excludeTemplates)) {
                     continue;
                 }
 
-                if (preg_match($ignorePattern, $item->id())) continue;
+                if (preg_match($excludePattern, $item->id())) {
+                    continue;
+                }
 
-                $blueprintOptions = $item->blueprint()->options();
-                if (isset($blueprintOptions['sitemap']) && $blueprintOptions['sitemap'] === false) continue;
+                $options = $item->blueprint()->options();
+                if (isset($options['sitemap']) && $options['sitemap'] === false) {
+                    continue;
+                }
 
                 $meta = $item->meta();
 
