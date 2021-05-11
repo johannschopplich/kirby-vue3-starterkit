@@ -1,3 +1,23 @@
+# 2.12.1
+
+* Avoid redirecting away from an error.
+
+# 2.12.0
+
+* Hide non-string values in super globals when requested.
+
+# 2.11.0
+
+* Customize exit code
+
+# 2.10.0
+
+* Better chaining on handler classes
+
+# 2.9.2
+
+* Fix copy button styles
+
 # 2.9.1
 
 * Fix xdebug function crash on PHP 8

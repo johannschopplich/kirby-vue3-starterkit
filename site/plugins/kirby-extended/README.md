@@ -8,7 +8,6 @@ This package extends Kirby's base capabilities. It's built mostly upon existing 
 - 🗂 [Auto-generate meta tags](docs/meta.md)
 - 🧭 [Provide sitemaps with multilang support](docs/sitemap.md)
 - 🔀 [Redirect routes easily](docs/redirects.md)
-- 🗜 [Minify HTML templates](docs/html-minify.md)
 
 Click on one of the features to head to the docs.
 

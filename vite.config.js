@@ -1,4 +1,4 @@
-import 'dotenv/config.js'
+import 'dotenv/config'
 import path from 'path'
 import Vue from '@vitejs/plugin-vue'
 
@@ -33,7 +33,11 @@ export default ({ command, mode }) => ({
   server: {
     cors: true,
     port: 3000,
-    strictPort: true
+    strictPort: true,
+    fsServe: {
+      // Required for `@vite/client.js` script tag
+      root: process.cwd()
+    }
   },
 
   optimizeDeps: {

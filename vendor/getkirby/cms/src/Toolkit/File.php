@@ -3,6 +3,7 @@
 namespace Kirby\Toolkit;
 
 use Exception;
+use Kirby\Sane\Sane;
 
 /**
  * Flexible File object with a set of helpful
@@ -58,7 +59,7 @@ class File
      *
      * @param string $target
      * @param bool $force
-     * @return self
+     * @return static
      */
     public function copy(string $target, bool $force = false)
     {
@@ -196,7 +197,7 @@ class File
      *
      * @param string $newRoot
      * @param bool $overwrite Force overwriting any existing files
-     * @return self
+     * @return static
      */
     public function move(string $newRoot, bool $overwrite = false)
     {
@@ -255,7 +256,7 @@ class File
      *
      * @param string $newName
      * @param bool $overwrite Force overwrite existing files
-     * @return self
+     * @return static
      */
     public function rename(string $newName, bool $overwrite = false)
     {
@@ -321,6 +322,23 @@ class File
     public function type()
     {
         return F::type($this->root);
+    }
+
+    /**
+     * Validates the file contents depending on the file type
+     *
+     * @param string|bool $typeLazy Explicit sane handler type string,
+     *                              `true` for lazy autodetection or
+     *                              `false` for normal autodetection
+     * @return void
+     *
+     * @throws \Kirby\Exception\InvalidArgumentException If the file didn't pass validation
+     * @throws \Kirby\Exception\NotFoundException If the handler was not found
+     * @throws \Kirby\Exception\Exception On other errors
+     */
+    public function validateContents($typeLazy = false): void
+    {
+        Sane::validateFile($this->root(), $typeLazy);
     }
 
     /**
