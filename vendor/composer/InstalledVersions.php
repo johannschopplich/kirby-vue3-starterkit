@@ -32,7 +32,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '36a554f0c69c268577891f89395eac099d14d933',
+    'reference' => '65f7dac9011f8dd04a12c71341144ed451d8e1f3',
     'name' => '__root__',
   ),
   'versions' => 
@@ -44,7 +44,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '36a554f0c69c268577891f89395eac099d14d933',
+      'reference' => '65f7dac9011f8dd04a12c71341144ed451d8e1f3',
     ),
     'claviska/simpleimage' => 
     array (
@@ -93,12 +93,12 @@ private static $installed = array (
     ),
     'johannschopplich/kirby-extended' => 
     array (
-      'pretty_version' => 'v2.9.1',
-      'version' => '2.9.1.0',
+      'pretty_version' => 'v2.9.2',
+      'version' => '2.9.2.0',
       'aliases' => 
       array (
       ),
-      'reference' => '0d07f10e8cc254d13259c4b45d31f8ccbd856317',
+      'reference' => '4beab953f7ff276b7d0cb592b3634136788cb5f0',
     ),
     'laminas/laminas-escaper' => 
     array (
