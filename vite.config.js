@@ -14,7 +14,6 @@ export default ({ command, mode }) => ({
     outDir: path.resolve(process.cwd(), 'public/dist'),
     emptyOutDir: true,
     manifest: true,
-    target: 'es2018',
     rollupOptions: {
       input: '/index.js'
     }
