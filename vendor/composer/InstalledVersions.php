@@ -32,7 +32,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '65f7dac9011f8dd04a12c71341144ed451d8e1f3',
+    'reference' => 'acbe7eafefd1dce50198dc4d1c6b6ac379b8d3bf',
     'name' => '__root__',
   ),
   'versions' => 
@@ -44,7 +44,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '65f7dac9011f8dd04a12c71341144ed451d8e1f3',
+      'reference' => 'acbe7eafefd1dce50198dc4d1c6b6ac379b8d3bf',
     ),
     'claviska/simpleimage' => 
     array (

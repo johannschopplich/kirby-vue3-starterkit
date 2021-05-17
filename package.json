@@ -19,13 +19,13 @@
     "env-cmd": "^10.1.0",
     "eslint": "^7.26.0",
     "eslint-config-standard": "^16.0.2",
-    "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-jsdoc": "^34.0.2",
+    "eslint-plugin-import": "^2.23.2",
+    "eslint-plugin-jsdoc": "^34.6.3",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.3.1",
     "eslint-plugin-standard": "^4.1.0",
     "eslint-plugin-vue": "^7.9.0",
     "shx": "^0.3.3",
-    "vite": "^2.3.1"
+    "vite": "^2.3.2"
   }
 }
