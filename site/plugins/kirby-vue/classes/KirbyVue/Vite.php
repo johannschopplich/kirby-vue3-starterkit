@@ -224,7 +224,7 @@ class Vite
      *
      * @return \KirbyVue\Vite
      */
-    public static function getInstance(): static
+    public static function getInstance()
     {
         return static::$instance ??= new static;
     }
