@@ -128,16 +128,16 @@
         },
         {
             "name": "getkirby/cms",
-            "version": "3.5.5",
+            "version": "3.5.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/getkirby/kirby.git",
-                "reference": "efe24a6ef4ad61010428b1cb725f8f97a633ff82"
+                "reference": "aadf1c2e6fafe9f6170d97c541e85fe3512c54ac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/getkirby/kirby/zipball/efe24a6ef4ad61010428b1cb725f8f97a633ff82",
-                "reference": "efe24a6ef4ad61010428b1cb725f8f97a633ff82",
+                "url": "https://api.github.com/repos/getkirby/kirby/zipball/aadf1c2e6fafe9f6170d97c541e85fe3512c54ac",
+                "reference": "aadf1c2e6fafe9f6170d97c541e85fe3512c54ac",
                 "shasum": ""
             },
             "require": {
@@ -196,7 +196,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2021-05-11T09:49:47+00:00"
+            "time": "2021-06-08T07:54:57+00:00"
         },
         {
             "name": "getkirby/composer-installer",
@@ -437,16 +437,16 @@
         },
         {
             "name": "laminas/laminas-zendframework-bridge",
-            "version": "1.2.0",
+            "version": "1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-zendframework-bridge.git",
-                "reference": "6cccbddfcfc742eb02158d6137ca5687d92cee32"
+                "reference": "13af2502d9bb6f7d33be2de4b51fb68c6cdb476e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-zendframework-bridge/zipball/6cccbddfcfc742eb02158d6137ca5687d92cee32",
-                "reference": "6cccbddfcfc742eb02158d6137ca5687d92cee32",
+                "url": "https://api.github.com/repos/laminas/laminas-zendframework-bridge/zipball/13af2502d9bb6f7d33be2de4b51fb68c6cdb476e",
+                "reference": "13af2502d9bb6f7d33be2de4b51fb68c6cdb476e",
                 "shasum": ""
             },
             "require": {
@@ -495,7 +495,7 @@
                     "type": "community_bridge"
                 }
             ],
-            "time": "2021-02-25T21:54:58+00:00"
+            "time": "2021-06-24T12:49:22+00:00"
         },
         {
             "name": "league/color-extractor",
@@ -1237,5 +1237,5 @@
         "php": ">=7.4.0"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "2.1.0"
 }
