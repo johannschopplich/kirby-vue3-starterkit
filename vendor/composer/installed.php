@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'c1ac39c5acbdb1fee0e04fd92601a32a083b9c38',
+        'reference' => '21631d9c67035dd955f86e13d479f013b83b677e',
         'name' => '__root__',
         'dev' => true,
     ),
@@ -16,7 +16,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'c1ac39c5acbdb1fee0e04fd92601a32a083b9c38',
+            'reference' => '21631d9c67035dd955f86e13d479f013b83b677e',
             'dev_requirement' => false,
         ),
         'claviska/simpleimage' => array(
@@ -65,12 +65,12 @@
             'dev_requirement' => false,
         ),
         'johannschopplich/kirby-extended' => array(
-            'pretty_version' => 'v2.9.2',
-            'version' => '2.9.2.0',
+            'pretty_version' => 'v2.9.3',
+            'version' => '2.9.3.0',
             'type' => 'kirby-plugin',
             'install_path' => __DIR__ . '/../../site/plugins/kirby-extended',
             'aliases' => array(),
-            'reference' => '4beab953f7ff276b7d0cb592b3634136788cb5f0',
+            'reference' => '02e36f45557180ea707a91d2036598e4634618b1',
             'dev_requirement' => false,
         ),
         'laminas/laminas-escaper' => array(
