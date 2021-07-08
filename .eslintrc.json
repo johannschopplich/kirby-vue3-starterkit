@@ -3,6 +3,10 @@
     "browser": true,
     "es2021": true
   },
+  "plugins": [
+    "vue",
+    "jsdoc"
+  ],
   "extends": [
     "plugin:vue/vue3-recommended",
     "plugin:jsdoc/recommended",
@@ -12,10 +16,6 @@
     "ecmaVersion": 12,
     "sourceType": "module"
   },
-  "plugins": [
-    "vue",
-    "jsdoc"
-  ],
   "rules": {
     "vue/max-attributes-per-line": ["error", {
       "singleline": 3,
