@@ -13,15 +13,15 @@
 </template>
 
 <script>
-import { usePage } from '~/hooks'
+import { usePage } from "~/hooks";
 
 export default {
-  setup () {
+  setup() {
     return {
-      page: usePage()
-    }
-  }
-}
+      page: usePage(),
+    };
+  },
+};
 </script>
 
 <style scoped>
@@ -33,7 +33,7 @@ export default {
   text-align: center;
 }
 .note-date {
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
   display: block;
 }
 

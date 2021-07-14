@@ -9,20 +9,20 @@
 </template>
 
 <script>
-import { useRoute } from 'vue-router'
-import { useSite, useLanguages } from '~/hooks'
+import { useRoute } from "vue-router";
+import { useSite, useLanguages } from "~/hooks";
 
 export default {
-  setup () {
-    const site = useSite()
-    const route = useRoute()
-    const { languageCode: currentCode } = useLanguages()
-    const languages = site.languages.filter(({ code }) => code !== currentCode)
+  setup() {
+    const site = useSite();
+    const route = useRoute();
+    const { languageCode: currentCode } = useLanguages();
+    const languages = site.languages.filter(({ code }) => code !== currentCode);
 
     return {
       route,
-      languages
-    }
-  }
-}
+      languages,
+    };
+  },
+};
 </script>

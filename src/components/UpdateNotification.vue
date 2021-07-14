@@ -11,14 +11,14 @@
 </template>
 
 <script>
-import { useServiceWorker } from '~/hooks'
+import { useServiceWorker } from "~/hooks";
 
 export default {
-  setup () {
-    const { hasNewWorker, activateNewWorker } = useServiceWorker()
-    return { hasNewWorker, activateNewWorker }
-  }
-}
+  setup() {
+    const { hasNewWorker, activateNewWorker } = useServiceWorker();
+    return { hasNewWorker, activateNewWorker };
+  },
+};
 </script>
 
 <style>
@@ -31,7 +31,7 @@ export default {
   border: 2px solid #000;
   font-family: inherit;
   font-size: 1rem;
-  padding: .5rem 1rem;
+  padding: 0.5rem 1rem;
   margin: 0;
   white-space: nowrap;
   transform: translate(-50%, 0%);

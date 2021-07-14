@@ -2,7 +2,7 @@
   <article v-if="page.isReady">
     <header>
       <figure class="album-cover">
-        <img :src="page.cover.url" :alt="page.cover.alt">
+        <img :src="page.cover.url" :alt="page.cover.alt" />
 
         <figcaption>
           <h1>{{ page.headline }}</h1>
@@ -17,11 +17,15 @@
       </p>
     </div>
 
-    <ul class="album-gallery" :data-even="page.gallery.length % 2 === 0" :data-count="page.gallery.length">
+    <ul
+      class="album-gallery"
+      :data-even="page.gallery.length % 2 === 0"
+      :data-count="page.gallery.length"
+    >
       <li v-for="image in page.gallery" :key="image.url">
         <figure>
           <a :href="image.link">
-            <img :src="image.url" :alt="image.alt">
+            <img :src="image.url" :alt="image.alt" />
           </a>
         </figure>
       </li>
@@ -30,15 +34,15 @@
 </template>
 
 <script>
-import { usePage } from '~/hooks'
+import { usePage } from "~/hooks";
 
 export default {
-  setup () {
+  setup() {
     return {
-      page: usePage()
-    }
-  }
-}
+      page: usePage(),
+    };
+  },
+};
 </script>
 
 <style>
@@ -58,7 +62,7 @@ export default {
   left: 0;
   right: 0;
   top: 0;
-  background: rgba(0,0,0, .5);
+  background: rgba(0, 0, 0, 0.5);
   text-align: center;
   color: #fff;
   line-height: 1;

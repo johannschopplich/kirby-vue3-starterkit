@@ -39,20 +39,20 @@
 </template>
 
 <script>
-import { usePage } from '~/hooks'
-import Intro from '~/components/Intro.vue'
+import { usePage } from "~/hooks";
+import Intro from "~/components/Intro.vue";
 
 export default {
   components: {
-    Intro
+    Intro,
   },
 
-  setup () {
+  setup() {
     return {
-      page: usePage()
-    }
-  }
-}
+      page: usePage(),
+    };
+  },
+};
 </script>
 
 <style>
@@ -73,6 +73,6 @@ export default {
 }
 
 .layout aside h2 {
-  margin-bottom: .75rem;
+  margin-bottom: 0.75rem;
 }
 </style>

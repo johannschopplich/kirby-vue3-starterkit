@@ -3,29 +3,19 @@
     "browser": true,
     "es2021": true
   },
-  "plugins": [
-    "vue",
-    "jsdoc"
-  ],
+  "plugins": ["vue", "jsdoc"],
   "extends": [
+    "eslint:recommended",
     "plugin:vue/vue3-recommended",
     "plugin:jsdoc/recommended",
-    "standard"
+    "prettier"
   ],
   "parserOptions": {
     "ecmaVersion": 12,
     "sourceType": "module"
   },
   "rules": {
-    "vue/max-attributes-per-line": ["error", {
-      "singleline": 3,
-      "multiline": {
-        "max": 1,
-        "allowFirstLine": false
-      }
-    }],
-    "vue/no-v-html": "off",
-    "quote-props": ["error", "consistent-as-needed"]
+    "vue/no-v-html": "off"
   },
   "settings": {
     "jsdoc": {

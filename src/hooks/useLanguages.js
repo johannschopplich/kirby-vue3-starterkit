@@ -3,17 +3,17 @@
  *
  * @constant {boolean}
  */
-const isMultilang = import.meta.env.VITE_MULTILANG === 'true'
+const isMultilang = import.meta.env.VITE_MULTILANG === "true";
 
 /**
  * Current language code
  *
  * @constant {string}
  */
-const languageCode = document.documentElement.lang
+const languageCode = document.documentElement.lang;
 
 if (import.meta.env.DEV && isMultilang) {
-  console.log('[useLanguages] Current language code:', languageCode)
+  console.log("[useLanguages] Current language code:", languageCode);
 }
 
 /**
@@ -23,5 +23,5 @@ if (import.meta.env.DEV && isMultilang) {
  */
 export default () => ({
   isMultilang,
-  languageCode
-})
+  languageCode,
+});

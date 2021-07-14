@@ -11,26 +11,24 @@
       </header>
     </article>
   </div>
-  <div v-else>
-    Loading …
-  </div>
+  <div v-else>Loading …</div>
 </template>
 
 <script>
-import { usePage } from '~/hooks'
-import Intro from '~/components/Intro.vue'
+import { usePage } from "~/hooks";
+import Intro from "~/components/Intro.vue";
 
 export default {
   components: {
-    Intro
+    Intro,
   },
 
-  setup () {
+  setup() {
     return {
-      page: usePage()
-    }
-  }
-}
+      page: usePage(),
+    };
+  },
+};
 </script>
 
 <style scoped>
@@ -52,6 +50,6 @@ export default {
   font-size: 1rem;
 }
 .note time {
-  font-size: .75rem;
+  font-size: 0.75rem;
 }
 </style>

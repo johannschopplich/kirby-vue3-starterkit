@@ -1,37 +1,39 @@
 <template>
   <Intro>{{ page.title }}</Intro>
 
-  <ul v-if="page.isReady" class="albums" :data-even="page.children.length % 2 === 0">
+  <ul
+    v-if="page.isReady"
+    class="albums"
+    :data-even="page.children.length % 2 === 0"
+  >
     <li v-for="album in page.children" :key="album.uri">
       <router-link :to="`/${album.uri}`">
         <figure>
-          <img :src="album.cover.url" :alt="album.cover.alt">
+          <img :src="album.cover.url" :alt="album.cover.alt" />
 
           <figcaption>{{ album.title }}</figcaption>
         </figure>
       </router-link>
     </li>
   </ul>
-  <div v-else>
-    Loading …
-  </div>
+  <div v-else>Loading …</div>
 </template>
 
 <script>
-import { usePage } from '~/hooks'
-import Intro from '~/components/Intro.vue'
+import { usePage } from "~/hooks";
+import Intro from "~/components/Intro.vue";
 
 export default {
   components: {
-    Intro
+    Intro,
   },
 
-  setup () {
+  setup() {
     return {
-      page: usePage()
-    }
-  }
-}
+      page: usePage(),
+    };
+  },
+};
 </script>
 
 <style>
@@ -71,16 +73,16 @@ export default {
   bottom: 0;
   left: 0;
   color: #fff;
-  background: rgba(0,0,0, .5);
+  background: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
   line-height: 1.5em;
   padding: 1rem;
-  font-size: .875rem;
+  font-size: 0.875rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: .125em;
+  letter-spacing: 0.125em;
 }
 .albums img {
   position: absolute;
@@ -91,9 +93,9 @@ export default {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: all .3s;
+  transition: all 0.3s;
 }
 .albums img:hover {
-  opacity: .2;
+  opacity: 0.2;
 }
 </style>

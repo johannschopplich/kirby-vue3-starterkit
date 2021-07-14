@@ -5,7 +5,7 @@
     <li v-for="album in photography.children" :key="album.uri">
       <router-link :to="`/${album.uri}`">
         <figure>
-          <img :src="album.cover.urlHome" :alt="album.cover.alt">
+          <img :src="album.cover.urlHome" :alt="album.cover.alt" />
 
           <figcaption>
             <span>
@@ -16,38 +16,36 @@
       </router-link>
     </li>
   </ul>
-  <div v-else>
-    Loading …
-  </div>
+  <div v-else>Loading …</div>
 </template>
 
 <script>
-import { usePage } from '~/hooks'
-import Intro from '~/components/Intro.vue'
+import { usePage } from "~/hooks";
+import Intro from "~/components/Intro.vue";
 
 export default {
   components: {
-    Intro
+    Intro,
   },
 
-  setup () {
-    const page = usePage()
-    const photography = usePage('photography')
+  setup() {
+    const page = usePage();
+    const photography = usePage("photography");
 
     // Example of `isReadyPromise()` page method
-    ;(async () => {
-      await photography.isReadyPromise()
+    (async () => {
+      await photography.isReadyPromise();
       // Do something with the reactive page object
-      console.log('Photography page data has been loaded.')
-      console.log(photography.title)
-    })()
+      console.log("Photography page data has been loaded.");
+      console.log(photography.title);
+    })();
 
     return {
       page,
-      photography
-    }
-  }
-}
+      photography,
+    };
+  },
+};
 </script>
 
 <style>
@@ -94,7 +92,7 @@ export default {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: all .3s;
+  transition: all 0.3s;
 }
 .grid figcaption {
   display: flex;
@@ -108,10 +106,10 @@ export default {
   left: 0;
   line-height: 1;
   text-align: center;
-  background: rgba(0,0,0, .5);
+  background: rgba(0, 0, 0, 0.5);
   text-transform: uppercase;
-  font-size: .875rem;
-  letter-spacing: .125em;
+  font-size: 0.875rem;
+  letter-spacing: 0.125em;
   font-weight: 600;
 }
 

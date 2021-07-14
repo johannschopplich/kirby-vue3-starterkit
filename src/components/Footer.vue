@@ -5,11 +5,7 @@
     </router-link>
 
     <nav class="social">
-      <a
-        v-for="social in site.social"
-        :key="social.url"
-        :href="social.url"
-      >
+      <a v-for="social in site.social" :key="social.url" :href="social.url">
         {{ social.platform }}
       </a>
     </nav>
@@ -17,15 +13,15 @@
 </template>
 
 <script>
-import { useSite } from '~/hooks'
+import { useSite } from "~/hooks";
 
 export default {
-  setup () {
+  setup() {
     return {
-      site: useSite()
-    }
-  }
-}
+      site: useSite(),
+    };
+  },
+};
 </script>
 
 <style>
@@ -38,18 +34,18 @@ export default {
 }
 .footer a {
   display: inline-block;
-  font-size: .875rem;
+  font-size: 0.875rem;
 }
 .footer > a {
   margin-bottom: 1.5rem;
   border-top: 2px solid #000;
   width: 16.5rem;
-  padding-top: .5rem;
+  padding-top: 0.5rem;
 }
 
 .social a {
-  margin: 0 .75rem;
-  padding: .5rem 1rem;
+  margin: 0 0.75rem;
+  padding: 0.5rem 1rem;
   border: 2px solid #000;
   width: 7.5rem;
 }

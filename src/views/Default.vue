@@ -1,29 +1,24 @@
 <template>
   <Intro>{{ page.title }}</Intro>
 
-  <div
-    v-if="page.isReady"
-    v-kirbytext
-    class="text"
-    v-html="page.text"
-  />
+  <div v-if="page.isReady" v-kirbytext class="text" v-html="page.text" />
 </template>
 
 <script>
-import { usePage } from '~/hooks'
-import Intro from '~/components/Intro.vue'
+import { usePage } from "~/hooks";
+import Intro from "~/components/Intro.vue";
 
 export default {
   components: {
-    Intro
+    Intro,
   },
 
-  setup () {
+  setup() {
     return {
-      page: usePage()
-    }
-  }
-}
+      page: usePage(),
+    };
+  },
+};
 </script>
 
 <style scoped>

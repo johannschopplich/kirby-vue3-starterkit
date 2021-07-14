@@ -6,10 +6,12 @@
 
     <nav id="menu" class="menu">
       <router-link
-        v-for="page in site.children.filter(page => page.isListed)"
+        v-for="page in site.children.filter((page) => page.isListed)"
         :key="page.uri"
         :to="`/${page.uri}`"
-        :class="{ 'router-link-active': route.path.startsWith(`/${page.uri}/`) }"
+        :class="{
+          'router-link-active': route.path.startsWith(`/${page.uri}/`),
+        }"
       >
         {{ page.title }}
       </router-link>
@@ -18,16 +20,16 @@
 </template>
 
 <script>
-import { useRoute } from 'vue-router'
-import { useSite } from '~/hooks'
+import { useRoute } from "vue-router";
+import { useSite } from "~/hooks";
 
 export default {
-  setup () {
-    const site = useSite()
-    const route = useRoute()
-    return { site, route }
-  }
-}
+  setup() {
+    const site = useSite();
+    const route = useRoute();
+    return { site, route };
+  },
+};
 </script>
 
 <style>
@@ -38,16 +40,16 @@ export default {
 .header a {
   position: relative;
   text-transform: uppercase;
-  font-size: .875rem;
-  letter-spacing: .05em;
-  padding: .5rem 0;
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+  padding: 0.5rem 0;
   font-weight: 700;
 }
 
 .header .logo {
   display: block;
   margin-bottom: 1.5rem;
-  padding: .5rem 0;
+  padding: 0.5rem 0;
 }
 
 .header {
@@ -57,7 +59,7 @@ export default {
 }
 
 .menu a {
-  margin: 0 .75rem;
+  margin: 0 0.75rem;
 }
 
 .menu a[aria-current="page"],
@@ -74,7 +76,7 @@ export default {
     justify-content: space-between;
   }
   .menu {
-    margin-right: -.75rem;
+    margin-right: -0.75rem;
   }
 }
 </style>

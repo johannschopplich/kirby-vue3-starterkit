@@ -7,15 +7,14 @@
 </template>
 
 <script>
-import { useAnnouncer } from '~/hooks'
+import { useAnnouncer } from "~/hooks";
 
 export default {
-  setup () {
-    const { announcer } = useAnnouncer()
-    return { announcer }
-  }
-}
-
+  setup() {
+    const { announcer } = useAnnouncer();
+    return { announcer };
+  },
+};
 </script>
 
 <style>

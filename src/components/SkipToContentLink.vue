@@ -10,35 +10,35 @@
 </template>
 
 <script>
-import { ref, watch } from 'vue'
-import { useRoute } from 'vue-router'
+import { ref, watch } from "vue";
+import { useRoute } from "vue-router";
 
 export default {
-  setup () {
-    const skipLink = ref(null)
-    const route = useRoute()
+  setup() {
+    const skipLink = ref(null);
+    const route = useRoute();
 
     watch(route, () => {
-      skipLink.value.focus()
-    })
+      skipLink.value.focus();
+    });
 
-    const focusElement = id => {
-      const element = document.querySelector(id)
-      if (!id || !element) return
-      element.scrollIntoView()
-      element.focus()
-    }
+    const focusElement = (id) => {
+      const element = document.querySelector(id);
+      if (!id || !element) return;
+      element.scrollIntoView();
+      element.focus();
+    };
 
     const handleFocusElement = ({ target }) => {
-      focusElement(target.hash)
-    }
+      focusElement(target.hash);
+    };
 
     return {
       skipLink,
-      handleFocusElement
-    }
-  }
-}
+      handleFocusElement,
+    };
+  },
+};
 </script>
 
 <style>
@@ -46,7 +46,7 @@ export default {
   position: absolute;
   top: 0;
   left: 50%;
-  padding: .5rem;
+  padding: 0.5rem;
   transform: translate(-50%, -100%);
 }
 .skip-to-content-link:focus {
