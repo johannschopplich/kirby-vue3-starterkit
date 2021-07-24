@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./public/img/favicon.svg" alt="Logo of Kirby + Vue.js Starterkit" width="114" height="114">
+  <img src="./.github/favicon.svg" alt="Logo of Kirby + Vue.js Starterkit" width="114" height="114">
 </p>
 
 <h3 align="center">Kirby + Vue.js Starterkit</h3>
