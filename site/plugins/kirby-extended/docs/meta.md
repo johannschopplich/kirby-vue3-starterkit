@@ -1,4 +1,4 @@
-## Meta
+# Meta
 
 Handles the generation of meta tags for search engines, social networks, browsers and beyond.
 

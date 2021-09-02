@@ -3,7 +3,6 @@
 namespace KirbyExtended;
 
 use Kirby\Cms\Field;
-use Kirby\Cms\File;
 use Kirby\Cms\Page;
 use Kirby\Toolkit\A;
 use Kirby\Toolkit\Html;
@@ -15,8 +14,8 @@ class PageMeta
 
     public function __construct($page) {
         $this->page = $page;
-
         $defaults = option('kirby-extended.meta.defaults', []);
+
         if (!empty($defaults)) {
             $this->metadata = is_callable($defaults) ? $defaults(kirby(), site(), $this->page) : $defaults;
         }

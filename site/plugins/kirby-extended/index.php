@@ -38,14 +38,16 @@ Kirby::plugin('johannschopplich/kirby-extended', [
             }
         ]
     ],
-    'pageMethods' => [
+    'siteMethods' => [
         'env' => function ($key, $default = null) {
             if (!Env::isLoaded()) {
                 Env::load();
             }
 
             return Env::get($key, $default);
-        },
+        }
+    ],
+    'pageMethods' => [
         'meta' => function () {
             return new PageMeta($this);
         }

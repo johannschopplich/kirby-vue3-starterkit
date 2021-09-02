@@ -3,7 +3,6 @@
     "browser": true,
     "es2021": true
   },
-  "plugins": ["vue", "jsdoc"],
   "extends": [
     "eslint:recommended",
     "plugin:vue/vue3-recommended",

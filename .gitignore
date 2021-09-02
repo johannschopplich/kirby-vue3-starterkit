@@ -1,11 +1,6 @@
 .DS_Store
 /.env
-node_modules/
-
-# Frontend
-/public/assets
-/public/dist/
-/public/service-worker.js
+node_modules
 
 # Kirby
 .lock
@@ -20,3 +15,8 @@ node_modules/
 /storage/sessions/*
 !/storage/sessions/.gitkeep
 /site/config/.license
+
+# Build assets
+/public/assets
+/public/dist
+/public/service-worker.js

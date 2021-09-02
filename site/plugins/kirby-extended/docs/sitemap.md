@@ -1,4 +1,4 @@
-## Sitemap
+# Sitemap
 
 Auto-generate XML sitemaps to find and catalogue pages of your site. The plugin maps pages correctly in single-language as well as in multi-language sites.
 

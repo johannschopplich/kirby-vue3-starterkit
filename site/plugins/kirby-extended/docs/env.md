@@ -12,10 +12,10 @@ Create a `.env` file in Kirby's base directory. You can change the default filen
 
 ### Inside Templates, Snippets etc.
 
-You can use the `$page` method to retrieve an environment variable from anywhere:
+You can use the `$site` method `$site->env()` to retrieve an environment variable from anywhere:
 
 ```php
-$page->env('VARIABLE');
+$site->env('VARIABLE');
 ```
 
 ### Within `config.php`
@@ -27,6 +27,7 @@ THe first argument `path` is required. The second one (`filename`) is optional a
 ```php
 \KirbyExtended\Env::load('path/to/env', '.env');
 ```
+
 ### Options
 
 | Option | Default | Values | Description |

@@ -31,7 +31,7 @@
 
 This project is a starting point for [Vue.js 3](https://github.com/vuejs/vue-next) as the frontend UI library and [Kirby](https://getkirby.com) as headless CMS. The content is provided as JSON through Kirby and fetched by the frontend.
 
-It's a simple, zero-setup, almost identical port of the [Kirby 3 starterkit](https://github.com/getkirby/starterkit) frontend (snippets, templates and their corresponding JS/CSS) to Vue.js single file components. By "almost" meaning that some features have been added like meta tags generation, environment variables support, accessible routing etc.
+It's a simple website based on the former [Kirby 3 starterkit](https://github.com/getkirby/starterkit). Its functionality and layout (snippets, templates and their corresponding JS/CSS) are ported to Vue.js single file components. Many features have been added, like meta tags generation, environment variables support, accessible routing etc.
 
 To compile the frontend sources, [Vite](https://vitejs.dev) comes to use. Vite is an opinionated web development build tool, created by Evan You. It serves code via native ES Module imports during development, allowing you to develop Vue.js single file components without a bundle step, and bundles it with Rollup for production.
 
