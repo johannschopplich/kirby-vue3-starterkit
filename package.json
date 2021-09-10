@@ -10,20 +10,20 @@
     "cleanup": "prettier --write \"src/**/*.{js,vue}\""
   },
   "dependencies": {
-    "vue": "^3.2.7",
+    "vue": "^3.2.11",
     "vue-router": "^4.0.11"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^1.6.0",
-    "@vue/compiler-sfc": "^3.2.7",
+    "@vitejs/plugin-vue": "^1.6.2",
+    "@vue/compiler-sfc": "^3.2.11",
     "concurrently": "^6.2.1",
     "dotenv": "^10.0.0",
     "env-cmd": "^10.1.0",
     "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-jsdoc": "^36.0.8",
+    "eslint-plugin-jsdoc": "^36.1.0",
     "eslint-plugin-vue": "^7.17.0",
-    "prettier": "2.3.2",
+    "prettier": "2.4.0",
     "shx": "^0.3.3",
-    "vite": "^2.5.3"
+    "vite": "^2.5.6"
   }
 }
