@@ -1,8 +1,5 @@
 <?php
 
-$base = dirname(__DIR__, 2);
-\KirbyExtended\Env::load($base);
-
 return [
 
     'debug' => env('KIRBY_DEBUG', false),
