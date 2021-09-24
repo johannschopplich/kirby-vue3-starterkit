@@ -1,4 +1,6 @@
 /* eslint-env node */
+// @ts-check
+
 require("dotenv").config();
 const { readFileSync, writeFileSync } = require("fs");
 const { transformSync } = require("esbuild");
@@ -14,7 +16,7 @@ function random() {
   return `${segment()}-${segment()}-${segment()}`;
 }
 
-const swManifest = JSON.parse(readFileSync("public/dist/manifest.json"));
+const swManifest = JSON.parse(readFileSync("public/dist/manifest.json", 'utf-8'));
 const swSrcPath = "src/serviceWorker.js";
 const swDistPath = "public/service-worker.js";
 
