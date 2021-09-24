@@ -6,7 +6,7 @@ let router;
 /**
  * Handle absolute links inside dynamically added HTML with Vue Router
  *
- * @param {EventTarget} event The event taking place in the DOM
+ * @param {Event} event The event taking place in the DOM
  */
 function navigate(event) {
   const link = event.target.closest("a");

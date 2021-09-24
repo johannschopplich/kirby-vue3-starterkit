@@ -6,7 +6,7 @@ const cache = new Map();
  * Fetch wrapper to request JSON data
  *
  * @param {string} url The URL to fetch data from
- * @returns {object} The JSON content from the response
+ * @returns {Promise<object>} The JSON content from the response
  */
 const fetcher = async (url) => {
   const response = await fetch(url);
@@ -48,7 +48,7 @@ const apiUri = (path) => {
  * @param {string} id The page to retrieve
  * @param {object} [options] Optional options
  * @param {boolean} [options.revalidate=false] Skip cache look-up and fetch page freshly
- * @returns {object|boolean} The page's data or `false` if fetch request failed
+ * @returns {Promise<object|boolean>} The page's data or `false` if fetch request failed
  */
 const getPage = async (id, { revalidate = false } = {}) => {
   let page;
