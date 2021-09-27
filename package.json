@@ -10,12 +10,12 @@
     "cleanup": "prettier --write \"src/**/*.{js,vue}\""
   },
   "dependencies": {
-    "vue": "^3.2.16",
+    "vue": "^3.2.19",
     "vue-router": "^4.0.11"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^1.9.1",
-    "@vue/compiler-sfc": "^3.2.16",
+    "@vitejs/plugin-vue": "^1.9.2",
+    "@vue/compiler-sfc": "^3.2.19",
     "concurrently": "^6.2.1",
     "dotenv": "^10.0.0",
     "env-cmd": "^10.1.0",
