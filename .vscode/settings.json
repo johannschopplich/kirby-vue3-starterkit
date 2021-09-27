@@ -1,8 +1,6 @@
 {
-  "eslint.validate": [
-    "javascript",
-    "javascriptreact",
-    "vue"
-  ],
-  "vetur.validation.template": false
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "volar.tsPluginStatus": false,
+  "volar.codeLens.pugTools": false
 }
