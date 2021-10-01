@@ -7,7 +7,7 @@
     "build": "shx rm -f src/.lock && vite build && node scripts/buildServiceWorker.js",
     "lint": "eslint \"src/**/*.{js,vue}\"",
     "lint:fix": "npm run lint -- --fix",
-    "cleanup": "prettier --write \"src/**/*.{js,vue}\""
+    "format": "prettier --write \"src/**/*.{js,vue}\""
   },
   "dependencies": {
     "vue": "^3.2.19",
@@ -16,7 +16,7 @@
   "devDependencies": {
     "@vitejs/plugin-vue": "^1.9.2",
     "@vue/compiler-sfc": "^3.2.19",
-    "concurrently": "^6.2.1",
+    "concurrently": "^6.2.2",
     "dotenv": "^10.0.0",
     "env-cmd": "^10.1.0",
     "eslint-config-prettier": "^8.3.0",
@@ -24,6 +24,6 @@
     "eslint-plugin-vue": "^7.18.0",
     "prettier": "2.4.1",
     "shx": "^0.3.3",
-    "vite": "^2.5.10"
+    "vite": "^2.6.2"
   }
 }
