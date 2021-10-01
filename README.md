@@ -216,7 +216,7 @@ Update dependencies with:
 composer update
 ```
 
-### Node dependencies
+### Node Dependencies
 
 Install npm dependencies:
 
@@ -224,7 +224,7 @@ Install npm dependencies:
 npm install
 ```
 
-### Environment variables
+### Environment Variables
 
 Duplicate the [`.env.example`](.env.example) as `.env`::
 
@@ -236,13 +236,19 @@ Optionally, adapt it's values.
 
 ### Static assets
 
-*During development* Kirby can't access static files located in the `src` folder. Therefore it's necessary to create a symbolic link inside of the public folder:
+_During development_ Kirby can't access static files located in the `src` folder. Therefore it's necessary to create a symbolic link inside of the public folder:
 
 ```bash
 ln -s $PWD/src/assets ./public/assets
 ```
 
 ## Usage
+
+### Build Mode
+
+During development a `.lock` file will be generated inside the `src` directory to let the backend now it runs in development mode. This file is deleted when running the build command.
+
+> ℹ️ Alternatively, you can set a `KIRBY_MODE` env variable containing either `development` or `production` to set the app mode programmatically and overwrite the `.lock` file mechanism. This may ease setups with Docker.
 
 ### Development
 
@@ -260,8 +266,6 @@ Afterwards visit the app in your browser: [`http://127.0.0.1:8080`](http://127.0
 Vite is used in combination with [backend integration](https://vitejs.dev/guide/backend-integration.html) and only serves frontend assets, not the whole app. Thus, `http://localhost:3000` won't be accessible.
 
 The backend is served by the PHP built-in web server on `http://127.0.0.1:8080` by default, but you can adapt the location in your `.env` file.
-
-> During development a `.lock` file will be generated inside the `src` folder to let the backend now which mode the app runs in: development or production. This file is deletetd when running the build command.
 
 ### Production
 
@@ -288,6 +292,7 @@ Now your project is hopefully up 'n' running!
 ## Configuration
 
 All development and production related configurations for both backend and frontend code are located in your `.env` file:
+
 - `KIRBY_DEV_HOSTNAME` and `KIRBY_DEV_PORT` specify the address where you wish the Kirby backend to be served from. It is used by the frontend to fetch content data as JSON.
 - Keys starting with `VITE_` are available in your code following the `import.meta.env.VITE_CUSTOM_VARIABLE` syntax.
 
@@ -296,15 +301,17 @@ For example setting `KIRBY_CACHE` to `true` is useful in production environment.
 ### Content API Slug
 
 To change the API slug to fetch JSON-encoded page data from, set
+
 - `CONTENT_API_SLUG` to a value of your liking (defaults to `spa`). It can even be left empty to omit a slug altogether!
 
-> You can't use Kirby's internal API slug (defaults to `api`). If you insist on using `api` for *your* content endpoint, you can rename Kirby's by adding a `KIRBY_API_SLUG` key and set it to something other than `api`.
+> You can't use Kirby's internal API slug (defaults to `api`). If you insist on using `api` for _your_ content endpoint, you can rename Kirby's by adding a `KIRBY_API_SLUG` key and set it to something other than `api`.
 
 ### Multi-Language
 
 Multiple languages are supported. A comprehensive introduction about [multi-language setups](https://getkirby.com/docs/guide/languages/introduction) may be found on the Kirby website.
 
 To enable language handling, you don't have to edit the [`config.php`](site/config/config.php) manually. Just set
+
 - `KIRBY_MULTILANG` to `true`.
 - `KIRBY_MULTILANG_DETECT` to `true` (optional but recommended).
 
@@ -313,12 +320,14 @@ Then, visit the panel and add new languages by your liking. The Panel **automati
 Language data is provided by the global `site` object, which can be accessed via the `useSite()` hook.
 
 ℹ️ **Current limitations**:
+
 - Custom language paths aren't supported as of right now, the language code defined will be used as a base in the frontend.
 - Automatic language detection only works in production environment. In development the fallback language is always the default language.
 
 ### Service Worker
 
 To enable the **service worker** which precaches essential assets and page API calls for offline capability, set:
+
 - `VITE_SERVICE_WORKER` to `true`
 
 > ⚠️ Don't change the `CONTENT_API_SLUG` once you deployed your app publicly and thus a service worker is installed on clients. Otherwise fetch requests will fail and a blank page will show until the new service worker is activated, which then is only possible by closing the tab/PWA.
@@ -326,6 +335,7 @@ To enable the **service worker** which precaches essential assets and page API c
 ### Stale-While-Revalidate
 
 To keep page data fresh with **stale-while-revalidate**, set:
+
 - `VITE_STALE_WHILE_REVALIDATE` to `true`
 
 ## Credits

@@ -22,8 +22,11 @@ class Vite
      */
     protected function isDev(): bool
     {
-        $lockFile = kirby()->root('base') . '/src/.lock';
+        if (env('KIRBY_MODE') === 'development') {
+            return true;
+        }
 
+        $lockFile = kirby()->root('base') . '/src/.lock';
         return F::exists($lockFile);
     }
 
