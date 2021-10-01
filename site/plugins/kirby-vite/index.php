@@ -1,11 +1,11 @@
 <?php
 
 load([
-    'KirbyVue\\Page' => 'classes/KirbyVue/Page.php',
-    'KirbyVue\\Vite' => 'classes/KirbyVue/Vite.php'
+    'KirbyExtended\\Page' => 'classes/KirbyExtended/Page.php',
+    'KirbyExtended\\Vite' => 'classes/KirbyExtended/Vite.php'
 ], __DIR__);
 
-\Kirby\Cms\App::plugin('johannschopplich/kirby-vue', [
+\Kirby\Cms\App::plugin('johannschopplich/kirby-vite', [
     'options' => [
         'entry' => 'index.js',
         'outDir' => 'dist',
@@ -17,7 +17,7 @@ load([
         'system.loadPlugins:after' => function () {
             kirby()->extend([
                 'routes' => require __DIR__ . '/routes.php'
-            ], kirby()->plugin('johannschopplich/kirby-vue'));
+            ], kirby()->plugin('johannschopplich/kirby-vite'));
         }
     ]
 ]);
@@ -25,9 +25,9 @@ load([
 /**
  * Returns the Vite instance
  *
- * @return \KirbyVue\Vite
+ * @return \KirbyExtended\Vite
  */
 function vite()
 {
-    return \KirbyVue\Vite::getInstance();
+    return \KirbyExtended\Vite::getInstance();
 }

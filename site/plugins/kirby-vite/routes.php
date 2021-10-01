@@ -2,7 +2,7 @@
 
 use Kirby\Cms\Url;
 use Kirby\Http\Response;
-use KirbyVue\Page;
+use KirbyExtended\Page;
 
 $apiLocation = Url::path(env('CONTENT_API_SLUG', ''), false, true);
 

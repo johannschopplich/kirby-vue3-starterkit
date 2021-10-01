@@ -1,6 +1,6 @@
 <?php
 
-namespace KirbyVue;
+namespace KirbyExtended;
 
 use Kirby\Cms\Template;
 use Kirby\Exception\NotFoundException;
