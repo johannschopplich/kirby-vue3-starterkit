@@ -1,37 +1,42 @@
-/* eslint-env node */
 // @ts-check
+/* eslint-env node */
 
 require("dotenv").config();
-const { readFileSync, writeFileSync } = require("fs");
-const { transformSync } = require("esbuild");
+const { readFile, writeFile } = require("fs/promises");
+const { transform } = require("esbuild");
+const { green } = require("colorette");
+const { nanoid } = require("nanoid");
 
-/**
- * Generates a random string like `af51-7184-69cd`
- *
- * @returns {string} Random string
- */
-function random() {
-  const segment = () =>
-    (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
-  return `${segment()}-${segment()}-${segment()}`;
-}
-
-const swManifest = JSON.parse(readFileSync("public/dist/manifest.json", 'utf-8'));
 const swSrcPath = "src/serviceWorker.js";
 const swDistPath = "public/service-worker.js";
 
-const assets = Object.values(swManifest).map((i) => `/dist/${i.file}`);
-const bundle = `
-  self.__PRECACHE_MANIFEST = [${assets.map((i) => `'${i}'`).join(",")}]
-  const VERSION = '${random()}'
-  const KIRBY_API_SLUG = '${process.env.KIRBY_API_SLUG || "api"}'
-  const CONTENT_API_SLUG = '${process.env.CONTENT_API_SLUG}'
-  ${readFileSync(swSrcPath)}
-`;
+/**
+ * Main entry point
+ */
+async function main() {
+  console.log(green("Building service worker..."));
 
-const { code } = transformSync(bundle, { minify: true });
-writeFileSync(swDistPath, code);
-console.log(
-  "\x1b[32m%s\x1b[0m",
-  `Created service worker with ${assets.length} additional assets to precache.`
-);
+  const swManifest = JSON.parse(
+    await readFile("public/dist/manifest.json", "utf-8")
+  );
+
+  const assets = Object.values(swManifest).map((i) => `/dist/${i.file}`);
+  const bundle = `
+    self.__PRECACHE_MANIFEST = [${assets.map((i) => `"${i}"`).join(",")}]
+    const VERSION = "${nanoid()}"
+    const KIRBY_API_SLUG = "${process.env.KIRBY_API_SLUG || "api"}"
+    const CONTENT_API_SLUG = "${process.env.CONTENT_API_SLUG}"
+    ${await readFile(swSrcPath)}
+  `;
+
+  const { code } = await transform(bundle, { minify: true });
+  await writeFile(swDistPath, code);
+
+  console.log(
+    `${green("✓")} Added ${
+      assets.length
+    } additional service worker assets to precache.`
+  );
+}
+
+main().catch(() => process.exit(1));
