@@ -14,6 +14,8 @@ const swDistPath = "public/service-worker.js";
  * Main entry point
  */
 async function main() {
+  if (process.env.VITE_SERVICE_WORKER !== "true") return;
+
   console.log(green("Building service worker..."));
 
   const swManifest = JSON.parse(
