@@ -15,18 +15,19 @@
     "vue-router": "^4.0.11"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^1.9.2",
-    "@vue/compiler-sfc": "^3.2.19",
-    "colorette": "^2.0.13",
-    "concurrently": "^6.2.2",
+    "@vitejs/plugin-vue": "^1.9.3",
+    "@vue/compiler-sfc": "^3.2.20",
+    "colorette": "^2.0.16",
+    "concurrently": "^6.3.0",
     "dotenv": "^10.0.0",
     "env-cmd": "^10.1.0",
+    "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-jsdoc": "^36.1.0",
-    "eslint-plugin-vue": "^7.18.0",
-    "nanoid": "^3.1.28",
+    "eslint-plugin-jsdoc": "^36.1.1",
+    "eslint-plugin-vue": "^7.19.1",
+    "nanoid": "^3.1.29",
     "prettier": "2.4.1",
     "shx": "^0.3.3",
-    "vite": "^2.6.2"
+    "vite": "^2.6.5"
   }
 }
