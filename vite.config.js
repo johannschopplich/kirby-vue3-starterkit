@@ -10,35 +10,34 @@ process.env.VITE_MULTILANG = process.env.KIRBY_MULTILANG;
 
 const root = "src";
 
-export default ({ mode }) =>
-  defineConfig({
-    root,
-    base: mode === "development" ? "/" : "/dist/",
+export default defineConfig(({ mode }) => ({
+  root,
+  base: mode === "development" ? "/" : "/dist/",
 
-    resolve: {
-      alias: {
-        "~/": `${resolve(__dirname, root)}/`,
-      },
+  resolve: {
+    alias: {
+      "~/": `${resolve(__dirname, root)}/`,
     },
+  },
 
-    build: {
-      outDir: resolve(__dirname, "public/dist"),
-      emptyOutDir: true,
-      manifest: true,
-      rollupOptions: {
-        input: resolve(root, "index.js"),
-      },
+  build: {
+    outDir: resolve(__dirname, "public/dist"),
+    emptyOutDir: true,
+    manifest: true,
+    rollupOptions: {
+      input: resolve(root, "index.js"),
     },
+  },
 
-    plugins: [Vue()],
+  plugins: [Vue()],
 
-    server: {
-      cors: true,
-      port: 3000,
-      strictPort: true,
-    },
+  server: {
+    cors: true,
+    port: 3000,
+    strictPort: true,
+  },
 
-    optimizeDeps: {
-      include: ["vue", "vue-router"],
-    },
-  });
+  optimizeDeps: {
+    include: ["vue", "vue-router"],
+  },
+}));
