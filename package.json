@@ -28,6 +28,7 @@
     "nanoid": "^3.1.29",
     "prettier": "2.4.1",
     "shx": "^0.3.3",
+    "unplugin-vue-components": "^0.15.6",
     "vite": "^2.6.5"
   }
 }
