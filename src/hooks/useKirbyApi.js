@@ -81,7 +81,8 @@ const getPage = async (id, { revalidate = false } = {}) => {
   }
 
   if (import.meta.env.DEV && !revalidate) {
-    console.log(`[getPage] Fetched ${id} page data:`, page);
+    console.dir(`[getPage] Fetched ${id} page data`);
+    console.table(page);
   }
 
   // Add page data to the store, respectively overwrite it
