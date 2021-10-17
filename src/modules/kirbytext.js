@@ -1,7 +1,7 @@
+let router;
 const origin = import.meta.env.DEV
   ? import.meta.env.VITE_BACKEND_URL
   : window.location.origin;
-let router;
 
 /**
  * Handle absolute links inside dynamically added HTML with Vue Router
@@ -22,21 +22,19 @@ function navigate(event) {
     !event.shiftKey
   ) {
     event.preventDefault();
-    router.push({ path: link.href.substring(origin.length) });
+    router.push({ path: link.href.slice(origin.length) });
   }
 }
 
-export default {
-  install: (app) => {
-    app.directive("kirbytext", {
-      mounted(el, binding) {
-        router = binding.instance.$router;
-        el.addEventListener("click", navigate);
-      },
+export const install = ({ app }) => {
+  app.directive("kirbytext", {
+    mounted(el, binding) {
+      router = binding.instance.$router;
+      el.addEventListener("click", navigate);
+    },
 
-      beforeUnmount(el) {
-        el.removeEventListener("click", navigate);
-      },
-    });
-  },
+    beforeUnmount(el) {
+      el.removeEventListener("click", navigate);
+    },
+  });
 };
