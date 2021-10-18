@@ -152,11 +152,12 @@ const initSw = async () => {
     // Wait for the current service worker controlling this page to change,
     // specifically when the new worker has skipped waiting and become
     // the new active worker
-    let isRefreshing;
+    let isRefreshing = false;
     navigator.serviceWorker.addEventListener("controllerchange", () => {
-      if (isRefreshing) return;
-      isRefreshing = true;
-      window.location.reload();
+      if (!isRefreshing) {
+        isRefreshing = true;
+        window.location.reload();
+      }
     });
 
     if (hasExistingWorker) {

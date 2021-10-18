@@ -6,7 +6,7 @@ import "./index.css";
 const app = createApp(App);
 
 for (const m of Object.values(import.meta.globEager("./modules/*.js"))) {
-  m.install?.({ app });
+  m.install?.(app);
 }
 
 app.mount("#app");

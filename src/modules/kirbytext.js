@@ -10,6 +10,7 @@ const origin = import.meta.env.DEV
  */
 function navigate(event) {
   const link = event.target.closest("a");
+
   if (
     link &&
     link.href.startsWith(origin) &&
@@ -26,7 +27,8 @@ function navigate(event) {
   }
 }
 
-export const install = ({ app }) => {
+/** @param {import('vue').App} app The Vue app instance */
+export const install = (app) => {
   app.directive("kirbytext", {
     mounted(el, binding) {
       router = binding.instance.$router;

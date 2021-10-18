@@ -24,7 +24,8 @@ const scrollBehavior = (to, from, savedPosition) => {
   return { top: 0, behavior };
 };
 
-export const install = ({ app }) => {
+/** @param {import('vue').App} app The Vue app instance */
+export const install = (app) => {
   const site = useSite();
   const { isMultilang, languageCode } = useLanguages();
   const base = isMultilang ? `/${languageCode}/` : "";
