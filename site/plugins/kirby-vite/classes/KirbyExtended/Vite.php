@@ -170,7 +170,7 @@ class Vite
 
         $attr = array_merge($options, [
             'type' => 'module',
-            'async' => !$this->isDev() ? 'true' : null,
+            'async' => 'true',
             'src' => $file
         ]);
 
