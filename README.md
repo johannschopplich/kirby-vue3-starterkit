@@ -5,7 +5,7 @@
 <h3 align="center">Kirby + Vue.js Starterkit</h3>
 
 <p align="center">
-  SPA with Vue 3 and Kirby: SEO-friendly, automatic routing, mulit-lang-ready and more!<br>
+  SPA with Vue 3 and Kirby: SEO-friendly, automatic routing, multi-lang-ready and more!<br>
   <a href="https://kirby-vue3-starterkit.jhnn.dev"><strong>Explore the starterkit live »</strong></a>
 </p>
 
@@ -16,28 +16,22 @@
 ### Key Features
 
 - 🛣 Automatic routing
+- 🎢 [On-demand components auto importing](./src/components/)
+- 🍁 [Nuxt-inspired module system](./src/modules/)
+- ⚡️ [Vite](https://vitejs.dev), of course
 - 🔍 SEO-friendly: [server-side generated](site/snippets/meta.php) meta tags
-- 🌐 [Multi-language support](#multi-language)
+- 🌐 [Multi-language](#multi-language) support
 - ♿ Accessible frontend routing
 - 🚝 [Offline-first](#caching--offline-capability-with-service-worker)
 - 💫 [Stale-while-revalidate](#stale-while-revalidate) page data
-- ⚡️ [Vite](https://github.com/vitejs/vite) instead of Vue CLI
-- 🤝 Shared [`.env`](.env.example) for frontend & backend
-- 🚀 Modern folder structure
 
 ### Introduction
 
 > [Or jump right to the setup](#setup).
 
-This project is a starting point for [Vue.js 3](https://github.com/vuejs/vue-next) as the frontend UI library and [Kirby](https://getkirby.com) as headless CMS. The content is provided as JSON through Kirby and fetched by the frontend.
+This boilerplate is a tight and comprehensive integration of [Vue.js](https://github.com/vuejs/vue-next) in the frontend and [Kirby](https://getkirby.com) as headless CMS. The content is provided as JSON through Kirby and fetched by the frontend.
 
-It's a simple website based on the former [Kirby 3 starterkit](https://github.com/getkirby/starterkit). Its functionality and layout (snippets, templates and their corresponding JS/CSS) are ported to Vue.js single file components. Many features have been added, like meta tags generation, environment variables support, accessible routing etc.
-
-To compile the frontend sources, [Vite](https://vitejs.dev) comes to use. Vite is an opinionated web development build tool, created by Evan You. It serves code via native ES Module imports during development, allowing you to develop Vue.js single file components without a bundle step, and bundles it with Rollup for production.
-
-### Lighthouse Report
-
-![Lighthouse Report](./.github/lighthouse-report.png)
+![Lighthouse report](./.github/lighthouse-report.png)
 
 ### Folder Structure
 
@@ -64,12 +58,11 @@ kirby-vue3-starterkit/
 |   # Various development-related Node scripts
 ├── scripts/
 |   |
-|   |   # Service worker generator
+|   |   # Service worker generator (optional)
 |   └── buildServiceWorker.js
 |
-|   # Kirby's core folder containing templates, blueprints, snippets etc.
+|   # Kirby's core folder containing templates, blueprints, etc.
 ├── site/
-|   ├── blueprints/
 |   ├── config/
 |   |   |
 |   |   |   # General configuration settings for Kirby and plugins
@@ -82,10 +75,9 @@ kirby-vue3-starterkit/
 |   |   # Only relevant in multi-language setups
 |   ├── languages/
 |   |
-|   ├── models/
-|   ├── plugins/vite/
+|   ├── plugins/kirby-vite/
 |   |   |
-|   |   |   # Core of the Vite integration plugin, mainly registeres routes
+|   |   |   # Core of the Vite integration plugin, mainly registers routes
 |   |   ├── index.php
 |   |   |
 |   |   |   # Routes to handle `.json` requests and serving the `index.php` snippet
@@ -101,8 +93,7 @@ kirby-vue3-starterkit/
 |   # Includes all frontend-related sources
 ├── src/
 |   |
-|   |   # `Header`, `Footer`, `Intro` and other components
-|   |   # (Vue.js components correspond to Kirby snippets)
+|   |   # `Header`, `Footer`, `Intro` and other components (auto imported on-demand)
 |   ├── components/
 |   |
 |   |   # Hooks for common actions
@@ -126,20 +117,14 @@ kirby-vue3-starterkit/
 |   |   |   # Returns a object corresponding to Kirby's global `$site`
 |   |   └── useSite.js
 |   |
-|   |   # Custom Vue plugins
-|   ├── plugins/
+|   |   # Modules system entries will be auto-installed
+|   ├── modules/
 |   |   |
-|   |   |   # Adds a `v-kirbytext` directive to handle internal page links inside KirbyText
-|   |   └── KirbyTextDirective.js
-|   |
-|   |   # Vue Router related methods and exports
-|   ├── router/
+|   |   |   # Installs the `v-kirbytext` directive to handle internal page links inside KirbyText
+|   |   ├── kirbytext.js
 |   |   |
-|   |   |   # Initializes and exports the router instance
-|   |   ├── index.js
-|   |   |
-|   |   |   # Handles the router's scroll behaviour
-|   |   └── scrollBehaviour.js
+|   |   |   # Initializes the Vue Router
+|   |   └── router.js
 |   |
 |   |   # Vue.js views corresponding to Kirby templates
 |   |   # Routes are being automatically resolved
@@ -164,13 +149,7 @@ kirby-vue3-starterkit/
 |   # Environment variables for both Kirby and Vite (to be duplicated as `.env`)
 ├── .env.example
 |
-|   # Handles PHP dependencies
-├── composer.json
-|
-|   # Handles npm dependencies
-├── package.json
-|
-|   # Router for the PHP built-in development server (used by `serveKirby.js`)
+|   # Router for the PHP built-in development server
 ├── server.php
 |
 |   # Configuration file for Vite
@@ -181,7 +160,7 @@ kirby-vue3-starterkit/
 
 ## Caching & Offline Capability With Service Worker
 
-Even without a service worker installed, the frontend will store pages between indiviual routes/views. When you reload the tab, the data for each page is freshly fetched from the API once again.
+Even without a service worker installed, the frontend will store pages between individual routes/views. When the tab get reloaded, the data for each page is freshly fetched from the API once again.
 
 For offline capability of your Vue app, you can choose to activate the included [service worker](src/serviceWorker.js).
 
@@ -319,11 +298,6 @@ Then, visit the panel and add new languages by your liking. The Panel **automati
 
 Language data is provided by the global `site` object, which can be accessed via the `useSite()` hook.
 
-ℹ️ **Current limitations**:
-
-- Custom language paths aren't supported as of right now, the language code defined will be used as a base in the frontend.
-- Automatic language detection only works in production environment. In development the fallback language is always the default language.
-
 ### Service Worker
 
 To enable the **service worker** which precaches essential assets and page API calls for offline capability, set:
@@ -332,7 +306,7 @@ To enable the **service worker** which precaches essential assets and page API c
 
 > ⚠️ Don't change the `CONTENT_API_SLUG` once you deployed your app publicly and thus a service worker is installed on clients. Otherwise fetch requests will fail and a blank page will show until the new service worker is activated, which then is only possible by closing the tab/PWA.
 
-### Stale-While-Revalidate
+### Stale-While-Revalidating
 
 To keep page data fresh with **stale-while-revalidate**, set:
 
@@ -346,5 +320,3 @@ To keep page data fresh with **stale-while-revalidate**, set:
 ## License
 
 [MIT](https://opensource.org/licenses/MIT)
-
-It is discouraged to use this starterkit in any project that promotes racism, sexism, homophobia, animal abuse, violence or any other form of hate speech.
