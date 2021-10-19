@@ -2,9 +2,7 @@
 
 Components will be automatically imported on demand thanks to [unplugin-vue-components](https://github.com/antfu/unplugin-vue-components). Thus, no need to import and register your components manually anymore! If you register the parent component asynchronously (or via a lazy route), the auto imported components will be code-split along with their parent.
 
-The following template will be transpiled by Vite on the fly.
-
-From:
+Use your component in your template as you normally would:
 
 ```vue
 <template>
@@ -14,7 +12,7 @@ From:
 </template>
 ```
 
-To:
+… Which gets transpiled by Vite on the fly to:
 
 ```vue
 <template>

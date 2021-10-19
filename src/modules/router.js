@@ -4,7 +4,7 @@ import Default from "~/views/Default.vue";
 
 const capitalize = ([first, ...rest]) => first.toUpperCase() + rest.join("");
 
-/** @type {import('vue-router').RouterScrollBehavior} */
+/** @type {import("vue-router").RouterScrollBehavior} */
 const scrollBehavior = (to, from, savedPosition) => {
   // Use predefined scroll behavior if defined, defaults to no scroll behavior
   const behavior = document.documentElement.style.scrollBehavior || "auto";
@@ -30,7 +30,7 @@ export const install = (app) => {
   const { isMultilang, languageCode } = useLanguages();
   const base = isMultilang ? `/${languageCode}/` : "";
 
-  /** @type {import('vue-router').RouteRecordRaw[]} */
+  /** @type {import("vue-router").RouteRecordRaw[]} */
   const routes = [
     ...site.children.map((page) => ({
       path: `/${page.uri}`,
@@ -57,7 +57,6 @@ export const install = (app) => {
   // Catch-all fallback
   routes.push({ path: "/:pathMatch(.*)*", component: Default });
 
-  /** @type {import('vue-router').Router} */
   const router = createRouter({
     history: createWebHistory(base),
     routes,
