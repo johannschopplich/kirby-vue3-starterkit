@@ -170,11 +170,10 @@ class Vite
 
         $attr = array_merge($options, [
             'type' => 'module',
-            'async' => 'true',
             'src' => $file
         ]);
 
-        return $client . '<script ' . attr($attr) . '></script>';
+        return $client . '<script async ' . attr($attr) . '></script>';
     }
 
     /**
