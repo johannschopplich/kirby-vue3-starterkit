@@ -115,7 +115,7 @@ class Vite
      */
     protected function assetDev(string $file): string
     {
-        return option('johannschopplich.kirby-vite.devServer', 'http://localhost:3000') . "/{$file}";
+        return option('johannschopplich.kirby-vite.devServer', 'http://localhost:3000') . '/' . $file;
     }
 
     /**
@@ -126,21 +126,8 @@ class Vite
      */
     protected function assetProd(string $file): string
     {
-        return kirby()->url('index') . '/' . option('johannschopplich.kirby-vite.outDir', 'dist') . "/{$file}";
+        return '/' . option('johannschopplich.kirby-vite.outDir', 'dist') . '/' . $file;
     }
-
-    /**
-     * Includes Vite's client in development mode
-     *
-     * @return string|null
-     */
-    public function client(): ?string
-    {
-        return $this->isDev()
-            ? js($this->assetDev('@vite/client'), ['type' => 'module'])
-            : null;
-    }
-
     /**
      * Includes the CSS file for the specified entry in production mode
      *
@@ -153,16 +140,19 @@ class Vite
     {
         $entry ??= option('johannschopplich.kirby-vite.entry', 'index.js');
 
+        $attr = array_merge($options, [
+            'href' => $this->assetProd($this->getManifestProperty($entry, 'css')[0]),
+            'rel'  => 'stylesheet'
+        ]);
+
         return !$this->isDev()
-            ? css(
-                    $this->assetProd($this->getManifestProperty($entry, 'css')[0]),
-                    $options
-                )
+            ? '<link ' . attr($attr) . '>'
             : null;
     }
 
     /**
-     * Includes the JS file for the specified entry
+     * Includes the JS file for the specified entry and
+     * Vite's client in development mode as well
      *
      * @param string|null $entry
      * @param array $options
@@ -173,13 +163,18 @@ class Vite
     {
         $entry ??= option('johannschopplich.kirby-vite.entry', 'index.js');
 
+        $client = $this->isDev() ? js($this->assetDev('@vite/client'), ['type' => 'module']) : '';
         $file = $this->isDev()
             ? $this->assetDev($entry)
             : $this->assetProd($this->getManifestProperty($entry, 'file'));
 
-        $options = array_merge(['type' => 'module'], $options);
+        $attr = array_merge($options, [
+            'type' => 'module',
+            'async' => !$this->isDev() ? 'true' : null,
+            'src' => $file
+        ]);
 
-        return js($file, $options);
+        return $client . '<script ' . attr($attr) . '></script>';
     }
 
     /**

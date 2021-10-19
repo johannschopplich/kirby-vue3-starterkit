@@ -10,8 +10,8 @@
   <?= vite()->preloadJson($page->uri()) ?>
   <?= vite()->preloadModule($page->intendedTemplate()->name()) ?>
 
-  <?= vite()->client() ?>
   <?= vite()->css() ?>
+  <?= vite()->js() ?>
 
 </head>
 <body>
@@ -20,8 +20,6 @@
   <script id="site-data" type="application/json">
     <?= \Kirby\Data\Json::encode(vite()->useSite()) ?>
   </script>
-
-  <?= vite()->js() ?>
 
 </body>
 </html>
