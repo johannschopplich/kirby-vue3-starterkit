@@ -5,7 +5,7 @@
 <h3 align="center">Kirby + Vue.js Starterkit</h3>
 
 <p align="center">
-  SPA with Vue 3 and Kirby: SEO-friendly, automatic routing, multi-lang-ready and more!<br>
+  SPA with Vue 3 and Kirby: SEO-friendly, automatic routing, i18n and more!<br>
   <a href="https://kirby-vue3-starterkit.jhnn.dev"><strong>Explore the starterkit live »</strong></a>
 </p>
 
@@ -117,7 +117,7 @@ kirby-vue3-starterkit/
 |   |   |   # Returns a object corresponding to Kirby's global `$site`
 |   |   └── useSite.js
 |   |
-|   |   # Modules system entries will be auto-installed
+|   |   # Modules system entries will be auto installed
 |   ├── modules/
 |   |   |
 |   |   |   # Installs the `v-kirbytext` directive to handle internal page links inside KirbyText
