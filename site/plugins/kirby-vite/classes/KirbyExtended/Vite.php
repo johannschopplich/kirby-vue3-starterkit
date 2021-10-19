@@ -67,7 +67,7 @@ class Vite
 
         if (!F::exists($manifestFile)) {
             if (option('debug')) {
-                throw new Exception('The `manifest.json` does not exist. Run `npm run build`.');
+                throw new Exception('manifest.json not found. Run `npm run build` first.');
             }
 
             return [];
@@ -89,7 +89,7 @@ class Vite
         $manifestEntry = $this->useManifest()[$entry] ?? null;
         if (!$manifestEntry) {
             if (option('debug')) {
-                throw new Exception("`$entry` is not a manifest entry.");
+                throw new Exception("{$entry} is not a manifest entry");
             }
 
             return;
@@ -98,7 +98,7 @@ class Vite
         $value = $manifestEntry[$key] ?? null;
         if (!$value) {
             if (option('debug')) {
-                throw new Exception("Manifest entry `$entry` does not have property `$key`.");
+                throw new Exception("{$key} not found in manifest entry {$entry}");
             }
 
             return;

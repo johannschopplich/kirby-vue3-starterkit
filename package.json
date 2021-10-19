@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "kirby-vue3-starterkit",
-  "version": "4.0.0",
+  "version": "4.1.0",
   "scripts": {
     "kirby": "env-cmd --use-shell \"php -S \\$KIRBY_DEV_HOSTNAME:\\$KIRBY_DEV_PORT -t public server.php\"",
     "dev": "shx touch src/.lock && concurrently \"npm:kirby\" \"vite\"",

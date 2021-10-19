@@ -1,8 +1,6 @@
 <?php
 
-use Kirby\Cms\App as Kirby;
-
-Kirby::plugin('starterkit/gallery', [
+\Kirby\Cms\App::plugin('starterkit/gallery', [
     'snippets' => [
         'gallery' => __DIR__ . '/snippets/gallery.php'
     ],
