@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "kirby-vue3-starterkit",
-  "version": "3.2.0",
+  "version": "4.0.0",
   "scripts": {
     "kirby": "env-cmd --use-shell \"php -S \\$KIRBY_DEV_HOSTNAME:\\$KIRBY_DEV_PORT -t public server.php\"",
     "dev": "shx touch src/.lock && concurrently \"npm:kirby\" \"vite\"",
@@ -11,8 +11,8 @@
     "format": "prettier --write \"src/**/*.{js,vue}\""
   },
   "dependencies": {
-    "vue": "^3.2.19",
-    "vue-router": "^4.0.11"
+    "vue": "^3.2.20",
+    "vue-router": "^4.0.12"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^1.9.3",
@@ -28,7 +28,7 @@
     "nanoid": "^3.1.30",
     "prettier": "2.4.1",
     "shx": "^0.3.3",
-    "unplugin-vue-components": "^0.15.6",
-    "vite": "^2.6.9"
+    "unplugin-vue-components": "^0.16.0",
+    "vite": "^2.6.10"
   }
 }
