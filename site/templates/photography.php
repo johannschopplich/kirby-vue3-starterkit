@@ -18,4 +18,4 @@ $data = [
     ->values()
 ];
 
-echo \Kirby\Data\Json::encode($data);
+echo vite()->json($data);
