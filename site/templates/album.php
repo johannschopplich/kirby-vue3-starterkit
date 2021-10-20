@@ -6,7 +6,7 @@ $data = [
   'headline' => $page->headline()->or($page->title())->value(),
   'description' => $page->description()->kt()->value(),
   'tags' => $page->tags()->or(null)->value(),
-  'cover' => ($image = $page->cover()) ? [
+  'cover' => ($image = $page->cover()->toFile()) ? [
     'url' => $image->crop(1024, 768)->url(),
     'alt' => $image->alt()->value()
   ] : null,

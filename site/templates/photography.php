@@ -9,7 +9,7 @@ $data = [
     ->map(fn ($album) => [
       'uri' => $album->uri(),
       'title' => $album->title()->value(),
-      'cover' => ($image = $album->cover()) ? [
+      'cover' => ($image = $album->cover()->toFile()) ? [
         'url' => $image->crop(800, 1000)->url(),
         'urlHome' => $image->resize(1024, 1024)->url(),
         'alt' => $image->alt()->value()
