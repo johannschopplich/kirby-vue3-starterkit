@@ -128,6 +128,7 @@ class Vite
     {
         return '/' . option('johannschopplich.kirby-vite.outDir', 'dist') . '/' . $file;
     }
+
     /**
      * Includes the CSS file for the specified entry in production mode
      *
@@ -205,7 +206,7 @@ class Vite
     {
         $match = array_filter(
             $this->useManifest(),
-            fn($i) => str_ends_with($i, ucfirst($name) . '.vue'),
+            fn ($i) => str_ends_with($i, ucfirst($name) . '.vue'),
             ARRAY_FILTER_USE_KEY
         );
 

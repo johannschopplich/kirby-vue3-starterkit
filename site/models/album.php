@@ -1,8 +1,6 @@
 <?php
 
-use Kirby\Cms\Page;
-
-class AlbumPage extends Page
+class AlbumPage extends \Kirby\Cms\Page
 {
     public function cover()
     {

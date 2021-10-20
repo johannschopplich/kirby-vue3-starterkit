@@ -6,7 +6,7 @@ return [
     'children' => site()
         ->children()
         ->published()
-        ->map(fn($child) => [
+        ->map(fn ($child) => [
             'uri' => $child->uri(),
             'title' => $child->title()->value(),
             'isListed' => $child->isListed(),
@@ -18,7 +18,7 @@ return [
     // The following data is required for multi-language setups:
     'languages' => kirby()
         ->languages()
-        ->map(fn($language) => [
+        ->map(fn ($language) => [
             'code' => $language->code(),
             'name' => $language->name(),
             'isDefault' => $language->isDefault()
@@ -30,7 +30,7 @@ return [
     'social' => page('about')
         ->social()
         ->toStructure()
-        ->map(fn($social) => [
+        ->map(fn ($social) => [
             'url' => $social->url()->value(),
             'platform' => $social->platform()->value()
         ])

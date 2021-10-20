@@ -1,4 +1,7 @@
-<?php /** @var \Kirby\Cms\Page $page */ ?>
+<?php
+/** @var \Kirby\Cms\App $kirby */
+/** @var \Kirby\Cms\Page $page */
+?>
 <!DOCTYPE html>
 <html lang="<?= $kirby->languageCode() ?? 'en' ?>">
 <head>
