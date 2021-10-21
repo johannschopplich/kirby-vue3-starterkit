@@ -139,16 +139,15 @@ class Vite
      */
     public function css(string $entry = null, array $options = []): ?string
     {
-        $entry ??= option('johannschopplich.kirby-vite.entry', 'index.js');
+        if ($this->isDev()) return null;
 
+        $entry ??= option('johannschopplich.kirby-vite.entry', 'index.js');
         $attr = array_merge($options, [
             'href' => $this->assetProd($this->getManifestProperty($entry, 'css')[0]),
             'rel'  => 'stylesheet'
         ]);
 
-        return !$this->isDev()
-            ? '<link ' . attr($attr) . '>'
-            : null;
+        return '<link ' . attr($attr) . '>';
     }
 
     /**
@@ -200,22 +199,24 @@ class Vite
      * Preloads the view module for a given page, e.g. `Home.e701bdef.js`
      *
      * @param string $name Page template name or other module name
-     * @return string|void
+     * @return string|null
      */
-    public function preloadModule(string $name)
+    public function preloadModule(string $name): ?string
     {
+        if ($this->isDev()) return null;
+
         $match = array_filter(
             $this->useManifest(),
             fn ($i) => str_ends_with($i, ucfirst($name) . '.vue'),
             ARRAY_FILTER_USE_KEY
         );
 
-        if (!empty($match)) {
-            Html::tag('link', '', [
+        return !empty($match)
+            ? Html::tag('link', '', [
                 'rel' => 'modulepreload',
                 'href' => '/' . option('johannschopplich.kirby-vite.outDir', 'dist') . '/' . array_values($match)[0]['file']
-            ]);
-        }
+            ])
+            : null;
     }
 
     /**
