@@ -15,15 +15,24 @@
 
 ### Key Features
 
+- ⚡️ [Vue 3](https://github.com/vuejs/vue-next) & [Vite](https://vitejs.dev)
 - 🛣 Automatic routing
-- 🎢 [On-demand components auto importing](./src/components/)
-- 🍁 [Nuxt-inspired module system](./src/modules/)
-- ⚡️ [Vite](https://vitejs.dev), of course
+- 📦 [On-demand components auto importing](./src/components/)
+- 📑 [Nuxt-inspired module system](./src/modules/)
 - 🔍 SEO-friendly: [server-side generated](site/snippets/meta.php) meta tags
 - 🌐 [Multi-language](#multi-language) support
 - ♿ Accessible frontend routing
 - 🚝 [Offline-first](#caching--offline-capability-with-service-worker)
 - 💫 [Stale-while-revalidate](#stale-while-revalidate) page data
+
+### Heads Up: Another Boilerplate Available
+
+The [Kirby + Vue.js Lightkit](https://github.com/johannschopplich/kirby-vue-lightkit) is be simpler version of this boilerplate for small projects, which you might be interesed in. Since routing won't be inherited, another set of features awaits:
+
+- 🗂 [File-based routing](./src/pages) like Nuxt.js
+- 📑 [Layout system](./src/layouts)
+- 🎨 [Windi CSS](https://github.com/windicss/windicss) – Next generation utility-first CSS framework
+- 😃 [Use icons from any icon sets, with no compromise](https://github.com/antfu/unplugin-icons)
 
 ### Introduction
 
