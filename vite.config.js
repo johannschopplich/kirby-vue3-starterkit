@@ -26,7 +26,7 @@ export default defineConfig(({ mode }) => ({
     emptyOutDir: true,
     manifest: true,
     rollupOptions: {
-      input: resolve(root, "index.js"),
+      input: resolve(root, "main.js"),
     },
   },
 

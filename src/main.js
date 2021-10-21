@@ -1,7 +1,7 @@
 import { createApp } from "vue";
 import { useServiceWorker } from "./hooks";
 import App from "./App.vue";
-import "./index.css";
+import "./styles/main.css";
 
 const app = createApp(App);
 

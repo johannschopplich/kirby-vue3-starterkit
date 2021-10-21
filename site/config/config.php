@@ -27,6 +27,12 @@ return [
         ]
     ],
 
+    'johannschopplich' => [
+        'kirby-vite' => [
+            'entry' => 'main.js'
+        ]
+    ],
+
     // See https://github.com/johannschopplich/kirby-extended/blob/main/docs/meta.md
     'kirby-extended' => [
         'meta' => [
