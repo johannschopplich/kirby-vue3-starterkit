@@ -30,13 +30,14 @@
   <?= vite()->preloadModule($page->intendedTemplate()->name()) ?>
 
   <?= vite()->css() ?>
-  <?= vite()->js() ?>
 
 </head>
 <body>
 
   <div id="app"></div>
   <script id="site-data" type="application/json"><?= vite()->json(vite()->useSite()) ?></script>
+
+  <?= vite()->js() ?>
 
 </body>
 </html>

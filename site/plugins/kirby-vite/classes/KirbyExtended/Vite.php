@@ -173,7 +173,7 @@ class Vite
             'src' => $file
         ]);
 
-        return $client . '<script async ' . attr($attr) . '></script>';
+        return $client . '<script ' . attr($attr) . '></script>';
     }
 
     /**
