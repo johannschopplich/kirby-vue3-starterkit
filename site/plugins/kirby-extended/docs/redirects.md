@@ -10,9 +10,9 @@ Instead of a target string, a callback function returning that string may also b
 
 ## Options
 
-| Option | Default | Values | Description |
-| --- | --- | --- | --- |
-| `kirby-extended.redirects` | `false` | array | List of redirects. |
+| Option                     | Default | Values | Description        |
+| -------------------------- | ------- | ------ | ------------------ |
+| `kirby-extended.redirects` | `false` | array  | List of redirects. |
 
 ## Example
 
@@ -40,5 +40,7 @@ return [
 ## Credits
 
 Forked from [redirects plugin](https://github.com/getkirby/getkirby.com/pull/1131)
+
 Author: Nico Hoffmann
+
 Licence: MIT

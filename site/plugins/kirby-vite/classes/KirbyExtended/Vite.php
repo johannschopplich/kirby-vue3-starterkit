@@ -221,10 +221,10 @@ class Vite
     /**
      * Converts an array to an encoded JSON string
      *
-     * @param mixed $data
+     * @param array $data
      * @return string
      */
-    public function json($data): string
+    public function json(array $data): string
     {
         return json_encode($data, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
     }

@@ -25,6 +25,31 @@ return [
                 return isset($options['cache']) ? !$options['cache'] : false;
             }
         ]
+    ],
+
+    // See https://github.com/johannschopplich/kirby-extended/blob/main/docs/meta.md
+    'kirby-extended' => [
+        'meta' => [
+            'defaults' => function (\Kirby\Cms\App $kirby, \Kirby\Cms\Site $site, \Kirby\Cms\Page $page) {
+                $description = $page->description()->or($site->description())->value();
+
+                return [
+                    'opengraph' => [
+                        'image' => '/img/android-chrome-512x512.png'
+                    ],
+                    'twitter' => [
+                        'image' => '/img/android-chrome-512x512.png'
+                    ],
+                    'jsonld' => [
+                        'WebSite' => [
+                            'url' => $site->url(),
+                            'name' => $site->title()->value(),
+                            'description' => $description
+                        ]
+                    ]
+                ];
+            }
+        ]
     ]
 
 ];

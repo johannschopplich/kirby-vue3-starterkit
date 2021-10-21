@@ -22,11 +22,11 @@ options:
 
 ## Options
 
-| Option | Default | Values | Description |
-| --- | --- | --- | --- |
-| `kirby-extended.sitemap.enable` | `[]` | array | List of template names to include in the generated sitemap. |
-| `kirby-extended.sitemap.exclude.templates` | `[]` | array | List of template names to exclude from the generated sitemap. |
-| `kirby-extended.sitemap.exclude.pages` | `[]` | array | List of page ids to exclude. |
+| Option                                     | Default | Values | Description                                                   |
+| ------------------------------------------ | ------- | ------ | ------------------------------------------------------------- |
+| `kirby-extended.sitemap.enable`            | `[]`    | array  | List of template names to include in the generated sitemap.   |
+| `kirby-extended.sitemap.exclude.templates` | `[]`    | array  | List of template names to exclude from the generated sitemap. |
+| `kirby-extended.sitemap.exclude.pages`     | `[]`    | array  | List of page ids to exclude.                                  |
 
 ## Example
 
@@ -48,5 +48,7 @@ return [
 ## Credits
 
 Forked from [getkirby.com meta plugin](https://github.com/getkirby/getkirby.com/tree/master/site/plugins/meta)
+
 Author: Bastian Allgeier
+
 Licence: MIT

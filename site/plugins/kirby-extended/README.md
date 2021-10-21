@@ -4,10 +4,10 @@ This package extends Kirby's base capabilities. It's built mostly upon existing 
 
 ## Key features
 
-- ⚡️ [Use environment variables from `.env` files](docs/env.md)
-- 🗂 [Auto-generate meta tags](docs/meta.md)
-- 🧭 [Provide sitemaps with multilang support](docs/sitemap.md)
-- 🔀 [Redirect routes easily](docs/redirects.md)
+- ⚡️ [`.env` support with global `env()` helper](./docs/env.md)
+- 🗂 [Auto-generated meta tags](./docs/meta.md)
+- 🧭 [Sitemaps with multi-language support](./docs/sitemap.md)
+- 🔀 [Easy route redirects](./docs/redirects.md)
 
 Click on one of the features to head to the docs.
 

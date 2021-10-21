@@ -10,7 +10,7 @@ Create a `.env` file in Kirby's base directory. You can change the default filen
 
 ## Usage
 
-### Inside Templates, Snippets etc.
+### Inside templates, snippets etc.
 
 You can use the `$site` method `$site->env()` to retrieve an environment variable from anywhere:
 
@@ -30,14 +30,14 @@ THe first argument `path` is required. The second one (`filename`) is optional a
 
 ### Options
 
-| Option | Default | Values | Description |
-| --- | --- | --- | --- |
-| `kirby-extended.env.path` | `kirby()->root('base')` | string | Path from which the file should be loaded. |
-| `kirby-extended.env.filename` | `.env` | string | Environment filename to load. |
+| Option                        | Default                 | Values | Description                                |
+| ----------------------------- | ----------------------- | ------ | ------------------------------------------ |
+| `kirby-extended.env.path`     | `kirby()->root('base')` | string | Path from which the file should be loaded. |
+| `kirby-extended.env.filename` | `.env`                  | string | Environment filename to load.              |
 
 ## Example
 
-```ssh
+```
 # .env
 KIRBY_DEBUG=false
 

@@ -8,7 +8,7 @@ In a nutshell: plugin internal defaults ➡️ option defaults ➡️ page model
 
 1. The plugin looks for meta data defaults, set in Kirby's global configuration.
 2. If the defaults don't contain the specific key, it looks in the pagel model if it provides a `metadata()` method that returns an array or metadata fields.
-3. If the page model doesn't contain the specific key, it will look for a field from a pages content file (e.g. `article.txt`) by the corrsponding key. 
+3. If the page model doesn't contain the specific key, it will look for a field from a pages content file (e.g. `article.txt`) by the corrsponding key.
 4. If that also fails, it will fall back to default metadata, as stored in either the `site.txt` file at the top-level of the content directory or the plugin internal's.
 
 That way, every page will always be able to serve default values, even if the specific page or its model does not contain information like e.g. a thumbnail or a dedicated description.
@@ -41,36 +41,36 @@ Echoing `$meta->social()` uses sensible defaults, which of course can be extende
 
 #### Generic meta
 
-| Key | Default |
-| --- | --- |
+| Key           | Default                  |
+| ------------- | ------------------------ |
 | `description` | `description` key if set |
 
 The `description` key will be used for the meta tag, OpenGraph description as well as Twitter description. One key to rule them all.
 
 #### Open Graph meta
 
-| Key | Default |
-| --- | --- |
-| `site_name` | `$site->title()->value()` |
-| `url` | `$page->url()` |
-| `type` | `website` |
-| `title` | `$page->customTitle()->or($page->title())->value()` |
-| `description` | `description` key if set |
-| `image` | `thumbnail` key value or thumbnail field and its image exists |
-| `image:alt` | `alt` field of thumbnail if it exists |
+| Key           | Default                                                       |
+| ------------- | ------------------------------------------------------------- |
+| `site_name`   | `$site->title()->value()`                                     |
+| `url`         | `$page->url()`                                                |
+| `type`        | `website`                                                     |
+| `title`       | `$page->customTitle()->or($page->title())->value()`           |
+| `description` | `description` key if set                                      |
+| `image`       | `thumbnail` key value or thumbnail field and its image exists |
+| `image:alt`   | `alt` field of thumbnail if it exists                         |
 
 Each meta name will be prefixed with `og:` in the rendered HTML automatically.
 
 #### Twitter meta
 
-| Key | Default |
-| --- | --- |
-| `url` | `$page->url()` |
-| `card` | `summary_large_image` or `summary` if no thumbnail image is present |
-| `title` | `$page->customTitle()->or($page->title())->value()` |
-| `description` | `description` key if set |
-| `image` | `thumbnail` key value or thumbnail field and its image exists |
-| `image:alt` | `alt` field of thumbnail if it exists |
+| Key           | Default                                                             |
+| ------------- | ------------------------------------------------------------------- |
+| `url`         | `$page->url()`                                                      |
+| `card`        | `summary_large_image` or `summary` if no thumbnail image is present |
+| `title`       | `$page->customTitle()->or($page->title())->value()`                 |
+| `description` | `description` key if set                                            |
+| `image`       | `thumbnail` key value or thumbnail field and its image exists       |
+| `image:alt`   | `alt` field of thumbnail if it exists                               |
 
 Each meta name will be prefixed with `twitter:` in the rendered HTML automatically.
 
@@ -79,6 +79,7 @@ Each meta name will be prefixed with `twitter:` in the rendered HTML automatical
 ### Default tags
 
 The `kirby-extended.meta.defaults` option key may be populated by default metadata. It will be used as the base. Available array keys are:
+
 - `robots` (string)
 - `description` (string)
 - `opengraph` (array)
@@ -91,7 +92,7 @@ Custom configurations like default tags will be merged with the plugin internal 
 // config.php
 return [
     'kirby-extended.meta' => [
-        'defaults' => return function ($kirby, $page, $site) {
+        'defaults' => function (\Kirby\Cms\App $kirby, \Kirby\Cms\Site $site, \Kirby\Cms\Page $page) {
             $description = $page->description()->or($site->description())->value();
 
             // Available keys
@@ -112,7 +113,7 @@ return [
                     ]
                 ]
             ];
-        };
+        }
     ]
 ];
 ```
@@ -170,12 +171,14 @@ class ArticlePage extends \Kirby\Cms\Page
 
 ## Options
 
-| Option | Default | Values | Description |
-| --- | --- | --- | --- |
-| `kirby-extended.meta.defaults` | `[]` | array or function | You can use `$kirby`, `$site` and `$page` (fixed order) within the closure arguments to refer to the given object. |
+| Option                         | Default | Values            | Description                                                                                                        |
+| ------------------------------ | ------- | ----------------- | ------------------------------------------------------------------------------------------------------------------ |
+| `kirby-extended.meta.defaults` | `[]`    | array or function | You can use `$kirby`, `$site` and `$page` (fixed order) within the closure arguments to refer to the given object. |
 
 ## Credits
 
 Forked from [getkirby.com meta plugin](https://github.com/getkirby/getkirby.com/tree/master/site/plugins/meta)
+
 Author: Bastian Allgeier
+
 Licence: MIT
