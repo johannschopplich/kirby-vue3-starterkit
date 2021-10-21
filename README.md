@@ -27,7 +27,7 @@
 
 ### Heads Up: Another Boilerplate Available
 
-The [Kirby + Vue.js Lightkit](https://github.com/johannschopplich/kirby-vue-lightkit) is be simpler version of this boilerplate for small projects, which you might be interesed in. Since routing won't be inherited, another set of features awaits:
+The [Kirby + Vue.js Lightkit](https://github.com/johannschopplich/kirby-vue-lightkit) is a simpler version of this boilerplate, which you might be interested in for smaller, less complex projects. Since routing is defined inside your SPA, rather than Kirby, another set of features awaits:
 
 - 🗂 [File-based routing](./src/pages) like Nuxt.js
 - 📑 [Layout system](./src/layouts)
