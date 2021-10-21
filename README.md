@@ -19,7 +19,7 @@
 - 🛣 Automatic routing
 - 📦 [On-demand components auto importing](./src/components/)
 - 📑 [Nuxt-inspired module system](./src/modules/)
-- 🔍 SEO-friendly: [server-side generated](site/snippets/meta.php) meta tags
+- 🔍 SEO-friendly: [server-side generated](https://github.com/johannschopplich/kirby-extended/blob/main/docs/meta.md) meta tags
 - 🌐 [Multi-language](#multi-language) support
 - ♿ Accessible frontend routing
 - 🚝 [Offline-first](#caching--offline-capability-with-service-worker)
@@ -29,8 +29,8 @@
 
 The [Kirby + Vue.js Lightkit](https://github.com/johannschopplich/kirby-vue-lightkit) is a simpler version of this boilerplate, which you might be interested in for smaller, less complex projects. Since routing is defined inside your SPA, rather than Kirby, another set of features awaits:
 
-- 🗂 [File-based routing](./src/pages) like Nuxt.js
-- 📑 [Layout system](./src/layouts)
+- 🗂 [File-based routing](https://github.com/johannschopplich/kirby-vue-lightkit/tree/main/src/pages) like Nuxt.js
+- 📑 [Layout system](https://github.com/johannschopplich/kirby-vue-lightkit/tree/main/src/layouts)
 - 🎨 [Windi CSS](https://github.com/windicss/windicss) – Next generation utility-first CSS framework
 - 😃 [Use icons from any icon sets, with no compromise](https://github.com/antfu/unplugin-icons)
 
