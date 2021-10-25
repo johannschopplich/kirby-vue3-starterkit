@@ -29,6 +29,7 @@
   <?= vite()->preloadJson($page->uri()) ?>
   <?= vite()->preloadModule($page->intendedTemplate()->name()) ?>
 
+  <?= vite()->js() ?>
   <?= vite()->css() ?>
 
 </head>
@@ -36,8 +37,6 @@
 
   <div id="app"></div>
   <script id="site-data" type="application/json"><?= vite()->json(vite()->useSite()) ?></script>
-
-  <?= vite()->js() ?>
 
 </body>
 </html>
