@@ -3,41 +3,30 @@
     ref="skipLink"
     href="#main"
     class="skip-to-content-link"
-    @click.prevent="handleFocusElement"
+    @click.prevent="navigate"
   >
     Skip to content
   </a>
 </template>
 
-<script>
+<script setup>
 import { ref, watch } from "vue";
 import { useRoute } from "vue-router";
 
-export default {
-  setup() {
-    const skipLink = ref(null);
-    const route = useRoute();
+const skipLink = ref(null);
+const route = useRoute();
 
-    watch(route, () => {
-      skipLink.value.focus();
-    });
+watch(route, () => {
+  skipLink.value.focus();
+});
 
-    const focusElement = (id) => {
-      const element = document.querySelector(id);
-      if (!id || !element) return;
-      element.scrollIntoView();
-      element.focus();
-    };
-
-    const handleFocusElement = ({ target }) => {
-      focusElement(target.hash);
-    };
-
-    return {
-      skipLink,
-      handleFocusElement,
-    };
-  },
+const navigate = ({ target }) => {
+  const { hash } = target;
+  if (hash) {
+    const element = document.querySelector(hash);
+    element?.scrollIntoView();
+    element?.focus();
+  }
 };
 </script>
 

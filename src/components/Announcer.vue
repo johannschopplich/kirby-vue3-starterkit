@@ -6,15 +6,9 @@
   />
 </template>
 
-<script>
+<script setup>
 import { useAnnouncer } from "~/hooks";
-
-export default {
-  setup() {
-    const { announcer } = useAnnouncer();
-    return { announcer };
-  },
-};
+const { announcer } = useAnnouncer();
 </script>
 
 <style>

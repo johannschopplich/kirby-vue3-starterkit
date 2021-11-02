@@ -12,16 +12,9 @@
   </footer>
 </template>
 
-<script>
+<script setup>
 import { useSite } from "~/hooks";
-
-export default {
-  setup() {
-    return {
-      site: useSite(),
-    };
-  },
-};
+const site = useSite();
 </script>
 
 <style>

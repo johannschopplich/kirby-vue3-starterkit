@@ -13,14 +13,7 @@
   <Footer />
 </template>
 
-<script>
+<script setup>
 import { useRoute } from "vue-router";
-
-export default {
-  setup() {
-    return {
-      route: useRoute(),
-    };
-  },
-};
+const route = useRoute();
 </script>
