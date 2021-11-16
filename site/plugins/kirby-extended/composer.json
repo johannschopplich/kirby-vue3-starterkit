@@ -1,7 +1,8 @@
 {
   "name": "johannschopplich/kirby-extended",
-  "description": "Env variables, meta tags generation and more",
+  "description": "Dotenv support, meta tags generation and more for the Kirby CMS",
   "type": "kirby-plugin",
+  "version": "2.10.2",
   "keywords": [
     "kirby",
     "env",
@@ -11,6 +12,7 @@
     "meta-tags"
   ],
   "license": "MIT",
+  "homepage": "https://github.com/johannschopplich/kirby-extended",
   "authors": [
     {
       "name": "Johann Schopplich",
@@ -25,7 +27,7 @@
     "vlucas/phpdotenv": "^5.0"
   },
   "require-dev": {
-    "getkirby/cms": "^3.0"
+    "getkirby/cms": "^3.6"
   },
   "autoload": {
     "files": [

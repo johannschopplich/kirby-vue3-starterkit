@@ -1,3 +1,27 @@
+# 2.14.4
+
+* Fix PHP 5.5 support.
+* Allow to use psr/log 2 or 3.
+
+# 2.14.3
+
+* Support PHP 8.1
+
+# 2.14.1
+
+* Fix syntax highlighting scrolling too far.
+* Improve the way we detect xdebug linkformat.
+
+# 2.14.0
+
+* Switched syntax highlighting to Prism.js
+
+Avoids licensing issues with prettify, and uses a maintaned, modern project.
+
+# 2.13.0
+
+* Add Netbeans editor
+
 # 2.12.1
 
 * Avoid redirecting away from an error.
