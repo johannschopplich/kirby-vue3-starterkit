@@ -196,12 +196,10 @@ The stale-while-revalidate mechanism for the [`usePage`](src/hooks/usePage.js) h
 
 ### Composer
 
-Kirby-related dependencies are managed via [Composer](https://getcomposer.org) and located in the `vendor` directory. Composer dependencies are tracked in this repository by default. Thus, no installation of Composer and executing `composer install` is required.
-
-Update dependencies with:
+Kirby-related dependencies are managed via [Composer](https://getcomposer.org) and located in the `vendor` directory. Install them with:
 
 ```bash
-composer update
+composer install
 ```
 
 ### Node Dependencies
@@ -214,10 +212,10 @@ npm install
 
 ### Environment Variables
 
-Duplicate the [`.env.example`](.env.example) as `.env`::
+Duplicate the [`.env.development.example`](.env.development.example) as `.env`::
 
 ```bash
-cp .env.example .env
+cp .env.development.example .env
 ```
 
 Optionally, adapt it's values.
@@ -267,15 +265,9 @@ Vite will generate a hashed version of all assets, including images and fonts sa
 
 ### Deployment
 
-1. Deploy the repository on your server.
-2. Duplicate [`.env.example`](.env.example) as `.env`.
-3. Install npm dependencies and build frontend assets: `npm i && npm run build`.
-4. Change variables in your `.env`:
-   - `KIRBY_DEBUG` to `false`
-5. Point your web server to the `public` folder.
-6. Some hosting environments require to uncomment `RewriteBase /` in [`.htaccess`](public/.htaccess) to make site links work.
+> ℹ️ See [ploi-deploy.sh](./scripts/ploi-deploy.sh) for exemplary deployment instructions.
 
-Now your project is hopefully up 'n' running!
+> ℹ️ Some hosting environments require to uncomment `RewriteBase /` in [`.htaccess`](public/.htaccess) to make site links work.
 
 ## Configuration
 
@@ -284,7 +276,7 @@ All development and production related configurations for both backend and front
 - `KIRBY_DEV_HOSTNAME` and `KIRBY_DEV_PORT` specify the address where you wish the Kirby backend to be served from. It is used by the frontend to fetch content data as JSON.
 - Keys starting with `VITE_` are available in your code following the `import.meta.env.VITE_CUSTOM_VARIABLE` syntax.
 
-For example setting `KIRBY_CACHE` to `true` is useful in production environment.
+For example, setting `KIRBY_CACHE` to `true` is useful in production environment.
 
 ### Content API Slug
 
@@ -328,4 +320,4 @@ To keep page data fresh with **stale-while-revalidate**, set:
 
 ## License
 
-[MIT](https://opensource.org/licenses/MIT)
+[MIT](./LICENSE) License © 2021 [Johann Schopplich](https://github.com/johannschopplich)
