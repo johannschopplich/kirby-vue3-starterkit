@@ -1,6 +1,7 @@
 .DS_Store
-/.env
+.env
 node_modules
+vendor
 
 # Kirby
 .lock
@@ -10,6 +11,8 @@ node_modules
 !/storage/accounts/.gitkeep
 /storage/cache/*
 !/storage/cache/.gitkeep
+# /storage/content/*
+# !/storage/content/.gitkeep
 /storage/logs/*
 !/storage/logs/.gitkeep
 /storage/sessions/*
