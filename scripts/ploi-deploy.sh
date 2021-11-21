@@ -15,9 +15,9 @@ composer install --no-interaction --prefer-dist --optimize-autoloader --no-dev
 
 # Build frontend assets
 if [ -f package-lock.json ]; then
-  npm install
+  npm install && npm run build
 elif [ -f pnpm-lock.yaml ]; then
-  npx pnpm i --store=node_modules/.pnpm-store && npx pnpm run build
+  npx pnpm i && npx pnpm run build
 fi
 
 # Clean cache
