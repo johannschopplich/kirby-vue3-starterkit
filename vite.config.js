@@ -1,4 +1,3 @@
-/* eslint-env node */
 import "dotenv/config";
 import { defineConfig } from "vite";
 import { resolve } from "path";

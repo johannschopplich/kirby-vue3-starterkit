@@ -207,7 +207,7 @@ composer install
 Install npm dependencies:
 
 ```bash
-npm install
+npm ci
 ```
 
 ### Environment Variables

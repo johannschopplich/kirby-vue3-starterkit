@@ -1,32 +1,32 @@
 {
   "private": true,
-  "name": "kirby-vue3-starterkit",
   "version": "4.1.0",
   "scripts": {
     "kirby": "env-cmd --use-shell \"php -S \\$KIRBY_DEV_HOSTNAME:\\$KIRBY_DEV_PORT -t public server.php\"",
     "dev": "shx touch src/.lock && concurrently \"npm:kirby\" \"vite\"",
-    "build": "shx rm -f src/.lock && vite build && node scripts/buildServiceWorker.js",
+    "build": "shx rm -f src/.lock && vite build && node scripts/buildServiceWorker.mjs",
     "lint": "eslint \"src/**/*.{js,vue}\"",
     "lint:fix": "npm run lint -- --fix",
     "format": "prettier --write \"src/**/*.{js,vue}\""
   },
   "dependencies": {
-    "vue": "^3.2.22",
+    "vue": "^3.2.24",
     "vue-router": "^4.0.12"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^1.10.0",
-    "colorette": "^2.0.16",
+    "@types/node": "^16.11.12",
+    "@vitejs/plugin-vue": "^1.10.2",
     "concurrently": "^6.4.0",
+    "consola": "^2.15.3",
     "dotenv": "^10.0.0",
     "env-cmd": "^10.1.0",
-    "eslint": "^8.3.0",
+    "eslint": "^8.4.1",
     "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-vue": "^8.1.1",
+    "eslint-plugin-vue": "^8.2.0",
     "nanoid": "^3.1.30",
-    "prettier": "2.4.1",
+    "prettier": "2.5.1",
     "shx": "^0.3.3",
-    "unplugin-vue-components": "^0.17.2",
-    "vite": "^2.6.14"
+    "unplugin-vue-components": "^0.17.6",
+    "vite": "^2.7.0"
   }
 }
