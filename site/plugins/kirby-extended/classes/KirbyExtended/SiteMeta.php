@@ -30,18 +30,21 @@ class SiteMeta
 
         if ($sitemap === null) {
             $sitemap[] = '<?xml version="1.0" encoding="UTF-8"?>';
-            $sitemap[] = '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">';
+            $sitemap[] = '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
 
             $excludeTemplates = option('kirby-extended.sitemap.exclude.templates', []);
             $excludePages     = option('kirby-extended.sitemap.exclude.pages', []);
-            $excludePattern   = '/^(?:' . implode('|', $excludePages) . ')$/i';
+
+            if (is_callable($excludePages)) {
+                $excludePages = $excludePages();
+            }
 
             foreach (site()->index() as $item) {
                 if (in_array($item->intendedTemplate()->name(), $excludeTemplates)) {
                     continue;
                 }
 
-                if (preg_match($excludePattern, $item->id())) {
+                if (preg_match('/^(?:' . implode('|', $excludePages) . ')$/i', $item->id())) {
                     continue;
                 }
 

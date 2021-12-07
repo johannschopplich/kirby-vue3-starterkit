@@ -24,16 +24,16 @@ Download and copy this repository to `/site/plugins/kirby-extended`.
 
 ### Git submodule
 
-```
+```bash
 git submodule add https://github.com/johannschopplich/kirby-extended.git site/plugins/kirby-extended
 ```
 
 ### Composer
 
-```
+```bash
 composer require johannschopplich/kirby-extended
 ```
 
 ## License
 
-[MIT](https://opensource.org/licenses/MIT)
+[MIT](./LICENSE) License © 2021 [Johann Schopplich](https://github.com/johannschopplich)

@@ -2,7 +2,7 @@
   "name": "johannschopplich/kirby-extended",
   "description": "Dotenv support, meta tags generation and more for the Kirby CMS",
   "type": "kirby-plugin",
-  "version": "2.10.2",
+  "version": "2.10.3",
   "keywords": [
     "kirby",
     "env",
@@ -12,7 +12,7 @@
     "meta-tags"
   ],
   "license": "MIT",
-  "homepage": "https://github.com/johannschopplich/kirby-extended",
+  "homepage": "https://github.com/johannschopplich/kirby-extended#readme",
   "authors": [
     {
       "name": "Johann Schopplich",
@@ -23,7 +23,7 @@
   "require": {
     "php": ">=7.4.0",
     "getkirby/composer-installer": "^1.2",
-    "symfony/polyfill-php80": "^1.20",
+    "symfony/polyfill-php80": "^1.23",
     "vlucas/phpdotenv": "^5.0"
   },
   "require-dev": {
