@@ -6,8 +6,8 @@ import { transform } from "esbuild";
 import { nanoid } from "nanoid";
 import consola from "consola";
 
-const swSrcPath = "src/serviceWorker.js";
-const swDistPath = "public/service-worker.js";
+const srcPath = "src/serviceWorker.js";
+const distPath = "public/service-worker.js";
 
 async function main() {
   if (process.env.VITE_SERVICE_WORKER !== "true") return;
@@ -24,11 +24,11 @@ async function main() {
     const VERSION = "${nanoid()}"
     const KIRBY_API_SLUG = "${process.env.KIRBY_API_SLUG || "api"}"
     const CONTENT_API_SLUG = "${process.env.CONTENT_API_SLUG}"
-    ${await readFile(swSrcPath)}
+    ${await readFile(srcPath)}
   `;
 
   const { code } = await transform(bundle, { minify: true });
-  await writeFile(swDistPath, code);
+  await writeFile(distPath, code);
 
   consola.success(`${assets.length} assets added to precache`);
 }

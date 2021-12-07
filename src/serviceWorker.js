@@ -32,8 +32,8 @@ const PRECACHE_URLS = [
  * Stash an item in specified cache
  *
  * @param {string} cacheName Name of cache
- * @param {object} request Request data
- * @param {object} response Cloned fetch response
+ * @param {Request} request Request data
+ * @param {Response} response Cloned fetch response
  */
 async function stashInCache(cacheName, request, response) {
   const cache = await caches.open(cacheName);
@@ -45,7 +45,6 @@ async function stashInCache(cacheName, request, response) {
  *
  * @param {string} cacheName Name of cache
  * @param {number} maxItems Limit of images to cache
- * @returns {Function} Run until limit is fullfilled
  */
 async function trimCache(cacheName, maxItems) {
   const cache = await caches.open(cacheName);
@@ -57,14 +56,11 @@ async function trimCache(cacheName, maxItems) {
 }
 
 self.addEventListener("message", ({ data }) => {
-  if (typeof data !== "object" || data === null) return;
-  const { command } = data;
-
-  if (command === "skipWaiting") {
+  if (data?.command === "skipWaiting") {
     self.skipWaiting();
   }
 
-  if (command === "trimCaches") {
+  if (data?.command === "trimCaches") {
     if (MAX_CACHED_PAGES) trimCache(CACHE_KEYS.PAGES, MAX_CACHED_PAGES);
     if (MAX_CACHED_IMAGES) trimCache(CACHE_KEYS.IMAGES, MAX_CACHED_IMAGES);
   }
@@ -168,6 +164,7 @@ self.addEventListener("fetch", (event) => {
         }
 
         console.error(error);
+        return new Response(null, { status: 504 });
       }
     })()
   );
