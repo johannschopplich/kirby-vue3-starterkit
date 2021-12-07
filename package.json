@@ -2,7 +2,7 @@
   "private": true,
   "version": "4.1.0",
   "scripts": {
-    "kirby": "env-cmd --use-shell \"php -S \\$KIRBY_DEV_HOSTNAME:\\$KIRBY_DEV_PORT -t public server.php\"",
+    "kirby": "env-cmd --use-shell \"php -S \\$KIRBY_DEV_HOSTNAME:\\$KIRBY_DEV_PORT -t public vendor/getkirby/cms/router.php\"",
     "dev": "shx touch src/.lock && concurrently \"npm:kirby\" \"vite\"",
     "build": "shx rm -f src/.lock && vite build && node scripts/buildServiceWorker.mjs",
     "lint": "eslint \"src/**/*.{js,vue}\"",

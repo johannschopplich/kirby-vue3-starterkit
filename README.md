@@ -158,9 +158,6 @@ kirby-vue3-starterkit/
 |   # Environment variables for both Kirby and Vite (to be duplicated as `.env`)
 ├── .env.example
 |
-|   # Router for the PHP built-in development server
-├── server.php
-|
 |   # Configuration file for Vite
 └── vite.config.js
 ```
