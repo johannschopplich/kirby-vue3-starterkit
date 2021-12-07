@@ -1,22 +1,18 @@
 // @ts-check
-/* eslint-env node */
 
-require("dotenv").config();
-const { readFile, writeFile } = require("fs/promises");
-const { transform } = require("esbuild");
-const { green } = require("colorette");
-const { nanoid } = require("nanoid");
+import "dotenv/config";
+import { readFile, writeFile } from "fs/promises";
+import { transform } from "esbuild";
+import { nanoid } from "nanoid";
+import consola from "consola";
 
 const swSrcPath = "src/serviceWorker.js";
 const swDistPath = "public/service-worker.js";
 
-/**
- * Main entry point
- */
 async function main() {
   if (process.env.VITE_SERVICE_WORKER !== "true") return;
 
-  console.log(green("Building service worker..."));
+  consola.start("building service worker...");
 
   const swManifest = JSON.parse(
     await readFile("public/dist/manifest.json", "utf-8")
@@ -34,11 +30,7 @@ async function main() {
   const { code } = await transform(bundle, { minify: true });
   await writeFile(swDistPath, code);
 
-  console.log(
-    `${green("✓")} Added ${
-      assets.length
-    } additional service worker assets to precache.`
-  );
+  consola.success(`${assets.length} assets added to precache`);
 }
 
-main().catch(() => process.exit(1));
+main().catch((err) => consola.error(err));
