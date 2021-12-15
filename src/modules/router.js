@@ -1,8 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import { useSite, useLanguages } from "~/hooks";
+import { pascalCase } from "change-case";
 import Default from "~/views/Default.vue";
-
-const capitalize = ([first, ...rest]) => first.toUpperCase() + rest.join("");
 
 /** @type {import("vue-router").RouterScrollBehavior} */
 const scrollBehavior = (to, from, savedPosition) => {
@@ -35,7 +34,7 @@ export const install = (app) => {
     ...site.children.map((page) => ({
       path: `/${page.uri}`,
       component: () =>
-        import(`../views/${capitalize(page.template)}.vue`).catch(
+        import(`../views/${pascalCase(page.template)}.vue`).catch(
           () => Default
         ),
     })),
@@ -44,7 +43,7 @@ export const install = (app) => {
       .map((page) => ({
         path: `/${page.uri}/:id`,
         component: () =>
-          import(`../views/${capitalize(page.childTemplate)}.vue`).catch(
+          import(`../views/${pascalCase(page.childTemplate)}.vue`).catch(
             () => Default
           ),
       })),
