@@ -10,12 +10,13 @@
     "format": "prettier --write \"src/**/*.{js,vue}\""
   },
   "dependencies": {
+    "change-case": "^4.1.2",
     "vue": "^3.2.24",
     "vue-router": "^4.0.12"
   },
   "devDependencies": {
-    "@types/node": "^16.11.12",
-    "@vitejs/plugin-vue": "^1.10.2",
+    "@types/node": "^16.11.13",
+    "@vitejs/plugin-vue": "^2.0.1",
     "concurrently": "^6.4.0",
     "consola": "^2.15.3",
     "dotenv": "^10.0.0",
@@ -26,7 +27,7 @@
     "nanoid": "^3.1.30",
     "prettier": "2.5.1",
     "shx": "^0.3.3",
-    "unplugin-vue-components": "^0.17.6",
-    "vite": "^2.7.0"
+    "unplugin-vue-components": "^0.17.9",
+    "vite": "^2.7.2"
   }
 }
