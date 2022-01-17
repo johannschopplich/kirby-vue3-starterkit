@@ -44,6 +44,6 @@ export default defineConfig(({ mode }) => ({
   },
 
   optimizeDeps: {
-    include: ["vue", "vue-router"],
+    include: ["vue", "vue-router", "change-case"],
   },
 }));
