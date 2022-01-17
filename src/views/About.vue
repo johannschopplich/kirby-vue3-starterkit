@@ -5,6 +5,7 @@
     <aside>
       <section>
         <h2>Address</h2>
+        <!-- eslint-disable-next-line vue/no-v-html -->
         <div class="text" v-html="page.address" />
       </section>
 
@@ -34,6 +35,7 @@
       </section>
     </aside>
 
+    <!-- eslint-disable-next-line vue/no-v-html -->
     <div v-kirbytext class="text" v-html="page.text" />
   </div>
 </template>

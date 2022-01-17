@@ -3,7 +3,8 @@
   "env": {
     "es2021": true,
     "browser": true,
-    "node": true
+    "node": true,
+    "vue/setup-compiler-macros": true
   },
   "extends": ["eslint:recommended", "plugin:vue/vue3-recommended", "prettier"],
   "parserOptions": {
@@ -11,6 +12,7 @@
     "sourceType": "module"
   },
   "rules": {
-    "vue/no-v-html": "off"
+    "vue/multi-word-component-names": "off",
+    "vue/script-setup-uses-vars": "error"
   }
 }

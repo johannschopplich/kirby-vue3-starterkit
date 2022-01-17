@@ -8,6 +8,7 @@
       </p>
     </header>
 
+    <!-- eslint-disable-next-line vue/no-v-html -->
     <div v-kirbytext class="note-text text" v-html="page.text" />
   </article>
 </template>

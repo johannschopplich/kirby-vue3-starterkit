@@ -11,6 +11,7 @@
     </header>
 
     <div class="album-text text">
+      <!-- eslint-disable-next-line vue/no-v-html -->
       <span v-html="page.description" />
       <p class="album-tags tags">
         {{ page.tags }}
