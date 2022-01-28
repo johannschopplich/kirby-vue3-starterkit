@@ -50,9 +50,7 @@ const apiUri = (path) => {
  * @param {boolean} [options.revalidate=false] Skip cache look-up and fetch page freshly
  * @returns {Promise<object|boolean>} The page's data or `false` if fetch request failed
  */
-const getPage = async (id, { revalidate = false, token } = {}) => {
-  console.log(token);
-
+const getPage = async (id, { revalidate = false, token = null } = {}) => {
   let page;
   const isCached = cache.has(id);
   const targetUrl = token
