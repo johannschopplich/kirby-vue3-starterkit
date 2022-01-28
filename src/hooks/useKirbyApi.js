@@ -48,6 +48,7 @@ const apiUri = (path) => {
  * @param {string} id The page to retrieve
  * @param {object} [options] Optional options
  * @param {boolean} [options.revalidate=false] Skip cache look-up and fetch page freshly
+ * @param {boolean} [options.token] Add a token to the request to fetch a draft preview
  * @returns {Promise<object|boolean>} The page's data or `false` if fetch request failed
  */
 const getPage = async (id, { revalidate = false, token = null } = {}) => {
