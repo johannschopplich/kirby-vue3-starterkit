@@ -10,12 +10,15 @@ import { useAnnouncer, useKirbyApi } from "./";
  */
 export default (path) => {
   const router = useRouter();
-  const { path: currentPath } = useRoute();
+  const { path: currentPath, query } = useRoute();
   const { hasPage, getPage } = useKirbyApi();
   const { setAnnouncer } = useAnnouncer();
 
   // Build page id and trim leading or trailing slashes
   let id = (path ?? currentPath).replace(/^\/|\/$/g, "");
+
+  // Get token for draft previews
+  const token = query.token;
 
   // Fall back to homepage if id is empty
   if (!id) id = "home";
@@ -37,7 +40,7 @@ export default (path) => {
     // Check if cached page exists (otherwise skip SWR)
     const isCached = hasPage(id);
     // Get page from cache or freshly fetch it
-    const data = await getPage(id);
+    const data = await getPage(id, { token });
 
     if (!data) {
       page.__status = "error";

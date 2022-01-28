@@ -21,7 +21,7 @@ return [
             }
 
             $page = kirby()->page($pageId);
-            if (!$page || !$page->isReadable()) {
+            if (!$page || !$page->isVerified(get('token'))) {
                 $page = kirby()->site()->errorPage();
             };
 
@@ -49,7 +49,7 @@ return [
             }
 
             $page = kirby()->page($pageId);
-            if (!$page || !$page->isReadable()) {
+            if (!$page || !$page->isVerified(get('token'))) {
                 $page = kirby()->site()->errorPage();
             };
 
