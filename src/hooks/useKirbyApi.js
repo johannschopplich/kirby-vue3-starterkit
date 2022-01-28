@@ -51,7 +51,7 @@ const apiUri = (path) => {
  * @param {boolean} [options.token] Add a token to the request to fetch a draft preview
  * @returns {Promise<object|boolean>} The page's data or `false` if fetch request failed
  */
-const getPage = async (id, { revalidate = false, token = null } = {}) => {
+const getPage = async (id, { revalidate = false, token } = {}) => {
   let page;
   const isCached = cache.has(id);
   const targetUrl = token
