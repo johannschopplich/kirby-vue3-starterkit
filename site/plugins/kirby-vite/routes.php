@@ -22,7 +22,7 @@ return [
 
             $page = kirby()->page($pageId);
             if (!$page || !$page->isReadable()) {
-                $page = site()->errorPage();
+                $page = kirby()->site()->errorPage();
             };
 
             $json = Page::render($page, 'json');
@@ -50,7 +50,7 @@ return [
 
             $page = kirby()->page($pageId);
             if (!$page || !$page->isReadable()) {
-                $page = site()->errorPage();
+                $page = kirby()->site()->errorPage();
             };
 
             $html = Page::render($page, 'html');
