@@ -20,9 +20,12 @@ return [
                 [$pageId] = $args;
             }
 
-            $page = page($pageId) ?? site()->errorPage();
-            $json = Page::render($page, 'json');
+            $page = kirby()->page($pageId);
+            if (!$page || !$page->isReadable()) {
+                $page = site()->errorPage();
+            };
 
+            $json = Page::render($page, 'json');
             return new Response($json, 'application/json');
         }
     ],
@@ -45,9 +48,12 @@ return [
                 $pageId = site()->homePageId();
             }
 
-            $page = page($pageId) ?? site()->errorPage();
-            $html = Page::render($page, 'html');
+            $page = kirby()->page($pageId);
+            if (!$page || !$page->isReadable()) {
+                $page = site()->errorPage();
+            };
 
+            $html = Page::render($page, 'html');
             return $html;
         }
     ]
