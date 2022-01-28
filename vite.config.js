@@ -4,7 +4,7 @@ import { resolve } from "path";
 import Components from "unplugin-vue-components/vite";
 import Vue from "@vitejs/plugin-vue";
 
-process.env.VITE_BACKEND_URL = `http://${process.env.KIRBY_DEV_HOSTNAME}:${process.env.KIRBY_DEV_PORT}`;
+process.env.VITE_BACKEND_URL = `${process.env.KIRBY_DEV_PROTOCOL}://${process.env.KIRBY_DEV_HOSTNAME}:${process.env.KIRBY_DEV_PORT}`;
 process.env.VITE_BACKEND_API_SLUG = process.env.CONTENT_API_SLUG;
 process.env.VITE_MULTILANG = process.env.KIRBY_MULTILANG;
 
@@ -39,7 +39,8 @@ export default defineConfig(({ mode }) => ({
 
   server: {
     cors: true,
-    port: 3000,
+    port: process.env.VITE_DEV_PORT,
+    host: "0.0.0.0",
     strictPort: true,
   },
 

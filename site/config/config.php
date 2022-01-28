@@ -25,7 +25,8 @@ return [
 
     'johannschopplich' => [
         'kirby-vite' => [
-            'entry' => 'main.js'
+            'entry' => 'main.js',
+            'devServer' => env('KIRBY_DEV_PROTOCOL', 'http').'://'.env('KIRBY_DEV_HOSTNAME', 'localhost').':'.env('VITE_DEV_PORT', '3000')
         ]
     ],
 
