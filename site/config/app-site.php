@@ -14,25 +14,18 @@ return [
             'childTemplate' => $child->hasChildren() ? $child->children()->first()->intendedTemplate()->name() : null
         ])
         ->values(),
+
     // (2)
     // The following data is required for multi-language setups:
     'languages' => kirby()
         ->languages()
-        ->map(fn ($language) => [
-            'code' => $language->code(),
-            'name' => $language->name(),
-            'isDefault' => $language->isDefault()
-        ])
-        ->values(),
+        ->toArray(),
+
     // (3)
     // You can add custom commonly used data, as done for this starterkit:
     'title' => site()->title()->value(),
     'social' => page('about')
         ->social()
         ->toStructure()
-        ->map(fn ($social) => [
-            'url' => $social->url()->value(),
-            'platform' => $social->platform()->value()
-        ])
-        ->values()
+        ->toArray()
 ];
