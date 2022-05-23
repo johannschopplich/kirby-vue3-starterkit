@@ -5,7 +5,7 @@
   <div class="page">
     <Header />
     <main id="main" tabindex="-1">
-      <router-view :key="route.path" />
+      <RouterView :key="route.path" />
     </main>
   </div>
 

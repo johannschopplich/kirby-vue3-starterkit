@@ -3,7 +3,7 @@
     ref="skipLink"
     href="#main"
     class="skip-to-content-link"
-    @click.prevent="navigate"
+    @click.prevent="navigate()"
   >
     Skip to content
   </a>
@@ -20,14 +20,14 @@ watch(route, () => {
   skipLink.value.focus();
 });
 
-const navigate = ({ target }) => {
+function navigate({ target }) {
   const { hash } = target;
   if (!hash) return;
 
   const element = document.querySelector(hash);
   element?.scrollIntoView();
   element?.focus();
-};
+}
 </script>
 
 <style>
