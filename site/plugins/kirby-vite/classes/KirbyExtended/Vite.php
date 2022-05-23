@@ -139,7 +139,9 @@ class Vite
      */
     public function css(string $entry = null, array $options = []): ?string
     {
-        if ($this->isDev()) return null;
+        if ($this->isDev()) {
+            return null;
+        }
 
         $entry ??= option('johannschopplich.kirby-vite.entry', 'index.js');
         $attr = array_merge($options, [
@@ -203,7 +205,9 @@ class Vite
      */
     public function preloadModule(string $name): ?string
     {
-        if ($this->isDev()) return null;
+        if ($this->isDev()) {
+            return null;
+        }
 
         $match = array_filter(
             $this->useManifest(),
@@ -227,7 +231,7 @@ class Vite
      */
     public function json(array $data): string
     {
-        return json_encode($data, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+        return \Kirby\Data\Json::encode($data);
     }
 
     /**
