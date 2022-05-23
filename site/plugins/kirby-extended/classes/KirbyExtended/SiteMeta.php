@@ -44,7 +44,7 @@ class SiteMeta
                     continue;
                 }
 
-                if (preg_match('/^(?:' . implode('|', $excludePages) . ')$/i', $item->id())) {
+                if (preg_match('!^(?:' . implode('|', $excludePages) . ')$!i', $item->id())) {
                     continue;
                 }
 

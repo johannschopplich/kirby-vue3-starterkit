@@ -1,8 +1,8 @@
 import "dotenv/config";
-import { defineConfig } from "vite";
 import { resolve } from "path";
-import Components from "unplugin-vue-components/vite";
+import { defineConfig } from "vite";
 import Vue from "@vitejs/plugin-vue";
+import Components from "unplugin-vue-components/vite";
 
 process.env.VITE_BACKEND_URL = `http://${process.env.KIRBY_DEV_HOSTNAME}:${process.env.KIRBY_DEV_PORT}`;
 process.env.VITE_BACKEND_API_SLUG = process.env.CONTENT_API_SLUG;
@@ -41,9 +41,5 @@ export default defineConfig(({ mode }) => ({
     cors: true,
     port: 3000,
     strictPort: true,
-  },
-
-  optimizeDeps: {
-    include: ["vue", "vue-router", "change-case"],
   },
 }));

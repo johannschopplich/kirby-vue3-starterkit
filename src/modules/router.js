@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import { useSite, useLanguages } from "~/hooks";
-import { pascalCase } from "change-case";
+import { pascalCase } from "scule";
 import Default from "~/views/Default.vue";
 
 /** @type {import("vue-router").RouterScrollBehavior} */

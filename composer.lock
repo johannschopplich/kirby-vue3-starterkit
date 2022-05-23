@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "06679e480bc8f816c3b2a80ab796da08",
+    "content-hash": "1a105db533bfe1bba1b00784a86a160d",
     "packages": [
         {
             "name": "claviska/simpleimage",
@@ -128,16 +128,16 @@
         },
         {
             "name": "getkirby/cms",
-            "version": "3.6.3.1",
+            "version": "3.6.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/getkirby/kirby.git",
-                "reference": "e8a40bf0ff2a3b5b7ee5729dc86a9e4b0ed141a7"
+                "reference": "005fc78fcc0e7f99f61e6973efa8ea8ec85741d9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/getkirby/kirby/zipball/e8a40bf0ff2a3b5b7ee5729dc86a9e4b0ed141a7",
-                "reference": "e8a40bf0ff2a3b5b7ee5729dc86a9e4b0ed141a7",
+                "url": "https://api.github.com/repos/getkirby/kirby/zipball/005fc78fcc0e7f99f61e6973efa8ea8ec85741d9",
+                "reference": "005fc78fcc0e7f99f61e6973efa8ea8ec85741d9",
                 "shasum": ""
             },
             "require": {
@@ -146,13 +146,13 @@
                 "ext-mbstring": "*",
                 "filp/whoops": "2.14.5",
                 "getkirby/composer-installer": "^1.2.1",
-                "laminas/laminas-escaper": "2.9.0",
+                "laminas/laminas-escaper": "2.10.0",
                 "michelf/php-smartypants": "1.8.1",
                 "php": ">=7.4.0 <8.2.0",
                 "phpmailer/phpmailer": "6.5.4",
                 "psr/log": "1.1.4",
-                "symfony/polyfill-intl-idn": "1.24.0",
-                "symfony/polyfill-mbstring": "1.24.0"
+                "symfony/polyfill-intl-idn": "1.25.0",
+                "symfony/polyfill-mbstring": "1.25.0"
             },
             "replace": {
                 "symfony/polyfill-php72": "*"
@@ -205,7 +205,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2022-03-24T09:53:11+00:00"
+            "time": "2022-05-05T11:30:27+00:00"
         },
         {
             "name": "getkirby/composer-installer",
@@ -318,16 +318,16 @@
         },
         {
             "name": "johannschopplich/kirby-extended",
-            "version": "2.10.3",
+            "version": "2.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/johannschopplich/kirby-extended.git",
-                "reference": "b4f10330ba7d20c5c23507af0c046f92afde1b0f"
+                "reference": "2651645e030d95a27deb7979915dab9c4b0c68ef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/johannschopplich/kirby-extended/zipball/b4f10330ba7d20c5c23507af0c046f92afde1b0f",
-                "reference": "b4f10330ba7d20c5c23507af0c046f92afde1b0f",
+                "url": "https://api.github.com/repos/johannschopplich/kirby-extended/zipball/2651645e030d95a27deb7979915dab9c4b0c68ef",
+                "reference": "2651645e030d95a27deb7979915dab9c4b0c68ef",
                 "shasum": ""
             },
             "require": {
@@ -374,39 +374,39 @@
             ],
             "support": {
                 "issues": "https://github.com/johannschopplich/kirby-extended/issues",
-                "source": "https://github.com/johannschopplich/kirby-extended/tree/v2.10.3"
+                "source": "https://github.com/johannschopplich/kirby-extended/tree/v2.11.0"
             },
-            "time": "2021-11-23T12:56:39+00:00"
+            "time": "2022-05-23T10:33:26+00:00"
         },
         {
             "name": "laminas/laminas-escaper",
-            "version": "2.9.0",
+            "version": "2.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-escaper.git",
-                "reference": "891ad70986729e20ed2e86355fcf93c9dc238a5f"
+                "reference": "58af67282db37d24e584a837a94ee55b9c7552be"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-escaper/zipball/891ad70986729e20ed2e86355fcf93c9dc238a5f",
-                "reference": "891ad70986729e20ed2e86355fcf93c9dc238a5f",
+                "url": "https://api.github.com/repos/laminas/laminas-escaper/zipball/58af67282db37d24e584a837a94ee55b9c7552be",
+                "reference": "58af67282db37d24e584a837a94ee55b9c7552be",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.3 || ~8.0.0 || ~8.1.0"
+                "ext-ctype": "*",
+                "ext-mbstring": "*",
+                "php": "^7.4 || ~8.0.0 || ~8.1.0"
             },
             "conflict": {
                 "zendframework/zend-escaper": "*"
             },
             "require-dev": {
+                "infection/infection": "^0.26.6",
                 "laminas/laminas-coding-standard": "~2.3.0",
-                "phpunit/phpunit": "^9.3",
-                "psalm/plugin-phpunit": "^0.12.2",
-                "vimeo/psalm": "^3.16"
-            },
-            "suggest": {
-                "ext-iconv": "*",
-                "ext-mbstring": "*"
+                "maglnet/composer-require-checker": "^3.8.0",
+                "phpunit/phpunit": "^9.5.18",
+                "psalm/plugin-phpunit": "^0.16.1",
+                "vimeo/psalm": "^4.22.0"
             },
             "type": "library",
             "autoload": {
@@ -438,7 +438,7 @@
                     "type": "community_bridge"
                 }
             ],
-            "time": "2021-09-02T17:10:53+00:00"
+            "time": "2022-03-08T20:15:36+00:00"
         },
         {
             "name": "league/color-extractor",
@@ -835,7 +835,7 @@
         },
         {
             "name": "symfony/polyfill-intl-idn",
-            "version": "v1.24.0",
+            "version": "v1.25.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-intl-idn.git",
@@ -902,7 +902,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-intl-idn/tree/v1.24.0"
+                "source": "https://github.com/symfony/polyfill-intl-idn/tree/v1.25.0"
             },
             "funding": [
                 {
@@ -1006,7 +1006,7 @@
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.24.0",
+            "version": "v1.25.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
@@ -1069,7 +1069,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.24.0"
+                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.25.0"
             },
             "funding": [
                 {
@@ -1261,5 +1261,5 @@
         "php": ">=7.4.0"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }
