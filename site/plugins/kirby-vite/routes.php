@@ -27,7 +27,7 @@ return [
             };
 
             $json = Page::render($page, 'json');
-            return new Response($json, 'application/json');
+            return Response::json($json);
         }
     ],
 
