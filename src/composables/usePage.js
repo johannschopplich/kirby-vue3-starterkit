@@ -17,7 +17,7 @@ export default (path) => {
   // Build page id and trim leading or trailing slashes
   let id = (path ?? currentPath).replace(/^\/|\/$/g, "");
 
-  // Get token for draft previews
+  // Get the token query parameter for draft previews
   const token = query.token;
 
   // Fall back to homepage if id is empty

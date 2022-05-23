@@ -10,8 +10,8 @@
     "format": "prettier --write \"src/**/*.{js,vue}\""
   },
   "dependencies": {
+    "ohmyfetch": "^0.4.18",
     "scule": "^0.2.1",
-    "ufo": "^0.8.4",
     "vue": "^3.2.36",
     "vue-router": "^4.0.15"
   },

@@ -1,22 +1,7 @@
+import { $fetch } from "ohmyfetch";
 import { useLanguages } from "./";
 
 const cache = new Map();
-
-/**
- * Fetch wrapper to request JSON data
- *
- * @param {string} url The URL to fetch data from
- * @returns {Promise<object>} The JSON content from the response
- */
-const fetcher = async (url) => {
-  const response = await fetch(url);
-
-  if (!response.ok) {
-    throw new Error(`Request ${url} failed with "${response.statusText}".`);
-  }
-
-  return await response.json();
-};
 
 /**
  * Builds an API URL for a specific file and language
@@ -24,7 +9,7 @@ const fetcher = async (url) => {
  * @param {string} path The path to the file desired
  * @returns {string} The final URL
  */
-const apiUri = (path) => {
+const getApiUri = (path) => {
   const { isMultilang, languageCode } = useLanguages();
   let result = "";
 
@@ -36,7 +21,7 @@ const apiUri = (path) => {
   // Add the API path
   result += `/${import.meta.env.VITE_BACKEND_API_SLUG}`;
 
-  // Add the file to fetch
+  // Add the file path to fetch
   result += `/${path}`;
 
   return result;
@@ -54,9 +39,7 @@ const apiUri = (path) => {
 const getPage = async (id, { revalidate = false, token } = {}) => {
   let page;
   const isCached = cache.has(id);
-  const targetUrl = token
-    ? apiUri(`${id}.json?token=${token}`)
-    : apiUri(`${id}.json`);
+  const targetUrl = getApiUri(`${id}.json${token ? `?token=${token}` : ""}`);
 
   // Use cached page if present in the store, except when revalidating
   if (!revalidate && isCached) {
@@ -77,7 +60,7 @@ const getPage = async (id, { revalidate = false, token } = {}) => {
   }
 
   try {
-    page = await fetcher(targetUrl);
+    page = await $fetch(targetUrl);
   } catch (error) {
     console.error(error);
     return false;
@@ -109,8 +92,6 @@ const hasPage = (id) => cache.has(id);
  * @returns {object} API related methods
  */
 export default () => ({
-  apiUri,
-  fetcher,
   cache,
   hasPage,
   getPage,
