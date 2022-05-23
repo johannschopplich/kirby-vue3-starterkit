@@ -13,7 +13,8 @@
 </template>
 
 <script setup>
-import { useSite } from "~/hooks";
+import { useSite } from "~/composables";
+
 const site = useSite();
 </script>
 

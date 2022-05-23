@@ -7,7 +7,8 @@
 </template>
 
 <script setup>
-import { useAnnouncer } from "~/hooks";
+import { useAnnouncer } from "~/composables";
+
 const { announcer } = useAnnouncer();
 </script>
 

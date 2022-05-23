@@ -21,7 +21,7 @@
 
 <script setup>
 import { useRoute } from "vue-router";
-import { useSite } from "~/hooks";
+import { useSite } from "~/composables";
 
 const site = useSite();
 const route = useRoute();

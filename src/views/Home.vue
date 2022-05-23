@@ -19,28 +19,19 @@
   <div v-else>Loading …</div>
 </template>
 
-<script>
-import { usePage } from "~/hooks";
+<script setup>
+import { usePage } from "~/composables";
 
-export default {
-  setup() {
-    const page = usePage();
-    const photography = usePage("photography");
+const page = usePage();
+const photography = usePage("photography");
 
-    // Example of `isReadyPromise()` page method
-    (async () => {
-      await photography.isReadyPromise();
-      // Do something with the reactive page object
-      console.log("Photography page data has been loaded.");
-      console.log(photography.title);
-    })();
-
-    return {
-      page,
-      photography,
-    };
-  },
-};
+// Example of `isReadyPromise()` page method
+(async () => {
+  await photography.isReadyPromise();
+  // Do something with the reactive page object
+  console.log("Photography page data has been loaded.");
+  console.log(photography.title);
+})();
 </script>
 
 <style>

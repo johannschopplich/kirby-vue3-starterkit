@@ -10,7 +10,7 @@
 
 <script setup>
 import { useRoute } from "vue-router";
-import { useSite, useLanguages } from "~/hooks";
+import { useSite, useLanguages } from "~/composables";
 
 const site = useSite();
 const route = useRoute();

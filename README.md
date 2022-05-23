@@ -105,8 +105,8 @@ kirby-vue3-starterkit/
 |   |   # `Header`, `Footer`, `Intro` and other components (auto imported on-demand)
 |   ├── components/
 |   |
-|   |   # Hooks for common actions
-|   ├── hooks/
+|   |   # Composables for common actions
+|   ├── composables/
 |   |   |
 |   |   |   # Announces any useful information for screen readers
 |   |   ├── useAnnouncer.js
@@ -180,7 +180,7 @@ Each JSON request will be freshly fetched from the network and saved to the cach
 
 ## Stale-While-Revalidate
 
-The stale-while-revalidate mechanism for the [`usePage`](src/hooks/usePage.js) hook allows you to respond as quickly as possible with cached page data if available, falling back to the network request if it's not cached. The network request is then used to update the cached page data – which directly affects the view after lazily assigning changes (if any), thanks to Vue's reactivity.
+The stale-while-revalidate mechanism for the [`usePage`](src/composables/usePage.js) hook allows you to respond as quickly as possible with cached page data if available, falling back to the network request if it's not cached. The network request is then used to update the cached page data – which directly affects the view after lazily assigning changes (if any), thanks to Vue's reactivity.
 
 ## Prerequisites
 

@@ -1,5 +1,5 @@
 import { createApp } from "vue";
-import { useServiceWorker } from "./hooks";
+import { useServiceWorker } from "./composables";
 import App from "./App.vue";
 import "./styles/main.css";
 

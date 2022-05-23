@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { usePage } from "~/hooks";
+import { usePage } from "~/composables";
 
 export default {
   setup() {

@@ -11,7 +11,8 @@
 </template>
 
 <script setup>
-import { useServiceWorker } from "~/hooks";
+import { useServiceWorker } from "~/composables";
+
 const { hasNewWorker, activateNewWorker } = useServiceWorker();
 </script>
 

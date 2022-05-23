@@ -34,16 +34,10 @@
   </article>
 </template>
 
-<script>
-import { usePage } from "~/hooks";
+<script setup>
+import { usePage } from "~/composables";
 
-export default {
-  setup() {
-    return {
-      page: usePage(),
-    };
-  },
-};
+const page = usePage();
 </script>
 
 <style>

@@ -13,8 +13,8 @@
 import { ref, watch } from "vue";
 import { useRoute } from "vue-router";
 
-const skipLink = ref(null);
 const route = useRoute();
+const skipLink = ref();
 
 watch(route, () => {
   skipLink.value.focus();
@@ -22,11 +22,11 @@ watch(route, () => {
 
 const navigate = ({ target }) => {
   const { hash } = target;
-  if (hash) {
-    const element = document.querySelector(hash);
-    element?.scrollIntoView();
-    element?.focus();
-  }
+  if (!hash) return;
+
+  const element = document.querySelector(hash);
+  element?.scrollIntoView();
+  element?.focus();
 };
 </script>
 
