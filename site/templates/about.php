@@ -7,10 +7,7 @@ $data = [
   'phone' => $page->phone()->value(),
   'address' => $page->address()->kt()->value(),
   'text' => $page->text()->kt()->value(),
-  'social' => $page->social()->toStructure()->map(fn ($social) => [
-    'url' => $social->url()->value(),
-    'platform' => $social->platform()->value()
-  ])->values()
+  'social' => $page->social()->toStructure()->toArray()
 ];
 
 echo vite()->json($data);
