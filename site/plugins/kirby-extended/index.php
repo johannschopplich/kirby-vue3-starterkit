@@ -10,7 +10,7 @@ use KirbyExtended\SiteMeta;
 
 Kirby::plugin('johannschopplich/kirby-extended', [
     'hooks' => [
-        'route:after' => function ($route, $path, $method, $result, $final) {
+        'route:after' => function (\Kirby\Http\Route $route, string $path, string $method, $result, bool $final) {
             if ($final && empty($result)) {
                 Redirects::go($path, $method);
             }
@@ -48,8 +48,6 @@ Kirby::plugin('johannschopplich/kirby-extended', [
         }
     ],
     'pageMethods' => [
-        'meta' => function () {
-            return new PageMeta($this);
-        }
+        'meta' => fn () => new PageMeta($this)
     ]
 ]);

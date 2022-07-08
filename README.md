@@ -185,7 +185,7 @@ The stale-while-revalidate mechanism for the [`usePage`](src/composables/usePage
 ## Prerequisites
 
 - Node.js with npm (only required to build the frontend)
-- PHP 7.4+
+- PHP 8.0+
 
 > Kirby is not a free software. You can try it for free on your local machine but in order to run Kirby on a public server you must purchase a [valid license](https://getkirby.com/buy).
 

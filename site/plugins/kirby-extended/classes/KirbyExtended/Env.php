@@ -5,6 +5,7 @@ namespace KirbyExtended;
 use Dotenv\Dotenv;
 use Dotenv\Repository\RepositoryBuilder;
 use Dotenv\Repository\RepositoryInterface;
+use PhpOption\Option;
 
 class Env
 {
@@ -62,31 +63,29 @@ class Env
      */
     public static function get(string $key, $default = null)
     {
-        $value = static::getRepository()->get($key);
+        return Option::fromValue(static::getRepository()->get($key))
+            ->map(function ($value) {
+                switch (strtolower($value)) {
+                    case 'true':
+                    case '(true)':
+                        return true;
+                    case 'false':
+                    case '(false)':
+                        return false;
+                    case 'empty':
+                    case '(empty)':
+                        return '';
+                    case 'null':
+                    case '(null)':
+                        return;
+                }
 
-        if ($value === null) {
-            return value($default);
-        }
+                if (preg_match('/\A([\'"])(.*)\1\z/', $value, $matches)) {
+                    return $matches[2];
+                }
 
-        switch (strtolower($value)) {
-            case 'true':
-            case '(true)':
-                return true;
-            case 'false':
-            case '(false)':
-                return false;
-            case 'empty':
-            case '(empty)':
-                return '';
-            case 'null':
-            case '(null)':
-                return;
-        }
-
-        if (preg_match('/\A([\'"])(.*)\1\z/', $value, $matches)) {
-            return $matches[2];
-        }
-
-        return $value;
+                return $value;
+            })
+            ->getOrCall(fn () => value($default));
     }
 }

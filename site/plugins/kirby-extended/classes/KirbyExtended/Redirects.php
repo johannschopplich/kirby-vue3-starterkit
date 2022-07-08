@@ -7,14 +7,18 @@ use Throwable;
 
 class Redirects
 {
-    public static function go($path, $method) {
+    public static function go($path, $method)
+    {
         // Load redirects definitions
         $redirects = option('kirby-extended.redirects', []);
-        if (empty($redirects)) return;
+
+        if (empty($redirects)) {
+            return;
+        }
 
         // Turn into routes array
-        $routes = array_map(function($from, $to) {
-            return [
+        $routes = array_map(
+            fn ($from, $to) => [
                 'pattern' => $from,
                 'action'  => function (...$parameters) use ($to) {
                     // Resolve callback
@@ -29,8 +33,10 @@ class Redirects
 
                     return go($to);
                 }
-            ];
-        }, array_keys($redirects), $redirects);
+            ],
+            array_keys($redirects),
+            $redirects
+        );
 
         // Run router on redirects routes
         try {

@@ -51,14 +51,14 @@ class PageMeta
         }
 
         $field = $this->page->content()->get($key);
-        if ($field->exists() && $field->isNotEmpty()) {
+        if ($field->exists() && $field->isNotEmpty() && $field->value() !== '[]') {
             return $field;
         }
 
         if ($fallback) {
             $field = site()->content()->get($key);
 
-            if ($field->exists() && $field->isNotEmpty()) {
+            if ($field->exists() && $field->isNotEmpty() && $field->value() !== '[]') {
                 return $field;
             }
         }
