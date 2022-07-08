@@ -5,7 +5,9 @@ import "./styles/main.css";
 
 const app = createApp(App);
 
-for (const m of Object.values(import.meta.globEager("./modules/*.js"))) {
+for (const m of Object.values(
+  import.meta.glob("./modules/*.js", { eager: true })
+)) {
   m.install?.(app);
 }
 
