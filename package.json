@@ -11,24 +11,24 @@
   },
   "dependencies": {
     "ohmyfetch": "^0.4.18",
-    "scule": "^0.2.1",
+    "scule": "^0.3.2",
     "vue": "^3.2.37",
-    "vue-router": "^4.1.1"
+    "vue-router": "^4.1.3"
   },
   "devDependencies": {
-    "@types/node": "^18.0.3",
-    "@vitejs/plugin-vue": "^3.0.0-beta.1",
-    "concurrently": "^7.2.2",
+    "@types/node": "^18.6.2",
+    "@vitejs/plugin-vue": "^3.0.1",
+    "concurrently": "^7.3.0",
     "consola": "^2.15.3",
     "dotenv": "^16.0.1",
     "env-cmd": "^10.1.0",
-    "eslint": "^8.19.0",
+    "eslint": "^8.20.0",
     "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-vue": "^9.2.0",
+    "eslint-plugin-vue": "^9.3.0",
     "nanoid": "^4.0.0",
     "prettier": "2.7.1",
     "shx": "^0.3.4",
-    "unplugin-vue-components": "^0.21.1",
-    "vite": "^3.0.0-beta.9"
+    "unplugin-vue-components": "^0.21.2",
+    "vite": "^3.0.3"
   }
 }
