@@ -21,6 +21,6 @@ elif [ -f pnpm-lock.yaml ]; then
 fi
 
 # Clean cache
-rm -rf storage/cache/{DOMAIN}
+rm -rf storage/cache/{REPOSITORY_NAME}
 
 echo "🚀 Application deployed!"
