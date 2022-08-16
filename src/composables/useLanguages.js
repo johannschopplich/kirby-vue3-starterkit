@@ -15,7 +15,9 @@ if (import.meta.env.DEV && isMultilang) {
 /**
  * Composable to work with multi-language setups
  */
-export default () => ({
-  isMultilang,
-  languageCode,
-});
+export function useLanguages() {
+  return {
+    isMultilang,
+    languageCode,
+  };
+}

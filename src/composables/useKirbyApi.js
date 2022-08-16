@@ -9,7 +9,7 @@ const cache = new Map();
  * @param {string} path The path to the file desired
  * @returns {string} The final URL
  */
-const getApiUri = (path) => {
+function getApiUri(path) {
   const { isMultilang, languageCode } = useLanguages();
   let result = "";
 
@@ -25,7 +25,7 @@ const getApiUri = (path) => {
   result += `/${path}`;
 
   return result;
-};
+}
 
 /**
  * Retrieves page data by id from either network or store
@@ -34,9 +34,9 @@ const getApiUri = (path) => {
  * @param {object} [options] Optional options
  * @param {boolean} [options.revalidate=false] Skip cache look-up and fetch page freshly
  * @param {string} [options.token] Add a token to the request to fetch a draft preview
- * @returns {Promise<object|boolean>} The page's data or `false` if fetch request failed
+ * @returns {Promise<Record<string, any>|boolean>} The page's data or `false` if fetch request failed
  */
-const getPage = async (id, { revalidate = false, token } = {}) => {
+async function getPage(id, { revalidate = false, token } = {}) {
   let page;
   const isCached = cache.has(id);
   const targetUrl = getApiUri(`${id}.json${token ? `?token=${token}` : ""}`);
@@ -76,7 +76,7 @@ const getPage = async (id, { revalidate = false, token } = {}) => {
   }
 
   return page;
-};
+}
 
 /**
  * Checks if a page has been cached already
@@ -84,13 +84,17 @@ const getPage = async (id, { revalidate = false, token } = {}) => {
  * @param {string} id The page id to look up
  * @returns {boolean} `true` if the page exists
  */
-const hasPage = (id) => cache.has(id);
+function hasPage(id) {
+  return cache.has(id);
+}
 
 /**
  * Composable to fetch data from the Kirby backend
  */
-export default () => ({
-  cache,
-  hasPage,
-  getPage,
-});
+export function useKirbyApi() {
+  return {
+    cache,
+    hasPage,
+    getPage,
+  };
+}

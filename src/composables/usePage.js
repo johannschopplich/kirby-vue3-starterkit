@@ -8,7 +8,7 @@ import { useAnnouncer, useKirbyApi } from "./";
  * @param {string} [path] The ptional page id (path) to retrieve
  * @returns {Record<string, any>} The readonly reactive page object
  */
-export default (path) => {
+export function usePage(path) {
   const router = useRouter();
   const { path: currentPath, query } = useRoute();
   const { hasPage, getPage } = useKirbyApi();
@@ -89,4 +89,4 @@ export default (path) => {
   })();
 
   return readonly(page);
-};
+}

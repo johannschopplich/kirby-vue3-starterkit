@@ -15,11 +15,11 @@ const announcer = reactive({
  * @param {string} message The content to announce
  * @param {string} [politeness] The degree of importance
  */
-const setAnnouncer = (message, politeness = defaultOptions.politeness) => {
+function setAnnouncer(message, politeness = defaultOptions.politeness) {
   resetAnnouncer();
   announcer.politeness = politeness;
   announcer.content = message;
-};
+}
 
 /**
  * Announces the information politely
@@ -35,25 +35,27 @@ const announcePolite = (message) => {
  *
  * @param {string} message The content to announce
  */
-const announceAssertive = (message) => {
+function announceAssertive(message) {
   setAnnouncer(message, "assertive");
-};
+}
 
 /**
  * Resets the announcer content and politeness
  */
-const resetAnnouncer = () => {
+function resetAnnouncer() {
   announcer.content = "";
   announcer.politeness = defaultOptions.politeness;
-};
+}
 
 /**
  * Announcer composable
  */
-export default () => ({
-  announcer,
-  setAnnouncer,
-  announcePolite,
-  announceAssertive,
-  resetAnnouncer,
-});
+export function useAnnouncer() {
+  return {
+    announcer,
+    setAnnouncer,
+    announcePolite,
+    announceAssertive,
+    resetAnnouncer,
+  };
+}

@@ -7,4 +7,6 @@ const site = reactive(data);
 /**
  * Returns the global site object
  */
-export default () => readonly(site);
+export function useSite() {
+  return readonly(site);
+}

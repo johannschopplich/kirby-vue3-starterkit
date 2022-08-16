@@ -1,5 +1,5 @@
-export { default as useAnnouncer } from "./useAnnouncer";
-export { default as useKirbyApi } from "./useKirbyApi";
-export { default as useLanguages } from "./useLanguages";
-export { default as usePage } from "./usePage";
-export { default as useSite } from "./useSite";
+export * from "./useAnnouncer";
+export * from "./useKirbyApi";
+export * from "./useLanguages";
+export * from "./usePage";
+export * from "./useSite";
