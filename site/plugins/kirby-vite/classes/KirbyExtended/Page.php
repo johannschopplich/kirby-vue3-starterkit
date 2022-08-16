@@ -15,9 +15,6 @@ class Page
      * Almost identical to Kirby's internal
      * page render function
      *
-     * @param \Kirby\Cms\Page $page
-     * @param string $contentType
-     * @return string
      * @throws \Kirby\Exception\NotFoundException If the default template cannot be found
      */
     public static function render(\Kirby\Cms\Page $page, string $contentType): string
@@ -82,9 +79,6 @@ class Page
 
     /**
      * Builds the cache id for a page
-     *
-     * @param string $contentType
-     * @return string
      */
     protected static function cacheId(string $contentType): string
     {

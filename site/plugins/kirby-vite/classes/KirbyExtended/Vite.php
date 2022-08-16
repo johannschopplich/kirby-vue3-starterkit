@@ -18,8 +18,6 @@ class Vite
     /**
      * Checks for development mode by either `KIRBY_MODE` env var or
      * if a `.lock` file in `/src` exists
-     *
-     * @return bool
      */
     protected function isDev(): bool
     {
@@ -33,8 +31,6 @@ class Vite
 
     /**
      * Gets the content api path
-     *
-     * @return string
      */
     public function useApiLocation(): string
     {
@@ -43,8 +39,6 @@ class Vite
 
     /**
      * Gets the site data
-     *
-     * @return array
      */
     public function useSite(): array
     {
@@ -54,10 +48,9 @@ class Vite
     /**
      * Reads and parses the manifest file created by Vite
      *
-     * @return array|null
      * @throws Exception
      */
-    protected function useManifest(): ?array
+    protected function useManifest(): array|null
     {
         if (isset(static::$manifest)) {
             return static::$manifest;
@@ -79,12 +72,9 @@ class Vite
     /**
      * Gets a value of a manifest property for a specific entry
      *
-     * @param string $entry
-     * @param string $key
-     * @return string|void
      * @throws Exception
      */
-    protected function getManifestProperty(string $entry, $key = 'file')
+    protected function getManifestProperty(string $entry, string $key = 'file'): string|array
     {
         $manifestEntry = $this->useManifest()[$entry] ?? null;
         if (!$manifestEntry) {
@@ -92,7 +82,7 @@ class Vite
                 throw new Exception("{$entry} is not a manifest entry");
             }
 
-            return;
+            return "";
         }
 
         $value = $manifestEntry[$key] ?? null;
@@ -101,7 +91,7 @@ class Vite
                 throw new Exception("{$key} not found in manifest entry {$entry}");
             }
 
-            return;
+            return "";
         }
 
         return $value;
@@ -109,9 +99,6 @@ class Vite
 
     /**
      * Gets the URL for the specified file in development mode
-     *
-     * @param string $file
-     * @return string
      */
     protected function assetDev(string $file): string
     {
@@ -120,9 +107,6 @@ class Vite
 
     /**
      * Gets the URL for the specified file in production mode
-     *
-     * @param string $file
-     * @return string
      */
     protected function assetProd(string $file): string
     {
@@ -132,12 +116,9 @@ class Vite
     /**
      * Includes the CSS file for the specified entry in production mode
      *
-     * @param string|null $entry
-     * @param array|null $options
-     * @return string|null
      * @throws Exception
      */
-    public function css(string $entry = null, array $options = []): ?string
+    public function css(string|null $entry = null, array|null $options = []): string|null
     {
         if ($this->isDev()) {
             return null;
@@ -156,12 +137,9 @@ class Vite
      * Includes the JS file for the specified entry and
      * Vite's client in development mode as well
      *
-     * @param string|null $entry
-     * @param array $options
-     * @return string|null
      * @throws Exception
      */
-    public function js(string $entry = null, array $options = []): ?string
+    public function js(string|null $entry = null, array $options = []): string|null
     {
         $entry ??= option('johannschopplich.kirby-vite.entry', 'index.js');
 
@@ -180,9 +158,6 @@ class Vite
 
     /**
      * Preloads the JSON-encoded page data for a given page
-     *
-     * @param string $name Page id
-     * @return string
      */
     public function preloadJson(string $name): string
     {
@@ -199,11 +174,8 @@ class Vite
 
     /**
      * Preloads the view module for a given page, e.g. `Home.e701bdef.js`
-     *
-     * @param string $name Page template name or other module name
-     * @return string|null
      */
-    public function preloadModule(string $name): ?string
+    public function preloadModule(string $name): string|null
     {
         if ($this->isDev()) {
             return null;
@@ -225,9 +197,6 @@ class Vite
 
     /**
      * Converts an array to an encoded JSON string
-     *
-     * @param array $data
-     * @return string
      */
     public function json(array $data): string
     {
@@ -236,11 +205,9 @@ class Vite
 
     /**
      * Gets the instance via lazy initialization
-     *
-     * @return \KirbyExtended\Vite
      */
     public static function getInstance(): \KirbyExtended\Vite
     {
-        return static::$instance ??= new static;
+        return static::$instance ??= new static();
     }
 }
