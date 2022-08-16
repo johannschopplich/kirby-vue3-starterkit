@@ -11,7 +11,7 @@
 
   <title><?= $page->customTitle()->or($page->title() . ' – ' . $site->title()) ?></title>
 
-  <?php // See https://github.com/johannschopplich/kirby-extended/blob/main/docs/meta.md ?>
+  <?php /* See https://github.com/johannschopplich/kirby-extended/blob/main/docs/meta.md */ ?>
   <?php $meta = $page->meta() ?>
   <?= $meta->robots() ?>
   <?= $meta->jsonld() ?>
