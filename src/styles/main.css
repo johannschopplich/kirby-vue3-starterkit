@@ -11,7 +11,8 @@
 }
 
 html {
-  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji";
 }
 
 li {
@@ -47,11 +48,23 @@ main:focus {
   outline: none;
 }
 
+.intro {
+  padding: 10vh 0;
+  text-align: center;
+}
+.intro h1 {
+  position: relative;
+  margin-bottom: 1rem;
+  font-weight: 900;
+  font-size: calc(1vw + 2rem);
+  z-index: 1;
+}
+
 .tags {
   text-align: center;
   text-transform: uppercase;
-  letter-spacing: .075em;
-  font-size: .75rem;
+  letter-spacing: 0.075em;
+  font-size: 0.75rem;
   font-weight: 600;
 }
 

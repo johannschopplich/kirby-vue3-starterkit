@@ -10,7 +10,7 @@
         :key="page.uri"
         :to="`/${page.uri}`"
         :class="{
-          'router-link-active': route.path.startsWith(`/${page.uri}/`),
+          open: route.path.startsWith(`/${page.uri}`),
         }"
       >
         {{ page.title }}
@@ -58,7 +58,7 @@ const route = useRoute();
 }
 
 .menu a[aria-current="page"],
-.menu a.router-link-active {
+.menu a.open {
   border-bottom: 2px solid #000;
 }
 
