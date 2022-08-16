@@ -1,5 +1,5 @@
 import { reactive, readonly } from "vue";
-import { useRouter, useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { useAnnouncer, useKirbyApi } from "./";
 
 /**

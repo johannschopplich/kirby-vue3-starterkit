@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
-import { useSite, useLanguages } from "~/composables";
+import { useLanguages, useSite } from "~/composables";
 import { pascalCase } from "scule";
 import Default from "~/views/Default.vue";
 
