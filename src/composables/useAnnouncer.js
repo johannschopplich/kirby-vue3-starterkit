@@ -48,9 +48,7 @@ const resetAnnouncer = () => {
 };
 
 /**
- * Returns common announcer methods
- *
- * @returns {object} Announcer related methods
+ * Announcer composable
  */
 export default () => ({
   announcer,

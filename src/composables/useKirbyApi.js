@@ -87,9 +87,7 @@ const getPage = async (id, { revalidate = false, token } = {}) => {
 const hasPage = (id) => cache.has(id);
 
 /**
- * Returns methods for communication with the backend API
- *
- * @returns {object} API related methods
+ * Composable to fetch data from the Kirby backend
  */
 export default () => ({
   cache,

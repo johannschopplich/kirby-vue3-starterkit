@@ -6,7 +6,7 @@ import { useAnnouncer, useKirbyApi } from "./";
  * Returns page data by id or the current route path
  *
  * @param {string} [path] The ptional page id (path) to retrieve
- * @returns {reactive} The readonly reactive page object
+ * @returns {Record<string, any>} The readonly reactive page object
  */
 export default (path) => {
   const router = useRouter();

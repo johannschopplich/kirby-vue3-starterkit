@@ -1,14 +1,10 @@
 /**
  * Indicates a multi-language setup
- *
- * @constant {boolean}
  */
 const isMultilang = import.meta.env.VITE_MULTILANG === "true";
 
 /**
  * Current language code
- *
- * @constant {string}
  */
 const languageCode = document.documentElement.lang;
 
@@ -17,9 +13,7 @@ if (import.meta.env.DEV && isMultilang) {
 }
 
 /**
- * Returns methods for multi-language setups
- *
- * @returns {object} Language related methods
+ * Composable to work with multi-language setups
  */
 export default () => ({
   isMultilang,

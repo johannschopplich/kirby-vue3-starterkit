@@ -5,8 +5,6 @@ const data = JSON.parse(document.getElementById("site-data").textContent);
 const site = reactive(data);
 
 /**
- * Returns the gloval site object
- *
- * @returns {object} The readonly site object
+ * Returns the global site object
  */
 export default () => readonly(site);
