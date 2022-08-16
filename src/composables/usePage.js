@@ -54,15 +54,6 @@ export default (path) => {
         router.replace({ path: "/error" });
         return;
       }
-
-      // Redirect to offline page if page hasn't been cached either in-store or
-      // by the service worker and the offline fallback JSON was returned
-      // Note: data for `home` and `offline` pages are always available since they
-      // are precached by the service worker
-      if (data.__isOffline) {
-        router.replace({ path: "/offline" });
-        return;
-      }
     }
 
     // Append page data to reactive page object

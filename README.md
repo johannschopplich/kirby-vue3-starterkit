@@ -22,7 +22,6 @@
 - 🔍 SEO-friendly: [server-side generated](https://github.com/johannschopplich/kirby-extended/blob/main/docs/meta.md) meta tags
 - 🌐 [Multi-language](#multi-language) support
 - ♿ Accessible frontend routing
-- 🚝 [Offline-first](#caching--offline-capability-with-service-worker)
 - 💫 [Stale-while-revalidate](#stale-while-revalidate) page data
 
 ## Alternatives
@@ -59,12 +58,6 @@ kirby-vue3-starterkit/
 |   |
 |   |   # Kirby's media folder for thumbnails and more (not tracked by Git)
 |   └── media/
-|
-|   # Various development-related Node scripts
-├── scripts/
-|   |
-|   |   # Service worker generator (optional)
-|   └── buildServiceWorker.js
 |
 |   # Kirby's core folder containing templates, blueprints, etc.
 ├── site/
@@ -116,9 +109,6 @@ kirby-vue3-starterkit/
 |   |   |   # Returns page data for the current path, similarly to Kirby's `$page` object
 |   |   ├── usePage.js
 |   |   |
-|   |   |   # Various service worker methods like registering
-|   |   ├── useServiceWorker.js
-|   |   |
 |   |   |   # Returns a object corresponding to Kirby's global `$site`
 |   |   └── useSite.js
 |   |
@@ -137,8 +127,7 @@ kirby-vue3-starterkit/
 |   |
 |   ├── App.vue
 |   ├── index.css
-|   ├── index.js
-|   └── serviceWorker.js
+|   └── index.js
 |
 |   # Contains everything content and user data related (not tracked by Git)
 ├── storage/
@@ -160,19 +149,11 @@ kirby-vue3-starterkit/
 
 </details>
 
-## Caching & Offline Capability With Service Worker
+## Caching
 
-Even without a service worker installed, the frontend will store pages between individual routes/views. When the tab get reloaded, the data for each page is freshly fetched from the API once again.
-
-For offline capability of your Vue app, you can choose to activate the included [service worker](src/serviceWorker.js).
-
-A visual explanation of both methods can be found in the following flow chart:
+The frontend will store pages between individual routes/views. When the tab get reloaded, the data for each page is freshly fetched from the API once again.
 
 ![Caching for Kirby and Vue 3 starterkit](./.github/kirby-vue-3-cache-and-store.png)
-
-The service worker precaches all CSS & JS assets required by the Vue app and caches the data of every requested page. All assets are versioned and served from the service worker cache directly.
-
-Each JSON request will be freshly fetched from the network and saved to the cache. If the user's navigator turns out to be offline, the cached page request will be returned.
 
 ## Stale-While-Revalidate
 
@@ -291,14 +272,6 @@ To enable language handling, you don't have to edit the [`config.php`](site/conf
 Then, visit the panel and add new languages by your liking. The Panel **automatically renames all existing content** and file meta data files and includes the language extension.
 
 Language data is provided by the global `site` object, which can be accessed via the `useSite()` hook.
-
-### Service Worker
-
-To enable the **service worker** which precaches essential assets and page API calls for offline capability, set:
-
-- `VITE_SERVICE_WORKER` to `true`
-
-> ⚠️ Don't change the `CONTENT_API_SLUG` once you deployed your app publicly and thus a service worker is installed on clients. Otherwise fetch requests will fail and a blank page will show until the new service worker is activated, which then is only possible by closing the tab/PWA.
 
 ### Stale-While-Revalidating
 

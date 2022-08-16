@@ -1,10 +1,5 @@
 <template>
-  <a
-    ref="skipLink"
-    href="#main"
-    class="skip-to-content-link"
-    @click.prevent="navigate()"
-  >
+  <a ref="skipLink" href="#main" class="skip-link" @click.prevent="navigate()">
     Skip to content
   </a>
 </template>
@@ -30,15 +25,15 @@ function navigate({ target }) {
 }
 </script>
 
-<style>
-.skip-to-content-link {
+<style scoped>
+.skip-link {
   position: absolute;
   top: 0;
   left: 50%;
   padding: 0.5rem;
   transform: translate(-50%, -100%);
 }
-.skip-to-content-link:focus {
+.skip-link:focus {
   transform: translate(-50%, 0);
   /* Copy the browser's native focus styles */
   outline: 5px auto Highlight;

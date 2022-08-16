@@ -6,7 +6,7 @@
   </header>
 </template>
 
-<style>
+<style scoped>
 .intro {
   padding: 10vh 0;
   text-align: center;

@@ -1,5 +1,4 @@
 import { createApp } from "vue";
-import { useServiceWorker } from "./composables";
 import App from "./App.vue";
 import "./styles/main.css";
 
@@ -12,6 +11,3 @@ for (const m of Object.values(
 }
 
 app.mount("#app");
-
-const { initSw } = useServiceWorker();
-initSw();

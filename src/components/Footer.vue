@@ -18,7 +18,7 @@ import { useSite } from "~/composables";
 const site = useSite();
 </script>
 
-<style>
+<style scoped>
 .footer {
   padding: 1.5rem 5vw 10vh;
   text-align: center;

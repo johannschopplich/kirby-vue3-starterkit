@@ -9,7 +9,6 @@
     </main>
   </div>
 
-  <UpdateNotification />
   <Footer />
 </template>
 

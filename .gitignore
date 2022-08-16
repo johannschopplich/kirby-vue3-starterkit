@@ -22,4 +22,3 @@ vendor
 # Build assets
 /public/assets
 /public/dist
-/public/service-worker.js

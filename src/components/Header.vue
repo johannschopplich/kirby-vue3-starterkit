@@ -27,7 +27,7 @@ const site = useSite();
 const route = useRoute();
 </script>
 
-<style>
+<style scoped>
 .header {
   margin-bottom: 1.5rem;
 }
