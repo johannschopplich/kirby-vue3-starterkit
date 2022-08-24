@@ -12,6 +12,7 @@
   "dependencies": {
     "ohmyfetch": "^0.4.18",
     "scule": "^0.3.2",
+    "ufo": "^0.8.5",
     "vue": "^3.2.37",
     "vue-router": "^4.1.3"
   },

@@ -5,20 +5,21 @@ import { useAnnouncer, useKirbyApi } from "./";
 /**
  * Returns page data by id or the current route path
  *
- * @param {string} [path] The ptional page id (path) to retrieve
+ * @param {string} [path] The page id to retrieve (optional)
+ * @param {Record<string, string>} [query] Custom query parameters (optional)
  * @returns {Record<string, any>} The readonly reactive page object
  */
-export function usePage(path) {
+export function usePage(path, query = {}) {
   const router = useRouter();
-  const { path: currentPath, query } = useRoute();
+  const { path: currentPath, query: currentQuery } = useRoute();
   const { hasPage, getPage } = useKirbyApi();
   const { setAnnouncer } = useAnnouncer();
 
-  // Build page id and trim leading or trailing slashes
+  // Build page id, trim leading and trailing slashes
   let id = (path ?? currentPath).replace(/^\/|\/$/g, "");
 
   // Get the token query parameter for draft previews
-  const token = query.token;
+  const token = currentQuery.token;
 
   // Fall back to homepage if id is empty
   if (!id) id = "home";
@@ -38,9 +39,9 @@ export function usePage(path) {
 
   (async () => {
     // Check if cached page exists (otherwise skip SWR)
-    const isCached = hasPage(id);
+    const isCached = hasPage(id, query);
     // Get page from cache or freshly fetch it
-    const data = await getPage(id, { token });
+    const data = await getPage(id, { ...query, token });
 
     if (!data) {
       page.__status = "error";

@@ -1,15 +1,16 @@
 import { $fetch } from "ohmyfetch";
+import { withQuery } from "ufo";
 import { useLanguages } from "./";
 
 const cache = new Map();
 
 /**
- * Builds an API URL for a specific file and language
+ * Builds the full API URL for a specific path for the current language
  *
- * @param {string} path The path to the file desired
+ * @param {string} path The target path
  * @returns {string} The final URL
  */
-function getApiUri(path) {
+function getApiUrl(path) {
   const { isMultilang, languageCode } = useLanguages();
   let result = "";
 
@@ -21,7 +22,7 @@ function getApiUri(path) {
   // Add the API path
   result += `/${import.meta.env.VITE_BACKEND_API_SLUG}`;
 
-  // Add the file path to fetch
+  // Add the file path
   result += `/${path}`;
 
   return result;
@@ -33,13 +34,13 @@ function getApiUri(path) {
  * @param {string} id The page to retrieve
  * @param {object} [options] Optional options
  * @param {boolean} [options.revalidate=false] Skip cache look-up and fetch page freshly
- * @param {string} [options.token] Add a token to the request to fetch a draft preview
- * @returns {Promise<Record<string, any>|boolean>} The page's data or `false` if fetch request failed
+ * @param {Record<string, string>} [options.query] Custom query parameters
+ * @returns {Promise<Record<string, any>|boolean>} The page's data or `false` if the fetch request failed
  */
-async function getPage(id, { revalidate = false, token } = {}) {
+async function getPage(id, { revalidate = false, query = {} } = {}) {
   let page;
-  const isCached = cache.has(id);
-  const targetUrl = getApiUri(`${id}.json${token ? `?token=${token}` : ""}`);
+  const isCached = hasPage(id, query);
+  const targetUrl = getApiUrl(withQuery(`${id}.json`, query));
 
   // Use cached page if present in the store, except when revalidating
   if (!revalidate && isCached) {
@@ -82,10 +83,11 @@ async function getPage(id, { revalidate = false, token } = {}) {
  * Checks if a page has been cached already
  *
  * @param {string} id The page id to look up
+ * @param {Record<string, string>} [query] Custom query parameters (optional)
  * @returns {boolean} `true` if the page exists
  */
-function hasPage(id) {
-  return cache.has(id);
+function hasPage(id, query = {}) {
+  return cache.has(withQuery(id, query));
 }
 
 /**
