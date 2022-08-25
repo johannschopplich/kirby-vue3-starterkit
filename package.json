@@ -7,7 +7,8 @@
     "build": "shx rm -f src/.lock && vite build",
     "lint": "eslint \"src/**/*.{js,vue}\"",
     "lint:fix": "npm run lint -- --fix",
-    "format": "prettier --write \"src/**/*.{js,vue}\""
+    "format": "prettier --write \"src/**/*.{js,vue}\"",
+    "release": "bumpp --commit --push --tag"
   },
   "dependencies": {
     "ohmyfetch": "^0.4.18",
