@@ -41,7 +41,10 @@ export function usePage(path, query = {}) {
     // Check if cached page exists (otherwise skip SWR)
     const isCached = hasPage(id, query);
     // Get page from cache or freshly fetch it
-    const data = await getPage(id, { ...query, token });
+    const data = await getPage(id, {
+      ...query,
+      ...(token ? { token } : {}),
+    });
 
     if (!data) {
       page.__status = "error";

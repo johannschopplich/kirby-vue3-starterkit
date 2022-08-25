@@ -35,7 +35,7 @@ function getApiUrl(path) {
  * @param {object} [options] Optional options
  * @param {boolean} [options.revalidate=false] Skip cache look-up and fetch page freshly
  * @param {Record<string, string>} [options.query] Custom query parameters
- * @returns {Promise<Record<string, any>|boolean>} The page's data or `false` if the fetch request failed
+ * @returns {Promise<Record<string, any>|false>} The page's data or `false` if the fetch request failed
  */
 async function getPage(id, { revalidate = false, query = {} } = {}) {
   let page;
