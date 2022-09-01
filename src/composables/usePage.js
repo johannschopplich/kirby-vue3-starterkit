@@ -42,8 +42,10 @@ export function usePage(path, query = {}) {
     const isCached = hasPage(id, query);
     // Get page from cache or freshly fetch it
     const data = await getPage(id, {
-      ...query,
-      ...(token ? { token } : {}),
+      query: {
+        ...query,
+        ...(token ? { token } : {}),
+      },
     });
 
     if (!data) {
