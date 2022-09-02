@@ -23,8 +23,9 @@ class SiteMeta
 
     public static function sitemap(): Response
     {
+        $kirby = kirby();
         $sitemap = [];
-        $cache   = kirby()->cache('pages');
+        $cache   = $kirby->cache('pages');
         $cacheId = 'sitemap.xml';
         $sitemap = $cache->get($cacheId);
 
@@ -65,8 +66,8 @@ class SiteMeta
                     $sitemap[] = '  <changefreq>' . $changefreq . '</changefreq>';
                 }
 
-                if (kirby()->multilang()) {
-                    foreach (kirby()->languages() as $lang) {
+                if ($kirby->multilang()) {
+                    foreach ($kirby->languages() as $lang) {
                         $code = $lang->code();
                         $locale = $lang->locale(LC_ALL) ?? $code;
                         $locale = pathinfo($locale, PATHINFO_FILENAME);
