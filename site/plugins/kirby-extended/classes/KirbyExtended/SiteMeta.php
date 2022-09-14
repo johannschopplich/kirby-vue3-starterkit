@@ -28,10 +28,11 @@ class SiteMeta
         $cache   = $kirby->cache('pages');
         $cacheId = 'sitemap.xml';
         $sitemap = $cache->get($cacheId);
+        $xhtmlSchema = 'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xhtml="http://www.w3.org/1999/xhtml" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd http://www.w3.org/1999/xhtml http://www.w3.org/2002/08/xhtml/xhtml1-strict.xsd"';
 
         if ($sitemap === null) {
             $sitemap[] = '<?xml version="1.0" encoding="UTF-8"?>';
-            $sitemap[] = '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+            $sitemap[] = '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"' . ($kirby->multilang() ? " {$xhtmlSchema}" : '') . '>';
 
             $excludeTemplates = option('kirby-extended.sitemap.exclude.templates', []);
             $excludePages     = option('kirby-extended.sitemap.exclude.pages', []);

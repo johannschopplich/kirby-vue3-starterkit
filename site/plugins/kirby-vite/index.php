@@ -22,12 +22,12 @@ load([
     ]
 ]);
 
-/**
- * Returns the Vite instance
- *
- * @return \KirbyExtended\Vite
- */
-function vite()
-{
-    return \KirbyExtended\Vite::getInstance();
+if (!function_exists('vite')) {
+    /**
+     * Returns the Vite instance
+     */
+    function vite(): \KirbyExtended\Vite
+    {
+        return \KirbyExtended\Vite::getInstance();
+    }
 }

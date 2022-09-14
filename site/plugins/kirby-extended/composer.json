@@ -2,7 +2,7 @@
   "name": "johannschopplich/kirby-extended",
   "description": "Dotenv support, meta tags generation and more for the Kirby CMS",
   "type": "kirby-plugin",
-  "version": "2.11.3",
+  "version": "2.11.5",
   "keywords": [
     "kirby",
     "env",
