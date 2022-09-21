@@ -11,7 +11,6 @@ use Kirby\Toolkit\Html;
 class VueKit
 {
     protected static \JohannSchopplich\VueKit\VueKit $instance;
-    protected static string $apiLocation;
     protected static array $site;
     protected static array $manifest;
 
@@ -27,14 +26,6 @@ class VueKit
 
         $lockFile = kirby()->root('base') . '/src/.lock';
         return F::exists($lockFile);
-    }
-
-    /**
-     * Gets the content API path
-     */
-    public function useApiLocation(): string
-    {
-        return static::$apiLocation ??= Url::path(env('CONTENT_API_SLUG'), true);
     }
 
     /**
@@ -70,34 +61,6 @@ class VueKit
     }
 
     /**
-     * Gets a value of a manifest property for a specific entry
-     *
-     * @throws Exception
-     */
-    protected function getManifestProperty(string $entry, string $key = 'file'): string|array
-    {
-        $manifestEntry = $this->useManifest()[$entry] ?? null;
-        if (!$manifestEntry) {
-            if (option('debug')) {
-                throw new Exception("{$entry} is not a manifest entry");
-            }
-
-            return "";
-        }
-
-        $value = $manifestEntry[$key] ?? null;
-        if (!$value) {
-            if (option('debug')) {
-                throw new Exception("{$key} not found in manifest entry {$entry}");
-            }
-
-            return "";
-        }
-
-        return $value;
-    }
-
-    /**
      * Gets the URL for the specified file in development mode
      */
     protected function assetDev(string $file): string
@@ -118,29 +81,25 @@ class VueKit
      *
      * @throws Exception
      */
-    public function css(string $entry = 'main.js'): string|null
+    public function css(string $entry = 'main.js')
     {
-        if ($this->isDev()) {
-            return null;
+        if (!$this->isDev()) {
+            return css($this->assetProd($this->useManifest()[$entry]['css'][0]));
         }
-
-        return css($this->assetProd($this->getManifestProperty($entry, 'css')[0]));
     }
 
     /**
-     * Includes the JS file for the specified entry and
-     * Vite's client in development mode as well
+     * Includes the JS file for the specified entry
      *
      * @throws Exception
      */
     public function js(string $entry = 'main.js'): string|null
     {
-        $client = $this->isDev() ? js($this->assetDev('@vite/client'), ['type' => 'module']) : '';
         $file = $this->isDev()
             ? $this->assetDev($entry)
-            : $this->assetProd($this->getManifestProperty($entry, 'file'));
+            : $this->assetProd($this->useManifest()[$entry]['file']);
 
-        return $client . js($file, ['type' => 'module']);
+        return js($file, ['type' => 'module']);
     }
 
     /**
@@ -152,7 +111,7 @@ class VueKit
 
         return Html::tag('link', '', [
             'rel' => 'preload',
-            'href' => $base . $this->useApiLocation() . '/' . $name . '.json',
+            'href' => $base . '/' . Url::path(env('CONTENT_API_SLUG')) . '/' . $name . '.json',
             'as' => 'fetch',
             'type' => 'application/json',
             'crossorigin' => 'anonymous'
