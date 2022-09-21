@@ -3,12 +3,12 @@
 @include_once __DIR__ . '/vendor/autoload.php';
 
 use Kirby\Cms\App as Kirby;
-use KirbyExtended\Env;
-use KirbyExtended\PageMeta;
-use KirbyExtended\Redirects;
-use KirbyExtended\SiteMeta;
+use KirbyHelpers\Env;
+use KirbyHelpers\PageMeta;
+use KirbyHelpers\Redirects;
+use KirbyHelpers\SiteMeta;
 
-Kirby::plugin('johannschopplich/kirby-extended', [
+Kirby::plugin('johannschopplich/kirby-helpers', [
     'hooks' => [
         'route:after' => function (\Kirby\Http\Route $route, string $path, string $method, $result, bool $final) {
             if ($final && empty($result)) {
@@ -20,7 +20,7 @@ Kirby::plugin('johannschopplich/kirby-extended', [
         [
             'pattern' => 'robots.txt',
             'action' => function () {
-                if (option('kirby-extended.robots.enable', false)) {
+                if (option('kirby-helpers.robots.enable', false)) {
                     return SiteMeta::robots();
                 }
 
@@ -30,7 +30,7 @@ Kirby::plugin('johannschopplich/kirby-extended', [
         [
             'pattern' => 'sitemap.xml',
             'action' => function () {
-                if (option('kirby-extended.sitemap.enable', false)) {
+                if (option('kirby-helpers.sitemap.enable', false)) {
                     return SiteMeta::sitemap();
                 }
 
@@ -48,6 +48,8 @@ Kirby::plugin('johannschopplich/kirby-extended', [
         }
     ],
     'pageMethods' => [
-        'meta' => fn () => new PageMeta($this)
+        'meta' => function () {
+            return new PageMeta($this);
+        }
     ]
 ]);

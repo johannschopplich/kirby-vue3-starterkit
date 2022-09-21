@@ -1,6 +1,6 @@
 <?php
 
-namespace KirbyExtended;
+namespace KirbyHelpers;
 
 use Kirby\Cms\Field;
 use Kirby\Cms\Page;
@@ -12,9 +12,10 @@ class PageMeta
     protected Page $page;
     protected array $metadata = [];
 
-    public function __construct($page) {
+    public function __construct($page)
+    {
         $this->page = $page;
-        $defaults = option('kirby-extended.meta.defaults', []);
+        $defaults = option('kirby-helpers.meta.defaults', []);
 
         if (!empty($defaults)) {
             $this->metadata = is_callable($defaults) ? $defaults(kirby(), site(), $this->page) : $defaults;
@@ -169,11 +170,12 @@ class PageMeta
                     $prop = preg_replace('/^(namespace:)/', '', $prop);
                 }
 
-                foreach ($content as $typeProp => $typeContent)
+                foreach ($content as $typeProp => $typeContent) {
                     $html[] = Html::tag('meta', null, [
                         'property' => "{$prop}:{$typeProp}",
                         'content'  => $typeContent,
                     ]);
+                }
             } else {
                 $html[] = Html::tag('meta', null, [
                     'property' => "og:{$prop}",

@@ -73,7 +73,7 @@ kirby-vue3-starterkit/
 |   |   # Only relevant in multi-language setups
 |   ├── languages/
 |   |
-|   ├── plugins/kirby-vite/
+|   ├── plugins/kirby-vue-kit/
 |   |   |
 |   |   |   # Core of the Vite integration plugin, mainly registers routes
 |   |   ├── index.php

@@ -1,16 +1,14 @@
 <?php
 
-namespace KirbyExtended;
+namespace KirbyHelpers;
 
 use Kirby\Http\Router;
-use Throwable;
 
 class Redirects
 {
     public static function go($path, $method)
     {
-        // Load redirects definitions
-        $redirects = option('kirby-extended.redirects', []);
+        $redirects = option('kirby-helpers.redirects', []);
 
         if (empty($redirects)) {
             return;
@@ -42,7 +40,7 @@ class Redirects
         try {
             $router = new Router($routes);
             return $router->call($path, $method);
-        } catch (Throwable $e) {
+        } catch (\Throwable $e) {
             return site()->errorPage();
         }
     }

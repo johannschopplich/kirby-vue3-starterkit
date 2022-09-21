@@ -2,7 +2,7 @@
 
 Handles the generation of meta tags for search engines, social networks, browsers and beyond.
 
-## How it works
+## How It Works
 
 In a nutshell: plugin internal defaults ➡️ option defaults ➡️ page model ➡️ page field ➡️ site field
 
@@ -47,7 +47,7 @@ Echoing `$meta->social()` uses sensible defaults, which of course can be extende
 
 The `description` key will be used for the meta tag, OpenGraph description as well as Twitter description. One key to rule them all.
 
-#### Open Graph meta
+#### Open Graph Meta
 
 | Key           | Default                                                       |
 | ------------- | ------------------------------------------------------------- |
@@ -61,7 +61,7 @@ The `description` key will be used for the meta tag, OpenGraph description as we
 
 Each meta name will be prefixed with `og:` in the rendered HTML automatically.
 
-#### Twitter meta
+#### Twitter Meta
 
 | Key           | Default                                                             |
 | ------------- | ------------------------------------------------------------------- |
@@ -76,9 +76,9 @@ Each meta name will be prefixed with `twitter:` in the rendered HTML automatical
 
 ## Configuration
 
-### Default tags
+### Default Tags
 
-The `kirby-extended.meta.defaults` option key may be populated by default metadata. It will be used as the base. Available array keys are:
+The `kirby-helpers.meta.defaults` option key may be populated by default metadata. It will be used as the base. Available array keys are:
 
 - `robots` (string)
 - `description` (string)
@@ -91,7 +91,7 @@ Custom configurations like default tags will be merged with the plugin internal 
 ```php
 // config.php
 return [
-    'kirby-extended.meta' => [
+    'kirby-helpers.meta' => [
         'defaults' => function (\Kirby\Cms\App $kirby, \Kirby\Cms\Site $site, \Kirby\Cms\Page $page) {
             $description = $page->description()->or($site->description())->value();
 
@@ -118,7 +118,7 @@ return [
 ];
 ```
 
-### Page models for template-specific meta data
+### Page Models for Template-Specific Meta Data
 
 You might not want to adapt meta data for specific templates. To do so, overwrite defaults with the `metadata()` method of page models per template.
 
@@ -155,7 +155,7 @@ class ArticlePage extends \Kirby\Cms\Page
 }
 ```
 
-### Blueprint field keys
+### Blueprint Field Keys
 
 **Customtitle:** By default, the metadata plugin will use the page's `title` field. You can override this by defining an `customtitle` field for a specific page. The `customtitle` will then be used for OpenGraph and Twitter metadata instead of the page title.
 
@@ -171,14 +171,16 @@ class ArticlePage extends \Kirby\Cms\Page
 
 ## Options
 
-| Option                         | Default | Values            | Description                                                                                                        |
-| ------------------------------ | ------- | ----------------- | ------------------------------------------------------------------------------------------------------------------ |
-| `kirby-extended.meta.defaults` | `[]`    | array or function | You can use `$kirby`, `$site` and `$page` (fixed order) within the closure arguments to refer to the given object. |
+| Option                        | Default | Values            | Description                                                                                                        |
+| ----------------------------- | ------- | ----------------- | ------------------------------------------------------------------------------------------------------------------ |
+| `kirby-helpers.meta.defaults` | `[]`    | array or function | You can use `$kirby`, `$site` and `$page` (fixed order) within the closure arguments to refer to the given object. |
 
 ## Credits
 
-Forked from [getkirby.com meta plugin](https://github.com/getkirby/getkirby.com/tree/master/site/plugins/meta)
+Forked from [getkirby.com `meta` plugin](https://github.com/getkirby/getkirby.com/tree/master/site/plugins/meta).
 
-Author: Bastian Allgeier
+## License
 
-Licence: MIT
+[MIT](../LICENSE) License © 2020-2022 [Bastian Allgeier](https://github.com/getkirby)
+
+[MIT](../LICENSE) License © 2020-2022 [Johann Schopplich](https://github.com/johannschopplich)

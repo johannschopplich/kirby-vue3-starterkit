@@ -11,7 +11,7 @@
     "release": "npx -y bumpp --commit --push --tag"
   },
   "dependencies": {
-    "ohmyfetch": "^0.4.18",
+    "ohmyfetch": "^0.4.19",
     "scule": "^0.3.2",
     "ufo": "^0.8.5",
     "vue": "^3.2.39",
@@ -25,10 +25,10 @@
     "env-cmd": "^10.1.0",
     "eslint": "^8.23.1",
     "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-vue": "^9.4.0",
+    "eslint-plugin-vue": "^9.5.1",
     "prettier": "2.7.1",
     "shx": "^0.3.4",
     "unplugin-vue-components": "^0.22.7",
-    "vite": "^3.1.0"
+    "vite": "^3.1.3"
   }
 }

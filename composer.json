@@ -2,7 +2,7 @@
   "require": {
     "php": ">=8.0.0",
     "getkirby/cms": "^3.7",
-    "johannschopplich/kirby-extended": "^2.11"
+    "johannschopplich/kirby-helpers": "^3.0"
   },
   "config": {
     "optimize-autoloader": true,

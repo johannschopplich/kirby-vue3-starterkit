@@ -10,4 +10,4 @@ $data = [
   'social' => $page->social()->toStructure()->toArray()
 ];
 
-echo vite()->json($data);
+echo \Kirby\Data\Json::encode($data);

@@ -23,14 +23,8 @@ return [
         ]
     ],
 
-    'johannschopplich' => [
-        'kirby-vite' => [
-            'entry' => 'main.js'
-        ]
-    ],
-
-    // See https://github.com/johannschopplich/kirby-extended/blob/main/docs/meta.md
-    'kirby-extended' => [
+    // See https://github.com/johannschopplich/kirby-helpers/blob/main/docs/meta.md
+    'kirby-helpers' => [
         'meta' => [
             'defaults' => function (\Kirby\Cms\App $kirby, \Kirby\Cms\Site $site, \Kirby\Cms\Page $page) {
                 $description = $page->description()->or($site->description())->value();

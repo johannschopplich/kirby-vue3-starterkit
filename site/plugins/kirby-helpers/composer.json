@@ -1,18 +1,21 @@
 {
-  "name": "johannschopplich/kirby-extended",
+  "name": "johannschopplich/kirby-helpers",
   "description": "Dotenv support, meta tags generation and more for the Kirby CMS",
   "type": "kirby-plugin",
-  "version": "2.11.5",
+  "version": "3.0.2",
   "keywords": [
+    "kirby-cms",
+    "getkirby",
     "kirby",
     "env",
     "dotenv",
     "seo",
     "meta",
-    "meta-tags"
+    "meta-tags",
+    "vite"
   ],
   "license": "MIT",
-  "homepage": "https://github.com/johannschopplich/kirby-extended#readme",
+  "homepage": "https://github.com/johannschopplich/kirby-helpers#readme",
   "authors": [
     {
       "name": "Johann Schopplich",
@@ -23,7 +26,7 @@
   "require": {
     "php": ">=8.0.0",
     "getkirby/composer-installer": "^1.2",
-    "symfony/polyfill-php80": "^1.23",
+    "symfony/polyfill-php80": "^1.26",
     "vlucas/phpdotenv": "^5.0"
   },
   "require-dev": {
@@ -34,7 +37,7 @@
       "helpers.php"
     ],
     "psr-4": {
-      "KirbyExtended\\": "classes/KirbyExtended/"
+      "KirbyHelpers\\": "classes/KirbyHelpers/"
     }
   },
   "scripts": {

@@ -5,4 +5,4 @@ $data = [
   'metaTitle' => $page->customTitle()->or($page->title() . ' – ' . $site->title())->value()
 ];
 
-echo vite()->json($data);
+echo \Kirby\Data\Json::encode($data);

@@ -1,6 +1,6 @@
 <?php
 
-namespace KirbyExtended;
+namespace KirbyHelpers;
 
 use Kirby\Cms\Responder;
 use Kirby\Http\Response;
@@ -34,8 +34,8 @@ class SiteMeta
             $sitemap[] = '<?xml version="1.0" encoding="UTF-8"?>';
             $sitemap[] = '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"' . ($kirby->multilang() ? " {$xhtmlSchema}" : '') . '>';
 
-            $excludeTemplates = option('kirby-extended.sitemap.exclude.templates', []);
-            $excludePages     = option('kirby-extended.sitemap.exclude.pages', []);
+            $excludeTemplates = option('kirby-helpers.sitemap.exclude.templates', []);
+            $excludePages     = option('kirby-helpers.sitemap.exclude.pages', []);
 
             if (is_callable($excludePages)) {
                 $excludePages = $excludePages();

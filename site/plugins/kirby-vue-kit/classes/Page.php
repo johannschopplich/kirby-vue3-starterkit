@@ -1,6 +1,6 @@
 <?php
 
-namespace KirbyExtended;
+namespace JohannSchopplich\VueKit;
 
 use Kirby\Cms\Template;
 use Kirby\Exception\NotFoundException;

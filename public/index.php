@@ -3,7 +3,7 @@
 $base = dirname(__DIR__);
 
 require $base . '/vendor/autoload.php';
-\KirbyExtended\Env::load($base);
+\KirbyHelpers\Env::load($base);
 
 $kirby = new \Kirby\Cms\App([
     'roots' => [

@@ -1,6 +1,6 @@
 <?php
 
-namespace KirbyExtended;
+namespace KirbyHelpers;
 
 use Dotenv\Dotenv;
 use Dotenv\Repository\RepositoryBuilder;
@@ -14,15 +14,11 @@ class Env
 
     /**
      * Load the environment file from a given directory
-     *
-     * @param string|null $path
-     * @param string $filename
-     * @return array<string,string|null>
      */
-    public static function load(?string $path = null, string $filename = '.env'): ?array
+    public static function load(string|null $path = null, string $filename = '.env'): array|null
     {
-        $path = $path ?? option('kirby-extended.env.path', kirby()->root('base'));
-        $filename = option('kirby-extended.env.filename', $filename);
+        $path ??= option('kirby-helpers.env.path', kirby()->root('base'));
+        $filename = option('kirby-helpers.env.filename', $filename);
         $repository = static::getRepository();
 
         static::$loaded = true;
@@ -31,8 +27,6 @@ class Env
 
     /**
      * Get the state of `Dotenv` initialization
-     *
-     * @return bool
      */
     public static function isLoaded(): bool
     {
@@ -41,10 +35,8 @@ class Env
 
     /**
      * Get the environment repository instance
-     *
-     * @return \Dotenv\Repository\RepositoryInterface
      */
-    public static function getRepository()
+    public static function getRepository(): \Dotenv\Repository\RepositoryInterface
     {
         if (!isset(static::$repository)) {
             $builder = RepositoryBuilder::createWithDefaultAdapters();
@@ -56,10 +48,6 @@ class Env
 
     /**
      * Get the value of an environment variable
-     *
-     * @param string $key
-     * @param mixed $default
-     * @return mixed
      */
     public static function get(string $key, $default = null)
     {

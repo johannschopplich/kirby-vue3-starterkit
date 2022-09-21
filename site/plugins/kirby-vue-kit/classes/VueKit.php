@@ -1,6 +1,6 @@
 <?php
 
-namespace KirbyExtended;
+namespace JohannSchopplich\VueKit;
 
 use Exception;
 use Kirby\Data\Data;
@@ -8,9 +8,9 @@ use Kirby\Http\Url;
 use Kirby\Filesystem\F;
 use Kirby\Toolkit\Html;
 
-class Vite
+class VueKit
 {
-    protected static \KirbyExtended\Vite $instance;
+    protected static \JohannSchopplich\VueKit\VueKit $instance;
     protected static string $apiLocation;
     protected static array $site;
     protected static array $manifest;
@@ -30,7 +30,7 @@ class Vite
     }
 
     /**
-     * Gets the content api path
+     * Gets the content API path
      */
     public function useApiLocation(): string
     {
@@ -56,7 +56,7 @@ class Vite
             return static::$manifest;
         }
 
-        $manifestFile = kirby()->root('index') . '/' . option('johannschopplich.kirby-vite.outDir', 'dist') . '/manifest.json';
+        $manifestFile = kirby()->root('index') . '/' . option('johannschopplich.kirby-vue-kit.outDir') . '/manifest.json';
 
         if (!F::exists($manifestFile)) {
             if (option('debug')) {
@@ -102,7 +102,7 @@ class Vite
      */
     protected function assetDev(string $file): string
     {
-        return option('johannschopplich.kirby-vite.devServer', 'http://localhost:3000') . '/' . $file;
+        return option('johannschopplich.kirby-vue-kit.devServer') . '/' . $file;
     }
 
     /**
@@ -110,7 +110,7 @@ class Vite
      */
     protected function assetProd(string $file): string
     {
-        return '/' . option('johannschopplich.kirby-vite.outDir', 'dist') . '/' . $file;
+        return '/' . option('johannschopplich.kirby-vue-kit.outDir') . '/' . $file;
     }
 
     /**
@@ -118,19 +118,13 @@ class Vite
      *
      * @throws Exception
      */
-    public function css(string|null $entry = null, array|null $options = []): string|null
+    public function css(string $entry = 'main.js'): string|null
     {
         if ($this->isDev()) {
             return null;
         }
 
-        $entry ??= option('johannschopplich.kirby-vite.entry', 'index.js');
-        $attr = array_merge($options, [
-            'href' => $this->assetProd($this->getManifestProperty($entry, 'css')[0]),
-            'rel'  => 'stylesheet'
-        ]);
-
-        return '<link ' . attr($attr) . '>';
+        return css($this->assetProd($this->getManifestProperty($entry, 'css')[0]));
     }
 
     /**
@@ -139,21 +133,14 @@ class Vite
      *
      * @throws Exception
      */
-    public function js(string|null $entry = null, array $options = []): string|null
+    public function js(string $entry = 'main.js'): string|null
     {
-        $entry ??= option('johannschopplich.kirby-vite.entry', 'index.js');
-
         $client = $this->isDev() ? js($this->assetDev('@vite/client'), ['type' => 'module']) : '';
         $file = $this->isDev()
             ? $this->assetDev($entry)
             : $this->assetProd($this->getManifestProperty($entry, 'file'));
 
-        $attr = array_merge($options, [
-            'type' => 'module',
-            'src' => $file
-        ]);
-
-        return $client . '<script ' . attr($attr) . '></script>';
+        return $client . js($file, ['type' => 'module']);
     }
 
     /**
@@ -190,23 +177,15 @@ class Vite
         return !empty($match)
             ? Html::tag('link', '', [
                 'rel' => 'modulepreload',
-                'href' => '/' . option('johannschopplich.kirby-vite.outDir', 'dist') . '/' . array_values($match)[0]['file']
+                'href' => '/' . option('johannschopplich.kirby-vue-kit.outDir') . '/' . array_values($match)[0]['file']
             ])
             : null;
     }
 
     /**
-     * Converts an array to an encoded JSON string
-     */
-    public function json(array $data): string
-    {
-        return \Kirby\Data\Json::encode($data);
-    }
-
-    /**
      * Gets the instance via lazy initialization
      */
-    public static function getInstance(): \KirbyExtended\Vite
+    public static function instance(): \JohannSchopplich\VueKit\VueKit
     {
         return static::$instance ??= new static();
     }

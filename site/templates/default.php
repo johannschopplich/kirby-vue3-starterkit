@@ -6,4 +6,4 @@ $data = [
   'text' => $page->text()->kt()->value()
 ];
 
-echo vite()->json($data);
+echo \Kirby\Data\Json::encode($data);

@@ -1,13 +1,12 @@
 <?php
 
 load([
-    'KirbyExtended\\Page' => 'classes/KirbyExtended/Page.php',
-    'KirbyExtended\\Vite' => 'classes/KirbyExtended/Vite.php'
+    'JohannSchopplich\\VueKit\\Page' => 'classes/Page.php',
+    'JohannSchopplich\\VueKit\\VueKit' => 'classes/VueKit.php'
 ], __DIR__);
 
-\Kirby\Cms\App::plugin('johannschopplich/kirby-vite', [
+\Kirby\Cms\App::plugin('johannschopplich/kirby-vue-kit', [
     'options' => [
-        'entry' => 'index.js',
         'outDir' => 'dist',
         'devServer' => env('KIRBY_DEV_PROTOCOL', 'http') . '://' . env('KIRBY_DEV_HOSTNAME', 'localhost') . ':' . env('VITE_DEV_PORT', '3000')
     ],
@@ -17,17 +16,17 @@ load([
         'system.loadPlugins:after' => function () {
             kirby()->extend([
                 'routes' => require __DIR__ . '/routes.php'
-            ], kirby()->plugin('johannschopplich/kirby-vite'));
+            ], kirby()->plugin('johannschopplich/kirby-vue-kit'));
         }
     ]
 ]);
 
-if (!function_exists('vite')) {
+if (!function_exists('vueKit')) {
     /**
-     * Returns the Vite instance
+     * Returns the Vue instance
      */
-    function vite(): \KirbyExtended\Vite
+    function vueKit(): \JohannSchopplich\VueKit\VueKit
     {
-        return \KirbyExtended\Vite::getInstance();
+        return \JohannSchopplich\VueKit\VueKit::instance();
     }
 }

@@ -26,17 +26,17 @@
   <link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/img/apple-touch-icon.png" sizes="180x180">
 
-  <?= vite()->preloadJson($page->uri()) ?>
-  <?= vite()->preloadModule($page->intendedTemplate()->name()) ?>
+  <?= vueKit()->preloadJson($page->uri()) ?>
+  <?= vueKit()->preloadModule($page->intendedTemplate()->name()) ?>
 
-  <?= vite()->js() ?>
-  <?= vite()->css() ?>
+  <?= vueKit()->js() ?>
+  <?= vueKit()->css() ?>
 
 </head>
 <body>
 
   <div id="app"></div>
-  <script id="site-data" type="application/json"><?= vite()->json(vite()->useSite()) ?></script>
+  <script id="site-data" type="application/json"><?= \Kirby\Data\Json::encode(vueKit()->useSite()) ?></script>
 
 </body>
 </html>
