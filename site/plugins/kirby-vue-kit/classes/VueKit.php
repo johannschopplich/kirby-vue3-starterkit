@@ -31,7 +31,7 @@ class VueKit
     /**
      * Gets the site data
      */
-    public function useSite(): array
+    public function getSite(): array
     {
         return static::$site ??= require kirby()->root('config') . '/app-site.php';
     }
@@ -41,7 +41,7 @@ class VueKit
      *
      * @throws Exception
      */
-    protected function useManifest(): array|null
+    protected function getManifest(): array|null
     {
         if (isset(static::$manifest)) {
             return static::$manifest;
@@ -84,7 +84,7 @@ class VueKit
     public function css(string $entry = 'main.js')
     {
         if (!$this->isDev()) {
-            return css($this->assetProd($this->useManifest()[$entry]['css'][0]));
+            return css($this->assetProd($this->getManifest()[$entry]['css'][0]));
         }
     }
 
@@ -97,7 +97,7 @@ class VueKit
     {
         $file = $this->isDev()
             ? $this->assetDev($entry)
-            : $this->assetProd($this->useManifest()[$entry]['file']);
+            : $this->assetProd($this->getManifest()[$entry]['file']);
 
         return js($file, ['type' => 'module']);
     }
@@ -128,7 +128,7 @@ class VueKit
         }
 
         $match = array_filter(
-            $this->useManifest(),
+            $this->getManifest(),
             fn ($i) => str_ends_with($i, ucfirst($name) . '.vue'),
             ARRAY_FILTER_USE_KEY
         );

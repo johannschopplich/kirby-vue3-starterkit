@@ -36,7 +36,7 @@
 <body>
 
   <div id="app"></div>
-  <script id="site-data" type="application/json"><?= \Kirby\Data\Json::encode(vueKit()->useSite()) ?></script>
+  <script id="site-data" type="application/json"><?= \Kirby\Data\Json::encode(vueKit()->getSite()) ?></script>
 
 </body>
 </html>
