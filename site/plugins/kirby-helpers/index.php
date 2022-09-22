@@ -41,7 +41,9 @@ Kirby::plugin('johannschopplich/kirby-helpers', [
     'siteMethods' => [
         'env' => function ($key, $default = null) {
             if (!Env::isLoaded()) {
-                Env::load();
+                $path = option('kirby-helpers.env.path', kirby()->root('base'));
+                $file = option('kirby-helpers.env.filename', '.env');
+                Env::load($path, $file);
             }
 
             return Env::get($key, $default);

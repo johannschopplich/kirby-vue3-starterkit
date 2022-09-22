@@ -2,7 +2,7 @@
 
 namespace KirbyHelpers;
 
-use Kirby\Http\Environment;
+use Kirby\Data\Data;
 use Kirby\Http\Uri;
 
 class Vite
@@ -25,7 +25,7 @@ class Vite
         ], 'strlen'));
 
         try {
-            $this->manifest = json_decode(file_get_contents($path), true);
+            $this->manifest = Data::read($path);
         } catch (\Throwable $t) {
             // Vite is running in development mode.
         }
@@ -49,7 +49,7 @@ class Vite
     {
         $uri = new Uri([
             'scheme' => option('kirby-helpers.vite.server.https', false) ? 'https' : 'http',
-            'host'   => option('kirby-helpers.vite.server.host', (new Environment())->host()),
+            'host'   => option('kirby-helpers.vite.server.host', 'localhost'),
             'port'   => option('kirby-helpers.vite.server.port', 5173),
             'path'   => $path
         ]);

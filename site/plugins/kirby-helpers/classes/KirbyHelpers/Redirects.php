@@ -6,7 +6,7 @@ use Kirby\Http\Router;
 
 class Redirects
 {
-    public static function go($path, $method)
+    public static function go(string|null $path, string $method = 'GET')
     {
         $redirects = option('kirby-helpers.redirects', []);
 

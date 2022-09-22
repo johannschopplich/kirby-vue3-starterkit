@@ -41,7 +41,7 @@ class PageMeta
             if (is_callable($value) === true) {
                 $result = $value->call($this->page);
 
-                if (is_a($result, Field::class)) {
+                if ($result instanceof Field) {
                     return $result;
                 }
 

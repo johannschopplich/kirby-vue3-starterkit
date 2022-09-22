@@ -2,11 +2,11 @@
   "name": "johannschopplich/kirby-helpers",
   "description": "Dotenv support, meta tags generation and more for the Kirby CMS",
   "type": "kirby-plugin",
-  "version": "3.0.2",
+  "version": "3.0.5",
   "keywords": [
-    "kirby-cms",
     "getkirby",
     "kirby",
+    "kirby-cms",
     "env",
     "dotenv",
     "seo",
