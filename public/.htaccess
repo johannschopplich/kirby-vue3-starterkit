@@ -21,7 +21,7 @@
 </IfModule>
 
 # Pass the Authorization header to PHP.
-SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
+SetEnvIf Authorization "(.+)" HTTP_AUTHORIZATION=$1
 
 # Security
 # Remove the `X-Powered-By` response header providing server-side technology information.
