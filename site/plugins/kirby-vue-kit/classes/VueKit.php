@@ -73,7 +73,7 @@ class VueKit
      */
     protected function assetProd(string $file): string
     {
-        return '/' . option('johannschopplich.kirby-vue-kit.outDir') . '/' . $file;
+        return Url::index() . '/' . option('johannschopplich.kirby-vue-kit.outDir') . '/' . $file;
     }
 
     /**
@@ -111,7 +111,7 @@ class VueKit
 
         return Html::tag('link', '', [
             'rel' => 'preload',
-            'href' => $base . '/' . Url::path(env('CONTENT_API_SLUG')) . '/' . $name . '.json',
+            'href' => Url::index() . $base . '/' . Url::path(env('CONTENT_API_SLUG')) . '/' . $name . '.json',
             'as' => 'fetch',
             'type' => 'application/json',
             'crossorigin' => 'anonymous'
@@ -136,7 +136,7 @@ class VueKit
         return !empty($match)
             ? Html::tag('link', '', [
                 'rel' => 'modulepreload',
-                'href' => '/' . option('johannschopplich.kirby-vue-kit.outDir') . '/' . array_values($match)[0]['file']
+                'href' => Url::index() . '/' . option('johannschopplich.kirby-vue-kit.outDir') . '/' . array_values($match)[0]['file']
             ])
             : null;
     }
