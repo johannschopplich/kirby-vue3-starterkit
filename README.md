@@ -194,6 +194,16 @@ cp .env.development.example .env
 
 Optionally, adapt it's values.
 
+Vite will load .env files according to the [docs](https://vitejs.dev/guide/env-and-mode.html#env-files):
+
+```.env # loaded in all cases
+.env.local          # loaded in all cases, ignored by git
+.env.[mode]         # only loaded in specified mode
+.env.[mode].local   # only loaded in specified mode, ignored by git
+```
+
+Kirby will only load the main .env file
+
 ### Static assets
 
 _During development_ Kirby can't access static files located in the `src` folder. Therefore it's necessary to create a symbolic link inside of the public folder:
