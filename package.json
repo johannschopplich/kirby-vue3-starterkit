@@ -21,7 +21,6 @@
     "@types/node": "^18.7.18",
     "@vitejs/plugin-vue": "^3.1.0",
     "concurrently": "^7.4.0",
-    "dotenv": "^16.0.2",
     "env-cmd": "^10.1.0",
     "eslint": "^8.23.1",
     "eslint-config-prettier": "^8.5.0",
