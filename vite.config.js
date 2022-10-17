@@ -3,17 +3,17 @@ import { defineConfig, loadEnv } from "vite";
 import Vue from "@vitejs/plugin-vue";
 import Components from "unplugin-vue-components/vite";
 
+const root = "src";
+
 export default ({ mode }) => {
-  process.env = {
-    ...process.env,
-    ...loadEnv(mode, process.cwd(), ["VITE_", "KIRBY_", "CONTENT_"]),
-  };
+  Object.assign(
+    process.env,
+    loadEnv(mode, process.cwd(), ["VITE_", "KIRBY_", "CONTENT_"])
+  );
 
   process.env.VITE_BACKEND_URL = `${process.env.KIRBY_DEV_PROTOCOL}://${process.env.KIRBY_DEV_HOSTNAME}:${process.env.KIRBY_DEV_PORT}`;
   process.env.VITE_BACKEND_API_SLUG = process.env.CONTENT_API_SLUG;
   process.env.VITE_MULTILANG = process.env.KIRBY_MULTILANG;
-
-  const root = "src";
 
   return defineConfig({
     root,
@@ -48,5 +48,5 @@ export default ({ mode }) => {
       port: process.env.VITE_DEV_PORT,
       strictPort: true,
     },
-  })
+  });
 };
