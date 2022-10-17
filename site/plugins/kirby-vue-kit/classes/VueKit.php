@@ -8,18 +8,23 @@ use Kirby\Http\Url;
 use Kirby\Filesystem\F;
 use Kirby\Toolkit\Html;
 
-class VueKit
-{
+class VueKit {
     protected static \JohannSchopplich\VueKit\VueKit $instance;
     protected static array $site;
     protected static array $manifest;
 
     /**
+      * If Kirby is in a subdirectory, return the subdirectory name
+    */
+    protected function subDirectory(): string {
+      return str_replace(Url::stripPath(), '', Url::index());
+    }
+
+    /**
      * Checks for development mode by either `KIRBY_MODE` env var or
      * if a `.lock` file in `/src` exists
      */
-    protected function isDev(): bool
-    {
+    protected function isDev(): bool {
         if (env('KIRBY_MODE') === 'development') {
             return true;
         }
@@ -31,8 +36,7 @@ class VueKit
     /**
      * Gets the site data
      */
-    public function getSite(): array
-    {
+    public function getSite(): array {
         return static::$site ??= require kirby()->root('config') . '/app-site.php';
     }
 
@@ -41,8 +45,7 @@ class VueKit
      *
      * @throws Exception
      */
-    protected function getManifest(): array|null
-    {
+    protected function getManifest(): array|null {
         if (isset(static::$manifest)) {
             return static::$manifest;
         }
@@ -63,17 +66,15 @@ class VueKit
     /**
      * Gets the URL for the specified file in development mode
      */
-    protected function assetDev(string $file): string
-    {
+    protected function assetDev(string $file): string {
         return option('johannschopplich.kirby-vue-kit.devServer') . '/' . $file;
     }
 
     /**
      * Gets the URL for the specified file in production mode
      */
-    protected function assetProd(string $file): string
-    {
-        return Url::index() . '/' . option('johannschopplich.kirby-vue-kit.outDir') . '/' . $file;
+    protected function assetProd(string $file): string {
+        return option('johannschopplich.kirby-vue-kit.outDir') . '/' . $file;
     }
 
     /**
@@ -81,8 +82,7 @@ class VueKit
      *
      * @throws Exception
      */
-    public function css(string $entry = 'main.js')
-    {
+    public function css(string $entry = 'main.js') {
         if (!$this->isDev()) {
             return css($this->assetProd($this->getManifest()[$entry]['css'][0]));
         }
@@ -93,8 +93,7 @@ class VueKit
      *
      * @throws Exception
      */
-    public function js(string $entry = 'main.js'): string|null
-    {
+    public function js(string $entry = 'main.js'): string|null {
         $file = $this->isDev()
             ? $this->assetDev($entry)
             : $this->assetProd($this->getManifest()[$entry]['file']);
@@ -105,13 +104,12 @@ class VueKit
     /**
      * Preloads the JSON-encoded page data for a given page
      */
-    public function preloadJson(string $name): string
-    {
+    public function preloadJson(string $name): string {
         $base = kirby()->multilang() ? '/' . kirby()->languageCode() : '';
 
         return Html::tag('link', '', [
             'rel' => 'preload',
-            'href' => Url::index() . $base . '/' . Url::path(env('CONTENT_API_SLUG')) . '/' . $name . '.json',
+            'href' => $this->subDirectory() . $base . '/' . Url::path(env('CONTENT_API_SLUG')) . '/' . $name . '.json',
             'as' => 'fetch',
             'type' => 'application/json',
             'crossorigin' => 'anonymous'
@@ -121,8 +119,7 @@ class VueKit
     /**
      * Preloads the view module for a given page, e.g. `Home.e701bdef.js`
      */
-    public function preloadModule(string $name): string|null
-    {
+    public function preloadModule(string $name): string|null {
         if ($this->isDev()) {
             return null;
         }
@@ -132,11 +129,10 @@ class VueKit
             fn ($i) => str_ends_with($i, ucfirst($name) . '.vue'),
             ARRAY_FILTER_USE_KEY
         );
-
         return !empty($match)
             ? Html::tag('link', '', [
                 'rel' => 'modulepreload',
-                'href' => Url::index() . '/' . option('johannschopplich.kirby-vue-kit.outDir') . '/' . array_values($match)[0]['file']
+                'href' => $this->subDirectory() . '/' . option('johannschopplich.kirby-vue-kit.outDir') . '/' . array_values($match)[0]['file']
             ])
             : null;
     }
@@ -144,8 +140,7 @@ class VueKit
     /**
      * Gets the instance via lazy initialization
      */
-    public static function instance(): \JohannSchopplich\VueKit\VueKit
-    {
+    public static function instance(): \JohannSchopplich\VueKit\VueKit {
         return static::$instance ??= new static();
     }
 }
