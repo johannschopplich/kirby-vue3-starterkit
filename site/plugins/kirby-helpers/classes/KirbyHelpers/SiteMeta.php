@@ -70,11 +70,8 @@ class SiteMeta
                 if ($kirby->multilang()) {
                     foreach ($kirby->languages() as $lang) {
                         $code = $lang->code();
-                        $locale = $lang->locale(LC_ALL) ?? $code;
-                        $locale = pathinfo($locale, PATHINFO_FILENAME);
-                        $locale = Str::slug($locale);
-
-                        $sitemap[] = '  <xhtml:link rel="alternate" hreflang="' . $locale . '" href="' . $item->url($code) . '" />';
+                        $lang = Str::slug(Str::rtrim($lang->locale(LC_ALL) ?? $code, '.utf8'));
+                        $sitemap[] = '  <xhtml:link rel="alternate" hreflang="' . $lang . '" href="' . $item->url($code) . '" />';
                     }
                     $sitemap[] = '  <xhtml:link rel="alternate" hreflang="x-default" href="' . $item->url() . '" />';
                 }

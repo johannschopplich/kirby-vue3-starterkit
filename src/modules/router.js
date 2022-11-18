@@ -20,7 +20,7 @@ const scrollBehavior = (to, from, savedPosition) => {
   }
 
   // Always scroll to top
-  return { top: 0, behavior };
+  return { top: 0, left: 0, behavior };
 };
 
 /** @param {import("vue").App} app The Vue app instance */
