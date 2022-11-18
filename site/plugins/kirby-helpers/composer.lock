@@ -642,16 +642,16 @@
         },
         {
             "name": "getkirby/cms",
-            "version": "3.7.5",
+            "version": "3.7.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/getkirby/kirby.git",
-                "reference": "021561f7444896fc9917eccb52768a6e715e9a74"
+                "reference": "9a3ecf893488df745f5516d5e490a655a4e85c21"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/getkirby/kirby/zipball/021561f7444896fc9917eccb52768a6e715e9a74",
-                "reference": "021561f7444896fc9917eccb52768a6e715e9a74",
+                "url": "https://api.github.com/repos/getkirby/kirby/zipball/9a3ecf893488df745f5516d5e490a655a4e85c21",
+                "reference": "9a3ecf893488df745f5516d5e490a655a4e85c21",
                 "shasum": ""
             },
             "require": {
@@ -737,7 +737,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2022-08-30T18:27:48+00:00"
+            "time": "2022-10-18T11:35:04+00:00"
         },
         {
             "name": "laminas/laminas-escaper",
@@ -1130,16 +1130,16 @@
         },
         {
             "name": "symfony/polyfill-intl-normalizer",
-            "version": "v1.26.0",
+            "version": "v1.27.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-intl-normalizer.git",
-                "reference": "219aa369ceff116e673852dce47c3a41794c14bd"
+                "reference": "19bd1e4fcd5b91116f14d8533c57831ed00571b6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-intl-normalizer/zipball/219aa369ceff116e673852dce47c3a41794c14bd",
-                "reference": "219aa369ceff116e673852dce47c3a41794c14bd",
+                "url": "https://api.github.com/repos/symfony/polyfill-intl-normalizer/zipball/19bd1e4fcd5b91116f14d8533c57831ed00571b6",
+                "reference": "19bd1e4fcd5b91116f14d8533c57831ed00571b6",
                 "shasum": ""
             },
             "require": {
@@ -1151,7 +1151,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.26-dev"
+                    "dev-main": "1.27-dev"
                 },
                 "thanks": {
                     "name": "symfony/polyfill",
@@ -1194,7 +1194,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-intl-normalizer/tree/v1.26.0"
+                "source": "https://github.com/symfony/polyfill-intl-normalizer/tree/v1.27.0"
             },
             "funding": [
                 {
@@ -1210,7 +1210,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-05-24T11:49:31+00:00"
+            "time": "2022-11-03T14:55:06+00:00"
         }
     ],
     "aliases": [],
