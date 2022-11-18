@@ -1,5 +1,5 @@
-import { $fetch } from "ohmyfetch";
-import { withQuery } from "ufo";
+import { $fetch } from "ofetch";
+import { joinURL, withQuery } from "ufo";
 import { useLanguages } from "./";
 
 const cache = new Map();
@@ -12,20 +12,14 @@ const cache = new Map();
  */
 function getApiUrl(path) {
   const { isMultilang, languageCode } = useLanguages();
-  let result = "";
-
-  // Add language path in multi-language setup
-  if (isMultilang) {
-    result += `/${languageCode}`;
-  }
-
-  // Add the API path
-  result += `/${import.meta.env.VITE_BACKEND_API_SLUG}`;
-
-  // Add the file path
-  result += `/${path}`;
-
-  return result;
+  return joinURL(
+    // Add language path in multi-language setup
+    isMultilang ? `/${languageCode}` : "",
+    // Add the API path
+    import.meta.env.VITE_BACKEND_API_SLUG,
+    // Add the file path
+    path
+  );
 }
 
 /**
