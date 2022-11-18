@@ -1,6 +1,8 @@
-Cover: 
+Title: Plants
 
-- nice-colors-ugly-plant.jpg
+----
+
+Cover: - file://sq15pd2AejNoEdGJ
 
 ----
 
@@ -16,4 +18,4 @@ Tags: plants
 
 ----
 
-Title: Plants
+Uuid: OlYPcgdscy9a5w8t

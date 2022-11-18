@@ -2,9 +2,7 @@ Title: Sky
 
 ----
 
-Cover: 
-
-- dark-forest.jpg
+Cover: - file://2DGhiQZVO40I4Kvn
 
 ----
 
@@ -17,3 +15,7 @@ Description:
 ----
 
 Tags: stars, universe, up there
+
+----
+
+Uuid: koSH6K5MsJCQtiql

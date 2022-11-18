@@ -23,3 +23,7 @@ Template: image
 ----
 
 Sort: 5
+
+----
+
+Uuid: KfelWmwg3mSQ5Cyi

@@ -1,6 +1,8 @@
-Cover: 
+Title: Desert
 
-- indiana-jones.jpg
+----
+
+Cover: - file://A3UL0XxSikkbjtUp
 
 ----
 
@@ -16,4 +18,4 @@ Tags: desert, sand, landscape
 
 ----
 
-Title: Desert
+Uuid: 0xa946qJ6wiV5yc2

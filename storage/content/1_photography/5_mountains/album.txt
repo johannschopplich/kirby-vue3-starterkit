@@ -1,6 +1,8 @@
-Cover: 
+Title: Mountains
 
-- probably-photoshopped.jpg
+----
+
+Cover: - file://sAzdAAkQRGN9segI
 
 ----
 
@@ -16,4 +18,4 @@ Tags: mountains, peak nature
 
 ----
 
-Title: Mountains
+Uuid: NspFzMZp12CBo1VN
