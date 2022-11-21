@@ -16,7 +16,7 @@ function getApiUrl(path) {
     // Use language path in multi-language setup as base
     isMultilang ? `/${languageCode}` : "/",
     // Add the API path
-    import.meta.env.VITE_BACKEND_API_SLUG,
+    import.meta.env.KIRBY_CONTENT_API_SLUG,
     // Add the file path
     path
   );
