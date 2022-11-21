@@ -111,7 +111,7 @@ class VueKit
 
         return Html::tag('link', '', [
             'rel' => 'preload',
-            'href' => $base . '/' . Url::path(env('CONTENT_API_SLUG')) . '/' . $name . '.json',
+            'href' => $base . '/' . Url::path(env('KIRBY_CONTENT_API_SLUG')) . '/' . $name . '.json',
             'as' => 'fetch',
             'type' => 'application/json',
             'crossorigin' => 'anonymous'

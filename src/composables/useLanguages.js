@@ -1,7 +1,7 @@
 /**
  * Indicates a multi-language setup
  */
-const isMultilang = import.meta.env.VITE_MULTILANG === "true";
+const isMultilang = import.meta.env.KIRBY_MULTILANG === "true";
 
 /**
  * Current language code

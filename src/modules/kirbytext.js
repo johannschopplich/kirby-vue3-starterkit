@@ -1,6 +1,6 @@
 let router;
 const origin = import.meta.env.DEV
-  ? import.meta.env.VITE_BACKEND_URL
+  ? `${process.env.KIRBY_DEV_PROTOCOL}://${process.env.KIRBY_DEV_HOSTNAME}:${process.env.KIRBY_DEV_PORT}`
   : window.location.origin;
 
 /**

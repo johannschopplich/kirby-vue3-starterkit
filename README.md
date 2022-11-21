@@ -265,7 +265,7 @@ For example, setting `KIRBY_CACHE` to `true` is useful in production environment
 
 To change the API slug to fetch JSON-encoded page data from, set
 
-- `CONTENT_API_SLUG` to a value of your liking (defaults to `spa`). It can even be left empty to omit a slug altogether!
+- `KIRBY_CONTENT_API_SLUG` to a value of your liking (defaults to `app`). It can even be left empty to omit a slug altogether!
 
 > You can't use Kirby's internal API slug (defaults to `api`). If you insist on using `api` for _your_ content endpoint, you can rename Kirby's by adding a `KIRBY_API_SLUG` key and set it to something other than `api`.
 

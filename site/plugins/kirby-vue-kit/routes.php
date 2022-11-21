@@ -4,7 +4,7 @@ use Kirby\Cms\Url;
 use Kirby\Http\Response;
 use JohannSchopplich\VueKit\Page;
 
-$apiLocation = Url::path(env('CONTENT_API_SLUG', ''), false, true);
+$apiLocation = Url::path(env('KIRBY_CONTENT_API_SLUG', ''), false, true);
 
 return [
     /**
