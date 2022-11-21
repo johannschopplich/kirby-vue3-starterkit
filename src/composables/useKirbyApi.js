@@ -13,8 +13,8 @@ const cache = new Map();
 function getApiUrl(path) {
   const { isMultilang, languageCode } = useLanguages();
   return joinURL(
-    // Add language path in multi-language setup
-    isMultilang ? `/${languageCode}` : "",
+    // Use language path in multi-language setup as base
+    isMultilang ? `/${languageCode}` : "/",
     // Add the API path
     import.meta.env.VITE_BACKEND_API_SLUG,
     // Add the file path
