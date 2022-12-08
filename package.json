@@ -13,21 +13,21 @@
   "dependencies": {
     "ofetch": "^1.0.0",
     "scule": "^1.0.0",
-    "ufo": "^1.0.0",
+    "ufo": "^1.0.1",
     "vue": "^3.2.45",
     "vue-router": "^4.1.6"
   },
   "devDependencies": {
-    "@types/node": "^18.11.9",
+    "@nuxt/eslint-config": "^0.1.1",
+    "@types/node": "^18.11.11",
     "@vitejs/plugin-vue": "^3.2.0",
-    "concurrently": "^7.5.0",
+    "concurrently": "^7.6.0",
     "env-cmd": "^10.1.0",
-    "eslint": "^8.27.0",
+    "eslint": "^8.29.0",
     "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-vue": "^9.7.0",
-    "prettier": "2.7.1",
+    "prettier": "2.8.1",
     "shx": "^0.3.4",
-    "unplugin-vue-components": "^0.22.9",
-    "vite": "^3.2.4"
+    "unplugin-vue-components": "^0.22.11",
+    "vite": "^3.2.5"
   }
 }
