@@ -1,7 +1,8 @@
-.DS_Store
-.env
 node_modules
 vendor
+.DS_Store
+.env
+components.d.ts
 
 # Kirby
 .lock
