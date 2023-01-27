@@ -1,6 +1,6 @@
 # Kirby Helpers
 
-This package extends Kirby's base capabilities. It's built mostly upon existing packages, but unifies them under one namespace and further updates their original functionalities including fixes of open issues.
+A set of utility classes extending Kirby's base capabilities. It's built mostly upon existing packages, but unifies them under one namespace.
 
 ## Key Features
 

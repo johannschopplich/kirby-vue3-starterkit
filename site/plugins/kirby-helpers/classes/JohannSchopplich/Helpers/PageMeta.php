@@ -1,6 +1,6 @@
 <?php
 
-namespace KirbyHelpers;
+namespace JohannSchopplich\Helpers;
 
 use Kirby\Cms\Field;
 use Kirby\Cms\Page;
@@ -9,17 +9,12 @@ use Kirby\Toolkit\Html;
 
 class PageMeta
 {
-    protected Page $page;
     protected array $metadata = [];
 
-    public function __construct($page)
+    public function __construct(protected Page $page)
     {
-        $this->page = $page;
-        $defaults = option('kirby-helpers.meta.defaults', []);
-
-        if (!empty($defaults)) {
-            $this->metadata = is_callable($defaults) ? $defaults(kirby(), site(), $this->page) : $defaults;
-        }
+        $defaults = option('johannschopplich.helpers.meta.defaults', []);
+        $this->metadata = is_callable($defaults) ? $defaults(kirby(), site(), $this->page) : $defaults;
 
         if (method_exists($this->page, 'metadata')) {
             $this->metadata = A::merge($this->metadata, $this->page->metadata());
@@ -52,6 +47,7 @@ class PageMeta
         }
 
         $field = $this->page->content()->get($key);
+
         if ($field->exists() && $field->isNotEmpty() && $field->value() !== '[]') {
             return $field;
         }
@@ -167,7 +163,7 @@ class PageMeta
         foreach ($opengraph as $prop => $content) {
             if (is_array($content)) {
                 if (str_starts_with($prop, 'namespace:')) {
-                    $prop = preg_replace('/^(namespace:)/', '', $prop);
+                    $prop = substr($prop, 10);
                 }
 
                 foreach ($content as $typeProp => $typeContent) {

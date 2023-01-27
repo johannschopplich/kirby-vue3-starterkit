@@ -2,6 +2,7 @@ node_modules
 vendor
 .DS_Store
 .env
+.eslintcache
 components.d.ts
 
 # Kirby

@@ -1,7 +1,8 @@
 <?php
 
-namespace KirbyHelpers;
+namespace JohannSchopplich\Helpers;
 
+use Closure;
 use Dotenv\Dotenv;
 use Dotenv\Repository\RepositoryBuilder;
 use Dotenv\Repository\RepositoryInterface;
@@ -9,15 +10,12 @@ use PhpOption\Option;
 
 class Env
 {
-    protected static RepositoryInterface $repository;
     protected static bool $loaded = false;
+    protected static RepositoryInterface|null $repository = null;
 
-    public static function load(string $path, string $filename = '.env'): array|null
+    public static function getRepository(): RepositoryInterface
     {
-        $repository = static::getRepository();
-
-        static::$loaded = true;
-        return Dotenv::create($repository, $path, $filename)->load();
+        return static::$repository ??= RepositoryBuilder::createWithDefaultAdapters()->immutable()->make();
     }
 
     public static function isLoaded(): bool
@@ -25,17 +23,18 @@ class Env
         return static::$loaded;
     }
 
-    public static function getRepository(): \Dotenv\Repository\RepositoryInterface
+    public static function load(string $path, string $filename = '.env'): array
     {
-        if (!isset(static::$repository)) {
-            $builder = RepositoryBuilder::createWithDefaultAdapters();
-            static::$repository = $builder->immutable()->make();
-        }
+        static::$loaded = true;
 
-        return static::$repository;
+        return Dotenv::create(
+            static::getRepository(),
+            $path,
+            $filename
+        )->load();
     }
 
-    public static function get(string $key, $default = null)
+    public static function get(string $key, $default = null): mixed
     {
         return Option::fromValue(static::getRepository()->get($key))
             ->map(function ($value) {
@@ -60,6 +59,6 @@ class Env
 
                 return $value;
             })
-            ->getOrCall(fn () => value($default));
+            ->getOrCall(fn () => $default instanceof Closure ? $default() : $default);
     }
 }

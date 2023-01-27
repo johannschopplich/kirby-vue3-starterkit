@@ -19,15 +19,15 @@
   },
   "devDependencies": {
     "@nuxt/eslint-config": "^0.1.1",
-    "@types/node": "^18.11.17",
+    "@types/node": "^18.11.18",
     "@vitejs/plugin-vue": "^4.0.0",
     "concurrently": "^7.6.0",
     "env-cmd": "^10.1.0",
-    "eslint": "^8.30.0",
-    "eslint-config-prettier": "^8.5.0",
-    "prettier": "2.8.1",
+    "eslint": "^8.32.0",
+    "eslint-config-prettier": "^8.6.0",
+    "prettier": "2.8.3",
     "shx": "^0.3.4",
     "unplugin-vue-components": "^0.22.12",
-    "vite": "^4.0.3"
+    "vite": "^4.0.4"
   }
 }
