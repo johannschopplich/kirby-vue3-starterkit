@@ -1,8 +1,9 @@
 <?php
 
-use Kirby\Cms\Url;
-use Kirby\Http\Response;
 use JohannSchopplich\VueKit\Page;
+use Kirby\Cms\Url;
+use Kirby\Filesystem\F;
+use Kirby\Http\Response;
 
 $apiLocation = Url::path(env('KIRBY_CONTENT_API_SLUG', ''), false, true);
 
@@ -14,17 +15,19 @@ return [
         'pattern' => "{$apiLocation}(:all).json",
         'language' => '*',
         'action' => function (...$args) {
-            if (kirby()->multilang()) {
+            $kirby = kirby();
+
+            if ($kirby->multilang()) {
                 [$languageCode, $pageId] = $args;
             } else {
                 [$pageId] = $args;
             }
 
-            $page = kirby()->page($pageId);
+            $page = $kirby->page($pageId);
 
             if (!$page || !$page->isVerified(get('token'))) {
-                $page = kirby()->site()->errorPage();
-            };
+                $page = $kirby->site()->errorPage();
+            }
 
             $json = Page::render($page, 'json');
             return Response::json($json);
@@ -38,22 +41,42 @@ return [
         'pattern' => '(:all)',
         'language' => '*',
         'action' => function (...$args) {
-            if (kirby()->multilang()) {
-                [$languageCode, $pageId] = $args;
+            $kirby = kirby();
+
+            if ($kirby->multilang()) {
+                [$languageCode, $path] = $args;
             } else {
-                [$pageId] = $args;
+                [$path] = $args;
+            }
+
+            $extension = F::extension($path);
+
+            // Try to resolve page and site files
+            if (!empty($extension)) {
+                $id = dirname($path);
+                $filename = basename($path);
+
+                // Try to resolve image urls for pages and drafts
+                if ($page = $kirby->site()->findPageOrDraft($id)) {
+                    return $page->file($filename);
+                }
+
+                // Try to resolve site files at last
+                if ($file = $kirby->site()->file($filename)) {
+                    return $file;
+                }
             }
 
             // Fall back to homepage id
-            if (empty($pageId)) {
-                $pageId = site()->homePageId();
+            if (empty($path)) {
+                $path = site()->homePageId();
             }
 
-            $page = kirby()->page($pageId);
+            $page = $kirby->page($path);
 
             if (!$page || !$page->isVerified(get('token'))) {
-                $page = kirby()->site()->errorPage();
-            };
+                $page = $kirby->site()->errorPage();
+            }
 
             $html = Page::render($page, 'html');
             return $html;

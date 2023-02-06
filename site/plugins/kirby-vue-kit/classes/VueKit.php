@@ -4,8 +4,8 @@ namespace JohannSchopplich\VueKit;
 
 use Exception;
 use Kirby\Data\Data;
-use Kirby\Http\Url;
 use Kirby\Filesystem\F;
+use Kirby\Http\Url;
 use Kirby\Toolkit\Html;
 
 class VueKit
