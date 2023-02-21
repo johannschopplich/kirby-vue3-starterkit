@@ -11,23 +11,23 @@
     "release": "npx -y bumpp --commit --push --tag"
   },
   "dependencies": {
-    "ofetch": "^1.0.0",
+    "ofetch": "^1.0.1",
     "scule": "^1.0.0",
-    "ufo": "^1.0.1",
-    "vue": "^3.2.45",
+    "ufo": "^1.1.0",
+    "vue": "^3.2.47",
     "vue-router": "^4.1.6"
   },
   "devDependencies": {
     "@nuxt/eslint-config": "^0.1.1",
-    "@types/node": "^18.11.18",
+    "@types/node": "^18.14.0",
     "@vitejs/plugin-vue": "^4.0.0",
     "concurrently": "^7.6.0",
     "env-cmd": "^10.1.0",
-    "eslint": "^8.32.0",
+    "eslint": "^8.34.0",
     "eslint-config-prettier": "^8.6.0",
-    "prettier": "2.8.3",
+    "prettier": "2.8.4",
     "shx": "^0.3.4",
-    "unplugin-vue-components": "^0.22.12",
-    "vite": "^4.0.4"
+    "unplugin-vue-components": "^0.24.0",
+    "vite": "^4.1.3"
   }
 }
