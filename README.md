@@ -1,3 +1,11 @@
+> **Note**
+>
+> Thank you to everyone who has used this starterkit in the past. I'm grateful that something built for myself has been useful to others. I have moved from Vue to Nuxt for my projects and will not be maintaining this starterkit actively anymore. It is stable, but be aware.
+>
+> I recommend to check out [Cacao Kit](https://github.com/johannschopplich/cacao-kit-frontend), which is the evolved version of this starterkit. It uses **Nuxt** and **KQL** with a headless Kirby setup. It is my best practice starterkit for your next project.
+
+---
+
 <p align="center">
   <img src="./.github/icon.svg" alt="Logo of Kirby + Vue.js Starterkit" width="114" height="114">
 </p>
@@ -26,7 +34,13 @@
 
 ## Alternatives
 
+### SPA
+
 - [kirby-vue-lightkit](https://github.com/johannschopplich/kirby-vue-lightkit): ⛺️ Minimal Kirby + Vue starter: File-based routing, UnoCSS, SEO & more
+
+### SSR
+
+- [cacao-kit-frontend](https://github.com/johannschopplich/cacao-kit-frontend): 🍫 Best practice Nuxt and KQL starter for your headless Kirby CMS
 - [kirby-nuxt-starterkit](https://github.com/johannschopplich/kirby-nuxt-starterkit): 💚 Kirby's sample site – ported to Nuxt 3 and KirbyQL
 
 ## Introduction
