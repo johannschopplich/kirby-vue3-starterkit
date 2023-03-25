@@ -2,7 +2,7 @@
 >
 > Thank you to everyone who has used this starterkit in the past. I'm grateful that something built for myself has been useful to others. I have moved from Vue to Nuxt for my projects and will not be maintaining this starterkit actively anymore. It is stable, but be aware.
 >
-> I recommend to check out [Cacao Kit](https://github.com/johannschopplich/cacao-kit-frontend), which is the evolved version of this starterkit. It uses **Nuxt** and **KQL** with a headless Kirby setup. It is my best practice starterkit for your next project. All features of this starterkit are included!
+> I recommend to check out [Cacao Kit](https://github.com/johannschopplich/cacao-kit-frontend), which is the evolved version of this starterkit. It uses **Nuxt** and **KQL** with a headless Kirby setup. It is my best practice starterkit for your next project with server-side rendering. All features of this starterkit are included!
 
 ---
 
