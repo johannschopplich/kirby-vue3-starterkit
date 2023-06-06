@@ -28,6 +28,6 @@
     "prettier": "2.8.7",
     "shx": "^0.3.4",
     "unplugin-vue-components": "^0.24.1",
-    "vite": "^4.2.1"
+    "vite": "^4.2.3"
   }
 }
